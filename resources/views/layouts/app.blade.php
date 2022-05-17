@@ -22,8 +22,10 @@
      <!--
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     -->
-    <script src="{{ asset('template/js/scripts.js') }}" defer></script>
-    <script src="{{ asset('template/js/custom.js') }}" defer></script>
+    
+    <script src="{{ asset('template/js/scripts.js') }}"></script>
+    <script src="{{ asset('template/js/custom.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
@@ -66,7 +68,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->username }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -91,5 +93,15 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        /*
+        if (typeof jQuery == "undefined") {
+        alert("JQuery is not installed");
+        } else {
+        alert("JQuery is installed correctly!");
+        }
+        */
+    </script>
 </body>
 </html>

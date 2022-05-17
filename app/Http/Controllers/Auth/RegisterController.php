@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -41,6 +42,9 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+    
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -50,9 +54,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            //'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_type_id' => ['required']
         ]);
     }
 
@@ -65,9 +70,17 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'username' => $data['username'],
+           // 'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'user_type_id' => $data['user_type_id']
         ]);
+    }
+    protected function showRegistrationForm()
+    {
+        $roles = DB::table('user_types')->where('status', 'Active')->get();
+     
+        return view('auth.register', ['roles'=>  $roles]);
+
     }
 }
