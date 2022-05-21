@@ -9,18 +9,16 @@
 <section class="section shadow-sm">
         <div class="section-header mt-5">
         <div class="row">
-            <h1>Dashboard</h1>
+            <h1>Select a service</h1>
         </div>  
         </div>
       
 </section>
-<h4>Trends</h4> <hr>
-<h5>Today</h5>
     <div class="row">
         <div class="col-md-4">
 
             <div class="card mt-5">
-                <div class="card-header"><h4>Transactions</h4></div>
+                <div class="card-header"><h4>Overload of Subjects</h4></div>
 
                 <div class="card-body">
                     Details
@@ -31,7 +29,7 @@
          <div class="col-md-4">
 
         <div class="card mt-5">
-        <div class="card-header"><h4>Total clients</h4></div>
+        <div class="card-header"><h4>Adding of Subject</h4></div>
 
             <div class="card-body">
                     Details
@@ -42,7 +40,7 @@
         <div class="col-md-4">
 
         <div class="card mt-5">
-        <div class="card-header"><h4>Pending requests</h4></div>
+        <div class="card-header"><h4>Change of Subject or Schedule</h4></div>
 
             <div class="card-body">
                     Details
@@ -51,12 +49,11 @@
         </div>
         <!---->
     </div>
-    <h5>Weekly</h5>
     <div class="row">
         <div class="col-md-4">
 
             <div class="card mt-5">
-                <div class="card-header"><h4>Transactions</h4></div>
+                <div class="card-header"><h4>Grade correction and reporting</h4></div>
 
                 <div class="card-body">
                     Details
@@ -67,7 +64,7 @@
          <div class="col-md-4">
 
         <div class="card mt-5">
-        <div class="card-header"><h4>Total clients</h4></div>
+        <div class="card-header"><h4>Cross-enrolment</h4></div>
 
             <div class="card-body">
                     Details
@@ -78,7 +75,7 @@
         <div class="col-md-4">
 
         <div class="card mt-5">
-        <div class="card-header"><h4>Pending requests</h4></div>
+        <div class="card-header"><h4>Shifting</h4></div>
 
             <div class="card-body">
                     Details
@@ -87,12 +84,11 @@
         </div>
         <!---->
     </div>
-    <h5>Monthly</h5>
     <div class="row">
         <div class="col-md-4">
 
             <div class="card mt-5">
-                <div class="card-header"><h4>Transactions</h4></div>
+                <div class="card-header"><h4>Manual Enrolment</h4></div>
 
                 <div class="card-body">
                     Details
@@ -103,7 +99,7 @@
          <div class="col-md-4">
 
         <div class="card mt-5">
-        <div class="card-header"><h4>Total clients</h4></div>
+        <div class="card-header"><h4>Subject Petition</h4></div>
 
             <div class="card-body">
                     Details
@@ -114,7 +110,7 @@
         <div class="col-md-4">
 
         <div class="card mt-5">
-        <div class="card-header"><h4>Pending requests</h4></div>
+        <div class="card-header"><h4>Subject Tutorial Request</h4></div>
 
             <div class="card-body">
                     Details
@@ -123,7 +119,18 @@
         </div>
         <!---->
     </div>
-    
+    <div class="row">
+        <div class="col-md-4">
+
+            <div class="card mt-5">
+                <div class="card-header"><h4>Certification Request</h4></div>
+
+                <div class="card-body">
+                    Details
+                </div>
+            </div>
+        </div>
+         <!---->
 
     </div>
 </div>

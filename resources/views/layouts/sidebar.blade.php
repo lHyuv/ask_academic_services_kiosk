@@ -11,10 +11,11 @@
               </li>
               <li class="menu-header">Services</li>
 
-              <li class="nav-item">
-                <a href="/services" class="nav-link"><i class="fas fa-file"></i><span>Pending Services</span></a>
-              </li>
 
+              <li class="nav-item">
+                <a href="/request_service_home" class="nav-link"><i class="fas fa-file"></i><span>Request Service</span></a>
+                <a href="/ongoing_services" class="nav-link"><i class="far fa-file"></i><span>Ongoing Service</span></a>
+              </li>
               <li class="menu-header">Others</li>
               <li class="nav-item">
                 <a href="/backlogs" class="nav-link"><i class="fas fa-list"></i><span>Backlogs and Queries</span></a>
@@ -27,11 +28,10 @@
                 <a href="/home" class="nav-link"><i class="fas fa-table"></i><span>Dashboard</span></a>
               </li>
               <li class="menu-header">Services</li>
-
               <li class="nav-item">
-                <a href="/request_services" class="nav-link"><i class="fas fa-file"></i><span>Request Service</span></a>
-                <a href="/ongoing_services" class="nav-link"><i class="far fa-file"></i><span>Ongoing Service</span></a>
+                <a href="/service" class="nav-link"><i class="fas fa-file"></i><span>Pending Services</span></a>
               </li>
+
 
               <li class="menu-header">Others</li>
               <li class="nav-item">
