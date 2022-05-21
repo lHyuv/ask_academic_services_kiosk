@@ -33,4 +33,12 @@ class HomeController extends Controller
     public function request_service_home(){
         return view('request_service_home');
     }
+
+    public function backlog(){
+        return view('backlog');
+    }
+
+    public function pending_services(){
+        return view('pending_services');
+    }
 }

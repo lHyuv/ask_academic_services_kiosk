@@ -14,7 +14,7 @@
         </div>
       
 </section>
-<h4>Trends</h4> <hr>
+
 <h5>Today</h5>
     <div class="row">
         <div class="col-md-4">

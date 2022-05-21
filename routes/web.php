@@ -24,3 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('test');
 
 Route::get('/request_service_home', [App\Http\Controllers\HomeController::class, 'request_service_home']);
+
+Route::get('/backlogs', [App\Http\Controllers\HomeController::class, 'backlog']);
+
+Route::get('/pending_services', [App\Http\Controllers\HomeController::class, 'pending_services']);

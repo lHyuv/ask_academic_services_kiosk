@@ -1,8 +1,10 @@
+@if(Auth::check())
 <div class="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
             <a href="/home">Academic Services</a>
           </div>
+       
           @if(Auth::user()->usertype->user_type_name == 'Client' || Auth::user()->usertype->user_type_name == 'Student')
           <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
@@ -41,3 +43,4 @@
         @endif
         </aside>
       </div>
+@endif

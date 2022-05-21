@@ -21,6 +21,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "datatables.net-bs4": "^1.12.1",
         "jquery": "^3.6.0"
     }
 }
