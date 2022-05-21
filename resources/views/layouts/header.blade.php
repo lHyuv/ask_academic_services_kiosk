@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Academic Services') }}</title>
 
     <!-- Scripts -->
     <!--
@@ -22,10 +22,11 @@
      <!--
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     -->
-    
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('template/js/scripts.js') }}"></script>
     <script src="{{ asset('template/js/custom.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('template/js/stisla.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
@@ -34,11 +35,14 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+    <div class="main-wrapper">
+    <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-md">
+                <!--
                 <a class="navbar-brand" href="{{ url('/') }}">
                   Academic Services
                 </a>
+                -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -46,10 +50,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav  col-md-10">
+                    <ul class="navbar-nav mr-3">
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
 
-                    </ul>
-
+                   </ul>
+                   <ul class="navbar-nav col-md-10">
+                       <li></li>
+                   </ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -86,22 +93,14 @@
                         @endguest
                     </ul>
                 </div>
-            </div>
+    
         </nav>
 
+@extends('layouts.sidebar')
+
+  
         <main class="py-4">
             @yield('content')
         </main>
-    </div>
 
-    <script>
-        /*
-        if (typeof jQuery == "undefined") {
-        alert("JQuery is not installed");
-        } else {
-        alert("JQuery is installed correctly!");
-        }
-        */
-    </script>
-</body>
-</html>
+ @extends('layouts.footer')
