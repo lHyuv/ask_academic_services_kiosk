@@ -43,8 +43,9 @@
                 </ul>
             </div>
         </div>
+    <!--Continue on this card..:end-->
         </div>
-  <!--Continue on this card..:end-->
+
          <!---->
          <div class="col-md-4">
 

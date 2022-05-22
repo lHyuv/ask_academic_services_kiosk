@@ -41,4 +41,8 @@ class HomeController extends Controller
     public function pending_services(){
         return view('pending_services');
     }
+
+    public function request_service(){
+        return view('request_service_form');
+    }
 }
