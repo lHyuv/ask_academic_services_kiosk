@@ -31,7 +31,7 @@
               </li>
               <li class="menu-header">Services</li>
               <li class="nav-item">
-                <a href="/service" class="nav-link"><i class="fas fa-file"></i><span>Pending Services</span></a>
+                <a href="/pending_services" class="nav-link"><i class="fas fa-file"></i><span>Pending Services</span></a>
               </li>
 
 
