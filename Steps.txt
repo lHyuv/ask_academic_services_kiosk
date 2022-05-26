@@ -1,0 +1,31 @@
+
+
+1. Download Composer
+
+https://getcomposer.org/download/
+
+2. Install Laravel
+
+Open cmd/powershell on vs/etc
+
+type: composer create-project laravel/laravel acad_services_app
+
+3 Import DB
+
+Create database "acad_services_app" on localhost > phpmyadmin
+
+Import acad_services_app.sql
+
+4 Open project
+
+Open cmd/powershell on vs/etc
+
+type: php artisan serve
+
+on browser, go to: localhost:8000
+
+--If template is not rendering, try:
+Open cmd/powershell/etc
+
+type: npm install
+type: npm  run dev
