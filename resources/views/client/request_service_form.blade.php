@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-8">
 
-            <div class="card mt-5">
+            <div class="card card-outline card-primary mt-5">
                 <div class="card-header"><h4>Process name</h4></div>
 
                 <div class="card-body">
@@ -55,7 +55,7 @@
          <!---->
          <div class="col-md-4">
 
-            <div class="card mt-5">
+            <div class="card card-outline card-primary mt-5">
                 <div class="card-header"><h4>Steps</h4></div>
 
                 <div class="card-body">

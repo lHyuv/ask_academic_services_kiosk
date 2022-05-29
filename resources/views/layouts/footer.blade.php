@@ -101,7 +101,7 @@
       </div>
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Proceed</button>
+        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal"  onclick = "window.location.href='/ongoing_services'">Proceed</button>
       </div>
     </div>
   </div>

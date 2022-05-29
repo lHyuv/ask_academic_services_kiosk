@@ -60,7 +60,7 @@
 }
 .close{
     background-color: gray;
-    border-radius: 45px;
+    border-radius: 15px;
     grid-column: span 2;
 }
 .keyboard-container{

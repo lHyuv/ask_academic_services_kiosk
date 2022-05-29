@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-9">
 
-            <div class="card mt-5">
+            <div class="card  card-outline card-primary mt-5">
                 <div class="card-header">
                   <div class = "col-md-6">
                   <h4>ACE Form</h4>
@@ -96,7 +96,7 @@
          <!---->
          <div class="col-md-3">
 
-            <div class="card mt-5">
+            <div class="card  card-outline card-primary mt-5">
                 <div class="card-header"><h4>Steps</h4></div>
 
                 <div class="card-body">
@@ -165,7 +165,7 @@
          <!---->
          <div class="col-md-12">
 
-<div class="card mt-5">
+<div class="card  card-outline card-primary mt-5">
     <div class="card-header">
       <div class = 'col-md-8'>
       <h4 id = "change_subject_loc">Change Subjects or Schedule</h4>
@@ -464,7 +464,7 @@
         <div class = "card-footer">
         <div class="float-right">
                         <button class = "btn btn-secondary"  onclick = "window.location.href = '/request_service_home'">Cancel</button>
-                        <button class = "btn btn-primary" type = "submit" >Submit</button>
+                        <button class = "btn btn-primary" type = "submit"   data-bs-toggle = "modal" data-bs-target="#confirmModal" >Submit</button>
                         </div>
                     </form>
         </div>

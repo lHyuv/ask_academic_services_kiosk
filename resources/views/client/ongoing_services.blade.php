@@ -16,7 +16,7 @@
 </section>
 
 <!--Hidden card--> 
-<div class="card mt-5" id = "ongoing_services" style = 'display:none;'>
+<div class="card card-outline card-primary mt-5" id = "ongoing_services" style = 'display:none;'>
                 <div class="card-header"><h4>Process name</h4></div>
 
                 <div class="card-body">
@@ -68,7 +68,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="card">
+            <div class="card card-outline card-primary ">
                 <div class="card-header"><h4>List of Services</h4></div>
 
                 <div class="card-body">
