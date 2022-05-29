@@ -30,3 +30,5 @@ Route::get('/backlogs', [App\Http\Controllers\HomeController::class, 'backlog'])
 Route::get('/pending_services', [App\Http\Controllers\HomeController::class, 'pending_services']);
 
 Route::get('/request_service', [App\Http\Controllers\HomeController::class, 'request_service']);
+
+Route::get('/overload_form', [App\Http\Controllers\HomeController::class, 'overload_form']);

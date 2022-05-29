@@ -5,7 +5,7 @@
             <a href="/home">Academic Services</a>
           </div>
        
-          @if(Auth::user()->usertype->user_type_name == 'Client' || Auth::user()->usertype->user_type_name == 'Student')
+          @if(Auth::user()->usertype->user_type_name == 'Client' || Auth::user()->usertype->user_type_name == 'Student' || Auth::user()->usertype->user_type_name == 'Student/Client')
           <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
               <li class="nav-item">

@@ -94,7 +94,7 @@
                               <i class="fas fa-check"></i>
                             </div>
                             <div class="wizard-step-label">
-                            Step 4:  Request Completed
+                            Request Completed
                             </div>
                           </div>
                      </div>

@@ -45,4 +45,8 @@ class HomeController extends Controller
     public function request_service(){
         return view('request_service_form');
     }
+
+    public function overload_form(){
+        return view('service_forms.overload_form');
+    }
 }
