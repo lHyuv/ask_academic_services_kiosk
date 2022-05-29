@@ -32,3 +32,7 @@ Route::get('/pending_services', [App\Http\Controllers\HomeController::class, 'pe
 Route::get('/request_service', [App\Http\Controllers\HomeController::class, 'request_service']);
 
 Route::get('/overload_form', [App\Http\Controllers\HomeController::class, 'overload_form']);
+
+Route::get('/ace_add_form', [App\Http\Controllers\HomeController::class, 'ace_add_form']);
+
+Route::get('/ace_change_form', [App\Http\Controllers\HomeController::class, 'ace_change_form']);

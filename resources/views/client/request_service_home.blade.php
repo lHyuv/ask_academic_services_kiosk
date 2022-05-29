@@ -28,7 +28,7 @@
         </div>
          <!---->
          <div class="col-md-4">
-         <a href = "/request_service">
+         <a href = "/ace_add_form">
         <div class="card mt-5">
         <div class="card-header"><h4>Adding of Subject</h4></div>
 
@@ -40,7 +40,7 @@
         </div>
         <!---->
         <div class="col-md-4">
-        <a href = "/request_service">
+        <a href = "/ace_change_form">
         <div class="card mt-5">
         <div class="card-header"><h4>Change of Subject or Schedule</h4></div>
 

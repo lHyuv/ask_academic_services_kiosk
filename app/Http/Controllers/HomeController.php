@@ -31,7 +31,7 @@ class HomeController extends Controller
     }
 
     public function request_service_home(){
-        return view('request_service_home');
+        return view('client.request_service_home');
     }
 
     public function backlog(){
@@ -39,14 +39,21 @@ class HomeController extends Controller
     }
 
     public function pending_services(){
-        return view('pending_services');
+        return view('other_users.pending_services');
     }
 
     public function request_service(){
-        return view('request_service_form');
+        return view('client.request_service_form');
     }
 
     public function overload_form(){
         return view('service_forms.overload_form');
+    }
+
+    public function ace_add_form(){
+        return view('service_forms.ace_add_form');
+    }
+    public function ace_change_form(){
+        return view('service_forms.ace_change_form');
     }
 }

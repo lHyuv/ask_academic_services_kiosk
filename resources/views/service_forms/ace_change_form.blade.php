@@ -9,7 +9,8 @@
 <section class="section shadow-sm">
         <div class="section-header mt-5">
         <div class="row">
-            <h1>Overload of Subjects</h1>
+            <h1>Change of Enrollment (Change of Subject/Schedule)</h1>
+           
         </div>  
         </div>
       
@@ -19,13 +20,13 @@
 
             <div class="card mt-5">
                 <div class="card-header">
-                <div class = "col-md-7">
+                  <div class = "col-md-6">
                   <h4>ACE Form</h4>
-                </div>
-                  <div class = "col-md-5">
-                  <a  href = "#overload_subject_loc">Go to overloading of subjects</a>
                   </div>
-                </div>
+                  <div class = "col-md-6">
+                  <a href = "#change_subject_loc">Go to changing of subjects/schedule</a>
+                  </div>
+              </div>
                 
                 <div class="card-body">
                     <form action="" method = "">
@@ -67,16 +68,7 @@
 
                         <label>Requirements</label>
                         <div class="form-group">
-                        <label>Request letter for Overload</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "Enter url.." required/>
-                        </div>
-                        <div class="form-group">
-                        <label>Certificate of Registration for current semester</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "Enter url.." required/>
-                        </div>
-                        <div class="form-group">
-                        <label>Fully-accomplished Request for Overload Form</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "Enter url.." required/>
+                        <i>Nothing to submmit</i>
                         </div>
                         <hr>
                         <div class="form-group">
@@ -115,7 +107,7 @@
                               <i class="fas fa-file"></i>
                             </div>
                             <div class="wizard-step-label">
-                        Submit requirements for approval
+                        Submit requirements
                             </div>
                           </div>
             
@@ -124,11 +116,35 @@
                               <i class="fas fa-user"></i>
                             </div>
                             <div class="wizard-step-label">
-                        Wait for approval
+                        Wait for signature by Faculty Head
                             </div>
                           </div>
                  
-                  
+                          <div class="wizard-step wizard-step-active">
+                            <div class="wizard-step-icon">
+                              <i class="fas fa-user"></i>
+                            </div>
+                            <div class="wizard-step-label">
+                        Wait for signature by Director or Academic Program Head
+                            </div>
+                          </div>
+
+                          <div class="wizard-step wizard-step-active">
+                            <div class="wizard-step-icon">
+                              <i class="fas fa-user"></i>
+                            </div>
+                            <div class="wizard-step-label">
+                        Wait for tagging
+                            </div>
+                          </div>
+                          <div class="wizard-step wizard-step-active">
+                            <div class="wizard-step-icon">
+                              <i class="fas fa-receipt"></i>
+                            </div>
+                            <div class="wizard-step-label">
+                        Receive receipt after paying
+                            </div>
+                          </div>
               
                           <div class="wizard-step wizard-step-success">
                             <div class="wizard-step-icon">
@@ -152,7 +168,7 @@
 <div class="card mt-5">
     <div class="card-header">
       <div class = 'col-md-8'>
-      <h4 id ="overload_subject_loc">Overload Subjects</h4>
+      <h4 id = "change_subject_loc">Change Subjects or Schedule</h4>
     </div>
     <div class = 'col-md-4'>
    
@@ -167,6 +183,111 @@
 
 
                         <div class = "row">
+                        <div class = "col-md-12">
+                        <div class="form-group">
+                        <center><label>Change from</label></center>
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                        <label>Course Code</label>
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                        <label>Course Description</label>
+                        
+                        </div>
+                        </div>
+                        <div class = "col-md-1">
+                        <div class="form-group">
+                        <label>Units</label><br>
+                       
+                        </div>
+                        </div>
+                        <div class = "col-md-1">
+                        <div class="form-group">
+                        <label>Hours</label>
+                   
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                        <label>Day</label>
+                     
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                        <label>Time</label>
+                  
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                        <label>Room</label>
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                        &nbsp;
+                        </div>
+                        </div>
+                        </div>
+                        <!--Row end-->
+                        <div class = "row">
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                       
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                     
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
+                        </div>
+                        </div>
+                        <div class = "col-md-1">
+                        <div class="form-group">
+                        
+                        <input type="number" name = "" id = "" class = "form-control" placeholder = "" />
+                        </div>
+                        </div>
+                        <div class = "col-md-1">
+                        <div class="form-group">
+                       
+                        <input type="number" name = "" id = "" class = "form-control" placeholder = ""/>
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                    
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                      
+                        <input type="time" name = "" id = "" class = "form-control" placeholder = ""/>
+                        </div>
+                        </div>
+                        <div class = "col-md-2">
+                        <div class="form-group">
+                  
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
+                        </div>
+                        </div>
+                        </div>
+                        <div class = "add_subject_row"></div>
+                        <!--Row end-->
+                        <!----> 
+                        <div class = "row">
+                        <div class = "col-md-12">
+                        <div class="form-group">
+                        <center><label>Change to</label></center>
+                        </div>
+                        </div>
                         <div class = "col-md-2">
                         <div class="form-group">
                         <label>Course Code</label>
@@ -342,7 +463,7 @@
         <!--Form cont..:end-->
         <div class = "card-footer">
         <div class="float-right">
-                        <button class = "btn btn-secondary" onclick = "window.location.href = '/request_service_home'">Cancel</button>
+                        <button class = "btn btn-secondary"  onclick = "window.location.href = '/request_service_home'">Cancel</button>
                         <button class = "btn btn-primary" type = "submit" >Submit</button>
                         </div>
                     </form>
