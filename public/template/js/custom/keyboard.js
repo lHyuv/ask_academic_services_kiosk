@@ -73,3 +73,16 @@ const rowManage = (mode) =>{
 
 };
 
+const manageCard = (id, mode) =>{
+ 
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    if(mode == "show"){
+        $('#' + id).css('display','flex');     
+    }else{
+        $('#' + id).css('display','none');    
+    }
+};

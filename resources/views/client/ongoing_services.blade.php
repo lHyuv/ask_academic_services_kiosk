@@ -9,11 +9,12 @@
 <section class="section shadow-sm">
         <div class="section-header mt-5">
         <div class="row">
-            <h1>Services and Requests</h1>
+            <h1>Ongoing Services</h1>
         </div>  
         </div>
       
 </section>
+
 <!--Hidden card--> 
 <div class="card mt-5" id = "ongoing_services" style = 'display:none;'>
                 <div class="card-header"><h4>Process name</h4></div>
@@ -51,8 +52,8 @@
                 <div class = "card-footer">
                 <div class = "float-right">
                         <button class = "btn btn-secondary" onclick = "manageCard('ongoing_services','hide');">Close</button>
-                        <button class = "btn btn-danger"  data-bs-toggle = "modal" data-bs-target="#confirmModal"  >Disapprove</button>
-                        <button class = "btn btn-primary"  data-bs-toggle = "modal" data-bs-target="#confirmModal" >Approve</button>
+                        <button class = "btn btn-danger" data-bs-toggle = "modal" data-bs-target="#confirmModal" >Disapprove</button>
+                        <button class = "btn btn-primary" data-bs-toggle = "modal" data-bs-target="#confirmModal"  >Approve</button>
                         </div>
                     </form>
                 </div>
@@ -63,18 +64,18 @@
          <!---->
        
 <!--Hidden card:end-->
+
     <div class="row">
         <div class="col-md-12">
 
             <div class="card">
-                <div class="card-header"><h4>Pending Services</h4></div>
+                <div class="card-header"><h4>List of Services</h4></div>
 
                 <div class="card-body">
                     <table class = "table table-striped">
                         <thead>
                             <tr>
                                 <th>Service</th>
-                                <th>User</th>
                                 <th>Status</th>
                                 <th>Time</th>
                                 <th>&nbsp;</th>
@@ -83,24 +84,22 @@
                         <tbody>
                             <tr>
                                 <td>Overload</td>
-                                <td>User 1</td>
                                 <td>
                                 <span class="badge badge-warning">Pending</span>
                                 </td>
                                 <td>{{ now()->diffForHumans() }}</td>
                                 <td>
-                                    <button class = "btn btn-info"   onclick = "manageCard('ongoing_services','show');">View Request</button>
+                                    <button class = "btn btn-info" onclick = "manageCard('ongoing_services','show');" >View Request</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td>Overload</td>
-                                <td>User 2</td>
                                 <td>
                                 <span class="badge badge-danger">Overdue</span>
                                 </td>
                                 <td>{{ now()->diffForHumans() }}</td>
                                 <td>
-                                    <button class = "btn btn-info"   onclick = "manageCard('ongoing_services','show');">View Request</button>
+                                    <button class = "btn btn-info"  onclick = "manageCard('ongoing_services','show');">View Request</button>
                                 </td>
                             </tr>
                         </tbody>

@@ -295,7 +295,7 @@
                         <div class = "col-md-4">
                         <div class="form-group">
                          Sign (Student)<br>
-                          <button class = 'btn btn-primary' id = 'student_sign'>Sign this form</button>
+                          <button class = 'btn btn-primary' id = 'student_sign' data-bs-toggle = "modal" data-bs-target="#confirmModal" >Sign this form</button>
                           <span id = 'signed_badge_status'></span>
                           </div>
                         </div>

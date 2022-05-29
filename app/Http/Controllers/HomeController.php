@@ -56,4 +56,12 @@ class HomeController extends Controller
     public function ace_change_form(){
         return view('service_forms.ace_change_form');
     }
+
+    public function view_profile(){
+        return view('profile');
+    }
+
+    public function ongoing_services(){
+        return view('client.ongoing_services');
+    }
 }

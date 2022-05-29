@@ -36,3 +36,7 @@ Route::get('/overload_form', [App\Http\Controllers\HomeController::class, 'overl
 Route::get('/ace_add_form', [App\Http\Controllers\HomeController::class, 'ace_add_form']);
 
 Route::get('/ace_change_form', [App\Http\Controllers\HomeController::class, 'ace_change_form']);
+
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'view_profile']);
+
+Route::get('/ongoing_services', [App\Http\Controllers\HomeController::class, 'ongoing_services']);
