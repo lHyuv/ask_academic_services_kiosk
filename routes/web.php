@@ -40,3 +40,7 @@ Route::get('/ace_change_form', [App\Http\Controllers\HomeController::class, 'ace
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'view_profile']);
 
 Route::get('/ongoing_services', [App\Http\Controllers\HomeController::class, 'ongoing_services']);
+
+Route::get('/user', [App\Http\Controllers\HomeController::class, 'user_crud']);
+
+Route::get('/role', [App\Http\Controllers\HomeController::class, 'role_crud']);

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+use App\Models\UserType;
+
 class HomeController extends Controller
 {
     /**
@@ -63,5 +66,21 @@ class HomeController extends Controller
 
     public function ongoing_services(){
         return view('client.ongoing_services');
+    }
+
+    public function user_crud(){
+        $users = User::where('status','Active')->get();
+        $roles = UserType::where('status','Active')->get();
+        return view('admin.user', [
+            'users' => $users,
+            'roles' => $roles
+        ]);
+    }
+
+    public function role_crud(){
+        $roles = UserType::where('status','Active')->get();
+        return view('admin.role', [
+            'roles' => $roles
+        ]);
     }
 }

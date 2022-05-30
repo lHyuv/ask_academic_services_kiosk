@@ -39,8 +39,18 @@
               <li class="nav-item">
                 <a href="/backlogs" class="nav-link"><i class="fas fa-list"></i><span>Backlogs and Queries</span></a>
               </li>
-        </ul>
+       
         @endif
+        @if(Auth::user()->usertype->user_type_name == 'Admin')
+        <li class="menu-header">User Management</li>
+              <li class="nav-item">
+                <a href="/user" class="nav-link"><i class="fas fa-user"></i><span>Users</span></a>
+              </li>
+              <li class="nav-item">
+                <a href="/role" class="nav-link"><i class="fas fa-users"></i><span>Roles</span></a>
+              </li>
+        @endif
+        </ul>
         </aside>
       </div>
 @endif
