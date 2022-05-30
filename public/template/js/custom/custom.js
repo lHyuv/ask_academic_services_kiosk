@@ -1,4 +1,5 @@
 
+const apiURL = "http://localhost:8000/api/";
 
 const showKeyboard = (mode) =>{
     if(mode == "show"){
@@ -85,4 +86,94 @@ const manageCard = (id, mode) =>{
     }else{
         $('#' + id).css('display','none');    
     }
+};
+
+
+const editRole = (data) =>{
+    //view
+    let values = JSON.parse(data);
+    $('#edit_user_type_name').val(values['user_type_name']);
+
+    $('#edit_role').on('submit',(e)=>{
+
+        e.preventDefault();
+
+        $.ajax({
+            url: apiURL + 'roles/update/' + values['id'],
+            async: true,
+            method: 'POST',
+            data: {
+                'user_type_name' : $('#edit_user_type_name').val()
+            },
+            success: (data)=>{
+                
+                //Replace with Toastr/Other Notif and Ajax TableLoad
+             
+                alert('Success');
+                location.reload();
+            },
+            error:({responseJSON})=>{
+                console.log(responseJSON);
+            }
+        });
+    })
+
+
+};
+
+const createRole = () =>{
+
+    $('#create_role').on('submit',(e)=>{
+
+        e.preventDefault();
+
+        $.ajax({
+            url: apiURL + 'roles',
+            async: true,
+            method: 'POST',
+            data: {
+                'user_type_name' : $('#create_user_type_name').val()
+            },
+            success: (data)=>{
+                
+                //Replace with Toastr/Other Notif and Ajax TableLoad
+             
+                alert('Success');
+                location.reload();
+            },
+            error:({responseJSON})=>{
+                console.log(responseJSON.message);
+            }
+        });
+    })
+
+
+};
+
+const deleteRole = (data) =>{
+    //view
+    let values = JSON.parse(data);
+  
+    
+    $('#modal_confirm_btn').on('click',()=>{
+
+
+        $.ajax({
+            url: apiURL + 'roles/delete/' + values['id'],
+            async: true,
+            method: 'POST',
+            success: (data)=>{
+               
+               //Replace with Toastr/Other Notif and Ajax TableLoad
+             
+               alert('Success');
+               location.reload();
+            },
+            error:({responseJSON})=>{
+                console.log(responseJSON);
+            }
+        });
+    })
+
+
 };

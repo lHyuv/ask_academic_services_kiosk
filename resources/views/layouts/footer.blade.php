@@ -101,10 +101,12 @@
       </div>
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        @if(Auth::check())
         @if(Auth::user()->usertype->user_type_name == 'Student' || Auth::user()->usertype->user_type_name == 'Client' || Auth::user()->usertype->user_type_name == 'Student/Client')
-        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal"  onclick = "window.location.href='/ongoing_services'">Proceed</button>
+        <button type="button" id = 'modal_confirm_btn' class="btn btn-primary"  data-bs-dismiss="modal"  onclick = "window.location.href='/ongoing_services'">Proceed</button>
         @else
-        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal"  onclick = "location.reload() //to be changed">Proceed</button>
+        <button type="button" id = 'modal_confirm_btn' class="btn btn-primary"  data-bs-dismiss="modal"  onclick = "">Proceed</button>
+        @endif
         @endif
       </div>
     </div>

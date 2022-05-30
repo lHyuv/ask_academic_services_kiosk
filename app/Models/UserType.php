@@ -15,4 +15,5 @@ class UserType extends Authenticatable
     public function user(){
         return $this->hasOne('App\Models\User');
     }
+    protected $fillable = ['user_type_name', 'status'];
 }

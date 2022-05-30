@@ -22,13 +22,13 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "">
+                    <form action="" method = "" id = 'edit_role'>
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>User Type</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" required/>
+                        <input type="text" name = "user_type_name" id = "edit_user_type_name" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
 
@@ -56,13 +56,13 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "">
+                    <form action="" method = "" id = "create_role">
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>User Type</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" required/>
+                        <input type="text" name = "create_user_type_name" id = "create_user_type_name" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
 
@@ -95,7 +95,7 @@
                     <h4>List of Roles</h4>
                     </div>
                     <div class = "col-md-2">
-                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_role_crud','show');">+ Add</button>
+                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_role_crud','show');createRole();">+ Add</button>
                     </div>
                 </div>
 
@@ -134,15 +134,23 @@
                                     <!-- Dropdown Menu --> 
                                     <div class="dropdown-menu dropdown-menu-right"> 
                                 
-                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_role_crud','show');">
+                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_role_crud','show');editRole(' {{$role}}');">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>
                                     <div>Edit</div>
                                     </div> 
                                     <!----> 
+                                    <div class="dropdown-item d-flex" role="button" onclick = "deleteRole(' {{$role}}');"  data-bs-toggle = "modal" data-bs-target="#confirmModal">
+                                    <div style="width: 2rem">
+                                    <i class="fas fa-list mr-1"></i>
                                     </div>
-                                    
+                                    <div>Delete</div>
+                                    </div> 
+                                    <!----> 
+                                    </div>
+
+                                    </div>
                                 </div>
                                 </td>
                             </tr>
