@@ -22,13 +22,13 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "">
+                    <form action="" method = "" id = "edit_user">
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" required/>
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" />
                         </div>
                         </div>
                         <div class = "col-md-12">
@@ -40,7 +40,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" required/>
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
                         </div>
                         </div>
                         <div class = "col-md-12">
@@ -63,11 +63,11 @@
                         <label>User Info</label>
                         <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
+                        <input type="text" name = "edit_username" id = "edit_username" class = "form-control" placeholder = ""/>
                         </div>
                         <div class="form-group">
                         <label>User Type/Role</label>
-                        <select class = "form-control">
+                        <select class = "form-control" id = "edit_usertype_id" name = "edit_usertype_id">
                             @foreach($roles as $role)
                             <option value = "{{ $role->id }}"> {{ $role->user_type_name }} </option>
                             @endforeach
@@ -76,11 +76,11 @@
                         <label>Change Password</label>
                         <div class="form-group">
                         <label>Password</label>
-                        <input type="password" name = "" id = "" class = "form-control" placeholder = ""/>
+                        <input type="password" name = "edit_password" id = "edit_password" class = "form-control" placeholder = ""/>
                         </div>
                         <div class="form-group">
                         <label>Confirm password</label>
-                        <input type="password" name = "" id = "" class = "form-control" placeholder = ""/>
+                        <input type="password" name = "edit_password_confirm" id = "edit_password_confirm" class = "form-control" placeholder = ""/>
                         </div>
                         <div class="float-right">
                         <button class = "btn btn-secondary" onclick = "manageCard('edit_user_crud','hide');" >Cancel</button>
@@ -101,13 +101,13 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "">
+                    <form action="" method = "" id = "create_user">
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" required/>
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
                         </div>
                         </div>
                         <div class = "col-md-12">
@@ -119,7 +119,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" required/>
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
                         </div>
                         </div>
                         <div class = "col-md-12">
@@ -142,11 +142,11 @@
                         <label>User Info</label>
                         <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
+                        <input type="text" name = "create_username" id = "create_username" class = "form-control" placeholder = ""/>
                         </div>
                         <div class="form-group">
                         <label>User Type/Role</label>
-                        <select class = "form-control">
+                        <select class = "form-control" id = "create_usertype" name = "create_usertype">
                             @foreach($roles as $role)
                             <option value = "{{ $role->id }}"> {{ $role->user_type_name }} </option>
                             @endforeach
@@ -155,11 +155,11 @@
                        
                         <div class="form-group">
                         <label>Password</label>
-                        <input type="password" name = "" id = "" class = "form-control" placeholder = ""/>
+                        <input type="password" name = "create_password" id = "create_password" class = "form-control" placeholder = ""/>
                         </div>
                         <div class="form-group">
                         <label>Confirm password</label>
-                        <input type="password" name = "" id = "" class = "form-control" placeholder = ""/>
+                        <input type="password"  name = "create_password_confirm" id = "create_password_confirm"  class = "form-control" placeholder = ""/>
                         </div>
                         <div class="float-right">
                         <button class = "btn btn-secondary" onclick = "manageCard('create_user_crud','hide');" >Cancel</button>
@@ -184,7 +184,7 @@
                     <h4>List of Users</h4>
                     </div>
                     <div class = "col-md-2">
-                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_user_crud','show');">+ Add</button>
+                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_user_crud','show');createUser();">+ Add</button>
                     </div>
                  </div>
 
@@ -224,14 +224,14 @@
                                     <!-- Dropdown Menu --> 
                                     <div class="dropdown-menu dropdown-menu-right"> 
                                 
-                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_user_crud','show');">
+                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_user_crud','show');editUser('{{ $user }}');">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>
                                     <div>Edit</div>
                                     </div> 
                                     <!----> 
-                                    <div class="dropdown-item d-flex" role="button"  data-bs-toggle="modal" data-bs-target="#confirmModal"  onclick = "">
+                                    <div class="dropdown-item d-flex" role="button"  data-bs-toggle="modal" data-bs-target="#confirmModal"  onclick = "deleteUser('{{ $user }}');">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>

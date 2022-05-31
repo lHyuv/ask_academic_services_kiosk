@@ -12,7 +12,7 @@ class User extends Authenticatable
    
     use HasFactory;
     use Uuids;
-    protected $fillable = ['username','password', 'user_type_id'];
+    protected $fillable = ['username','password', 'user_type_id','status'];
     public function usertype(){
         return $this->belongsTo('App\Models\UserType', 'user_type_id');
     }

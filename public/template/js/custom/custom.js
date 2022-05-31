@@ -177,3 +177,136 @@ const deleteRole = (data) =>{
 
 
 };
+
+const createUser = () =>{
+
+    $('#create_user').on('submit',(e)=>{
+
+        e.preventDefault();
+        if($('#create_password').val() != $('#create_password_confirm').val()){
+            //Replace this with Toastr or other notif
+            alert('Passwords does not match!');
+        }else if($('#create_password').val().length < 8){
+            //Replace this with Toastr or other notif
+            alert('Passwords must be 8 characters or more!');            
+        }else{
+        $.ajax({
+            url: apiURL + 'users',
+            async: true,
+            method: 'POST',
+            data: {
+                'username' : $('#create_username').val(),
+                'password' : $('#create_password').val(),
+                'user_type_id' : $('#create_usertype').val()
+            },
+            success: (data)=>{
+                
+                //Replace with Toastr/Other Notif and Ajax TableLoad
+             
+                alert('Success');
+                location.reload();
+            },
+            error:({responseJSON})=>{
+                console.log(responseJSON.message);
+            }
+        });
+        }
+    })
+
+
+};
+
+const editUser = (data) =>{
+    //view
+    let values = JSON.parse(data);
+    $('#edit_usertype_id').val(values['user_type_id']);
+    $('#edit_username').val(values['username']);
+    $('#edit_user').on('submit',(e)=>{
+
+        e.preventDefault();
+        if($('#edit_password').val().length == 0){
+            $.ajax({
+                url: apiURL + 'users/update/' + values['id'],
+                async: true,
+                method: 'POST',
+                data: {
+                    'username' : $('#edit_username').val(),
+                    'user_type_id' : $('#edit_usertype_id').val()
+                },
+                success: (data)=>{
+                    
+                    //Replace with Toastr/Other Notif and Ajax TableLoad
+                 
+                    alert('Success');
+                    location.reload();
+                },
+                error:({responseJSON})=>{
+                    console.log(responseJSON);
+                }
+            });
+        }else{
+            if($('#edit_password').val() != $('#edit_password_confirm').val()){
+                //Replace this with Toastr/Other notif
+
+                alert('Passwords must match!');
+            }else if($('#edit_password').val().length < 8){
+                //Replace this with Toastr/Other notif
+
+                alert('Passwords must be 8 characters or more');                
+            }else{
+                $.ajax({
+                    url: apiURL + 'users/update/' + values['id'],
+                    async: true,
+                    method: 'POST',
+                    data: {
+                        'username' : $('#edit_username').val(),
+                        'user_type_id' : $('#edit_usertype_id').val(),
+                        'password' : $('#edit_password').val()
+                    },
+                    success: (data)=>{
+                        
+                        //Replace with Toastr/Other Notif and Ajax TableLoad
+                     
+                        alert('Success');
+                        location.reload();
+                    },
+                    error:({responseJSON})=>{
+                        console.log(responseJSON);
+                    }
+                });  
+            }
+        }
+
+    })
+  
+
+};
+
+
+const deleteUser = (data) =>{
+    //view
+    let values = JSON.parse(data);
+  
+    
+    $('#modal_confirm_btn').on('click',()=>{
+
+
+        $.ajax({
+            url: apiURL + 'users/delete/' + values['id'],
+            async: true,
+            method: 'POST',
+            success: (data)=>{
+               
+               //Replace with Toastr/Other Notif and Ajax TableLoad
+             
+               alert('Success');
+               location.reload();
+            },
+            error:({responseJSON})=>{
+                console.log(responseJSON);
+            }
+        });
+    })
+
+
+};
