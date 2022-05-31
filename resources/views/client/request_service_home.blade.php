@@ -8,46 +8,89 @@
 
 <section class="section shadow-sm">
         <div class="section-header mt-5">
-        <div class="row">
+     
             <h1>Select a service</h1>
-        </div>  
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item"><a href="/home">Home</a></div>
+              <div class="breadcrumb-item">Select Service</div>
+            </div>
+        
         </div>
       
 </section>
+
+
     <div class="row">
         <div class="col-md-4">
             <a href = "/overload_form">
-            <div class="card mt-5">
-                <div class="card-header"><h4>Overload of Subjects</h4></div>
 
-                <div class="card-body">
-                    Details
+            <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Overload of Subjects</a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-            </div>
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
             </a>
         </div>
          <!---->
          <div class="col-md-4">
          <a href = "/ace_add_form">
-        <div class="card mt-5">
-        <div class="card-header"><h4>Adding of Subject</h4></div>
-
-            <div class="card-body">
-                    Details
+         <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Adding of Subject </a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-        </div> 
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
         </a>
         </div>
         <!---->
         <div class="col-md-4">
         <a href = "/ace_change_form">
-        <div class="card mt-5">
-        <div class="card-header"><h4>Change of Subject or Schedule</h4></div>
-
-            <div class="card-body">
-                    Details
+        <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Change of Subject or Schedule</a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-        </div>
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
         </a>
         </div>
         <!---->
@@ -55,37 +98,73 @@
     <div class="row">
         <div class="col-md-4">
         <a href = "/request_service">
-            <div class="card mt-5">
-                <div class="card-header"><h4>Grade correction and reporting</h4></div>
-
-                <div class="card-body">
-                    Details
+        <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Grade Correction and Reporting </a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-            </div>
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
             </a>
         </div>
          <!---->
          <div class="col-md-4">
          <a href = "/request_service">
-        <div class="card mt-5">
-        <div class="card-header"><h4>Cross-enrolment</h4></div>
-
-            <div class="card-body">
-                    Details
+         <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Cross-enrolment </a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-        </div>
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
         </a>
         </div>
         <!---->
         <div class="col-md-4">
         <a href = "/request_service">
-        <div class="card mt-5">
-        <div class="card-header"><h4>Shifting</h4></div>
-
-            <div class="card-body">
-                    Details
+        <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Shifting </a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-        </div>
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
         </a>
         </div>
         <!---->
@@ -93,37 +172,73 @@
     <div class="row">
         <div class="col-md-4">
         <a href = "/request_service">
-            <div class="card mt-5">
-                <div class="card-header"><h4>Manual Enrolment</h4></div>
-
-                <div class="card-body">
-                    Details
+        <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Manual Enrolment</a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-            </div>
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
             </a>
         </div>
          <!---->
          <div class="col-md-4">
          <a href = "/request_service">
-        <div class="card mt-5">
-        <div class="card-header"><h4>Subject Petition</h4></div>
-
-            <div class="card-body">
-                    Details
+         <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Subject Petition</a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-        </div>
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
         </a>
         </div>
         <!---->
         <div class="col-md-4">
         <a href = "/request_service">
-        <div class="card mt-5">
-        <div class="card-header"><h4>Subject Tutorial Request</h4></div>
-
-            <div class="card-body">
-                    Details
+        <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Subject Tutorial Request </a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-        </div>
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
         </a>
         </div>
         <!---->
@@ -131,13 +246,25 @@
     <div class="row">
         <div class="col-md-4">
         <a href = "/request_service">
-            <div class="card mt-5">
-                <div class="card-header"><h4>Certification Request</h4></div>
-
-                <div class="card-body">
-                    Details
+        <article class="article">
+                  <div class="article-header">
+                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
+                    </div>
+                    <div class="article-title">
+                      <h2><a href="#">Certification Request </a></h2>
+                    </div>
+                  </div>
+                  <div class="article-details">
+                      <div class = "row">
+                      <div class = "col-md-8">
+                  <p>Details... </p>
                 </div>
-            </div>
+                <div class = "col-md-2">
+                  <a href="#" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                    </div>
+                  </div>
+                  </div>
+                </article>
             </a>
         </div>
          <!---->

@@ -4,7 +4,22 @@
           <div class="sidebar-brand">
             <a href="/home">Academic Services</a>
           </div>
-       
+<div class = "row">
+  <div class = "col-md-4">
+<div class="image">
+<img src="http://localhost:8000/template/img/avatar/avatar-1.png" width="50" style = "margin-left:20px;" class="mr-3 rounded-circle profile-widget-picture">
+</div>
+</div>
+<div class = "col-md-8 mt-2">
+
+<a href="/profile" class="nav-item text-truncate">{{ Auth::user()->username }}</a>
+
+<div class="small text-secondary text-truncate">{{Auth::user()->usertype->user_type_name}}</div>
+                    
+</div>
+</div>
+<hr>
+
           @if(Auth::user()->usertype->user_type_name == 'Client' || Auth::user()->usertype->user_type_name == 'Student' || Auth::user()->usertype->user_type_name == 'Student/Client')
           <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
