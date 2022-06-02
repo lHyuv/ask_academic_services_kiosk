@@ -8,9 +8,11 @@
 
 <section class="section shadow-sm">
         <div class="section-header mt-5">
-        <div class="row">
+   
             <h1>Dashboard</h1>
-        </div>  
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item">Home</div>
+            </div>
         </div>
       
 </section>
@@ -52,7 +54,7 @@
         <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
                 <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-list"></i>
+                  <i class="fas fa-clipboard"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
@@ -104,7 +106,7 @@
         <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
                 <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-list"></i>
+                  <i class="fas fa-clipboard"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
@@ -155,7 +157,7 @@
         <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
                 <div class="card-icon shadow-primary bg-primary">
-                  <i class="fas fa-list"></i>
+                  <i class="fas fa-clipboard"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">

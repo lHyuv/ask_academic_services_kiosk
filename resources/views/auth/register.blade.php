@@ -9,7 +9,8 @@
         <div class="row">
           <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
           <div class="login-brand">
-                <h3>Academic Services</h3>
+          <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" alt="logo" width="100" class="shadow-light rounded-circle">
+                <h4>Academic Services</h4>
             </div>
             <div class="card card-primary">
               <div class="card-header"><h4>Register</h4></div>
@@ -73,7 +74,7 @@
                         </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                     Register
+                     Register <i class="fas fa-sign-in-alt"></i>
                     </button>
                   </div>
                 </form>

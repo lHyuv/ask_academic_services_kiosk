@@ -68,7 +68,7 @@
                         <label>User Info</label>
                         <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" disabled/>
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" disabled value = "{{Auth::user()->username}}"/>
                         </div>
                         <div class="form-group">
                         <label>User Type/Role</label>

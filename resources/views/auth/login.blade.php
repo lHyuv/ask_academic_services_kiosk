@@ -10,7 +10,8 @@
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
            
             <div class="login-brand">
-                <h3>Academic Services</h3>
+            <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" alt="logo" width="100" class="shadow-light rounded-circle">
+                <h4>Academic Services</h4>
             </div>
             
 
@@ -18,11 +19,13 @@
               <div class="card-header"><h4>Login</h4></div>
 
               <div class="card-body">
+              <p>Login using your email and password.</p>
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
                   <div class="form-group">
                     <label for="email">Username</label>
-                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username"  required  autofocus>
+                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username"  required  autofocus
+                    data-parsley-required-message="Please fill in your email.">
 
                     @error('username')
                      <span class="invalid-feedback" role="alert">
@@ -50,17 +53,17 @@
                         </span>
                     @enderror
                   </div>
-
+                  <!--
                   <div class="form-group">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                       <label class="custom-control-label" for="remember-me">Remember Me</label>
                     </div>
                   </div>
-
+                  -->
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                      Login
+                      Login <i class="fas fa-sign-in-alt"></i>
                     </button>
                   </div>
                 </form>

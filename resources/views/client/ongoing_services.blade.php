@@ -118,7 +118,7 @@
 </div>
 <script>
 $(document).ready(()=>{
-    $('table').DataTable();
+    $('table').dataTable();
 })
 </script>
 @endsection

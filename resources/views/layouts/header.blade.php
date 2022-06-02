@@ -21,26 +21,42 @@
     <!-- Styles -->
      <!--
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    -->
+    -->     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('template/js/scripts.js') }}"></script>
-    <script src="{{ asset('template/js/custom.js') }}"></script>
     <script src="{{ asset('template/js/stisla.js') }}"></script>
-    <script src="{{ asset('template/js/custom/custom.js') }}"></script>
+    <script src="{{ asset('template/custom/custom.js') }}"></script>
+        <script src="{{ asset('template/custom/additional_custom.js') }}"></script>
+
+        <!-- General JS Scripts -->
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="{{ asset('template/vendors/datatable/js/datatables.min.js') }}"></script>
+    <script src="{{ asset('template/vendors/reveal-password/js/show-hide-password.min.js') }}"></script>
+    <script src="{{ asset('template/vendors/parsley/js/parsley.min.js') }}"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/components.css') }}" rel="stylesheet">
-    <link href="{{ asset('template/css/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('template/css/custom/keyboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('template/css/custom/step.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/custom/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/custom/keyboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/custom/step.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/vendors/datatable/css/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/vendors/parsley/css/custom-parsley.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
 @if(Auth::check())
     <div id="app">
-    <div class="main-wrapper">
+    <div class="main-wrapper main-wrapper-1">
     <div class="navbar-bg"></div>
         <nav class="navbar navbar-expand-md">
         @if(!Auth::check())
@@ -48,6 +64,7 @@
                   Academic Services
                 </a>
          @endif
+
              
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -100,16 +117,17 @@
                                 <i class = 'fa fa-user-circle'></i> {{ Auth::user()->username }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <!--<div class="dropdown-title">Logged in n min ago</div>-->
                                      <a class="dropdown-item" href="/profile"
                                        onclick="/profile">
-                                       Profile
+                                       <i class="far fa-user"></i> Profile
                                     </a>
                                     <div class = "dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                       <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
