@@ -95,7 +95,7 @@ class RegisterController extends Controller
     
     protected function showRegistrationForm()
     {
-        $roles = DB::table('roles')->where('status', 'Active')->get();
+        $roles = DB::table('roles')->where('status', '1')->get();
      
         return view('auth.register', ['roles'=>  $roles]);
 

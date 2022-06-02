@@ -49,3 +49,11 @@ Route::post('/roles/update/{id}', [RoleController::class,'update']);
 Route::post('/roles/delete/{id}', [RoleController::class,'delete']);
 
 Route::get('/roles/{id}', [RoleController::class,'show']);
+
+//Auth
+use App\Http\Controllers\AuthController;
+
+Route::post('/custom_auth/login', [AuthController::class, 'login']);
+Route::post('/custom_auth/register', [AuthController::class, 'register']);
+Route::post('/custom_auth/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->post('/custom_auth/test', [AuthController::class, 'test']);
