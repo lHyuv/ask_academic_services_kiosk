@@ -16,16 +16,16 @@
               <div class="card-header"><h4>Register</h4></div>
 
               <div class="card-body">
-              <form method="POST" action="{{ route('login') }}">
+              <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="form-group">
                 <div class="d-block">
-                            <label for="name" class="control-label">{{ __('Username') }}</label>
+                            <label for="name" class="control-label">{{ __('Email') }}</label>
 
                           
-                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username"  required autocomplete="name" autofocus>
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email"  required autocomplete="name" autofocus>
 
-                                @error('username')
+                                @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -63,10 +63,10 @@
 
                           
                               
-                                <select name="user_type_id" id="user_type_id" class="form-control" required>
+                                <select name="role_id" id="role_id" class="form-control" required>
                                 
                                    @foreach($roles as $role)
-                                    <option value="{{ $role->id }}">{{  $role->user_type_name }}</option>
+                                    <option value="{{ $role->id }}">{{  $role->name }}</option>
                                    @endforeach
                                 </select>
                            

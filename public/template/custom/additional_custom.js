@@ -92,8 +92,8 @@ const manageCard = (id, mode) =>{
 const editRole = (data) =>{
     //view
     let values = JSON.parse(data);
-    $('#edit_user_type_name').val(values['user_type_name']);
-
+    $('#edit_user_type_name').val(values['name']);
+    $('#edit_details').val(values['description']);
     $('#edit_role').on('submit',(e)=>{
 
         e.preventDefault();
@@ -103,7 +103,8 @@ const editRole = (data) =>{
             async: true,
             method: 'POST',
             data: {
-                'user_type_name' : $('#edit_user_type_name').val()
+                'name' : $('#edit_user_type_name').val(),
+                'description' : $('#edit_details').val()
             },
             success: (data)=>{
                 
@@ -132,7 +133,8 @@ const createRole = () =>{
             async: true,
             method: 'POST',
             data: {
-                'user_type_name' : $('#create_user_type_name').val()
+                'name' : $('#create_user_type_name').val(),
+                'description' : $('#create_details').val()
             },
             success: (data)=>{
                 
@@ -195,9 +197,9 @@ const createUser = () =>{
             async: true,
             method: 'POST',
             data: {
-                'username' : $('#create_username').val(),
+                'email' : $('#create_email').val(),
                 'password' : $('#create_password').val(),
-                'user_type_id' : $('#create_usertype').val()
+             //   'user_type_id' : $('#create_usertype').val()
             },
             success: (data)=>{
                 
@@ -207,7 +209,7 @@ const createUser = () =>{
                 location.reload();
             },
             error:({responseJSON})=>{
-                console.log(responseJSON.message);
+              //  console.log(responseJSON.message);
             }
         });
         }
@@ -219,8 +221,8 @@ const createUser = () =>{
 const editUser = (data) =>{
     //view
     let values = JSON.parse(data);
-    $('#edit_usertype_id').val(values['user_type_id']);
-    $('#edit_username').val(values['username']);
+   // $('#edit_usertype_id').val(values['user_type_id']);
+    $('#edit_email').val(values['email']);
     $('#edit_user').on('submit',(e)=>{
 
         e.preventDefault();
@@ -230,8 +232,8 @@ const editUser = (data) =>{
                 async: true,
                 method: 'POST',
                 data: {
-                    'username' : $('#edit_username').val(),
-                    'user_type_id' : $('#edit_usertype_id').val()
+                    'email' : $('#edit_email').val(),
+                  //  'user_type_id' : $('#edit_usertype_id').val()
                 },
                 success: (data)=>{
                     
@@ -260,7 +262,7 @@ const editUser = (data) =>{
                     method: 'POST',
                     data: {
                         'username' : $('#edit_username').val(),
-                        'user_type_id' : $('#edit_usertype_id').val(),
+                     //   'user_type_id' : $('#edit_usertype_id').val(),
                         'password' : $('#edit_password').val()
                     },
                     success: (data)=>{
@@ -286,7 +288,7 @@ const editUser = (data) =>{
 const deleteUser = (data) =>{
     //view
     let values = JSON.parse(data);
-  
+
     
     $('#modal_confirm_btn').on('click',()=>{
 
@@ -296,11 +298,11 @@ const deleteUser = (data) =>{
             async: true,
             method: 'POST',
             success: (data)=>{
-               
+            console.log(data);
                //Replace with Toastr/Other Notif and Ajax TableLoad
-             
+                
                alert('Success');
-               location.reload();
+              // location.reload();
             },
             error:({responseJSON})=>{
                 console.log(responseJSON);

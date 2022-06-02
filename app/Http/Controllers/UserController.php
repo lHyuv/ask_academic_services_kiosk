@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -15,7 +16,7 @@ class UserController extends Controller
  
     public function show_active()
     {
-        return User::where('status','Active')->get();
+        return User::where('status','1')->get();
     }
 
     public function show($id)
@@ -25,13 +26,12 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
-        //request()->validate([...=>...]); //Enter validation here
-        //$user->update($request->all());
         return User::create([
-            'username' => request('username'),
-            'password' => Hash::make(request('password')),
-            'user_type_id' => request('user_type_id')
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+      
         ]);
+
     }
 
     public function update(Request $request, $id)
@@ -40,17 +40,17 @@ class UserController extends Controller
         $user = User::findOrFail($id);
        // $user->update($request->all());
         $user->update([
-            'username' => request('username'),
+            'email' => request('email'),
             'password' => Hash::make(request('password')),
-            'user_type_id' => request('user_type_id')
         ]);
+
         return $user;
     }
 
     public function delete(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $user->update(['status' => 'Inactive']);
+        $user->update(['status' => '2']);
 
         //return $user;
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\User;
-use App\Models\UserType;
+use App\Models\Role;
 
 class HomeController extends Controller
 {
@@ -69,8 +69,8 @@ class HomeController extends Controller
     }
 
     public function user_crud(){
-        $users = User::where('status','Active')->get();
-        $roles = UserType::where('status','Active')->get();
+        $users = User::where('status',1)->get();
+        $roles = Role::where('status',1)->get();
         return view('admin.user', [
             'users' => $users,
             'roles' => $roles
@@ -78,7 +78,7 @@ class HomeController extends Controller
     }
 
     public function role_crud(){
-        $roles = UserType::where('status','Active')->get();
+        $roles = Role::where('status',1)->get();
         return view('admin.role', [
             'roles' => $roles
         ]);

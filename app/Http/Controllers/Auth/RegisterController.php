@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -54,10 +55,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'max:255', 'unique:users'],
             //'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'user_type_id' => ['required']
+            'role_id' => ['required']
         ]);
     }
 
@@ -69,16 +70,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'username' => $data['username'],
+
+        $created_user = User::create([
+            'email' => $data['email'],
            // 'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_type_id' => $data['user_type_id']
+      
         ]);
+        UserRole::create([
+            'user_id' => $created_user->id,
+            'role_id' => request('role_id'),
+        ]);
+
+        return $created_user;
+        /*
+        return User::create([
+        'email' => $data['email'],
+        // 'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+        'user_type_id' => $data['user_type_id']
+        ]);
+        */
     }
+    
     protected function showRegistrationForm()
     {
-        $roles = DB::table('user_types')->where('status', 'Active')->get();
+        $roles = DB::table('roles')->where('status', 'Active')->get();
      
         return view('auth.register', ['roles'=>  $roles]);
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2022 at 01:26 PM
+-- Generation Time: Jun 02, 2022 at 04:43 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -39,8 +39,9 @@ CREATE TABLE `migrations` (
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(2, '2022_05_17_041737_create_user_type', 1),
-(3, '2022_05_17_043628_create_user', 1);
+(2, '2022_06_02_130411_create_user', 1),
+(3, '2022_06_02_131100_create_role', 2),
+(4, '2022_06_02_131138_create_userrole', 3);
 
 -- --------------------------------------------------------
 
@@ -63,51 +64,84 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_by` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `description`, `created_by`, `updated_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('8f69bc54-616e-4ce8-9bcb-5ccc6a978fa4', 'Client', 'N/A', NULL, NULL, '1', '2022-06-01 16:00:00', NULL, NULL),
+('9124df97-d15f-4c15-93a0-e95de079c104', 'Cashier', 'N/A', NULL, NULL, '1', '2022-06-01 16:00:00', NULL, NULL),
+('99868717-5ddd-4311-af35-09f73da7a826', 'Admin', 'N/A', NULL, NULL, '1', '2022-06-01 16:00:00', NULL, NULL),
+('dfca8de3-277b-4733-b694-9b142988b58a', 'Head', 'N/A', NULL, NULL, '1', '2022-06-01 16:00:00', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_by` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
-  `user_type_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `created_at`, `updated_at`, `status`, `user_type_id`) VALUES
-('6ac12ad4-2f70-4a96-a5c8-37da5fdd0d02', 'student', '$2y$10$bN9I5ebiws9ZWnIhEfEH.eFukQnQJDqH4wGZ.PdWGUhUAInwW6DZ6', NULL, '2022-05-26 03:26:00', '2022-05-26 03:26:00', 'Active', '8f69bc54-616e-4ce8-9bcb-5ccc6a978fa4'),
-('c6d56f5c-5cbc-422c-a67d-874996ceff00', 'admin', '$2y$10$UpO4/EbMGhglPWhiCRGJg.e0GGG5WYR5V/e45hQHgVagHPlLyBQjG', NULL, '2022-05-21 08:34:01', '2022-05-21 08:34:01', 'Active', '99868717-5ddd-4311-af35-09f73da7a826');
+INSERT INTO `users` (`id`, `email`, `created_by`, `updated_by`, `status`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('9f9dd4c6-cdc3-49fa-a2c8-f2461247469e', 'admin@test.com', NULL, NULL, '1', '$2y$10$.cY7hh76pPa2E4.uZbvMY.gKtbsMrmmtdluD2dFAHf/hx7SrDtnMu', NULL, '2022-06-02 06:01:22', '2022-06-02 06:01:22', NULL),
+('c91ceaca-ad59-4e33-b8b5-451159582a44', 'student@test.com', NULL, NULL, '1', '$2y$10$yw/a1gi7/nS8eenbCA7XkufjNJwMrirEULomhxfp66BnNKT1RpGeO', NULL, '2022-06-02 05:45:44', '2022-06-02 06:19:35', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_types`
+-- Table structure for table `user_roles`
 --
 
-CREATE TABLE `user_types` (
-  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_type_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Active',
+CREATE TABLE `user_roles` (
+  `user_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `created_by` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_by` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `user_types`
+-- Dumping data for table `user_roles`
 --
 
-INSERT INTO `user_types` (`id`, `user_type_name`, `status`, `created_at`, `updated_at`) VALUES
-('8f69bc54-616e-4ce8-9bcb-5ccc6a978fa4', 'Student/Client', 'Active', '2022-05-16 16:00:00', NULL),
-('9124df97-d15f-4c15-93a0-e95de079c104', 'Cashier', 'Active', '2022-05-16 16:00:00', NULL),
-('99868717-5ddd-4311-af35-09f73da7a826', 'Admin', 'Active', '2022-05-16 16:00:00', NULL),
-('dfca8de3-277b-4733-b694-9b142988b58a', 'Head', 'Active', '2022-05-16 16:00:00', NULL);
+INSERT INTO `user_roles` (`user_id`, `role_id`, `start_date`, `end_date`, `created_by`, `updated_by`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+('9f9dd4c6-cdc3-49fa-a2c8-f2461247469e', '99868717-5ddd-4311-af35-09f73da7a826', NULL, NULL, NULL, NULL, '1', '2022-06-02 06:01:22', '2022-06-02 06:01:22', NULL),
+('c91ceaca-ad59-4e33-b8b5-451159582a44', '8f69bc54-616e-4ce8-9bcb-5ccc6a978fa4', NULL, NULL, NULL, NULL, '1', '2022-06-02 05:45:44', '2022-06-02 05:45:44', NULL);
 
 --
 -- Indexes for dumped tables
@@ -128,18 +162,31 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_unique` (`name`),
+  ADD KEY `roles_created_by_foreign` (`created_by`),
+  ADD KEY `roles_updated_by_foreign` (`updated_by`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_username_unique` (`username`),
-  ADD KEY `users_user_type_id_foreign` (`user_type_id`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `users_created_by_foreign` (`created_by`),
+  ADD KEY `users_updated_by_foreign` (`updated_by`);
 
 --
--- Indexes for table `user_types`
+-- Indexes for table `user_roles`
 --
-ALTER TABLE `user_types`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `user_roles`
+  ADD PRIMARY KEY (`user_id`,`role_id`),
+  ADD KEY `user_roles_role_id_foreign` (`role_id`),
+  ADD KEY `user_roles_created_by_foreign` (`created_by`),
+  ADD KEY `user_roles_updated_by_foreign` (`updated_by`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -149,7 +196,7 @@ ALTER TABLE `user_types`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -162,10 +209,27 @@ ALTER TABLE `personal_access_tokens`
 --
 
 --
+-- Constraints for table `roles`
+--
+ALTER TABLE `roles`
+  ADD CONSTRAINT `roles_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `roles_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_user_type_id_foreign` FOREIGN KEY (`user_type_id`) REFERENCES `user_types` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `users_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `users_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_roles`
+--
+ALTER TABLE `user_roles`
+  ADD CONSTRAINT `user_roles_created_by_foreign` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_roles_updated_by_foreign` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_roles_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

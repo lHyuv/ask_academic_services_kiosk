@@ -62,17 +62,10 @@
                         <hr>
                         <label>User Info</label>
                         <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" name = "edit_username" id = "edit_username" class = "form-control" placeholder = ""/>
+                        <label>Email</label>
+                        <input type="text" name = "edit_email" id = "edit_email" class = "form-control" placeholder = ""/>
                         </div>
-                        <div class="form-group">
-                        <label>User Type/Role</label>
-                        <select class = "form-control" id = "edit_usertype_id" name = "edit_usertype_id">
-                            @foreach($roles as $role)
-                            <option value = "{{ $role->id }}"> {{ $role->user_type_name }} </option>
-                            @endforeach
-                        </select>
-                        </div>
+
                         <label>Change Password</label>
                         <div class="form-group">
                         <label>Password</label>
@@ -141,17 +134,10 @@
                         <hr>
                         <label>User Info</label>
                         <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" name = "create_username" id = "create_username" class = "form-control" placeholder = ""/>
+                        <label>Email</label>
+                        <input type="text" name = "create_email" id = "create_email" class = "form-control" placeholder = ""/>
                         </div>
-                        <div class="form-group">
-                        <label>User Type/Role</label>
-                        <select class = "form-control" id = "create_usertype" name = "create_usertype">
-                            @foreach($roles as $role)
-                            <option value = "{{ $role->id }}"> {{ $role->user_type_name }} </option>
-                            @endforeach
-                        </select>
-                        </div>
+                      
                        
                         <div class="form-group">
                         <label>Password</label>
@@ -192,27 +178,25 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
-                                <th>Username</th>
+                                <th>Email</th>
                                 <th>Date Created</th>
                                 <th>Status</th>
-                                <th>Role</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach($users as $user)
                         <tr>
-                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at->diffForHumans() }}</td>
                                 <td>
                              
-                                @if($user->status == 'Active')
+                                @if($user->status == '1')
                                 <span class="badge badge-success">Active</span>
                                 @else
                                 <span class="badge badge-warning">Inactive</span>
                                 @endif
                                 </td>
-                                <td>{{ $user->usertype->user_type_name }}</td>
                                 <td>
                                    
                                     <div class="text-center dropdown">

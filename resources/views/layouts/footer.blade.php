@@ -102,7 +102,7 @@
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         @if(Auth::check())
-        @if(Auth::user()->usertype->user_type_name == 'Student' || Auth::user()->usertype->user_type_name == 'Client' || Auth::user()->usertype->user_type_name == 'Student/Client')
+        @if(Auth::user()->roles->pluck('name')[0] == 'Student' || Auth::user()->roles->pluck('name')[0] == 'Client' || Auth::user()->roles->pluck('name')[0] == 'Student/Client')
         <button type="button" id = 'modal_confirm_btn' class="btn btn-primary"  data-bs-dismiss="modal"  onclick = "window.location.href='/ongoing_services'">Proceed</button>
         @else
         <button type="button" id = 'modal_confirm_btn' class="btn btn-primary"  data-bs-dismiss="modal"  onclick = "">Proceed</button>

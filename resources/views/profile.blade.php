@@ -67,12 +67,12 @@
                         <hr>
                         <label>User Info</label>
                         <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" disabled value = "{{Auth::user()->username}}"/>
+                        <label>Email</label>
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" disabled value = "{{Auth::user()->email}}"/>
                         </div>
                         <div class="form-group">
                         <label>User Type/Role</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" value = "{{ Auth::user()->usertype->user_type_name }}" disabled/>
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" value = "{{ Auth::user()->roles->pluck('name')[0] }}" disabled/>
                         </div>
                         <label>Change Password</label>
                         <div class="form-group">

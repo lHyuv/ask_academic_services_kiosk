@@ -13,14 +13,14 @@
                                     <i class="avatar-presence online"></i>
                             </figure>
                             <div class="media-body">
-                                <h6 class="mt-1 mb-0"> <a href="/profile" class="nav-item text-truncate">{{ Auth::user()->username }}</a></h6>
-                                <p class="mb-0">{{Auth::user()->usertype->user_type_name}}</p>
+                                <h6 class="mt-1 mb-0"> <a href="/profile" class="nav-item text-truncate">{{ Auth::user()->email }}</a></h6>
+                                <p class="mb-0">{{Auth::user()->roles->pluck('name')[0]}}</p>
                             </div>
                         </div>
                     </div>
 
 
-          @if(Auth::user()->usertype->user_type_name == 'Client' || Auth::user()->usertype->user_type_name == 'Student' || Auth::user()->usertype->user_type_name == 'Student/Client')
+          @if(Auth::user()->roles->pluck('name')[0] == 'Client' || Auth::user()->roles->pluck('name')[0] == 'Student' || Auth::user()->roles->pluck('name')[0] == 'Student/Client')
           <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
               <li class="nav-item">
@@ -56,7 +56,7 @@
               </li>
        
         @endif
-        @if(Auth::user()->usertype->user_type_name == 'Admin')
+        @if(Auth::user()->roles->pluck('name')[0] == 'Admin')
         <li class="menu-header">User Management</li>
               <li class="nav-item">
                 <a href="/user" class="nav-link"><i class="fas fa-users"></i><span>Users</span></a>

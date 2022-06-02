@@ -30,6 +30,10 @@
                         <label>User Type</label>
                         <input type="text" name = "user_type_name" id = "edit_user_type_name" class = "form-control" placeholder = "" required/>
                         </div>
+                        <div class="form-group">
+                        <label>Details</label>
+                        <textarea name="edit_details" id="edit_details" rows="10" class = "form-control"> </textarea>
+                        </div>
                         </div>
 
                         </div>
@@ -63,6 +67,10 @@
                         <div class="form-group">
                         <label>User Type</label>
                         <input type="text" name = "create_user_type_name" id = "create_user_type_name" class = "form-control" placeholder = "" required/>
+                        </div>
+                        <div class="form-group">
+                        <label>Details</label>
+                        <textarea name="create_details" id="create_details" rows="10" class = "form-control"> </textarea>
                         </div>
                         </div>
 
@@ -103,7 +111,7 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
-                                <th>User Type</th>
+                                <th>Role</th>
                                 <th>Date Created</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -112,11 +120,11 @@
                         <tbody>
                         @foreach($roles as $role)
                         <tr>
-                                <td>{{ $role->user_type_name }}</td>
+                                <td>{{ $role->name }}</td>
                                 <td>{{ $role->created_at->diffForHumans() }}</td>
                                 <td>
                              
-                                @if($role->status == 'Active')
+                                @if($role->status == '1')
                                 <span class="badge badge-success">Active</span>
                                 @else
                                 <span class="badge badge-warning">Inactive</span>

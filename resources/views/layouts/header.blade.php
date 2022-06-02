@@ -114,7 +114,7 @@
                             <li class="nav-item dropdown">
                              
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class = 'fa fa-user-circle'></i> {{ Auth::user()->username }}
+                                <i class = 'fa fa-user-circle'></i> {{ Auth::user()->email}}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

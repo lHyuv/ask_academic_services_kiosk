@@ -23,8 +23,8 @@
                 <form method="POST" action="{{ route('login') }}">
                 @csrf
                   <div class="form-group">
-                    <label for="email">Username</label>
-                    <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username"  required  autofocus
+                    <label for="email">Email</label>
+                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email"  required  autofocus
                     data-parsley-required-message="Please fill in your email.">
 
                     @error('username')

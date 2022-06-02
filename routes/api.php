@@ -36,16 +36,16 @@ Route::post('/users/delete/{id}', [UserController::class,'delete']);
 Route::get('/users/{id}', [UserController::class,'show']);
 
 //User Type
-use App\Http\Controllers\UserTypeController;
+use App\Http\Controllers\RoleController;
 
-Route::get('/roles', [UserTypeController::class,'index']);
+Route::get('/roles', [RoleController::class,'index']);
 
-Route::get('/roles/active', [UserTypeController::class,'show_active']);
+Route::get('/roles/active', [RoleController::class,'show_active']);
 
-Route::post('/roles', [UserTypeController::class,'create']);
+Route::post('/roles', [RoleController::class,'create']);
 
-Route::post('/roles/update/{id}', [UserTypeController::class,'update']);
+Route::post('/roles/update/{id}', [RoleController::class,'update']);
 
-Route::post('/roles/delete/{id}', [UserTypeController::class,'delete']);
+Route::post('/roles/delete/{id}', [RoleController::class,'delete']);
 
-Route::get('/roles/{id}', [UserTypeController::class,'show']);
+Route::get('/roles/{id}', [RoleController::class,'show']);
