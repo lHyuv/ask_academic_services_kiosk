@@ -65,10 +65,25 @@ Route::middleware('auth:sanctum')->get('/requests', [RequestController::class, '
 
 Route::middleware('auth:sanctum')->get('/requests/show_active', [RequestController::class, 'show_active']);
 
-Route::middleware('auth:sanctum')->get('/requests/show', [RequestController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/requests/{id}', [RequestController::class, 'show']);
 
 Route::middleware('auth:sanctum')->post('/requests',[RequestController::class, 'create']);
 
 Route::middleware('auth:sanctum')->post('/requests/update/{id}', [RequestController::class, 'update']);
 
-Route::middleware('auth:sanctum')->post('requests/delete/{id}', [RequestController::class, 'delete']);
+Route::middleware('auth:sanctum')->post('/requests/delete/{id}', [RequestController::class, 'delete']);
+
+//Requests
+use App\Http\Controllers\RequirementController;
+
+Route::middleware('auth:sanctum')->get('/requirements', [RequirementController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/requirements/show_active', [RequirementController::class, 'show_active']);
+
+Route::middleware('auth:sanctum')->get('/requirements/{id}', [RequirementController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/requirements',[RequirementController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/requirements/update/{id}', [RequirementController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('/requirements/delete/{id}', [RequirementController::class, 'delete']);

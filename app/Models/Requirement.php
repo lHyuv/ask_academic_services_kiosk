@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class Request extends Model
+class Requirement extends Model
 {
     use Uuids, HasFactory, SoftDeletes;
 
-    protected $fillable = (['request_type','status']);
+    protected $fillable = (['requirement_name','request_id','status']);
 
-    public function requirements(){
-        return $this->hasMany('App\Model\Requirement');
+    public function requests(){
+        return $this->belongsTo(Request::class, 'request_id');
     }
     //
     public function created_by_user()
