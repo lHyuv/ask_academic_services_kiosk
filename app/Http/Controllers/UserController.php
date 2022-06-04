@@ -11,26 +11,46 @@ class UserController extends Controller
 {
     public function index()
     {
-        return User::all();
+        $data = User::all();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
     }
  
     public function show_active()
     {
-        return User::where('status','1')->get();
+        $data = User::where('status','1')->get();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
     }
 
     public function show($id)
     {
-        return User::find($id);
+        $data = User::find($id);
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
     }
 
     public function create(Request $request)
     {
-        return User::create([
+        $data = User::create([
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
       
         ]);
+
+        return [
+            'message' => 'Successfully created',
+            'data' => $data
+        ];
 
     }
 
@@ -44,7 +64,10 @@ class UserController extends Controller
             'password' => Hash::make(request('password')),
         ]);
 
-        return $user;
+        return [
+            'message' => 'Successfully updated',
+            'data' => $user
+        ];
     }
 
     public function delete(Request $request, $id)
@@ -53,5 +76,8 @@ class UserController extends Controller
         $user->update(['status' => '2']);
 
         //return $user;
+        return [
+            'message' => 'Successfully deleted'
+        ];
     }
 }

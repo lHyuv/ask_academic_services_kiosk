@@ -9,23 +9,43 @@ class RoleController extends Controller
 {
     public function index()
     {
-        return Role::all();
+        $data = Role::all();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
     }
  
     public function show_active()
     {
-        return Role::where('status','1')->get();
+        $data = Role::where('status','1')->get();
+        
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
     }
 
     public function show($id)
     {
-        return Role::find($id);
+        $data = Role::find($id);
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
     }
 
     public function create(Request $request)
     {
         //request()->validate([...=>...]); //Enter validation here
-        return Role::create($request->all());
+        $data = Role::create($request->all());
+        
+        return [
+            'message' => 'Successfully created',
+            'data' => $data
+        ];
     }
 
     public function update(Request $request, $id)
@@ -34,7 +54,10 @@ class RoleController extends Controller
         $Role = Role::findOrFail($id);
         $Role->update($request->all());
 
-        return $Role;
+        return [
+            'message' => 'Successfully updated',
+            'data' => $Role
+        ];
     }
 
     public function delete(Request $request, $id)
@@ -43,6 +66,9 @@ class RoleController extends Controller
         $Role->update(['status' => '2']);
 
         //return $Role;
+        return [
+            'message' => 'Successfully deleted'
+        ];
 
     }
 }

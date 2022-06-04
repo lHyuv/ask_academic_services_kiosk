@@ -57,3 +57,18 @@ Route::post('/custom_auth/login', [AuthController::class, 'login']);
 Route::post('/custom_auth/register', [AuthController::class, 'register']);
 Route::post('/custom_auth/logout', [AuthController::class, 'logout']);
 Route::middleware('auth:sanctum')->post('/custom_auth/test', [AuthController::class, 'test']);
+
+//Requests
+use App\Http\Controllers\RequestController;
+
+Route::middleware('auth:sanctum')->get('/requests', [RequestController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/requests/show_active', [RequestController::class, 'show_active']);
+
+Route::middleware('auth:sanctum')->get('/requests/show', [RequestController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/requests',[RequestController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/requests/update/{id}', [RequestController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('requests/delete/{id}', [RequestController::class, 'delete']);
