@@ -22,9 +22,9 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors());       
+            return ['message' => $validator->errors()];       
         }
-
+        //
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -38,11 +38,25 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['data' => $user,'access_token' => $token, 'token_type' => 'Bearer', ]);
+        return response()->json([
+            'message' => 'Successfully registered',
+            'data' => $user,
+            'access_token' => $token, 
+            'token_type' => 'Bearer',
+        ], 200);
     }
 
     public function login(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+
+        if($validator->fails()){
+            return ['message' => [$validator->errors()]];       
+        }
+        //
         if (!Auth::attempt($request->only('email', 'password')))
         {
             return response()
@@ -53,7 +67,12 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['data' => $user,'access_token' => $token, 'token_type' => 'Bearer', ]);
+        return response()->json([
+            'message' => 'Successfully logged in',
+            'data' => $user,
+            'access_token' => $token, 
+            'token_type' => 'Bearer',
+        ], 200);
     }
 
   

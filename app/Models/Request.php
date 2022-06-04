@@ -11,10 +11,16 @@ class Request extends Model
 {
     use Uuids, HasFactory, SoftDeletes;
 
+    protected $guarded = ['id'];
+
     protected $fillable = (['request_type','status']);
 
     public function requirements(){
         return $this->hasMany('App\Model\Requirement');
+    }
+
+    public function steps(){
+        return $this->hasMany('App\Model\Step');
     }
     //
     public function created_by_user()

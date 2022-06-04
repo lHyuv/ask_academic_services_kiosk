@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Request as Requests;
+use App\Models\Step;
 use Validator;
 
-class RequestController extends Controller
+class StepController extends Controller
 {
     //
     public function index(){
-        $data = Requests::all();
+        $data = Step::all();
 
         return [
             'message' => 'Successfully retrieved',
@@ -19,7 +19,7 @@ class RequestController extends Controller
     }
 
     public function show_active(){
-        $data = Requests::where('status','1')->get();
+        $data = Step::where('status','1')->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -28,7 +28,7 @@ class RequestController extends Controller
     }
 
     public function show($id){
-        $data = Requests::find($id);
+        $data = Step::find($id);
 
         return [
             'message' => 'Successfully retrieved',
@@ -39,14 +39,16 @@ class RequestController extends Controller
     public function create(Request $request){
         
         $validator = Validator::make($request->all(), [
-            'request_type' => ['required', 'string', 'max:255','unique:requests'],
+            'request_id' => ['required', 'string'],
+            'step_number' => ['required', 'integer'],
+            'step_name' => ['required', 'string', 'max:255'],
         ]);
 
         if($validator->fails()){
             return ['message' => [$validator->errors()]];       
         }
 
-        $data =  Requests::create($request->all());
+        $data =  Step::create($request->all());
         return [
             'message' => 'Successfully created',
             'data' => $data
@@ -54,25 +56,39 @@ class RequestController extends Controller
     }
 
     public function update(Request $request, $id){
-        $request_data = Requests::findOrFail($id);
-        $request_data->update($request->all());
+        $data = Step::findOrFail($id);
+        $data->update($request->all());
 
         return [
             'message' => 'Successfully updated',
-            'data' => $request_data
+            'data' => $data
         ];  
     }
 
     public function delete(Request $request, $id){
-        $request_data = Requests::findOrFail($id);
+        $data = Step::findOrFail($id);
 
-        $request_data->update([
+        $data->update([
             'status' => '2'
         ]);
 
-        //return $request_data;
+        //return $data;
         return [
             'message' => 'Successfully deleted'
+        ];
+    }
+
+    public function complete_step(Request $request, $id){
+        $data = Step::findOrFail($id);
+
+        $data->update([
+            'completed_status' => 'Completed'
+        ]);
+
+        //return $data;
+        return [
+            'message' => 'Successfully updated',
+            'data' => $data
         ];
     }
 

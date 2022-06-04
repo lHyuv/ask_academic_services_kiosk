@@ -87,3 +87,20 @@ Route::middleware('auth:sanctum')->post('/requirements',[RequirementController::
 Route::middleware('auth:sanctum')->post('/requirements/update/{id}', [RequirementController::class, 'update']);
 
 Route::middleware('auth:sanctum')->post('/requirements/delete/{id}', [RequirementController::class, 'delete']);
+
+//Steps
+use App\Http\Controllers\StepController;
+
+Route::middleware('auth:sanctum')->get('/steps', [StepController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/steps/show_active', [StepController::class, 'show_active']);
+
+Route::middleware('auth:sanctum')->get('/steps/{id}', [StepController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/steps',[StepController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/steps/update/{id}', [StepController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('/steps/delete/{id}', [StepController::class, 'delete']);
+
+Route::middleware('auth:sanctum')->post('/steps/complete/{id}', [StepController::class, 'complete_step']);

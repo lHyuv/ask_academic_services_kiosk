@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Requirement;
+use Validator;
 
 class RequirementController extends Controller
 {
@@ -39,7 +40,17 @@ class RequirementController extends Controller
 
     public function create(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'requirement_name' => ['required', 'string', 'max:255'],
+            'request_id' =>  ['required', 'string', 'max:255'],
+        ]);
+
+        if($validator->fails()){
+            return ['message' => [$validator->errors()]];       
+        }
+        //
         //request()->validate([...=>...]); //Enter validation here
+        
         $data = Requirement::create($request->all());
         
         return [
