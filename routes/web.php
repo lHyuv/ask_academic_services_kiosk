@@ -44,3 +44,5 @@ Route::get('/ongoing_services', [App\Http\Controllers\HomeController::class, 'on
 Route::get('/user', [App\Http\Controllers\HomeController::class, 'user_crud']);
 
 Route::get('/role', [App\Http\Controllers\HomeController::class, 'role_crud']);
+
+Route::get('/requests', [App\Http\Controllers\HomeController::class, 'request_crud']);

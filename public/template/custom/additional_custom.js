@@ -1,6 +1,8 @@
 
 const apiURL = "http://localhost:8000/api/";
 
+$("form").parsley();
+
 const notification = (type, title, message) => {
 
 	toastr.options = {
@@ -36,6 +38,7 @@ const drawTable = (table_id) =>{
 
 };
 
+//-----------------------------------------------------//
 let rowNo = 0;
 const rowManage = (mode) =>{
     if(mode == 'add'){
@@ -163,7 +166,7 @@ const createRole = () =>{
             },
             success: (data)=>{
                 
-                //Replace with Toastr/Other Notif and Ajax TableLoad
+            
              
                 notification('success','','Successfully created');
                // location.reload();
@@ -194,7 +197,7 @@ const deleteRole = (data) =>{
             method: 'POST',
             success: (data)=>{
                
-               //Replace with Toastr/Other Notif and Ajax TableLoad
+               
              
                notification('success','','Successfully deleted');
                //location.reload();
@@ -335,7 +338,7 @@ const deleteUser = (data) =>{
             method: 'POST',
             success: (data)=>{
             console.log(data);
-               //Replace with Toastr/Other Notif and Ajax TableLoad
+              
                 
                notification('success','','Successfully deleted');
                drawTable();
@@ -354,7 +357,116 @@ const deleteUser = (data) =>{
 $('input[type=\'password\']').showHidePassword();
 */
 
-$("form").parsley();
+
+
+//
+
+const editRequest = (data) =>{
+    //view
+
+    let values = JSON.parse(data);
+    $('#edit_type').val(values['request_type']);
+
+
+    $('#edit_request').on('submit',(e)=>{
+
+        e.preventDefault();
+
+        $.ajax({
+            url: apiURL + 'requests/update/' + values['id'],
+            async: true,
+            method: 'POST',
+            data: {
+                'request_type' : $('#edit_type').val(),
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                
+
+                notification('success','','Successfully updated');
+                //location.reload();
+                manageCard('edit_request_crud','hide');
+                drawTable();
+            },
+            error:({responseJSON})=>{
+                //console.log(responseJSON);
+                notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
+
+const createRequest = () =>{
+
+    $('#create_request').on('submit',(e)=>{
+
+        e.preventDefault();
+
+        $.ajax({
+            url: apiURL + 'requests',
+            async: true,
+            method: 'POST',
+            data: {
+                'request_type' : $('#create_type').val(),
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                
+       
+             
+                notification('success','','Successfully created');
+               // location.reload();
+               manageCard('create_request_crud','hide'); 
+               drawTable();
+            },
+            error:({responseJSON})=>{
+               // console.log(responseJSON.message);
+               notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
+
+const deleteRequest = (data) =>{
+    //view
+    let values = JSON.parse(data);
+  
+    
+    $('#modal_confirm_btn').on('click',()=>{
+
+
+        $.ajax({
+            url: apiURL + 'requests/delete/' + values['id'],
+            async: true,
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+               
+            
+             
+               notification('success','','Successfully deleted');
+               //location.reload();
+               drawTable();
+            },
+            error:({responseJSON})=>{
+              //  console.log(responseJSON);
+              notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
 
 
 

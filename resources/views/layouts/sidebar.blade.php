@@ -57,6 +57,16 @@
        
         @endif
         @if(Auth::user()->roles->pluck('name')[0] == 'Admin')
+        <li class="menu-header">System Setup</li>
+              <li class="nav-item">
+                <a href="/requests" class="nav-link"><i class="fas fa-file"></i><span>Requests</span></a>
+              </li>
+              <li class="nav-item">
+                <a href="/steps" class="nav-link"><i class="fas fa-shoe-prints"></i><span>Steps</span></a>
+              </li>
+              <li class="nav-item">
+                <a href="/requirements" class="nav-link"><i class="far fa-clipboard"></i><span>Requirements</span></a>
+              </li>
         <li class="menu-header">User Management</li>
               <li class="nav-item">
                 <a href="/user" class="nav-link"><i class="fas fa-users"></i><span>Users</span></a>

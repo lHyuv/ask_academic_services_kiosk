@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Request as Requests;
 
 class HomeController extends Controller
 {
@@ -81,6 +82,13 @@ class HomeController extends Controller
         $roles = Role::where('status',1)->get();
         return view('admin.role', [
             'roles' => $roles
+        ]);
+    }
+
+    public function request_crud(){
+        $requests = Requests::where('status',1)->get();
+        return view('setup.requests',[
+            'requests' => $requests
         ]);
     }
 }

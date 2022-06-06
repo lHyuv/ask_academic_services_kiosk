@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+
+use App\Models\User;
+use Session;
+
 class LoginController extends Controller
 {
     /*
@@ -44,12 +48,20 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
       
+        //
+        $user = User::where('email', $request['email'])->firstOrFail();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+        //
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-   
+            //
+            session()->put('token',$token);
+            session()->save();
+            //
             return redirect()->route('home');
         }
      
-        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
+        return redirect("login")->withSuccess('You have entered invalid credentials');
     }
 }

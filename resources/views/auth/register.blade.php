@@ -88,4 +88,7 @@
       </div>
     </section>
   </div>
+  <script>
+  sessionStorage.setItem('token', null);
+</script>
 @endsection

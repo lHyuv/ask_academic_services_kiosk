@@ -25,4 +25,7 @@
         </div>
     </div>
 </div>
+<script>
+  sessionStorage.setItem('token', null);
+</script>
 @endsection

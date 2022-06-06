@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -82,6 +83,15 @@ class RegisterController extends Controller
             'role_id' => request('role_id'),
         ]);
 
+        //
+        $user = User::where('email', $data['email'])->firstOrFail();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+        //
+        //
+        session()->put('token',$token);
+        session()->save();
+        //
         return $created_user;
         /*
         return User::create([
