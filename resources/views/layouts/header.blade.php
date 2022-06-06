@@ -65,7 +65,7 @@
     <div id="app">
     <div class="main-wrapper main-wrapper-1">
     <div class="navbar-bg"></div>
-        <nav class="navbar navbar-expand-md">
+        <nav class="navbar navbar-expand-lg main-navbar">
         @if(!Auth::check())
                 <a class="navbar-brand" href="/">
                   Academic Services
@@ -80,23 +80,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     
                     <!-- Left Side Of Navbar -->
-
+                    <form class="form-inline mr-auto">
                     @if(Auth::check())
                     <ul class="navbar-nav mr-3">
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
 
                    </ul>
-                
-                   <ul class="navbar-nav col-md-9">
-                       <li></li>
-                   </ul>
-                   @else
-                   <ul class="navbar-nav col-md-9">
-                       <li></li>
-                   </ul>
+                    </form>
+
                    @endif
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

@@ -20,14 +20,14 @@
     <div class="row">
         <div class="col-md-8">
 
-            <div class="card mt-5">
-                <div class="card-header"><h4>{{ now()->diffForHumans() }}</h4></div>
+            <div class="card card-primary mt-5">
+                <div class="card-header"><h4>Today</h4></div>
 
                 <div class="card-body">
                     <ul class = "list-unstyled">
-                    <li><a href = "#"> User</a> did this transaction.. </li> <hr>
-                    <li><a href = "#"> User</a> did this transaction.. </li> <hr>
-                    <li><a href = "#"> User</a> did this transaction.. </li>
+                    <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li> <hr>
+                    <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li> <hr>
+                    <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li>
                     </ul>
                 </div>
             </div>
@@ -35,14 +35,14 @@
   <!--Continue on this card..-->
     
 
-        <div class="card mt-5">
-            <div class="card-header"><h4>{{ now()->diffForHumans() }}</h4></div>
+        <div class="card card-primary mt-5">
+            <div class="card-header"><h4>Yesterday</h4></div>
 
             <div class="card-body">
                 <ul class = "list-unstyled">
-                <li><a href = "#"> User</a> did this transaction.. </li> <hr>
-                <li><a href = "#"> User</a> did this transaction.. </li> <hr>
-                <li><a href = "#"> User</a> did this transaction.. </li>
+                <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li> <hr>
+                <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li> <hr>
+                <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li>
                 </ul>
             </div>
         </div>
