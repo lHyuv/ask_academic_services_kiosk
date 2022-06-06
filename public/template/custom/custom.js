@@ -35,12 +35,13 @@ function trimInputFields() {
     });
 }
 
+/*
 toastr.options = {
     closeButton: true,
     newestOnTop: true,
     progressBar: true,
 };
-
+*/
 function show_card(card,form) {
     $("html, body").animate({ scrollTop: 0 });
     card.slideDown("slow");

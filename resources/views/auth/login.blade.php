@@ -24,8 +24,7 @@
                 @csrf
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email"  required  autofocus
-                    data-parsley-required-message="Please fill in your email.">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"  required  autofocus>
 
                     @error('username')
                      <span class="invalid-feedback" role="alert">

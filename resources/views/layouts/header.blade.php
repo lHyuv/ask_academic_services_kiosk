@@ -23,11 +23,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     -->     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="{{ asset('template/vendors/toastr/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('template/vendors/toastr/js/toastr.js') }}"></script>
+
+
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('template/js/scripts.js') }}"></script>
     <script src="{{ asset('template/js/stisla.js') }}"></script>
+  
     <script src="{{ asset('template/custom/custom.js') }}"></script>
-        <script src="{{ asset('template/custom/additional_custom.js') }}"></script>
+  
 
         <!-- General JS Scripts -->
    
@@ -38,10 +43,10 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <script src="{{ asset('template/vendors/datatable/js/datatables.min.js') }}"></script>
     <script src="{{ asset('template/vendors/reveal-password/js/show-hide-password.min.js') }}"></script>
-    <script src="{{ asset('template/vendors/parsley/js/parsley.min.js') }}"></script>
+   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
@@ -51,6 +56,8 @@
     <link href="{{ asset('template/custom/step.css') }}" rel="stylesheet">
     <link href="{{ asset('template/vendors/datatable/css/datatables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/vendors/parsley/css/custom-parsley.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/vendors/toastr/css/iziToast.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/vendors/toastr/css/toastr.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>

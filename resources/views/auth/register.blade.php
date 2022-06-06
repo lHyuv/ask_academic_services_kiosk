@@ -23,7 +23,7 @@
                             <label for="name" class="control-label">{{ __('Email') }}</label>
 
                           
-                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email"  required autocomplete="name" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"  required autocomplete="name" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

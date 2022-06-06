@@ -37,9 +37,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/overload_form" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </div-->
                   </div>
                   </div>
                 </article>
@@ -61,9 +61,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/ace_add_form" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </div-->
                   </div>
                   </div>
                 </article>
@@ -85,9 +85,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/ace_change_form" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </-->
                   </div>
                   </div>
                 </article>
@@ -111,9 +111,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </div-->
                   </div>
                   </div>
                 </article>
@@ -135,9 +135,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </div-->
                   </div>
                   </div>
                 </article>
@@ -159,9 +159,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </div-->
                   </div>
                   </div>
                 </article>
@@ -185,9 +185,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </div-->
                   </div>
                   </div>
                 </article>
@@ -209,9 +209,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </div-->
                   </div>
                   </div>
                 </article>
@@ -233,9 +233,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </div-->
                   </div>
                   </div>
                 </article>
@@ -259,9 +259,9 @@
                       <div class = "col-md-8">
                   <p>Details... </p>
                 </div>
-                <div class = "col-md-2">
+                <!--div class = "col-md-2">
                   <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                    </div>
+                    </div-->
                   </div>
                   </div>
                 </article>

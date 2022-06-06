@@ -8,9 +8,12 @@
 
 <section class="section shadow-sm">
         <div class="section-header mt-5">
-        <div class="row">
+       
             <h1>Roles</h1>
-        </div>  
+            <div class="section-header-breadcrumb">
+              <div class="breadcrumb-item"><a href="/home">Home</a></div>
+              <div class="breadcrumb-item">Roles</div>
+            </div> 
         </div>
       
 </section>
@@ -32,7 +35,7 @@
                         </div>
                         <div class="form-group">
                         <label>Details</label>
-                        <textarea name="edit_details" id="edit_details" rows="10" class = "form-control"> </textarea>
+                        <textarea name="edit_details" id="edit_details" rows="10" class = "form-control" required> </textarea>
                         </div>
                         </div>
 
@@ -97,7 +100,7 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="card card-outline card-primary ">
+            <div class="card card-outline card-primary " id = 'create_role_crud'>
                 <div class="card-header">
                 <div class = "col-md-10">
                     <h4>List of Roles</h4>

@@ -63,7 +63,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Student Number</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = "20XX-00XXX-XX-X"/>
                         </div>
                         </div>
                         </div>

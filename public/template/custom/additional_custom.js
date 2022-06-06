@@ -1,6 +1,19 @@
 
 const apiURL = "http://localhost:8000/api/";
 
+const notification = (type, title, message) => {
+
+	toastr.options = {
+		preventDuplicates: true,
+		preventOpenDuplicates: true,
+		positionClass: 'toast-top-center',
+        closeButton: true,
+        newestOnTop: true,
+        progressBar: true,
+	};
+
+	return toastr[type](message, title);
+};
 const showKeyboard = (mode) =>{
     if(mode == "show"){
         $('.keyboard-container').css('display','block');
@@ -10,6 +23,17 @@ const showKeyboard = (mode) =>{
         $('#empty_space').css('display', 'none');
     }
    
+};
+
+const drawTable = (table_id) =>{
+    if(table_id){
+        //do something
+        $(`#${table_id}`).load(location.href + ` #${table_id}`);
+    }else{
+        //$('table')... //do something
+        $("table").load(location.href + " table");
+    }
+
 };
 
 let rowNo = 0;
@@ -75,9 +99,8 @@ const rowManage = (mode) =>{
 };
 
 const manageCard = (id, mode) =>{
- 
+    
     $("html, body").animate({ scrollTop: 0 }, "slow");
-
     $('input').val('');
     $('select').val('');
     $('textarea').val('');
@@ -108,13 +131,15 @@ const editRole = (data) =>{
             },
             success: (data)=>{
                 
-                //Replace with Toastr/Other Notif and Ajax TableLoad
-             
-                alert('Success');
-                location.reload();
+
+                notification('success','','Successfully updated');
+                //location.reload();
+                manageCard('edit_role_crud','hide');
+                drawTable();
             },
             error:({responseJSON})=>{
-                console.log(responseJSON);
+                //console.log(responseJSON);
+                notification('error','','Something went wrong');
             }
         });
     })
@@ -140,11 +165,14 @@ const createRole = () =>{
                 
                 //Replace with Toastr/Other Notif and Ajax TableLoad
              
-                alert('Success');
-                location.reload();
+                notification('success','','Successfully created');
+               // location.reload();
+               manageCard('create_role_crud','hide'); 
+               drawTable();
             },
             error:({responseJSON})=>{
-                console.log(responseJSON.message);
+               // console.log(responseJSON.message);
+               notification('error','','Something went wrong');
             }
         });
     })
@@ -168,11 +196,13 @@ const deleteRole = (data) =>{
                
                //Replace with Toastr/Other Notif and Ajax TableLoad
              
-               alert('Success');
-               location.reload();
+               notification('success','','Successfully deleted');
+               //location.reload();
+               drawTable();
             },
             error:({responseJSON})=>{
-                console.log(responseJSON);
+              //  console.log(responseJSON);
+              notification('error','','Something went wrong');
             }
         });
     })
@@ -203,13 +233,16 @@ const createUser = () =>{
             },
             success: (data)=>{
                 
-                //Replace with Toastr/Other Notif and Ajax TableLoad
+            
              
-                alert('Success');
-                location.reload();
+                notification('success','','Successfully created');
+                //location.reload();
+                manageCard('create_user_crud','hide'); 
+                drawTable();
             },
             error:({responseJSON})=>{
               //  console.log(responseJSON.message);
+              notification('error','','Something went wrong');
             }
         });
         }
@@ -237,13 +270,14 @@ const editUser = (data) =>{
                 },
                 success: (data)=>{
                     
-                    //Replace with Toastr/Other Notif and Ajax TableLoad
                  
-                    alert('Success');
-                    location.reload();
+                    notification('success','','Successfully updated');
+                   // location.reload();
+                   manageCard('edit_user_crud','hide');
+                   drawTable();
                 },
                 error:({responseJSON})=>{
-                    console.log(responseJSON);
+                    notification('error','','Something went wrong');
                 }
             });
         }else{
@@ -267,13 +301,15 @@ const editUser = (data) =>{
                     },
                     success: (data)=>{
                         
-                        //Replace with Toastr/Other Notif and Ajax TableLoad
+
                      
-                        alert('Success');
-                        location.reload();
+                        notification('success','','Successfully updated');
+                       // location.reload();
+                       manageCard('edit_user_crud','hide');
+                       drawTable();
                     },
                     error:({responseJSON})=>{
-                        console.log(responseJSON);
+                        notification('error','','Something went wrong');
                     }
                 });  
             }
@@ -301,20 +337,27 @@ const deleteUser = (data) =>{
             console.log(data);
                //Replace with Toastr/Other Notif and Ajax TableLoad
                 
-               alert('Success');
-              // location.reload();
+               notification('success','','Successfully deleted');
+               drawTable();
             },
             error:({responseJSON})=>{
-                console.log(responseJSON);
+                notification('error','','Something went wrong');
             }
         });
     })
 
 
 };
+
+
 /*
 $('input[type=\'password\']').showHidePassword();
-if((window.location.href).includes('login')){
-    $("form").parsley();
-}
 */
+
+$("form").parsley();
+
+
+
+
+
+
