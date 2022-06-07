@@ -4,17 +4,19 @@
 
 https://getcomposer.org/download/
 
-2. Install Laravel
+Install Downloaded Composer
+
+2. Git pull
 
 Open cmd/powershell on vs/etc
 
-type: composer create-project laravel/laravel acad_services_app
+git init
+git remote add origin <<git link here>>
+git pull origin master
 
-3 Import DB
+3 Create DB
 
 Create database "acad_services_app" on localhost > phpmyadmin
-
-Import acad_services_app.sql
 
 4 Migrate
 
@@ -22,7 +24,11 @@ Open cmd/powershell on vs/etc
 
 php artisan migrate
 
-5 Open project
+5 Import DB
+
+Import acad_services_app.sql
+
+6 Open project
 
 Open cmd/powershell on vs/etc
 

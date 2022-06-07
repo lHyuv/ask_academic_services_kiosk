@@ -104,3 +104,18 @@ Route::middleware('auth:sanctum')->post('/steps/update/{id}', [StepController::c
 Route::middleware('auth:sanctum')->post('/steps/delete/{id}', [StepController::class, 'delete']);
 
 Route::middleware('auth:sanctum')->post('/steps/complete/{id}', [StepController::class, 'complete_step']);
+
+//Clients
+use App\Http\Controllers\ClientController;
+
+Route::middleware('auth:sanctum')->get('/clients', [ClientController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/clients/show_active', [ClientController::class, 'show_active']);
+
+Route::middleware('auth:sanctum')->get('/clients/{id}', [ClientController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/clients',[ClientController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/clients/update/{id}', [ClientController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('/clients/delete/{id}', [ClientController::class, 'delete']);
