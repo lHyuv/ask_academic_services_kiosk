@@ -13,7 +13,7 @@ class Step extends Model
 
     protected $guarded = ['id'];
     
-    protected $fillable = ['step_number','step_name','completed_status','request_id'];
+    protected $fillable = ['step_number','step_name','completed_status','request_id','created_by','updated_by',];
 
     public function requests(){
         return $this->belongsTo(Request::class, 'request_id');

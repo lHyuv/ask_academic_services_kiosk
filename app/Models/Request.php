@@ -13,7 +13,7 @@ class Request extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = (['request_type','status']);
+    protected $fillable = (['request_type','status','created_by','updated_by',]);
 
     public function requirements(){
         return $this->hasMany('App\Model\Requirement');

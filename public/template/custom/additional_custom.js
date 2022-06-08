@@ -131,6 +131,7 @@ const editRole = (data) =>{
             data: {
                 'name' : $('#edit_user_type_name').val(),
                 'description' : $('#edit_details').val()
+                , 'updated_by' : sessionStorage.getItem('user_id'),
             },
             success: (data)=>{
                 
@@ -163,6 +164,7 @@ const createRole = () =>{
             data: {
                 'name' : $('#create_user_type_name').val(),
                 'description' : $('#create_details').val()
+                , 'created_by' : sessionStorage.getItem('user_id'),
             },
             success: (data)=>{
                 
@@ -233,6 +235,7 @@ const createUser = () =>{
                 'email' : $('#create_email').val(),
                 'password' : $('#create_password').val(),
              //   'user_type_id' : $('#create_usertype').val()
+                'created_by' : sessionStorage.getItem('user_id'),
             },
             success: (data)=>{
                 
@@ -270,6 +273,7 @@ const editUser = (data) =>{
                 data: {
                     'email' : $('#edit_email').val(),
                   //  'user_type_id' : $('#edit_usertype_id').val()
+                    'updated_by' : sessionStorage.getItem('user_id'),
                 },
                 success: (data)=>{
                     
@@ -301,6 +305,7 @@ const editUser = (data) =>{
                         'username' : $('#edit_username').val(),
                      //   'user_type_id' : $('#edit_usertype_id').val(),
                         'password' : $('#edit_password').val()
+                        , 'updated_by' : sessionStorage.getItem('user_id'),
                     },
                     success: (data)=>{
                         
@@ -378,6 +383,7 @@ const editRequest = (data) =>{
             method: 'POST',
             data: {
                 'request_type' : $('#edit_type').val(),
+                'updated_by' : sessionStorage.getItem('user_id'),
             },
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
@@ -412,6 +418,7 @@ const createRequest = () =>{
             method: 'POST',
             data: {
                 'request_type' : $('#create_type').val(),
+                'created_by' : sessionStorage.getItem('user_id'),
             },
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
@@ -517,6 +524,7 @@ const createProfile = () =>{
                 'last_name' : $('#last_name').val(),
                 'extension_name' : $('#extension_name').val(),
                 'user_id' : sessionStorage.getItem('user_id'),
+                'created_by' : sessionStorage.getItem('user_id'),
             },
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
@@ -554,12 +562,13 @@ const editProfile = (id) =>{
                 'last_name' : $('#last_name').val(),
                 'extension_name' : $('#extension_name').val(),
                 'user_id' : sessionStorage.getItem('user_id'),
+                'updated_by' : sessionStorage.getItem('user_id'),
             },
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
             },
             success: (data)=>{
-                alert($('#password').val());
+              
                 notification('success','','Successfully updated');
                 if($('#password').val().length > 0){
                     changePassword();

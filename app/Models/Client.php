@@ -25,7 +25,10 @@ class Client extends Model
         'status',
         //
         'semester_id',
-        'program_id'
+        'program_id',
+        //
+        'created_by',
+        'updated_by',
     ]);
     public function request(){
         return $this->hasOne('App\Models\Request');
