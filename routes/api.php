@@ -156,3 +156,31 @@ Route::middleware('auth:sanctum')->post('/submitted_requests/reject_release/{id}
 Route::middleware('auth:sanctum')->post('/submitted_requests/sign/{id}', [SubmittedRequestController::class, 'sign']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/complete/{id}', [SubmittedRequestController::class, 'complete']);
+
+use App\Http\Controllers\SubmittedRequirementController;
+
+Route::middleware('auth:sanctum')->get('/submitted_requirements', [SubmittedRequirementController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/submitted_requirements/show_active', [SubmittedRequirementController::class, 'show_active']);
+
+Route::middleware('auth:sanctum')->get('/submitted_requirements/user/{id}', [SubmittedRequirementController::class, 'find_by_user']);
+
+Route::middleware('auth:sanctum')->get('/submitted_requirements/request/{id}', [SubmittedRequirementController::class, 'find_by_request']);
+
+Route::middleware('auth:sanctum')->get('/submitted_requirements/{id}', [SubmittedRequirementController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requirements',[SubmittedRequirementController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requirements/update/{id}', [SubmittedRequirementController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requirements/delete/{id}', [SubmittedRequirementController::class, 'delete']);
+
+//statuses
+
+Route::middleware('auth:sanctum')->post('/submitted_requirements/approve_requirement/{id}', [SubmittedRequirementController::class, 'approve_requirement']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requirements/reject_requirement/{id}', [SubmittedRequirementController::class, 'reject_requirement']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requirements/sign/{id}', [SubmittedRequirementController::class, 'sign']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requirements/change/{id}', [SubmittedRequirementController::class, 'change_requirement']);

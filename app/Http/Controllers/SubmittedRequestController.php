@@ -9,7 +9,7 @@ use Validator;
 class SubmittedRequestController extends Controller
 {
        //
-       public function index(){
+    public function index(){
         $data = SubmittedRequest::all();
 
         return [
