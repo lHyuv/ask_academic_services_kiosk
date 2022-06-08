@@ -468,6 +468,113 @@ const deleteRequest = (data) =>{
 
 };
 
+const changePassword = () =>{
+
+
+    if($('#password').val().length < 8){
+        notification('error','','Password should be more than 8 characters');
+    }else if($('#password').val() != $('#re_password').val()){
+        notification('error','','Password confirmation should be same');
+    }else{
+
+
+    $.ajax({
+        url: apiURL + 'users/update/' + sessionStorage.getItem('user_id'),
+        async: true,
+        method: 'POST',
+        data: {
+            'email' : $('#email').val(),
+            'password' : $('#password').val(),
+        },
+        headers: {
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+        },
+        success: (data)=>{
+            notification('success','','Successfully updated');
+            location.reload();
+        },
+        error:({responseJSON})=>{
+           // console.log(responseJSON.message);
+           notification('error','','Something went wrong');
+        }
+    });
+}
+
+};
+
+const createProfile = () =>{
+    $('#profile_form').on('submit',(e)=>{
+
+        e.preventDefault();
+
+        $.ajax({
+            url: apiURL + 'clients',
+            async: true,
+            method: 'POST',
+            data: {
+                'first_name' : $('#first_name').val(),
+                'middle_name' : $('#middle_name').val(),
+                'last_name' : $('#last_name').val(),
+                'extension_name' : $('#extension_name').val(),
+                'user_id' : sessionStorage.getItem('user_id'),
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                notification('success','','Successfully created');
+                if( $('#password').val().length > 0){
+                    changePassword();
+                }else{ 
+                    location.reload();
+                }
+
+ 
+            },
+            error:({responseJSON})=>{
+               // console.log(responseJSON.message);
+               notification('error','','Something went wrong');
+            }
+        });
+    })
+};
+
+const editProfile = (id) =>{
+    $('#profile_form').on('submit',(e)=>{
+
+        e.preventDefault();
+
+        $.ajax({
+            url: apiURL + 'clients/update/' + id,
+            async: true,
+            method: 'POST',
+            data: {
+                'first_name' : $('#first_name').val(),
+                'middle_name' : $('#middle_name').val(),
+                'last_name' : $('#last_name').val(),
+                'extension_name' : $('#extension_name').val(),
+                'user_id' : sessionStorage.getItem('user_id'),
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                alert($('#password').val());
+                notification('success','','Successfully updated');
+                if($('#password').val().length > 0){
+                    changePassword();
+                }else{ 
+                    location.reload();
+                }
+             
+            },
+            error:({responseJSON})=>{
+               // console.log(responseJSON.message);
+               notification('error','','Something went wrong');
+            }
+        });
+    })
+};
 
 
 

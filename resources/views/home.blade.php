@@ -178,6 +178,7 @@
 
 <script>
   sessionStorage.setItem('token', '{{ session("token") }}');
+  sessionStorage.setItem('user_id', '{{ session("user_id") }}');
 </script>
 
 @endsection

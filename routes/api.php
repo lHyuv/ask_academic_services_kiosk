@@ -112,6 +112,8 @@ Route::middleware('auth:sanctum')->get('/clients', [ClientController::class, 'in
 
 Route::middleware('auth:sanctum')->get('/clients/show_active', [ClientController::class, 'show_active']);
 
+Route::middleware('auth:sanctum')->get('/clients/user/{id}', [ClientController::class, 'find_by_user']);
+
 Route::middleware('auth:sanctum')->get('/clients/{id}', [ClientController::class, 'show']);
 
 Route::middleware('auth:sanctum')->post('/clients',[ClientController::class, 'create']);

@@ -57,6 +57,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             //
             session()->put('token',$token);
+            session()->put('user_id',$user->id);
             session()->save();
             //
             return redirect()->route('home');

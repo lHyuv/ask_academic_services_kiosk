@@ -84,5 +84,12 @@ class ClientController extends Controller
         ];
     }
 
+    public function find_by_user($id){
+        $data = Client::where('user_id', $id)->get();
 
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
+    }
 }

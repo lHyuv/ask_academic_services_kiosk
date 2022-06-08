@@ -67,7 +67,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'role_id');
     }
-
+    
     public function created_by_user()
     {
         return $this->belongsTo(User::class,'created_by');
@@ -86,6 +86,13 @@ class User extends Authenticatable
     public function updated_users()
     {
         return $this->hasMany(User::class, 'updated_by');
+    }
+
+    //Added
+
+    public function client()
+    {
+        return $this->hasOne('App\Models\Client');
     }
 
 }

@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Request as Requests;
-
+use App\Models\Client;
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     /**
@@ -62,7 +63,11 @@ class HomeController extends Controller
     }
 
     public function view_profile(){
-        return view('profile');
+        $my_data = Client::where('user_id', Auth::user()->id)->first();
+       // dd($my_data);
+        return view('profile',[
+            'my_data' => $my_data
+        ]);
     }
 
     public function ongoing_services(){

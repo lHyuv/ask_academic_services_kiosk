@@ -13,7 +13,13 @@
                                     <i class="avatar-presence online"></i>
                             </figure>
                             <div class="media-body">
-                                <h6 class="mt-1 mb-0"> <a href="/profile" class="nav-item text-truncate">{{ Auth::user()->email }}</a></h6>
+                                <h6 class="mt-1 mb-0"> <a href="/profile" class="nav-item text-truncate">
+                                @if(isset(Auth::user()->client)) 
+                                {{ Auth::user()->client->first_name}}
+                                @else
+                                {{ Auth::user()->email}} 
+                                @endif
+                                </a></h6>
                                 <p class="mb-0">{{Auth::user()->roles->pluck('name')[0]}}</p>
                             </div>
                         </div>
