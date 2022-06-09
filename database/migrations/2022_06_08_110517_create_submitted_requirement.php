@@ -22,6 +22,7 @@ class CreateSubmittedRequirement extends Migration
             $table->string('rejection_reason')->nullable();
             $table->foreignUuid('submitted_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   
             $table->foreignUuid('approved_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   
+            $table->foreignUuid('submitted_request_id')->nullable()->constrained('submitted_requests')->onDelete('cascade')->onUpdate('cascade');   
             //
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   
             $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');  

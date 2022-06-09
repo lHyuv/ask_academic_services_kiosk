@@ -21,6 +21,7 @@ class CreateSubmittedRequest extends Migration
             $table->string('release_status')->default('Pending');
             $table->string('application_status')->default('Pending');
             $table->string('signed_status')->default('Pending');
+            $table->string('signed_student_status')->default('Pending');
             $table->text('request_details')->nullable();
             $table->date('request_deadline');
             $table->year('school_year');

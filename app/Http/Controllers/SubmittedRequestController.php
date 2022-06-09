@@ -104,6 +104,20 @@ class SubmittedRequestController extends Controller
         ];
     }
 
+    public function student_sign(Request $request, $id){
+        $data = SubmittedRequest::findOrFail($id);
+
+        $data->update([
+            'signed_student_status' => 'Signed'
+        ]);
+
+        //return $data;
+        return [
+            'message' => 'Successfully updated',
+            'data' => $data
+        ];
+    }
+
 
     public function approve_request(Request $request, $id){
         $data = SubmittedRequest::findOrFail($id);

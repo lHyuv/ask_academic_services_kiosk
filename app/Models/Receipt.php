@@ -3,32 +3,29 @@
 namespace App\Models;
 
 use App\Traits\Uuids;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
-class SubmittedRequirement extends Model
+
+class Receipt extends Model
 {
     use Uuids, HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
 
     protected $fillable = ([
-
-        'requirement_id'  ,
-        'requirement_status',
+        'submitted_request_id',
+        'receipt_no',
+        'fee',
+        'paid_status',
+        'item',
+        'details',
+        'certified_by',
         'signed_status',
-        'rejection_reason',
-        'submitted_by' ,
-       'approved_by',
-       'submitted_request_id',
-        //
-        'created_by'   ,
+        'status',
+        'created_by',
         'updated_by',
-        //file
-        'file_name',
-        'file_path',
-        'file'
     ]);
 
     //
@@ -41,5 +38,4 @@ class SubmittedRequirement extends Model
     {
         return $this->belongsTo(User::class,'updated_by');
     }
-    
 }

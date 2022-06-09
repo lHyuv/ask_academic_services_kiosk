@@ -24,6 +24,7 @@ class SubmittedRequest extends Model
         'school_year',
         'control_no',
         'reason',
+        'signed_student_status',
         //
         //fk ids:
         'approved_by', 

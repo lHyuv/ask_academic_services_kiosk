@@ -155,6 +155,8 @@ Route::middleware('auth:sanctum')->post('/submitted_requests/reject_release/{id}
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/sign/{id}', [SubmittedRequestController::class, 'sign']);
 
+Route::middleware('auth:sanctum')->post('/submitted_requests/student_sign/{id}', [SubmittedRequestController::class, 'student_sign']);
+
 Route::middleware('auth:sanctum')->post('/submitted_requests/complete/{id}', [SubmittedRequestController::class, 'complete']);
 
 use App\Http\Controllers\SubmittedRequirementController;
@@ -184,3 +186,27 @@ Route::middleware('auth:sanctum')->post('/submitted_requirements/reject_requirem
 Route::middleware('auth:sanctum')->post('/submitted_requirements/sign/{id}', [SubmittedRequirementController::class, 'sign']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requirements/change/{id}', [SubmittedRequirementController::class, 'change_requirement']);
+
+use App\Http\Controllers\ReceiptController;
+
+Route::middleware('auth:sanctum')->get('/receipts', [ReceiptController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/receipts/show_active', [ReceiptController::class, 'show_active']);
+
+Route::middleware('auth:sanctum')->get('/receipts/request/{id}', [ReceiptController::class, 'find_by_request']);
+
+Route::middleware('auth:sanctum')->get('/receipts/{id}', [ReceiptController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/receipts',[ReceiptController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/receipts/update/{id}', [ReceiptController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('/receipts/delete/{id}', [ReceiptController::class, 'delete']);
+
+//statuses
+
+Route::middleware('auth:sanctum')->post('/receipts/certify/{id}', [ReceiptController::class, 'certify']);
+
+Route::middleware('auth:sanctum')->post('/receipts/sign/{id}', [ReceiptController::class, 'sign']);
+
+Route::middleware('auth:sanctum')->post('/receipts/paid/{id}', [ReceiptController::class, 'set_paid']);
