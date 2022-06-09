@@ -13,6 +13,7 @@ class CreateStep extends Migration
      */
     public function up()
     {
+        if(Schema::hasTable('steps')) return; 
         Schema::create('steps', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');

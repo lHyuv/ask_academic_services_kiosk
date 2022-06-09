@@ -13,6 +13,7 @@ class CreateReceipt extends Migration
      */
     public function up()
     {
+        if(Schema::hasTable('receipts')) return; 
         Schema::create('receipts', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');

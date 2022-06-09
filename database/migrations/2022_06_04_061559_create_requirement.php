@@ -13,6 +13,7 @@ class CreateRequirement extends Migration
      */
     public function up()
     {
+        if(Schema::hasTable('requirements')) return; 
         Schema::create('requirements', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');

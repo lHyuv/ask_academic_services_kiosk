@@ -13,6 +13,7 @@ class CreateSubmittedRequirement extends Migration
      */
     public function up()
     {
+        if(Schema::hasTable('submitted_requirements')) return; 
         Schema::create('submitted_requirements', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');

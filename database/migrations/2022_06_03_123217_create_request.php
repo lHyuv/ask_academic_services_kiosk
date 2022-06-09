@@ -13,6 +13,7 @@ class CreateRequest extends Migration
      */
     public function up()
     {
+        if(Schema::hasTable('requests')) return; 
         Schema::create('requests', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');

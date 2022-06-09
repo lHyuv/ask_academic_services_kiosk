@@ -13,6 +13,7 @@ class CreateRole extends Migration
      */
     public function up()
     {
+        if(Schema::hasTable('roles')) return; 
         Schema::create('roles', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name')->unique();

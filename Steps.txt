@@ -62,3 +62,11 @@ Open cmd/powershell/etc
 
 type: npm install
 type: npm  run dev
+
+7 If project is existing, and DB tables needs changes
+
+Open cmd/powershell on vs/etc
+
+php artisan migrate:fresh
+
+php artisan migrate

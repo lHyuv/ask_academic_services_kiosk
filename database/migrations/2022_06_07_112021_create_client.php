@@ -13,6 +13,7 @@ class CreateClient extends Migration
      */
     public function up()
     {
+        if(Schema::hasTable('clients')) return; 
         Schema::create('clients', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
