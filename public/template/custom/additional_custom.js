@@ -615,7 +615,7 @@ const chooseCorrection = (option) =>{
     });
     $(`#${id}`).css('display','block');
  
-}
+};
 
 
 

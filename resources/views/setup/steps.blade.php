@@ -9,39 +9,55 @@
 <section class="section shadow-sm">
         <div class="section-header mt-5">
        
-            <h1>Requests</h1>
+            <h1>Steps</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item"><a href="/home">Home</a></div>
-              <div class="breadcrumb-item">Requests</div>
+              <div class="breadcrumb-item">Steps</div>
             </div> 
         </div>
       
 </section>
 
 <!--Hidden card--> 
-<div class="card card-outline card-primary mt-5" id = "edit_request_crud" style = 'display:none;'>
-                <div class="card-header"><h4>Request details</h4></div>
+<div class="card card-outline card-primary mt-5" id = "edit_step_crud" style = 'display:none;'>
+                <div class="card-header"><h4>Step details</h4></div>
 
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "" id = 'edit_request'>
+                    <form action="" method = "" id = 'edit_step'>
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Request Type</label>
-                        <input type="text" name = "edit_type" id = "edit_type" class = "form-control" placeholder = "" required/>
+                        <select name="" id="" class = "form-control">
+                            <option value = "" selected>Select request..</option>
+                            @foreach($requests as $request)
+                            <option value="{{ $request->id }}">{{ $request->request_type}}</option>
+                            @endforeach
+                        </select>
                         </div>
                         </div>
-
+                        <div class = "col-md-12">
+                        <div class="form-group">
+                        <label>Step number</label>
+                        <input type="number" name = "edit_step_no" id = "edit_step_no" class = "form-control" placeholder = "" required/>
+                        </div>
+                        </div>
+                        <div class = "col-md-12">
+                        <div class="form-group">
+                        <label>Step name</label>
+                        <input type="text" name = "edit_step_name" id = "edit_step_name" class = "form-control" placeholder = "" required/>
+                        </div>
+                        </div>
                         </div>
                     
 
                  
                      
                         <div class="float-right">
-                        <button class = "btn btn-secondary" onclick = "manageCard('edit_request_crud','hide');" >Cancel</button>
+                        <button class = "btn btn-secondary" onclick = "manageCard('edit_step_crud','hide');" >Cancel</button>
                         <button class = "btn btn-primary" type = "submit" >Update</button>
                         </div>
                     </form>
@@ -53,8 +69,8 @@
 
          <!---->
 
-         <div class="card card-outline card-primary mt-5" id = "create_request_crud" style = 'display:none;'>
-                <div class="card-header"><h4>Request details</h4></div>
+         <div class="card card-outline card-primary mt-5" id = "create_step_crud" style = 'display:none;'>
+                <div class="card-header"><h4>Step details</h4></div>
 
                 <div class="card-body">
                     <div class = "row">
@@ -65,7 +81,24 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Request Type</label>
-                        <input type="text" name = "create_type" id = "create_type" class = "form-control" placeholder = "" required/>
+                        <select name="" id="" class = "form-control">
+                        <option value = "" selected>Select request..</option>
+                            @foreach($requests as $request)
+                            <option value="{{ $request->id }}">{{ $request->request_type}}</option>
+                            @endforeach
+                        </select>
+                        </div>
+                        </div>
+                        <div class = "col-md-12">
+                        <div class="form-group">
+                        <label>Step number</label>
+                        <input type="number" name = "createstep_no" id = "create_step_no" class = "form-control" placeholder = "" required/>
+                        </div>
+                        </div>
+                        <div class = "col-md-12">
+                        <div class="form-group">
+                        <label>Step name</label>
+                        <input type="text" name = "create_step_name" id = "create_step_name" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
 
@@ -75,7 +108,7 @@
                  
                      
                         <div class="float-right">
-                        <button class = "btn btn-secondary" onclick = "manageCard('create_request_crud','hide');" >Cancel</button>
+                        <button class = "btn btn-secondary" type="button" onclick = "manageCard('create_step_crud','hide');" >Cancel</button>
                         <button class = "btn btn-primary" type = "submit" >Create</button>
                         </div>
                     </form>
@@ -92,13 +125,13 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="card card-outline card-primary " id = 'create_role_crud'>
+            <div class="card card-outline card-primary " id = 'create_step_crud'>
                 <div class="card-header">
                 <div class = "col-md-10">
-                    <h4>List of Requests</h4>
+                    <h4>List of Steps</h4>
                     </div>
                     <div class = "col-md-2">
-                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_request_crud','show');createRequest();">+ Add</button>
+                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_step_crud','show');">+ Add</button>
                     </div>
                 </div>
 
@@ -106,20 +139,24 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
-                                <th>Type/Name</th>
+                                <th>Request</th>
+                                <th>Step No</th>
+                                <th>Name</th>
                                 <th>Date Created</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($requests as $request)
+                        @foreach($steps as $step)
                         <tr>
-                                <td>{{ $request->request_type }}</td>
-                                <td>{{ $request->created_at->diffForHumans() }}</td>
+                                <td>{{ $step->requests()->pluck('request_type_name') }}</td>
+                                <td>{{ $step->step_number }}</td>
+                                <td>{{ $step->step_name }}</td>
+                                <td>{{ $step->created_at->diffForHumans() }}</td>
                                 <td>
                              
-                                @if($request->status == '1')
+                                @if($step->status == '1')
                                 <span class="badge badge-success">Active</span>
                                 @else
                                 <span class="badge badge-warning">Inactive</span>
@@ -137,14 +174,14 @@
                                     <!-- Dropdown Menu --> 
                                     <div class="dropdown-menu dropdown-menu-right"> 
                                 
-                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_request_crud','show');editRequest(' {{$request}}');">
+                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_step_crud','show');">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>
                                     <div>Edit</div>
                                     </div> 
                                     <!----> 
-                                    <div class="dropdown-item d-flex" role="button" onclick = "deleteRequest(' {{$request}}');"  data-bs-toggle = "modal" data-bs-target="#confirmModal">
+                                    <div class="dropdown-item d-flex" role="button" onclick = ""  data-bs-toggle = "modal" data-bs-target="#confirmModal">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>

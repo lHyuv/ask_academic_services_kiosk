@@ -23,7 +23,7 @@
 
                 <div class="card-body">
                     <div class = "row">
-                    <div class = "col-md-8">
+                    <div class = "col-md-6">
                     <form action="" method = "">
                         <div class="form-group">
                         <label>Request details</label>
@@ -44,7 +44,7 @@
  
                     </div>
                     <!---->
-                    <div class = "col-md-4">
+                    <div class = "col-md-6">
                         <i>Some content here..</i>
                     </div>
 

@@ -48,3 +48,7 @@ Route::get('/user', [App\Http\Controllers\HomeController::class, 'user_crud']);
 Route::get('/role', [App\Http\Controllers\HomeController::class, 'role_crud']);
 
 Route::get('/requests', [App\Http\Controllers\HomeController::class, 'request_crud']);
+
+Route::get('/steps', [App\Http\Controllers\HomeController::class, 'step_crud']);
+
+Route::get('/requirements', [App\Http\Controllers\HomeController::class, 'requirement_crud']);

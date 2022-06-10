@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\Request as Requests;
 use App\Models\Client;
+use App\Models\Step;
+use App\Models\Requirement;
 use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
@@ -97,6 +99,24 @@ class HomeController extends Controller
     public function request_crud(){
         $requests = Requests::where('status',1)->get();
         return view('setup.requests',[
+            'requests' => $requests
+        ]);
+    }
+
+    public function step_crud(){
+        $steps = Step::where('status',1)->get();
+        $requests = Requests::where('status',1)->get();
+        return view('setup.steps',[
+            'steps' => $steps,
+            'requests' => $requests
+        ]);
+    }
+
+    public function requirement_crud(){
+        $requirements = Requirement::where('status',1)->get();
+        $requests = Requests::where('status',1)->get();
+        return view('setup.requirements',[
+            'requirements' => $requirements,
             'requests' => $requests
         ]);
     }
