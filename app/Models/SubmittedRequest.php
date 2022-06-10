@@ -37,8 +37,25 @@ class SubmittedRequest extends Model
         'updated_by',
         'status',
     ]);
-
-    
+    public function approved_by()
+    {
+        return $this->belongsTo(User::class,'approved_by');
+    }
+    public function forward_to()
+    {
+        return $this->belongsTo(User::class,'forward_to');
+    }
+    public function client()
+    {
+        return $this->belongsTo(User::class,'client');
+    }
+    public function received_by()
+    {
+        return $this->belongsTo(User::class,'received_by');
+    }
+    public function requests(){
+        return $this->belongsTo(Request::class, 'request_id');
+    }
     //
     public function created_by_user()
     {

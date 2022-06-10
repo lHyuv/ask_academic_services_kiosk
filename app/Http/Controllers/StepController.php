@@ -10,7 +10,12 @@ class StepController extends Controller
 {
     //
     public function index(){
-        $data = Step::all();
+        // $data = Step::all();
+        $data = Step::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -19,7 +24,11 @@ class StepController extends Controller
     }
 
     public function show_active(){
-        $data = Step::where('status','1')->get();
+        $data = Step::where('status','1')::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -28,7 +37,11 @@ class StepController extends Controller
     }
 
     public function show($id){
-        $data = Step::find($id);
+        $data = Step::find($id)::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',

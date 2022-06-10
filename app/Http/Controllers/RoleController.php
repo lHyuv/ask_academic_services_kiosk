@@ -10,7 +10,10 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $data = Role::all();
+        $data = Role::with([
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -20,7 +23,10 @@ class RoleController extends Controller
  
     public function show_active()
     {
-        $data = Role::where('status','1')->get();
+        $data = Role::where('status','1')::with([
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
         
         return [
             'message' => 'Successfully retrieved',
@@ -30,7 +36,10 @@ class RoleController extends Controller
 
     public function show($id)
     {
-        $data = Role::find($id);
+        $data = Role::find($id)::with([
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',

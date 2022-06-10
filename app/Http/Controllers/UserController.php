@@ -12,7 +12,11 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data = User::all();
+       // $data = User::all();
+       $data = User::with([
+        'created_by_user',
+        'updated_by_user'
+     ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -22,7 +26,10 @@ class UserController extends Controller
  
     public function show_active()
     {
-        $data = User::where('status','1')->get();
+        $data = User::where('status','1')::with([
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -32,7 +39,10 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $data = User::find($id);
+        $data = User::find($id)::with([
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',

@@ -10,7 +10,13 @@ class RequirementController extends Controller
 {
     public function index()
     {
-        $data = Requirement::all();
+        //$data = Requirement::all();
+          $data = Requirement::with([
+              'requests',
+              'created_by_user',
+              'updated_by_user'
+           ])->get();
+   
 
         return [
             'message' => 'Successfully retrieved',
@@ -20,7 +26,11 @@ class RequirementController extends Controller
  
     public function show_active()
     {
-        $data = Requirement::where('status','1')->get();
+        $data = Requirement::where('status','1')::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
         
         return [
             'message' => 'Successfully retrieved',
@@ -30,7 +40,11 @@ class RequirementController extends Controller
 
     public function show($id)
     {
-        $data = Requirement::find($id);
+        $data = Requirement::find($id)::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',

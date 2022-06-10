@@ -10,7 +10,15 @@ class SubmittedRequestController extends Controller
 {
        //
     public function index(){
-        $data = SubmittedRequest::all();
+        $data = SubmittedRequest::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user',
+            'received_by' ,
+            'approved_by',
+            'client',
+            'forward_to',
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -19,7 +27,15 @@ class SubmittedRequestController extends Controller
     }
 
     public function show_active(){
-        $data = SubmittedRequest::where('status','1')->get();
+        $data = SubmittedRequest::where('status','1')::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user',
+            'received_by' ,
+            'approved_by',
+            'client',
+            'forward_to',
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -28,7 +44,15 @@ class SubmittedRequestController extends Controller
     }
 
     public function show($id){
-        $data = SubmittedRequest::find($id);
+        $data = SubmittedRequest::find($id)::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user',
+            'received_by' ,
+            'approved_by',
+            'client',
+            'forward_to',
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -80,7 +104,15 @@ class SubmittedRequestController extends Controller
     }
 
     public function find_by_user($id){
-        $data = SubmittedRequest::where('client', $id)->orWhere('created_by', $id)->get();
+        $data = SubmittedRequest::where('client', $id)->orWhere('created_by', $id)::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user',
+            'received_by' ,
+            'approved_by',
+            'client',
+            'forward_to',
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',

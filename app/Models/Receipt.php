@@ -29,6 +29,14 @@ class Receipt extends Model
     ]);
 
     //
+    public function submitted_requests()
+    {
+        return $this->belongsTo(SubmittedRequest::class,'submitted_request_id');
+    }
+    public function certified_by_user()
+    {
+        return $this->belongsTo(User::class,'certified_by');
+    }
     public function created_by_user()
     {
         return $this->belongsTo(User::class,'created_by');

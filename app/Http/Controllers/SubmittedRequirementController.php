@@ -10,7 +10,14 @@ class SubmittedRequirementController extends Controller
 {
        //
        public function index(){
-        $data = SubmittedRequirement::all();
+        $data = SubmittedRequirement::with([
+            'submitted_requests',
+            'approved_by_user',
+            'submitted_by_user',
+            'requirements',
+            'created_by_user',
+            'updated_by_user',
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -19,7 +26,14 @@ class SubmittedRequirementController extends Controller
     }
 
     public function show_active(){
-        $data = SubmittedRequirement::where('status','1')->get();
+        $data = SubmittedRequirement::where('status','1')::with([
+            'submitted_requests',
+            'approved_by_user',
+            'submitted_by_user',
+            'requirements',
+            'created_by_user',
+            'updated_by_user',
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -28,7 +42,14 @@ class SubmittedRequirementController extends Controller
     }
 
     public function show($id){
-        $data = SubmittedRequirement::find($id);
+        $data = SubmittedRequirement::find($id)::with([
+            'submitted_requests',
+            'approved_by_user',
+            'submitted_by_user',
+            'requirements',
+            'created_by_user',
+            'updated_by_user',
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -119,7 +140,14 @@ class SubmittedRequirementController extends Controller
     }
 
     public function find_by_user($id){
-        $data = SubmittedRequirement::where('submitted_by', $id)->orWhere('created_by', $id)->get();
+        $data = SubmittedRequirement::where('submitted_by', $id)->orWhere('created_by', $id)::with([
+            'submitted_requests',
+            'approved_by_user',
+            'submitted_by_user',
+            'requirements',
+            'created_by_user',
+            'updated_by_user',
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -128,7 +156,14 @@ class SubmittedRequirementController extends Controller
     }
 
     public function find_by_request($id){
-        $data = SubmittedRequirement::where('submitted_request_id', $id)->get();
+        $data = SubmittedRequirement::where('submitted_request_id', $id)::with([
+            'submitted_requests',
+            'approved_by_user',
+            'submitted_by_user',
+            'requirements',
+            'created_by_user',
+            'updated_by_user',
+         ])->get();;
 
         return [
             'message' => 'Successfully retrieved',

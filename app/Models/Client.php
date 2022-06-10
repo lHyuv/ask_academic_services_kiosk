@@ -33,8 +33,8 @@ class Client extends Model
     public function request(){
         return $this->hasOne('App\Models\Request');
     }
-    public function user(){
-        return $this->belongsTo(Request::class, 'user_id');
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
     }
     //
     public function created_by_user()

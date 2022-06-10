@@ -10,7 +10,10 @@ class RequestController extends Controller
 {
     //
     public function index(){
-        $data = Requests::all();
+        $data = Requests::with([
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -19,7 +22,10 @@ class RequestController extends Controller
     }
 
     public function show_active(){
-        $data = Requests::where('status','1')->get();
+        $data = Requests::where('status','1')::with([
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -28,7 +34,10 @@ class RequestController extends Controller
     }
 
     public function show($id){
-        $data = Requests::find($id);
+        $data = Requests::find($id)::with([
+            'created_by_user',
+            'updated_by_user'
+         ])->get();
 
         return [
             'message' => 'Successfully retrieved',
