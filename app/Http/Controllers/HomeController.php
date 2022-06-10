@@ -62,6 +62,10 @@ class HomeController extends Controller
         return view('service_forms.ace_change_form');
     }
 
+    public function completion_form(){
+        return view('service_forms.completion_form');
+    }
+
     public function view_profile(){
         $my_data = Client::where('user_id', Auth::user()->id)->first();
        // dd($my_data);

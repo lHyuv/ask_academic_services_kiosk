@@ -585,6 +585,37 @@ const editProfile = (id) =>{
     })
 };
 
+const chooseCorrection = (option) =>{
+    let ids = [
+        'no_grade',
+        'completed',
+        'name_correct',
+        'others'
+    ];
+    let id = ``;
+    switch(option){
+        case '1':
+            id = 'no_grade';
+        break;
+        case '2':
+            id = 'completed';
+        break; 
+        case '3':
+            id = 'name_correct';
+        break;
+        case '4':
+            id = 'others';
+        break;
+        default:
+           //do nothing
+    }
+
+    ids.forEach((val)=>{
+        $(`#${val}`).css('display','none');
+    });
+    $(`#${id}`).css('display','block');
+ 
+}
 
 
 

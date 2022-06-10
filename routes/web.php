@@ -37,6 +37,8 @@ Route::get('/ace_add_form', [App\Http\Controllers\HomeController::class, 'ace_ad
 
 Route::get('/ace_change_form', [App\Http\Controllers\HomeController::class, 'ace_change_form']);
 
+Route::get('/completion_form', [App\Http\Controllers\HomeController::class, 'completion_form']);
+
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'view_profile']);
 
 Route::get('/ongoing_services', [App\Http\Controllers\HomeController::class, 'ongoing_services']);

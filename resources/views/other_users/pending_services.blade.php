@@ -54,8 +54,7 @@
                 <div class = "card-footer">
                 <div class = "float-right">
                         <button class = "btn btn-secondary" onclick = "manageCard('ongoing_services','hide');">Close</button>
-                        <button class = "btn btn-danger"  data-bs-toggle = "modal" data-bs-target="#confirmModal"  >Disapprove</button>
-                        <button class = "btn btn-primary"  data-bs-toggle = "modal" data-bs-target="#confirmModal" >Approve</button>
+                
                         </div>
                     </form>
                 </div>

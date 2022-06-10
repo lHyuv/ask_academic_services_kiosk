@@ -97,7 +97,7 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-        <a href = "/request_service">
+        <a href = "/completion_form">
         <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
