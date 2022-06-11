@@ -24,6 +24,7 @@ class CreateReceipt extends Migration
             $table->text('details')->nullable();
             $table->foreignUuid('certified_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('signed_status')->default('Pending');
+            $table->string('paid_status')->default('Pending');
 
             //
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   

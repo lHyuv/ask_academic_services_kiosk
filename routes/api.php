@@ -95,6 +95,8 @@ Route::middleware('auth:sanctum')->get('/steps', [StepController::class, 'index'
 
 Route::middleware('auth:sanctum')->get('/steps/show_active', [StepController::class, 'show_active']);
 
+Route::middleware('auth:sanctum')->get('/steps/request/{request}', [StepController::class, 'find_by_request']);
+
 Route::middleware('auth:sanctum')->get('/steps/{id}', [StepController::class, 'show']);
 
 Route::middleware('auth:sanctum')->post('/steps',[StepController::class, 'create']);

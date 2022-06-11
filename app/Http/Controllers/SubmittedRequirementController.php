@@ -26,14 +26,14 @@ class SubmittedRequirementController extends Controller
     }
 
     public function show_active(){
-        $data = SubmittedRequirement::where('status','1')::with([
+        $data = SubmittedRequirement::with([
             'submitted_requests',
             'approved_by_user',
             'submitted_by_user',
             'requirements',
             'created_by_user',
             'updated_by_user',
-         ])->get();
+         ])->where('status','1')->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -42,14 +42,14 @@ class SubmittedRequirementController extends Controller
     }
 
     public function show($id){
-        $data = SubmittedRequirement::find($id)::with([
+        $data = SubmittedRequirement::with([
             'submitted_requests',
             'approved_by_user',
             'submitted_by_user',
             'requirements',
             'created_by_user',
             'updated_by_user',
-         ])->get();
+         ])->find($id);
 
         return [
             'message' => 'Successfully retrieved',
@@ -62,6 +62,7 @@ class SubmittedRequirementController extends Controller
         $validator = Validator::make($request->all(), [
             'requirement_id'  => ['required', 'string'] ,
             'submitted_by'  => ['required', 'string'] ,
+            'submitted_request_id'  => ['required', 'string'] ,
            // 'file_name'  => ['required', 'string'],
            // 'file_path'  => ['required', 'string'],
            'file'  => 'required|mimes:png,jpg,jpeg,gif,pdf,txt,docx,csv|max:2305',
@@ -73,12 +74,14 @@ class SubmittedRequirementController extends Controller
         }
 
         if ($file = $request->file('file')) {
-            $path = $file->store('public/files');
+
             $name = $file->getClientOriginalName();
+            $path = 'public/files/' . $name;
             $file->move(public_path('files'),$name); 
 
             $data = SubmittedRequirement::create([
                 'requirement_id' => request('requirement_id'),
+                'submitted_request_id' => request('submitted_request_id'),
                 'submitted_by' => request('submitted_by'),
                 'file_name' => $name,
                 'file_path' => $path,
@@ -102,13 +105,15 @@ class SubmittedRequirementController extends Controller
         $data = SubmittedRequirement::findOrFail($id);
 
         if ($file = $request->file('file')) {
-            $path = $file->store('public/files');
+           
             $name = $file->getClientOriginalName();
+            $path = 'public/files/' . $name;
             $file->move(public_path('files'),$name); 
 
             $data->update([
                 'requirement_id' => request('requirement_id'),
                 'submitted_by' => request('submitted_by'),
+                'submitted_request_id' => request('submitted_request_id'),
                 'file_name' => $name,
                 'file_path' => $path,
             ]);
@@ -140,14 +145,14 @@ class SubmittedRequirementController extends Controller
     }
 
     public function find_by_user($id){
-        $data = SubmittedRequirement::where('submitted_by', $id)->orWhere('created_by', $id)::with([
+        $data = SubmittedRequirement::with([
             'submitted_requests',
             'approved_by_user',
             'submitted_by_user',
             'requirements',
             'created_by_user',
             'updated_by_user',
-         ])->get();
+         ])->where('submitted_by', $id)->orWhere('created_by', $id)->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -156,14 +161,14 @@ class SubmittedRequirementController extends Controller
     }
 
     public function find_by_request($id){
-        $data = SubmittedRequirement::where('submitted_request_id', $id)::with([
+        $data = SubmittedRequirement::with([
             'submitted_requests',
             'approved_by_user',
             'submitted_by_user',
             'requirements',
             'created_by_user',
             'updated_by_user',
-         ])->get();;
+         ])->where('submitted_request_id', $id)->get();;
 
         return [
             'message' => 'Successfully retrieved',
@@ -246,8 +251,8 @@ class SubmittedRequirementController extends Controller
         $data = SubmittedRequirement::findOrFail($id);
 
         if ($file = $request->file('file')) {
-            $path = $file->store('public/files');
             $name = $file->getClientOriginalName();
+            $path = 'public/files/' . $name;
             $file->move(public_path('files'),$name); 
 
             $data->update([

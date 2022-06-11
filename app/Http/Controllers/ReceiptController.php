@@ -24,12 +24,12 @@ class ReceiptController extends Controller
     }
 
     public function show_active(){
-        $data = Receipt::where('status','1')->get()::with([
+        $data = Receipt::with([
             'submitted_requests',
             'certified_by_user',
             'created_by_user',
             'updated_by_user',
-         ])->get();
+         ])->where('status','1')->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -38,12 +38,12 @@ class ReceiptController extends Controller
     }
 
     public function show($id){
-        $data = Receipt::find($id)::with([
+        $data = Receipt::with([
             'submitted_requests',
             'certified_by_user',
             'created_by_user',
             'updated_by_user',
-         ])->get();
+         ])->find($id);
 
         return [
             'message' => 'Successfully retrieved',
@@ -152,12 +152,12 @@ class ReceiptController extends Controller
     }
 
     public function find_by_request($id){
-        $data = Receipt::where('submitted_request_id', $id)::with([
+        $data = Receipt::with([
             'submitted_requests',
             'certified_by_user',
             'created_by_user',
             'updated_by_user',
-         ])->get();
+         ])->where('submitted_request_id', $id)->get();
 
         return [
             'message' => 'Successfully retrieved',

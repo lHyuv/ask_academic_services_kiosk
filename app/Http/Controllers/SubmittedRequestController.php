@@ -44,7 +44,7 @@ class SubmittedRequestController extends Controller
     }
 
     public function show($id){
-        $data = SubmittedRequest::find($id)::with([
+        $data = SubmittedRequest::with([
             'requests',
             'created_by_user',
             'updated_by_user',
@@ -52,7 +52,7 @@ class SubmittedRequestController extends Controller
             'approved_by',
             'client',
             'forward_to',
-         ])->get();
+         ])->find($id);
 
         return [
             'message' => 'Successfully retrieved',
@@ -104,7 +104,7 @@ class SubmittedRequestController extends Controller
     }
 
     public function find_by_user($id){
-        $data = SubmittedRequest::where('client', $id)->orWhere('created_by', $id)::with([
+        $data = SubmittedRequest::with([
             'requests',
             'created_by_user',
             'updated_by_user',
@@ -112,7 +112,7 @@ class SubmittedRequestController extends Controller
             'approved_by',
             'client',
             'forward_to',
-         ])->get();
+         ])->where('client', $id)->orWhere('created_by', $id)->get();
 
         return [
             'message' => 'Successfully retrieved',

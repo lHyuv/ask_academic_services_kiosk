@@ -23,11 +23,11 @@ class ClientController extends Controller
     }
 
     public function show_active(){
-        $data = Client::where('status','1')::with([
+        $data = Client::with([
             'users',
             'created_by_user',
             'updated_by_user',
-         ])->get();
+         ])->where('status','1')->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -36,11 +36,11 @@ class ClientController extends Controller
     }
 
     public function show($id){
-        $data = Client::find($id)::with([
+        $data = Client::with([
             'users',
             'created_by_user',
             'updated_by_user',
-         ])->get();
+         ])->find($id);
 
         return [
             'message' => 'Successfully retrieved',

@@ -26,10 +26,10 @@ class UserController extends Controller
  
     public function show_active()
     {
-        $data = User::where('status','1')::with([
+        $data = User::with([
             'created_by_user',
             'updated_by_user'
-         ])->get();
+         ])->where('status','1')->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -39,10 +39,10 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $data = User::find($id)::with([
+        $data = User::with([
             'created_by_user',
             'updated_by_user'
-         ])->get();
+         ])->find($id);
 
         return [
             'message' => 'Successfully retrieved',
