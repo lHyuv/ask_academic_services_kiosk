@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Client;
+use App\Models\AceRequest;
 use Validator;
 
-class ClientController extends Controller
+class AceRequestController extends Controller
 {
-    //
-    public function index(){
-        $data = Client::with([
-            'users',
+     //
+     public function index(){
+        $data = AceRequest::with([
+            'submitted_requests',
             'created_by_user',
             'updated_by_user',
          ])->get();
@@ -23,8 +23,8 @@ class ClientController extends Controller
     }
 
     public function show_active(){
-        $data = Client::with([
-            'users',
+        $data = AceRequest::with([
+            'submitted_requests',
             'created_by_user',
             'updated_by_user',
          ])->where('status','1')->get();
@@ -36,8 +36,8 @@ class ClientController extends Controller
     }
 
     public function show($id){
-        $data = Client::with([
-            'users',
+        $data = AceRequest::with([
+            'submitted_requests',
             'created_by_user',
             'updated_by_user',
          ])->find($id);
@@ -51,22 +51,16 @@ class ClientController extends Controller
     public function create(Request $request){
         
         $validator = Validator::make($request->all(), [
-            //
-            'last_name' => ['required','string', 'max:255'],
-            'first_name' => ['required','string', 'max:255'],
-            'user_id' => ['required','string'],
-            'section' => ['string'],
-            'student_number' => ['string'],
-            //
-            'semester_id' => ['string'],
-            'program_id' =>['string'],
+            'ace_total_units_on_regi' => ['integer'],
+            'ace_type' => ['required','string', 'max:255'],
+            'submitted_request_id' => ['required','string'],
         ]);
 
         if($validator->fails()){
             return ['message' => [$validator->errors()]];       
         }
 
-        $data =  Client::create($request->all());
+        $data =  AceRequest::create($request->all());
         return [
             'message' => 'Successfully created',
             'data' => $data
@@ -74,7 +68,7 @@ class ClientController extends Controller
     }
 
     public function update(Request $request, $id){
-        $data = Client::findOrFail($id);
+        $data = AceRequest::findOrFail($id);
         $data->update($request->all());
 
         return [
@@ -84,11 +78,12 @@ class ClientController extends Controller
     }
 
     public function delete(Request $request, $id){
-        $data = Client::findOrFail($id);
-
+        $data = AceRequest::findOrFail($id);
+        
         $data->update([
             'status' => '2'
         ]);
+        
         $data->delete();
         //return $data;
         return [
@@ -97,11 +92,24 @@ class ClientController extends Controller
     }
 
     public function find_by_user($id){
-        $data = Client::with([
-            'users',
+        $data = AceRequest::with([
+            'submitted_requests',
             'created_by_user',
             'updated_by_user',
          ])->where('user_id', $id)->get();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
+    }
+
+    public function find_by_request($id){
+        $data = AceRequest::with([
+            'submitted_requests',
+            'created_by_user',
+            'updated_by_user',
+         ])->where('submitted_request_id', $id)->get();
 
         return [
             'message' => 'Successfully retrieved',

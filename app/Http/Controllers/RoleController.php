@@ -81,8 +81,7 @@ class RoleController extends Controller
     public function delete(Request $request, $id)
     {
         $Role = Role::findOrFail($id);
-        $Role->update(['status' => '2']);
-
+        $Role->delete();
         //return $Role;
         return [
             'message' => 'Successfully deleted'

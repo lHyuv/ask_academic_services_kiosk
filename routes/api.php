@@ -73,7 +73,7 @@ Route::middleware('auth:sanctum')->post('/requests/update/{id}', [RequestControl
 
 Route::middleware('auth:sanctum')->post('/requests/delete/{id}', [RequestController::class, 'delete']);
 
-//Requests
+//Requeirements
 use App\Http\Controllers\RequirementController;
 
 Route::middleware('auth:sanctum')->get('/requirements', [RequirementController::class, 'index']);
@@ -212,3 +212,22 @@ Route::middleware('auth:sanctum')->post('/receipts/certify/{id}', [ReceiptContro
 Route::middleware('auth:sanctum')->post('/receipts/sign/{id}', [ReceiptController::class, 'sign']);
 
 Route::middleware('auth:sanctum')->post('/receipts/paid/{id}', [ReceiptController::class, 'set_paid']);
+
+use App\Http\Controllers\AceRequestController;
+
+Route::middleware('auth:sanctum')->get('/ace_requests', [AceRequestController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/ace_requests/show_active', [AceRequestController::class, 'show_active']);
+
+Route::middleware('auth:sanctum')->get('/ace_requests/request/{id}', [AceRequestController::class, 'find_by_request']);
+
+Route::middleware('auth:sanctum')->get('/ace_requests/user/{id}', [AceRequestController::class, 'find_by_user']);
+
+Route::middleware('auth:sanctum')->get('/ace_requests/{id}', [AceRequestController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/ace_requests',[AceRequestController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/ace_requests/update/{id}', [AceRequestController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('/ace_requests/delete/{id}', [AceRequestController::class, 'delete']);
+

@@ -84,11 +84,12 @@ class ReceiptController extends Controller
 
     public function delete(Request $request, $id){
         $data = Receipt::findOrFail($id);
-
+        
         $data->update([
             'status' => '2'
         ]);
-
+        
+        $data->delete();
         //return $data;
         return [
             'message' => 'Successfully deleted'

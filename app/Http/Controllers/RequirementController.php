@@ -89,7 +89,7 @@ class RequirementController extends Controller
     {
         $Requirement = Requirement::findOrFail($id);
         $Requirement->update(['status' => '2']);
-
+        $data->delete();
         //return $Requirement;
         return [
             'message' => 'Successfully deleted'

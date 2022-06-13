@@ -97,7 +97,7 @@ class StepController extends Controller
         $data->update([
             'status' => '2'
         ]);
-
+        $data->delete();
         //return $data;
         return [
             'message' => 'Successfully deleted'

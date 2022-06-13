@@ -78,7 +78,7 @@ class RequestController extends Controller
         $request_data->update([
             'status' => '2'
         ]);
-
+        $data->delete();
         //return $request_data;
         return [
             'message' => 'Successfully deleted'
