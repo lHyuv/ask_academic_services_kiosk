@@ -28,7 +28,8 @@ class SubmittedRequirement extends Model
         //file
         'file_name',
         'file_path',
-        'file'
+        'file',
+        'status'
     ]);
     public function submitted_requests()
     {

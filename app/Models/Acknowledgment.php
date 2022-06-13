@@ -3,21 +3,24 @@
 namespace App\Models;
 
 use App\Traits\Uuids;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
-class Step extends Model
+class Acknowledgment extends Model
 {
     use Uuids, HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
-    
-    protected $fillable = ['step_number','step_name','completed_status','request_id','created_by','updated_by', 'status',];
 
-    public function requests(){
-        return $this->belongsTo(Request::class, 'request_id');
+    public function receipts(){
+        return $this->belongsTo(User::class,'receipt_id');
     }
+
+    public function users(){
+        return $this->belongsTo(User::class,'user_id');
+    }
+
     //
     public function created_by_user()
     {

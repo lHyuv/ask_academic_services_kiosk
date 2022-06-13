@@ -231,3 +231,23 @@ Route::middleware('auth:sanctum')->post('/ace_requests/update/{id}', [AceRequest
 
 Route::middleware('auth:sanctum')->post('/ace_requests/delete/{id}', [AceRequestController::class, 'delete']);
 
+//acknowledgments
+use App\Http\Controllers\AcknowledgmentController;
+
+Route::middleware('auth:sanctum')->get('/acknowledgments', [AcknowledgmentController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/acknowledgments/show_active', [AcknowledgmentController::class, 'show_active']);
+
+Route::middleware('auth:sanctum')->get('/acknowledgments/user/{id}', [AcknowledgmentController::class, 'find_by_user']);
+
+Route::middleware('auth:sanctum')->get('/acknowledgments/receipt/{id}', [AcknowledgmentController::class, 'find_by_receipts']);
+
+Route::middleware('auth:sanctum')->get('/acknowledgments/{id}', [AcknowledgmentController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/acknowledgments',[AcknowledgmentController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/acknowledgments/update/{id}', [AcknowledgmentController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('/acknowledgments/delete/{id}', [AcknowledgmentController::class, 'delete']);
+
+
