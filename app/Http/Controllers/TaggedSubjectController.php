@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AceRequest;
+use App\Models\TaggedSubject;
 use Validator;
 
-class AceRequestController extends Controller
+class TaggedSubjectController extends Controller
 {
      //
      public function index(){
-        $data = AceRequest::with([
-            'submitted_requests',
+        $data = TaggedSubject::with([
+            'tagged_by_user',
+            'acad_heads',
+            'acknowledgments',
+            'ace_requests',
             'created_by_user',
             'updated_by_user',
-            //'tagged_subjects',
+     
          ])->get();
 
         return [
@@ -24,11 +27,14 @@ class AceRequestController extends Controller
     }
 
     public function show_active(){
-        $data = AceRequest::with([
-            'submitted_requests',
+        $data = TaggedSubject::with([
+            'tagged_by_user',
+            'acad_heads',
+            'acknowledgments',
+            'ace_requests',
             'created_by_user',
             'updated_by_user',
-           //'tagged_subjects',
+      
          ])->where('status','1')->get();
 
         return [
@@ -38,11 +44,14 @@ class AceRequestController extends Controller
     }
 
     public function show($id){
-        $data = AceRequest::with([
-            'submitted_requests',
+        $data = TaggedSubject::with([
+            'tagged_by_user',
+            'acad_heads',
+            'acknowledgments',
+            'ace_requests',
             'created_by_user',
             'updated_by_user',
-           //'tagged_subjects',
+     
          ])->find($id);
 
         return [
@@ -54,16 +63,22 @@ class AceRequestController extends Controller
     public function create(Request $request){
         
         $validator = Validator::make($request->all(), [
-            'ace_total_units_on_regi' => ['integer'],
-            'ace_type' => ['required','string', 'max:255'],
-            'submitted_request_id' => ['required','string'],
+            'ace_request_id' => ['required','string'],
+            'subject_id' => ['required','string'],
+            'day' => ['required','string', 'max:255'],
+            'time' => ['required'],
+            'room_id' => ['required','string'],
+            'no_of_units' => ['integer'],
+            'acad_head' => ['string'],
+            'tagged_by' => ['string'],
+            'acknowledged_id' => ['string'],
         ]);
 
         if($validator->fails()){
             return ['message' => [$validator->errors()]];       
         }
 
-        $data =  AceRequest::create($request->all());
+        $data =  TaggedSubject::create($request->all());
         return [
             'message' => 'Successfully created',
             'data' => $data
@@ -71,7 +86,7 @@ class AceRequestController extends Controller
     }
 
     public function update(Request $request, $id){
-        $data = AceRequest::findOrFail($id);
+        $data = TaggedSubject::findOrFail($id);
         $data->update($request->all());
 
         return [
@@ -81,7 +96,7 @@ class AceRequestController extends Controller
     }
 
     public function delete(Request $request, $id){
-        $data = AceRequest::findOrFail($id);
+        $data = TaggedSubject::findOrFail($id);
         
         $data->update([
             'status' => '2'
@@ -94,13 +109,16 @@ class AceRequestController extends Controller
         ];
     }
 
-    public function find_by_user($id){
-        $data = AceRequest::with([
-            'submitted_requests',
+    public function find_by_ace_request($id){
+        $data = TaggedSubject::with([
+            'tagged_by_user',
+            'acad_heads',
+            'acknowledgments',
+            'ace_requests',
             'created_by_user',
             'updated_by_user',
-           //'tagged_subjects',
-         ])->where('user_id', $id)->get();
+  
+         ])->where('ace_request_id', $id)->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -108,17 +126,4 @@ class AceRequestController extends Controller
         ];
     }
 
-    public function find_by_request($id){
-        $data = AceRequest::with([
-            'submitted_requests',
-            'created_by_user',
-            'updated_by_user',
-           //'tagged_subjects',
-         ])->where('submitted_request_id', $id)->get();
-
-        return [
-            'message' => 'Successfully retrieved',
-            'data' => $data
-        ];
-    }
 }

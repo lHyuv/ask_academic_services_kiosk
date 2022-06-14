@@ -25,6 +25,11 @@ class AceRequest extends Model
         'updated_by',
         'status',
     ]);
+
+    public function tagged_subjects(){
+        return $this->hasMany('App\Model\TaggedSubject');
+    }
+
     public function submitted_requests()
     {
         return $this->belongsTo(SubmittedRequest::class,'submitted_request_id');

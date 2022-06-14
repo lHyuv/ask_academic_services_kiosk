@@ -251,3 +251,20 @@ Route::middleware('auth:sanctum')->post('/acknowledgments/update/{id}', [Acknowl
 Route::middleware('auth:sanctum')->post('/acknowledgments/delete/{id}', [AcknowledgmentController::class, 'delete']);
 
 
+//tagged_subjects
+use App\Http\Controllers\TaggedSubjectController;
+
+Route::middleware('auth:sanctum')->get('/tagged_subjects', [TaggedSubjectController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/tagged_subjects/show_active', [TaggedSubjectController::class, 'show_active']);
+
+Route::middleware('auth:sanctum')->get('/tagged_subjects/ace_request/{id}', [TaggedSubjectController::class, 'find_by_ace_request']);
+
+Route::middleware('auth:sanctum')->get('/tagged_subjects/{id}', [TaggedSubjectController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/tagged_subjects',[TaggedSubjectController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/tagged_subjects/update/{id}', [TaggedSubjectController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('/tagged_subjects/delete/{id}', [TaggedSubjectController::class, 'delete']);
+
