@@ -31,8 +31,8 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Request Type</label>
-                        <select name="" id="" class = "form-control">
-                            <option value = "" selected>Select request..</option>
+                        <select name="edit_type" id="edit_type" class = "form-control">
+                            <option value = "" selected required>Select request..</option>
                             @foreach($requests as $request)
                             <option value="{{ $request->id }}">{{ $request->request_type}}</option>
                             @endforeach
@@ -75,14 +75,14 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "" id = "create_role">
+                    <form action="" method = "" id = "create_step">
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Request Type</label>
-                        <select name="" id="" class = "form-control">
-                        <option value = "" selected>Select request..</option>
+                        <select name="create_type" id="create_type" class = "form-control">
+                        <option value = "" selected required>Select request..</option>
                             @foreach($requests as $request)
                             <option value="{{ $request->id }}">{{ $request->request_type}}</option>
                             @endforeach
@@ -92,7 +92,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Step number</label>
-                        <input type="number" name = "createstep_no" id = "create_step_no" class = "form-control" placeholder = "" required/>
+                        <input type="number" name = "create_step_no" id = "create_step_no" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
                         <div class = "col-md-12">
@@ -131,7 +131,7 @@
                     <h4>List of Steps</h4>
                     </div>
                     <div class = "col-md-2">
-                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_step_crud','show');">+ Add</button>
+                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_step_crud','show');createStep();">+ Add</button>
                     </div>
                 </div>
 
@@ -150,7 +150,7 @@
                         <tbody>
                         @foreach($steps as $step)
                         <tr>
-                                <td>{{ $step->requests()->pluck('request_type_name') }}</td>
+                                <td>{{ $step->requests()->pluck('request_type')[0] }}</td>
                                 <td>{{ $step->step_number }}</td>
                                 <td>{{ $step->step_name }}</td>
                                 <td>{{ $step->created_at->diffForHumans() }}</td>
@@ -174,14 +174,14 @@
                                     <!-- Dropdown Menu --> 
                                     <div class="dropdown-menu dropdown-menu-right"> 
                                 
-                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_step_crud','show');">
+                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_step_crud','show');editStep(' {{$step}}');">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>
                                     <div>Edit</div>
                                     </div> 
                                     <!----> 
-                                    <div class="dropdown-item d-flex" role="button" onclick = ""  data-bs-toggle = "modal" data-bs-target="#confirmModal">
+                                    <div class="dropdown-item d-flex" role="button" onclick = "deleteStep(' {{$step}}');"  data-bs-toggle = "modal" data-bs-target="#confirmModal">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>

@@ -59,7 +59,7 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "" id = "create_role">
+                    <form action="" method = "" id = "create_request">
 
                         <div class = "row">
                         <div class = "col-md-12">
@@ -75,7 +75,7 @@
                  
                      
                         <div class="float-right">
-                        <button class = "btn btn-secondary" onclick = "manageCard('create_request_crud','hide');" >Cancel</button>
+                        <button class = "btn btn-secondary" type = "button" onclick = "manageCard('create_request_crud','hide');" >Cancel</button>
                         <button class = "btn btn-primary" type = "submit" >Create</button>
                         </div>
                     </form>

@@ -25,13 +25,13 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "" id = 'edit_step'>
+                    <form action="" method = "" id = 'edit_requirement'>
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Request Type</label>
-                        <select name="" id="" class = "form-control">
+                        <select name="edit_type" id="edit_type" class = "form-control">
                             <option value = "" selected>Select request..</option>
                             @foreach($requests as $request)
                             <option value="{{ $request->id }}">{{ $request->request_type}}</option>
@@ -70,13 +70,13 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "" id = "create_role">
+                    <form action="" method = "" id = "create_requirement">
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Request Type</label>
-                        <select name="" id="" class = "form-control">
+                        <select name="create_type" id="create_type" class = "form-control">
                         <option value = "" selected>Select request..</option>
                             @foreach($requests as $request)
                             <option value="{{ $request->id }}">{{ $request->request_type}}</option>
@@ -138,7 +138,7 @@
                         <tbody>
                         @foreach($requirements as $requirement)
                         <tr>
-                                <td>{{ $requirement->requests()->pluck('request_type_name') }}</td>
+                                <td>{{ $requirement->requests()->pluck('request_type') }}</td>
                                 <td>{{ $requirement->requirement_name }}</td>
                                 <td>{{ $requirement->created_at->diffForHumans() }}</td>
                                 <td>

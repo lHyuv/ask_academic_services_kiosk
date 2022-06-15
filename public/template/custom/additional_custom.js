@@ -620,3 +620,118 @@ const chooseCorrection = (option) =>{
 
 
 
+const createStep = () =>{
+
+    $('#create_step').on('submit',(e)=>{
+
+        e.preventDefault();
+        
+        $.ajax({
+            url: apiURL + 'steps',
+            async: true,
+            method: 'POST',
+            data: {
+                'request_id' : $('#create_type').val(),
+                'step_number' : $('#create_step_no').val(),
+                'step_name' : $('#create_step_name').val(),
+                'created_by' : sessionStorage.getItem('user_id'),
+
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                
+       
+             
+                notification('success','','Successfully created');
+               // location.reload();
+               manageCard('create_step_crud','hide'); 
+               drawTable();
+            },
+            error:({responseJSON})=>{
+               // console.log(responseJSON.message);
+               notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
+
+const editStep = (data) =>{
+    //view
+
+    let values = JSON.parse(data);
+    $('#edit_type').val(values['request_id']);
+    $('#edit_step_no').val(values['step_number']);
+    $('#edit_step_name').val(values['step_name']);
+
+    $('#edit_step').on('submit',(e)=>{
+
+        e.preventDefault();
+
+        $.ajax({
+            url: apiURL + 'steps/update/' + values['id'],
+            async: true,
+            method: 'POST',
+            data: {
+                'request_id' : $('#edit_type').val(),
+                'step_number' : $('#edit_step_no').val(),
+                'step_name' : $('#edit_step_name').val(),
+                'updated_by' : sessionStorage.getItem('user_id'),
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                
+
+                notification('success','','Successfully updated');
+                //location.reload();
+                manageCard('edit_step_crud','hide');
+                drawTable();
+            },
+            error:({responseJSON})=>{
+                //console.log(responseJSON);
+                notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
+
+
+const deleteStep = (data) =>{
+    //view
+    let values = JSON.parse(data);
+  
+    
+    $('#modal_confirm_btn').on('click',()=>{
+
+
+        $.ajax({
+            url: apiURL + 'steps/delete/' + values['id'],
+            async: true,
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+               
+            
+             
+               notification('success','','Successfully deleted');
+               //location.reload();
+               drawTable();
+            },
+            error:({responseJSON})=>{
+              //  console.log(responseJSON);
+              notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
