@@ -120,7 +120,7 @@
                     <h4>List of requirements</h4>
                     </div>
                     <div class = "col-md-2">
-                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_requirement_crud','show');">+ Add</button>
+                    <button class = "btn btn-primary float-right"  onclick = "manageCard('create_requirement_crud','show');createRequirement();">+ Add</button>
                     </div>
                 </div>
 
@@ -138,7 +138,7 @@
                         <tbody>
                         @foreach($requirements as $requirement)
                         <tr>
-                                <td>{{ $requirement->requests()->pluck('request_type') }}</td>
+                                <td>{{ $requirement->requests()->pluck('request_type')[0] }}</td>
                                 <td>{{ $requirement->requirement_name }}</td>
                                 <td>{{ $requirement->created_at->diffForHumans() }}</td>
                                 <td>
@@ -161,14 +161,14 @@
                                     <!-- Dropdown Menu --> 
                                     <div class="dropdown-menu dropdown-menu-right"> 
                                 
-                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_requirement_crud','show');">
+                                    <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_requirement_crud','show');editRequirement(' {{$requirement}}');">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>
                                     <div>Edit</div>
                                     </div> 
                                     <!----> 
-                                    <div class="dropdown-item d-flex" role="button" onclick = ""  data-bs-toggle = "modal" data-bs-target="#confirmModal">
+                                    <div class="dropdown-item d-flex" role="button" onclick = "deleteRequirement(' {{$requirement}}');"  data-bs-toggle = "modal" data-bs-target="#confirmModal">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>

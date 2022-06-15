@@ -735,3 +735,115 @@ const deleteStep = (data) =>{
 
 
 };
+
+const createRequirement = () =>{
+
+    $('#create_requirement').on('submit',(e)=>{
+
+        e.preventDefault();
+        
+        $.ajax({
+            url: apiURL + 'requirements',
+            async: true,
+            method: 'POST',
+            data: {
+                'request_id' : $('#create_type').val(),
+                'requirement_name' : $('#create_req_name').val(),
+                'created_by' : sessionStorage.getItem('user_id'),
+
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                
+       
+             
+                notification('success','','Successfully created');
+               // location.reload();
+               manageCard('create_requirement_crud','hide'); 
+               drawTable();
+            },
+            error:({responseJSON})=>{
+               // console.log(responseJSON.message);
+               notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
+
+const editRequirement = (data) =>{
+    //view
+
+    let values = JSON.parse(data);
+    $('#edit_type').val(values['request_id']);
+    $('#edit_req_name').val(values['requirement_name']);
+
+    $('#edit_requirement').on('submit',(e)=>{
+
+        e.preventDefault();
+
+        $.ajax({
+            url: apiURL + 'requirements/update/' + values['id'],
+            async: true,
+            method: 'POST',
+            data: {
+                'request_id' : $('#edit_type').val(),
+                'requirement_name' : $('#edit_req_name').val(),
+                'updated_by' : sessionStorage.getItem('user_id'),
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                
+
+                notification('success','','Successfully updated');
+                //location.reload();
+                manageCard('edit_requirement_crud','hide');
+                drawTable();
+            },
+            error:({responseJSON})=>{
+                //console.log(responseJSON);
+                notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
+
+const deleteRequirement = (data) =>{
+    //view
+    let values = JSON.parse(data);
+  
+    
+    $('#modal_confirm_btn').on('click',()=>{
+
+
+        $.ajax({
+            url: apiURL + 'requirements/delete/' + values['id'],
+            async: true,
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+               
+            
+             
+               notification('success','','Successfully deleted');
+               //location.reload();
+               drawTable();
+            },
+            error:({responseJSON})=>{
+              //  console.log(responseJSON);
+              notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
