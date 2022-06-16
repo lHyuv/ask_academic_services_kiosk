@@ -65,6 +65,10 @@ type: npm  run dev
 
 7 If project is existing, and DB tables needs changes
 
+Drop database on localhost/phpmyadmin  
+
+Import database (acad_services_app) on localhost/phpmyadmin 
+
 Open cmd/powershell on vs/etc
 
 php artisan migrate:fresh

@@ -10,6 +10,9 @@ use App\Models\Request as Requests;
 use App\Models\Client;
 use App\Models\Step;
 use App\Models\Requirement;
+use App\Models\SubmittedRequest;
+use App\Models\AceRequest;
+use App\Models\TaggedModel;
 use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
@@ -46,7 +49,34 @@ class HomeController extends Controller
     }
 
     public function pending_services(){
-        return view('other_users.pending_services');
+
+        $submitted_requests = SubmittedRequest::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user',
+            'received_by' ,
+            'approved_by',
+            'client',
+            'forward_to',
+         ])->join('users','users.id','=','submitted_requests.created_by')->join('clients','clients.created_by','=','users.id')->get();
+
+        $ace_requests = AceRequest::with([
+            'submitted_requests',
+            'created_by_user',
+            'updated_by_user',
+           //'tagged_subjects',
+         ])->where('status',1)->get();
+        $clients = Client::with([
+            'users',
+            'created_by_user',
+            'updated_by_user',
+         ])->where('status',1)->get();
+         
+        return view('other_users.pending_services',[
+            'submitted_requests' => $submitted_requests,
+            'ace_requests' => $ace_requests,
+            'clients' => $clients,
+        ]);
     }
 
     public function request_service(){
@@ -77,7 +107,33 @@ class HomeController extends Controller
     }
 
     public function ongoing_services(){
-        return view('client.ongoing_services');
+        $submitted_requests = SubmittedRequest::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user',
+            'received_by' ,
+            'approved_by',
+            'client',
+            'forward_to',
+         ])->where('status',1)->where('created_by',Auth::user()->id)->get();
+
+        $ace_requests = AceRequest::with([
+            'submitted_requests',
+            'created_by_user',
+            'updated_by_user',
+           //'tagged_subjects',
+         ])->where('status',1)->where('created_by',Auth::user()->id)->get();
+        $clients = Client::with([
+            'users',
+            'created_by_user',
+            'updated_by_user',
+         ])->where('status',1)->where('created_by',Auth::user()->id)->get();
+         
+        return view('client.ongoing_services',[
+            'submitted_requests' => $submitted_requests,
+            'ace_requests' => $ace_requests,
+            'clients' => $clients,
+        ]);
     }
 
     public function user_crud(){

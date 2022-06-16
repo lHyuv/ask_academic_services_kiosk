@@ -179,6 +179,9 @@
 <script>
   sessionStorage.setItem('token', '{{ session("token") }}');
   sessionStorage.setItem('user_id', '{{ session("user_id") }}');
+@if(Auth::user()->client)
+  sessionStorage.setItem('client_id', '{{ Auth::user()->client->pluck("id")[0] }}');
+@endif
 </script>
 
 @endsection

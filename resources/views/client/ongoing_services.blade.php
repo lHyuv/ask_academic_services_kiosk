@@ -85,26 +85,25 @@
                             </tr>
                         </thead>
                         <tbody>
+
+                            @foreach($submitted_requests as $req)
                             <tr>
-                                <td>Overload</td>
+                                <td>{{ $req->requests->request_type}}</td>
                                 <td>
-                                <span class="badge badge-warning">Pending</span>
+                                @if($req->request_status == 'Pending')
+                                <span class="badge badge-info">Pending</span>
+                                @elseif($req->request_status == 'Approved')
+                                <span class="badge badge-success">Pending</span>
+                                @else
+                                <span class="badge badge-danger">Rejected</span>
+                                @endif
                                 </td>
-                                <td>{{ now()->diffForHumans() }}</td>
+                                <td>{{ $req->created_at->diffForHumans() }}</td>
                                 <td>
-                                    <button class = "btn btn-info" onclick = "manageCard('ongoing_services','show');" >View Request</button>
+                                    <button class = "btn btn-info" onclick = "notification('info','','Not yet done');//manageCard('ongoing_services','show');" >View Request</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>Overload</td>
-                                <td>
-                                <span class="badge badge-danger">Overdue</span>
-                                </td>
-                                <td>{{ now()->diffForHumans() }}</td>
-                                <td>
-                                    <button class = "btn btn-info"  onclick = "manageCard('ongoing_services','show');">View Request</button>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

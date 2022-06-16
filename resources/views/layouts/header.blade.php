@@ -149,7 +149,7 @@
     
         </nav>
  @endif
-@extends('layouts.sidebar')
+ @extends('layouts.sidebar')
 
   
         <main class="py-4">
