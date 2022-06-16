@@ -252,7 +252,9 @@
                         <div class = "col-md-2">
                         <div class="form-group">
                       
-                        <input type="time" name = "" id = "" class = "form-control" placeholder = ""/>
+
+                        <input type="time" style = 'margin-bottom:4px;' name = "time_from" id = "time_from" class = "form-control" placeholder = ""/>
+                        <input type="time" style = 'margin-bottom:4px;' name = "time_to" id = "time_to" class = "form-control" placeholder = ""/>
                         </div>
                         </div>
                         <div class = "col-md-2">

@@ -84,7 +84,9 @@ const rowManage = (mode) =>{
             <div class = "col-md-2">
             <div class="form-group">
           
-            <input type="time" name = "time${rowNo}" id = "time${rowNo}" class = "form-control" placeholder = ""/>
+           
+            <input type="time" style = 'margin-bottom:4px;' name = "time_from${rowNo}" id = "time_from${rowNo}" class = "form-control" placeholder = ""/>
+            <input type="time" style = 'margin-bottom:4px;' name = "time_to${rowNo}" id = "time_to${rowNo}" class = "form-control" placeholder = ""/>
             </div>
             </div>
             <div class = "col-md-2">
@@ -1007,7 +1009,8 @@ const submitAceAdd = () =>{
                                                         'day' : $('#day').val(),
                                                         'subject_id' : $('#subject_id').val(),
                                                         'room_id' : $('#room_id').val(),
-                                                        'time' : $('#time').val(),
+                                                        'time_from' : $('#time_from').val(),
+                                                        'time_to' : $('#time_to').val(),
                                                         'no_of_units' : $('#units').val(),
                                                         'created_by' : sessionStorage.getItem('user_id'),
                                                     };
@@ -1020,7 +1023,8 @@ const submitAceAdd = () =>{
                                                         'day' : $(`#day${ctr}`).val(),
                                                         'subject_id' : $(`#subject_id${ctr}`).val(),
                                                         'room_id' : $(`#room_id${ctr}`).val(),
-                                                        'time' : $(`#time${ctr}`).val(),
+                                                        'time_from' : $(`#time_from${ctr}`).val(),
+                                                        'time_to' : $(`#time_to${ctr}`).val(),
                                                         'no_of_units' : $(`#units${ctr}`).val(),
                                                         'created_by' : sessionStorage.getItem('user_id'),
                                                     };
@@ -1041,7 +1045,7 @@ const submitAceAdd = () =>{
                                                     } , 
                                                
                                                     error:({responseJSON})=>{
-                                                        // console.log(responseJSON.message);
+                                                        console.log(responseJSON.message);
                                                         notification('error','','Something went wrong');
                                                      } 
                                                     })

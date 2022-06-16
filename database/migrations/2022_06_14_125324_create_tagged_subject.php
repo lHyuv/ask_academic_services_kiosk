@@ -24,7 +24,10 @@ class CreateTaggedSubject extends Migration
             //subject fk
             $table->uuid('subject_id');//foreignUuid('subject_id')->constrained('subjects')->onDelete('cascade')->onUpdate('cascade');   
             $table->string('day');
-            $table->time('time');
+            //V2
+            $table->time('time_from');
+            $table->time('time_to');
+            //V2:end
             $table->integer('no_of_units');
             //room fk
             $table->uuid('room_id');//foreignUuid('room_id')->constrained('rooms')->onDelete('cascade')->onUpdate('cascade');   
