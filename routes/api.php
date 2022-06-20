@@ -50,6 +50,16 @@ Route::post('/roles/delete/{id}', [RoleController::class,'delete']);
 
 Route::get('/roles/{id}', [RoleController::class,'show']);
 
+//User Roles
+use App\Http\Controllers\UserRoleController;
+
+Route::get('/user_roles', [UserRoleController::class,'index']);
+
+Route::get('/user_roles/active', [UserRoleController::class,'show_active']);
+
+Route::post('/user_roles', [UserRoleController::class,'create']);
+
+
 //Auth
 use App\Http\Controllers\AuthController;
 
@@ -160,111 +170,3 @@ Route::middleware('auth:sanctum')->post('/submitted_requests/sign/{id}', [Submit
 Route::middleware('auth:sanctum')->post('/submitted_requests/student_sign/{id}', [SubmittedRequestController::class, 'student_sign']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/complete/{id}', [SubmittedRequestController::class, 'complete']);
-
-use App\Http\Controllers\SubmittedRequirementController;
-
-Route::middleware('auth:sanctum')->get('/submitted_requirements', [SubmittedRequirementController::class, 'index']);
-
-Route::middleware('auth:sanctum')->get('/submitted_requirements/show_active', [SubmittedRequirementController::class, 'show_active']);
-
-Route::middleware('auth:sanctum')->get('/submitted_requirements/user/{id}', [SubmittedRequirementController::class, 'find_by_user']);
-
-Route::middleware('auth:sanctum')->get('/submitted_requirements/request/{id}', [SubmittedRequirementController::class, 'find_by_request']);
-
-Route::middleware('auth:sanctum')->get('/submitted_requirements/{id}', [SubmittedRequirementController::class, 'show']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requirements',[SubmittedRequirementController::class, 'create']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requirements/update/{id}', [SubmittedRequirementController::class, 'update']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requirements/delete/{id}', [SubmittedRequirementController::class, 'delete']);
-
-//statuses
-
-Route::middleware('auth:sanctum')->post('/submitted_requirements/approve_requirement/{id}', [SubmittedRequirementController::class, 'approve_requirement']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requirements/reject_requirement/{id}', [SubmittedRequirementController::class, 'reject_requirement']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requirements/sign/{id}', [SubmittedRequirementController::class, 'sign']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requirements/change/{id}', [SubmittedRequirementController::class, 'change_requirement']);
-
-use App\Http\Controllers\ReceiptController;
-
-Route::middleware('auth:sanctum')->get('/receipts', [ReceiptController::class, 'index']);
-
-Route::middleware('auth:sanctum')->get('/receipts/show_active', [ReceiptController::class, 'show_active']);
-
-Route::middleware('auth:sanctum')->get('/receipts/request/{id}', [ReceiptController::class, 'find_by_request']);
-
-Route::middleware('auth:sanctum')->get('/receipts/{id}', [ReceiptController::class, 'show']);
-
-Route::middleware('auth:sanctum')->post('/receipts',[ReceiptController::class, 'create']);
-
-Route::middleware('auth:sanctum')->post('/receipts/update/{id}', [ReceiptController::class, 'update']);
-
-Route::middleware('auth:sanctum')->post('/receipts/delete/{id}', [ReceiptController::class, 'delete']);
-
-//statuses
-
-Route::middleware('auth:sanctum')->post('/receipts/certify/{id}', [ReceiptController::class, 'certify']);
-
-Route::middleware('auth:sanctum')->post('/receipts/sign/{id}', [ReceiptController::class, 'sign']);
-
-Route::middleware('auth:sanctum')->post('/receipts/paid/{id}', [ReceiptController::class, 'set_paid']);
-
-use App\Http\Controllers\AceRequestController;
-
-Route::middleware('auth:sanctum')->get('/ace_requests', [AceRequestController::class, 'index']);
-
-Route::middleware('auth:sanctum')->get('/ace_requests/show_active', [AceRequestController::class, 'show_active']);
-
-Route::middleware('auth:sanctum')->get('/ace_requests/request/{id}', [AceRequestController::class, 'find_by_request']);
-
-Route::middleware('auth:sanctum')->get('/ace_requests/user/{id}', [AceRequestController::class, 'find_by_user']);
-
-Route::middleware('auth:sanctum')->get('/ace_requests/{id}', [AceRequestController::class, 'show']);
-
-Route::middleware('auth:sanctum')->post('/ace_requests',[AceRequestController::class, 'create']);
-
-Route::middleware('auth:sanctum')->post('/ace_requests/update/{id}', [AceRequestController::class, 'update']);
-
-Route::middleware('auth:sanctum')->post('/ace_requests/delete/{id}', [AceRequestController::class, 'delete']);
-
-//acknowledgments
-use App\Http\Controllers\AcknowledgmentController;
-
-Route::middleware('auth:sanctum')->get('/acknowledgments', [AcknowledgmentController::class, 'index']);
-
-Route::middleware('auth:sanctum')->get('/acknowledgments/show_active', [AcknowledgmentController::class, 'show_active']);
-
-Route::middleware('auth:sanctum')->get('/acknowledgments/user/{id}', [AcknowledgmentController::class, 'find_by_user']);
-
-Route::middleware('auth:sanctum')->get('/acknowledgments/receipt/{id}', [AcknowledgmentController::class, 'find_by_receipts']);
-
-Route::middleware('auth:sanctum')->get('/acknowledgments/{id}', [AcknowledgmentController::class, 'show']);
-
-Route::middleware('auth:sanctum')->post('/acknowledgments',[AcknowledgmentController::class, 'create']);
-
-Route::middleware('auth:sanctum')->post('/acknowledgments/update/{id}', [AcknowledgmentController::class, 'update']);
-
-Route::middleware('auth:sanctum')->post('/acknowledgments/delete/{id}', [AcknowledgmentController::class, 'delete']);
-
-
-//tagged_subjects
-use App\Http\Controllers\TaggedSubjectController;
-
-Route::middleware('auth:sanctum')->get('/tagged_subjects', [TaggedSubjectController::class, 'index']);
-
-Route::middleware('auth:sanctum')->get('/tagged_subjects/show_active', [TaggedSubjectController::class, 'show_active']);
-
-Route::middleware('auth:sanctum')->get('/tagged_subjects/ace_request/{id}', [TaggedSubjectController::class, 'find_by_ace_request']);
-
-Route::middleware('auth:sanctum')->get('/tagged_subjects/{id}', [TaggedSubjectController::class, 'show']);
-
-Route::middleware('auth:sanctum')->post('/tagged_subjects',[TaggedSubjectController::class, 'create']);
-
-Route::middleware('auth:sanctum')->post('/tagged_subjects/update/{id}', [TaggedSubjectController::class, 'update']);
-
-Route::middleware('auth:sanctum')->post('/tagged_subjects/delete/{id}', [TaggedSubjectController::class, 'delete']);
-

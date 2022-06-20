@@ -11,7 +11,7 @@
      
             <h1>Select a service</h1>
             <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item"><a href="/home">Home</a></div>
+              <div class="breadcrumb-item"><a href="/guest">Home</a></div>
               <div class="breadcrumb-item">Select Service</div>
             </div>
         
@@ -49,7 +49,7 @@
         </div>
          <!---->
          <div class="col-md-4">
-         <a href = "/ace_add_form">
+         <a href = "/">
          <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
@@ -75,7 +75,7 @@
         </div>
         <!---->
         <div class="col-md-4">
-        <a href = "/ace_change_form">
+        <a href = "/">
         <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
@@ -103,7 +103,7 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-        <a href = "/completion_form">
+        <a href = "/">
         <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
@@ -129,7 +129,7 @@
         </div>
          <!---->
          <div class="col-md-4">
-         <a href = "/request_service">
+         <a href = "/">
          <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
@@ -155,7 +155,7 @@
         </div>
         <!---->
         <div class="col-md-4">
-        <a href = "/request_service">
+        <a href = "/">
         <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
@@ -183,7 +183,7 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-        <a href = "/request_service">
+        <a href = "/">
         <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
@@ -209,7 +209,7 @@
         </div>
          <!---->
          <div class="col-md-4">
-         <a href = "/request_service">
+         <a href = "/">
          <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
@@ -235,7 +235,7 @@
         </div>
         <!---->
         <div class="col-md-4">
-        <a href = "/request_service">
+        <a href = "/">
         <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
@@ -263,7 +263,7 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-        <a href = "/request_service">
+        <a href = "/">
         <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">

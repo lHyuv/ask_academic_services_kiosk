@@ -61,16 +61,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
-@if(Auth::check())
+
     <div id="app">
     <div class="main-wrapper main-wrapper-1">
     <div class="navbar-bg"></div>
         <nav class="navbar navbar-expand-lg main-navbar">
-        @if(!Auth::check())
+                <!--
                 <a class="navbar-brand" href="/">
                   Academic Services
                 </a>
-         @endif
+                -->
+ 
 
              
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -81,18 +82,26 @@
                     
                     <!-- Left Side Of Navbar -->
                     <form class="form-inline mr-auto">
-                    @if(Auth::check())
+                 
                     <ul class="navbar-nav mr-3">
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
 
                    </ul>
                     </form>
 
-                   @endif
+                  
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav navbar-right">
+
                         <!-- Authentication Links -->
                         @guest
+                        <li class="dropdown dropdown-list-toggle">
+                            <a href="javascript:void(0);" 
+                            onclick = "sessionStorage.setItem('keyboard_status', 'show');checkKBStatus();"
+                            role = "button" id = "keyboard_show_btn" class="nav-link notification-toggle nav-link-lg beep">
+                            <i class="far fa-keyboard"></i></a>
+
+                        </li>
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -105,13 +114,8 @@
                                 </li>
                             @endif
                         @else
-                        <li class="dropdown dropdown-list-toggle">
-                            <a href="javascript:void(0);" 
-                            onclick = "showKeyboard('show');"
-                            role = "button" id = "keyboard_show_btn" class="nav-link notification-toggle nav-link-lg beep">
-                            <i class="far fa-keyboard"></i></a>
+                        @if(Auth::check())
 
-                        </li>
                             <li class="nav-item dropdown">
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -143,12 +147,13 @@
 
                                 </div>
                             </li>
+                        @endif
                         @endguest
                     </ul>
                 </div>
     
         </nav>
- @endif
+
  @extends('layouts.sidebar')
 
   

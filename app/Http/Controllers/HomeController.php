@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\UserRole;
 use App\Models\Request as Requests;
 use App\Models\Client;
 use App\Models\Step;
@@ -14,6 +15,7 @@ use App\Models\SubmittedRequest;
 use App\Models\AceRequest;
 use App\Models\TaggedModel;
 use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
     /**
@@ -33,7 +35,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('admin.home');
+       
     }
 
     public function test(){
@@ -41,101 +44,17 @@ class HomeController extends Controller
     }
 
     public function request_service_home(){
-        return view('client.request_service_home');
+        return view('client.home');
     }
 
     public function backlog(){
-        return view('backlog');
-    }
-
-    public function pending_services(){
-
-        $submitted_requests = SubmittedRequest::with([
-            'requests',
-            'created_by_user',
-            'updated_by_user',
-            'received_by' ,
-            'approved_by',
-            'client',
-            'forward_to',
-         ])->join('users','users.id','=','submitted_requests.created_by')->join('clients','clients.created_by','=','users.id')->get();
-
-        $ace_requests = AceRequest::with([
-            'submitted_requests',
-            'created_by_user',
-            'updated_by_user',
-           //'tagged_subjects',
-         ])->where('status',1)->get();
-        $clients = Client::with([
-            'users',
-            'created_by_user',
-            'updated_by_user',
-         ])->where('status',1)->get();
-         
-        return view('other_users.pending_services',[
-            'submitted_requests' => $submitted_requests,
-            'ace_requests' => $ace_requests,
-            'clients' => $clients,
-        ]);
-    }
-
-    public function request_service(){
-        return view('client.request_service_form');
-    }
-
-    public function overload_form(){
-        return view('service_forms.overload_form');
-    }
-
-    public function ace_add_form(){
-        return view('service_forms.ace_add_form');
-    }
-    public function ace_change_form(){
-        return view('service_forms.ace_change_form');
-    }
-
-    public function completion_form(){
-        return view('service_forms.completion_form');
+        return view('admin.backlog');
     }
 
     public function view_profile(){
-        $my_data = Client::where('user_id', Auth::user()->id)->first();
-       // dd($my_data);
-        return view('profile',[
-            'my_data' => $my_data
-        ]);
+        return view('profile');
     }
-
-    public function ongoing_services(){
-        $submitted_requests = SubmittedRequest::with([
-            'requests',
-            'created_by_user',
-            'updated_by_user',
-            'received_by' ,
-            'approved_by',
-            'client',
-            'forward_to',
-         ])->where('status',1)->where('created_by',Auth::user()->id)->get();
-
-        $ace_requests = AceRequest::with([
-            'submitted_requests',
-            'created_by_user',
-            'updated_by_user',
-           //'tagged_subjects',
-         ])->where('status',1)->where('created_by',Auth::user()->id)->get();
-        $clients = Client::with([
-            'users',
-            'created_by_user',
-            'updated_by_user',
-         ])->where('status',1)->where('created_by',Auth::user()->id)->get();
-         
-        return view('client.ongoing_services',[
-            'submitted_requests' => $submitted_requests,
-            'ace_requests' => $ace_requests,
-            'clients' => $clients,
-        ]);
-    }
-
+ 
     public function user_crud(){
         $users = User::where('status',1)->get();
         $roles = Role::where('status',1)->get();
@@ -149,6 +68,17 @@ class HomeController extends Controller
         $roles = Role::where('status',1)->get();
         return view('admin.role', [
             'roles' => $roles
+        ]);
+    }
+
+    public function user_role_crud(){
+        $userroles = UserRole::where('status',1)->get();
+        $users = User::where('status',1)->get();
+        $roles = Role::where('status',1)->get();
+        return view('admin.user_role', [
+            'userroles' => $userroles,
+            'users' => $users,
+            'roles' => $roles,
         ]);
     }
 

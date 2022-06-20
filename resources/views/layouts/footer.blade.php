@@ -82,7 +82,7 @@
         <div class="key command">&nbsp;</div>
         <div class="key">&nbsp;</div>
         <div class="key">&nbsp;</div>
-        <div class="key close" onclick = "showKeyboard('hide');"><br>Close</div>
+        <div class="key close" onclick = "sessionStorage.setItem('keyboard_status', 'close');checkKBStatus();"><br>Close</div>
     </div>
                 </div>
             </div>
@@ -109,13 +109,10 @@
       </div>
       <div class="modal-footer bg-light">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        @if(Auth::check())
-        @if(Auth::user()->roles->pluck('name')[0] == 'Student' || Auth::user()->roles->pluck('name')[0] == 'Client' || Auth::user()->roles->pluck('name')[0] == 'Student/Client')
-        <button type="button" id = 'modal_confirm_btn' class="btn btn-primary"  data-bs-dismiss="modal"  onclick = "window.location.href='/ongoing_services'">Proceed</button>
-        @else
-        <button type="button" id = 'modal_confirm_btn' class="btn btn-primary"  data-bs-dismiss="modal"  onclick = "">Proceed</button>
-        @endif
-        @endif
+    
+        <button type="button" id = 'modal_confirm_btn' class="btn btn-primary"  data-bs-dismiss="modal">Proceed</button>
+       
+  
       </div>
     </div>
   </div>

@@ -39,78 +39,6 @@ const drawTable = (table_id) =>{
 
 };
 
-//-----------------------------------------------------//
-let rowNo = 0;
-const rowManage = (mode) =>{
-    if(mode == 'add'){
-        rowNo++;
-        $('.add_subject_row').append(
-            `
-            <div class = "row" id = "subject_row${rowNo}">
-            <div class = "col-md-2">
-            <div class="form-group">
-                       
-            <input type="text" name = "subject_id${rowNo}" id = "subject_id${rowNo}" class = "form-control" placeholder = ""/>
-            <!--
-             <select id = "subject_id${rowNo}" name = "subject_id${rowNo}" class = "form-control">
-              <option value = ""></option>
-            -->
-            </div>
-            </div>
-            <div class = "col-md-2">
-            <div class="form-group">
-         
-            <input type="text" name = "subject_desc${rowNo}" id = "subject_desc${rowNo}" class = "form-control" placeholder = ""/>
-            </div>
-            </div>
-            <div class = "col-md-1">
-            <div class="form-group">
-            
-            <input type="number" name = "units${rowNo}" id = "units${rowNo}" class = "form-control" placeholder = "" />
-            </div>
-            </div>
-            <div class = "col-md-1">
-            <div class="form-group">
-           
-            <input type="number" name = "hours${rowNo}" id = "hours${rowNo}" class = "form-control" placeholder = ""/>
-            </div>
-            </div>
-            <div class = "col-md-2">
-            <div class="form-group">
-        
-            <input type="text" name = "day${rowNo}" id = "day${rowNo}" class = "form-control" placeholder = ""/>
-            </div>
-            </div>
-            <div class = "col-md-2">
-            <div class="form-group">
-          
-           
-            <input type="time" style = 'margin-bottom:4px;' name = "time_from${rowNo}" id = "time_from${rowNo}" class = "form-control" placeholder = ""/>
-            <input type="time" style = 'margin-bottom:4px;' name = "time_to${rowNo}" id = "time_to${rowNo}" class = "form-control" placeholder = ""/>
-            </div>
-            </div>
-            <div class = "col-md-2">
-            <div class="form-group">
-      
-            <input type="text" name = "room_id${rowNo}" id = "room_id${rowNo}" class = "form-control" placeholder = ""/>
-             <!--
-             <select id = "room_id${rowNo}" name = "room_id${rowNo}" class = "form-control">
-              <option value = ""></option>
-            -->
-            </div>
-            </div>
-            </div>
-            `
-        );
-      
-    }else{
-        while(rowNo > 0){
-            $('.add_subject_row').find(`#subject_row${rowNo}`).remove()
-            rowNo--;
-        }
-    }
-
-};
 
 const manageCard = (id, mode) =>{
     
@@ -596,39 +524,6 @@ const editProfile = (id) =>{
     })
 };
 
-const chooseCorrection = (option) =>{
-    let ids = [
-        'no_grade',
-        'completed',
-        'name_correct',
-        'others'
-    ];
-    let id = ``;
-    switch(option){
-        case '1':
-            id = 'no_grade';
-        break;
-        case '2':
-            id = 'completed';
-        break; 
-        case '3':
-            id = 'name_correct';
-        break;
-        case '4':
-            id = 'others';
-        break;
-        default:
-           //do nothing
-    }
-
-    ids.forEach((val)=>{
-        $(`#${val}`).css('display','none');
-    });
-    $(`#${id}`).css('display','block');
- 
-};
-
-
 
 
 const createStep = () =>{
@@ -860,227 +755,60 @@ const deleteRequirement = (data) =>{
 };
 
 
+//
 
 
+const createUserRole = () =>{
 
+    $('#create_userrole').on('submit',(e)=>{
 
-const submitAceAdd = () =>{
-    
-    let total_units_input = 0;
-    $(this).on('change',()=>{
-
-
-        let ctr = 0;
-        total_units_input = 0;
-        while(ctr <= rowNo){
-            if(ctr == 0){
-                total_units_input += parseInt($('#units').val());
-            }else{
-                total_units_input += parseInt($(`#units${ctr}`).val());
-            }
-            ctr++;
-        }
-        $('#units_added').val(total_units_input);
-        if($('#ace_total_units_on_regi').val() == null || $('#ace_total_units_on_regi').val() == '' ){
-            $('#total_units').val(parseInt(total_units_input));
-        }else{
-            $('#total_units').val(parseInt(total_units_input) +  parseInt($('#ace_total_units_on_regi').val()) );
-        }
+        e.preventDefault();
         
-        ctr = 0;
-    })
+        $.ajax({
+            url: apiURL + 'user_roles',
+            async: true,
+            method: 'POST',
+            data: {
+                'user_id' : $('#create_user').val(),
+                'role_id': $('#create_role').val(),
+                'created_by' : sessionStorage.getItem('user_id'),
 
-    $('#ace_total_units_on_regi').on('change',()=>{
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                
        
-   
-        $('#total_units').val(parseInt(total_units_input) +  parseInt($('#ace_total_units_on_regi').val()) );
-    })
-
-    //Submit Form
-
-  
-        $('#submit_btn').on('click',(e)=>{
-          
-            e.preventDefault();
-
-            let json_data = "";
-            let url = "";
-            if($('#first_name').attr('disabled') == 'disabled'){
-                url = "clients/update/" + sessionStorage.getItem('client_id');
-                json_data = {
-                    'first_name' : $('#first_name').val(),
-                    'middle_name' : $('#middle_name').val(),
-                    'last_name' : $('#last_name').val(),
-                    'extension_name' : $('#extension_name').val(),
-                    'student_number' : $('#student_number').val(),
-                    'updated_by' : sessionStorage.getItem('user_id'),
-                };
-            }else{
-                url = "clients";
-                json_data = {
-                    'first_name' : $('#first_name').val(),
-                    'middle_name' : $('#middle_name').val(),
-                    'last_name' : $('#last_name').val(),
-                    'extension_name' : $('#extension_name').val(),
-                    'student_number' : $('#student_number').val(),
-                    'user_id' : sessionStorage.getItem('user_id'),
-                    'created_by' : sessionStorage.getItem('user_id'),
-                };
-            }
-            $.ajax({
-                url: apiURL + 'requests',
-                async: true,
-                method: "GET",
-                headers: {
-                    'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
-                },
-                success: (data0)=>{
-
-                    let arr = [];
-                    let type = 'Adding of Subject'
-                    data0.data.map((val)=>{
-                        arr.push(val.id,val.request_type)
-                    })
-                    let request_id = '';
-                    if(arr.includes(type)){
-           
-                        request_id = arr[arr.indexOf(type) - 1];
-                     }else{
-                        request_id = null;
-                     }
-        
-                $.ajax({
-                    url: apiURL + url,
-                    async: true,
-                    method: "POST",
-                    data: json_data,
-                    headers: {
-                        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
-                    },
-                    success: (data)=>{
-                        console.log(data)
-                    //    notification('success','Client','Successfully created');
-                        //
-                        $.ajax({
-                            url: apiURL + 'submitted_requests',
-                            async: true,
-                            method: "POST",
-                            data: {
-                                request_id: request_id,
-                                request_details: $('#request_details').val(),
-                                request_deadline:   $('#request_deadline').val(),  
-                                school_year: new Date().getFullYear(),
-                                reason: $('#reason').val(),
-                                created_by : sessionStorage.getItem('user_id'),
-                            },
-                            headers: {
-                                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
-                            },
-                            success: (data2)=>{
-                                console.log(data2)
-                                //notification('success','Submitted Request','Successfully created');
-
-                                    //
-                                    $.ajax({
-                                        url: apiURL + 'ace_requests',
-                                        async: true,
-                                        method: "POST",
-                                        data: {
-                                            ace_total_units_on_regi: $('#ace_total_units_on_regi').val(),
-                                            ace_type:   "Adding of Subject",  
-                                            submitted_request_id: data2.data['id'],//
-                                            created_by : sessionStorage.getItem('user_id'),
-                                        },
-                                        headers: {
-                                            'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
-                                        },
-                                        success: (data3)=>{
-                                            console.log(data3)
-                                          //  notification('success','Submitted Request','Successfully created');
-                                            //tagged subject
-                                            let ctr = 0;
-                                            while(ctr <= rowNo){
-                                                let subj_data = '';
-                                                if(ctr == 0){
-                                                    subj_data = {
-            
-
-                                                        'ace_request_id': data3.data['id'],
-                                                        'day' : $('#day').val(),
-                                                        'subject_id' : $('#subject_id').val(),
-                                                        'room_id' : $('#room_id').val(),
-                                                        'time_from' : $('#time_from').val(),
-                                                        'time_to' : $('#time_to').val(),
-                                                        'no_of_units' : $('#units').val(),
-                                                        'created_by' : sessionStorage.getItem('user_id'),
-                                                    };
-
-                                                }else{
-                                                    subj_data = {
-            
-
-                                                        'ace_request_id': data3.data['id'],
-                                                        'day' : $(`#day${ctr}`).val(),
-                                                        'subject_id' : $(`#subject_id${ctr}`).val(),
-                                                        'room_id' : $(`#room_id${ctr}`).val(),
-                                                        'time_from' : $(`#time_from${ctr}`).val(),
-                                                        'time_to' : $(`#time_to${ctr}`).val(),
-                                                        'no_of_units' : $(`#units${ctr}`).val(),
-                                                        'created_by' : sessionStorage.getItem('user_id'),
-                                                    };
-                                                }
-                                                $.ajax({
-                                                    url: apiURL + 'tagged_subjects',
-                                                    async: true,
-                                                    method: "POST",
-                                                    data: subj_data,
-                                                    headers: {
-                                                        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
-                                                    },
-                                                    success: (data3)=>{
-                                                    //notification('success','Tagged Subject' + ctr,'Successfully created');
-                                                        notification('success','','Successfully created');
-                                                        window.location.href='/ongoing_services';
-                                                        
-                                                    } , 
-                                               
-                                                    error:({responseJSON})=>{
-                                                        console.log(responseJSON.message);
-                                                        notification('error','','Something went wrong');
-                                                     } 
-                                                    })
-                                                    ctr++;
-                                            }
-                                            //
-
-                                        },
-                                        error:({responseJSON})=>{
-                                           // console.log(responseJSON.message);
-                                           notification('error','','Something went wrong');
-                                        }
-                                    });
-                                    //
-                            },
-                            error:({responseJSON})=>{
-                               // console.log(responseJSON.message);
-                               notification('error','','Something went wrong');
-                            }
-                        });
-                        //
-                    },
-                    error:({responseJSON})=>{
-                       // console.log(responseJSON.message);
-                       notification('error','','Something went wrong');
-                    }
-                });
-
+             
+                notification('success','','Successfully created');
+               // location.reload();
+               manageCard('create_userrole_crud','hide'); 
+               drawTable();
+            },
+            error:({responseJSON})=>{
+               // console.log(responseJSON.message);
+               notification('error','','Something went wrong');
             }
         });
+    })
 
-        })
- 
+
 };
+const checkKBStatus = () =>{
 
-submitAceAdd();
 
+if(typeof(sessionStorage.getItem('keyboard_status')) != 'undefined' || sessionStorage.getItem('keyboard_status') != null){
+if(sessionStorage.getItem('keyboard_status') == 'show'){
+    showKeyboard('show');
+}else{
+    
+    showKeyboard('hide');
+}
 
+if((window.location.href).includes('/login') || (window.location.href).includes('/register') ){
+    sessionStorage.setItem('keyboard_status','hide');
+}
+}
+};
+checkKBStatus();
