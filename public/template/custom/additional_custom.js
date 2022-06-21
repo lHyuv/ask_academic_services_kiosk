@@ -825,12 +825,16 @@ const generateService = (service_id, service_name) =>{
         async: true,
         method: 'GET',
         success: (data)=>{
-            console.log(data.data.length)
+          
             let content = ``;
             if(data.data.length != 0){
       
             content = `
-            <hr>
+            <div class="card card-outline card-primary mt-5 col-md-4">
+            <div class="card-header"><h4>Steps</h4></div>
+
+            <div class="card-body">
+          
             <div class = "row">
  
    
@@ -863,12 +867,16 @@ const generateService = (service_id, service_name) =>{
             content += `
             </div>
             </div>
-
+            </div>
+            </div>
             </div>
             `;
             }else{
                 content = `
-                <hr>
+                <div class="card card-outline card-primary mt-5 col-md-4">
+                <div class="card-header"><h4>Steps</h4></div>
+    
+                <div class="card-body">
                 <div class = "row">
                 <div class="col-md-12">
                 <div class="activities">
@@ -889,6 +897,8 @@ const generateService = (service_id, service_name) =>{
               </div>
   
               </div>
+              </div>
+              </div>
                 `
             }
             $('#request_title').append(content);
@@ -896,3 +906,89 @@ const generateService = (service_id, service_name) =>{
     });
 };
 
+const generateRequirement = (service_id) =>{
+    $.ajax({
+        url: apiURL + 'requirements/request/'+service_id,
+        async: true,
+        method: 'GET',
+        success: (data)=>{
+        
+            let content = ``;
+            if(data.data.length != 0){
+      
+            content = `
+            <div class="card card-outline card-primary mt-5  col-md-4">
+            <div class="card-header"><h4>Requirements</h4></div>
+
+            <div class="card-body">
+            <div class = "row">
+ 
+   
+            <div class="col-md-12">
+              <div class="activities">
+            `;
+            data.data.map((val)=>{
+                let details = val.details ? val.details: 'N/A';
+                let name = val.step_name ? val.step_name : 'N/A';
+                let icon = val.step_icon ? val.step_icon : 'fas fa-file';
+                content +=
+                `
+
+                    <div class="activity">
+                      <div class="activity-icon bg-primary text-white shadow-primary">
+                        <i class="${icon}"></i>
+                      </div>
+                      <div class="activity-detail">
+                        <div class="mb-2">
+                          <h5 class="text-job text-primary"> ${name}</h5>
+  
+                        </div>
+                        <p>${ details } </p>
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                `
+            }).join("");
+            content += `
+            </div>
+            </div>
+
+            </div>
+            `;
+            }else{
+                content = `
+                <div class="card card-outline  mt-5  col-md-4">
+                <div class="card-header"><h4>Requirements</h4></div>
+    
+                <div class="card-body">
+                <div class = "row">
+                <div class="col-md-12">
+                <div class="activities">
+                <div class="activity">
+                <div class="activity-icon bg-primary text-white shadow-primary">
+                  <i class="fas fa-file"></i>
+                </div>
+                <div class="activity-detail">
+                  <div class="mb-2">
+                    <h5 class="text-job text-primary">No content to be shown</h5>
+
+                  </div>
+                  <p>...</p>
+                </div>
+              </div>
+              </div>
+              </div>
+              </div>
+  
+              </div>
+              </div>
+  
+              </div>
+                `
+            }
+            $('#request_title').append(content);
+        }
+    });
+};

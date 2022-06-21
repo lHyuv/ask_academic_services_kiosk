@@ -23,7 +23,7 @@
     <div class="row">
     @foreach($requests as $request)
     <div class="col-md-4">
-            <a href = "javascript:void(0);" onclick = "generateService('{{ $request->id }}','{{ $request->request_type }}');">
+            <a href = "javascript:void(0);" onclick = "generateService('{{ $request->id }}','{{ $request->request_type }}');generateRequirement('{{ $request->id }}');">
 
             <article class="article">
                   <div class="article-header">

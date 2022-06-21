@@ -96,4 +96,17 @@ class RequirementController extends Controller
         ];
 
     }
+
+    public function find_by_request($request){
+        $data = Requirement::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user'
+         ])->where('request_id', $request)->get();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
+    }
 }

@@ -90,6 +90,8 @@ Route::get('/requirements', [RequirementController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/requirements/show_active', [RequirementController::class, 'show_active']);
 
+Route::get('/requirements/request/{request}', [RequirementController::class, 'find_by_request']);
+
 Route::middleware('auth:sanctum')->get('/requirements/{id}', [RequirementController::class, 'show']);
 
 Route::middleware('auth:sanctum')->post('/requirements',[RequirementController::class, 'create']);
@@ -97,6 +99,8 @@ Route::middleware('auth:sanctum')->post('/requirements',[RequirementController::
 Route::middleware('auth:sanctum')->post('/requirements/update/{id}', [RequirementController::class, 'update']);
 
 Route::middleware('auth:sanctum')->post('/requirements/delete/{id}', [RequirementController::class, 'delete']);
+
+
 
 //Steps
 use App\Http\Controllers\StepController;
