@@ -19,8 +19,8 @@ class CreateStep extends Migration
             $table->primary('id');
             $table->integer('step_number');
             $table->text('step_name');
+            $table->string('step_icon')->nullable();
             $table->foreignUuid('request_id')->constrained('requests')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('completed_status')->default('Pending');
             //
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   
             $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');  

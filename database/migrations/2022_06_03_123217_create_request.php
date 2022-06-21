@@ -18,6 +18,9 @@ class CreateRequest extends Migration
             $table->uuid('id');
             $table->primary('id');
             $table->string('request_type')->unique();
+            //V2
+            $table->text('details')->nullable();
+            //
             //
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   
             $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');  

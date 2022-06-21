@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Request as Requests;
 class GuestController extends Controller
 {
     //
     public function index()
     {
-        return view('client.home');
+        $requests = Requests::where('status',1)->get();
+        return view('client.home', [
+            'requests' => $requests
+        ]);
        
     }
 }

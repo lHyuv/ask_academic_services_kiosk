@@ -812,3 +812,87 @@ if((window.location.href).includes('/login') || (window.location.href).includes(
 }
 };
 checkKBStatus();
+
+const generateService = (service_id, service_name) =>{
+    $('#select_menu').css('display','none');
+
+    $('#selected_service').css('display','block');
+
+    $('#request_title').text(service_name);
+    //
+    $.ajax({
+        url: apiURL + 'steps/request/'+service_id,
+        async: true,
+        method: 'GET',
+        success: (data)=>{
+            console.log(data.data.length)
+            let content = ``;
+            if(data.data.length != 0){
+      
+            content = `
+            <hr>
+            <div class = "row">
+ 
+   
+            <div class="col-md-12">
+              <div class="activities">
+            `;
+            data.data.map((val)=>{
+                let details = val.details ? val.details: 'N/A';
+                let name = val.step_name ? val.step_name : 'N/A';
+                let icon = val.step_icon ? val.step_icon : 'fas fa-file';
+                content +=
+                `
+
+                    <div class="activity">
+                      <div class="activity-icon bg-primary text-white shadow-primary">
+                        <i class="${icon}"></i>
+                      </div>
+                      <div class="activity-detail">
+                        <div class="mb-2">
+                          <h5 class="text-job text-primary"> ${name}</h5>
+  
+                        </div>
+                        <p>${ details } </p>
+                      </div>
+                    </div>
+                    </div>
+
+                `
+            }).join("");
+            content += `
+            </div>
+            </div>
+
+            </div>
+            `;
+            }else{
+                content = `
+                <hr>
+                <div class = "row">
+                <div class="col-md-12">
+                <div class="activities">
+                <div class="activity">
+                <div class="activity-icon bg-primary text-white shadow-primary">
+                  <i class="fas fa-file"></i>
+                </div>
+                <div class="activity-detail">
+                  <div class="mb-2">
+                    <h5 class="text-job text-primary">No content to be shown</h5>
+
+                  </div>
+                  <p>...</p>
+                </div>
+              </div>
+              </div>
+              </div>
+              </div>
+  
+              </div>
+                `
+            }
+            $('#request_title').append(content);
+        }
+    });
+};
+

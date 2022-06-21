@@ -21,15 +21,7 @@ class CreateClient extends Migration
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('extension_name')->nullable();
-            $table->string('student_number')->nullable();
-            $table->string('section')->nullable();
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->year('year')->nullable();
-            //program fk
-            $table->uuid('program_id')->nullable();//foreignUuid('program_id')->nullable()->constrained('programs')->onDelete('cascade')->onUpdate('cascade');   
-            //semester fk
-            $table->uuid('semester_id')->nullable();//foreignUuid('semester_id')->nullable()->constrained('semesters')->onDelete('cascade')->onUpdate('cascade');   
-            //
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   
             $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');  
             $table->string('status')->default(true);

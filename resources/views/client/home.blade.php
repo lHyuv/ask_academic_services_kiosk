@@ -19,17 +19,18 @@
       
 </section>
 
-
+    <div id = "select_menu">
     <div class="row">
-        <div class="col-md-4">
-            <a href = "/overload_form">
+    @foreach($requests as $request)
+    <div class="col-md-4">
+            <a href = "javascript:void(0);" onclick = "generateService('{{ $request->id }}','{{ $request->request_type }}');">
 
             <article class="article">
                   <div class="article-header">
                     <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
                     </div>
                     <div class="article-title">
-                      <h2><a href="#">Overload of Subjects</a></h2>
+                      <h2><a href="javascript:void(0);">{{ $request->request_type }}</a></h2>
                     </div>
                   </div>
                   <!--
@@ -39,7 +40,7 @@
                   <p>Details... </p>
                 </div>
              
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
+                  <a href="/" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
                  
                   </div>
                   </div>
@@ -48,249 +49,29 @@
             </a>
         </div>
          <!---->
-         <div class="col-md-4">
-         <a href = "/">
-         <article class="article">
-                  <div class="article-header">
-                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Adding of Subject </a></h2>
-                    </div>
-                  </div>
-                  <!--
-                  <div class="article-details">
-                      <div class = "row">
-                      <div class = "col-md-8">
-                  <p>Details... </p>
-                </div>
-             
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                 
-                  </div>
-                  </div>
-                -->
-                </article>
-        </a>
-        </div>
-        <!---->
-        <div class="col-md-4">
-        <a href = "/">
-        <article class="article">
-                  <div class="article-header">
-                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Change of Subject or Schedule</a></h2>
-                    </div>
-                  </div>
-                  <!--
-                  <div class="article-details">
-                      <div class = "row">
-                      <div class = "col-md-8">
-                  <p>Details... </p>
-                </div>
-             
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                 
-                  </div>
-                  </div>
-                -->
-                </article>
-        </a>
-        </div>
-        <!---->
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-        <a href = "/">
-        <article class="article">
-                  <div class="article-header">
-                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Grade Correction and Reporting </a></h2>
-                    </div>
-                  </div>
-                  <!--
-                  <div class="article-details">
-                      <div class = "row">
-                      <div class = "col-md-8">
-                  <p>Details... </p>
-                </div>
-             
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                 
-                  </div>
-                  </div>
-                -->
-                </article>
-            </a>
-        </div>
-         <!---->
-         <div class="col-md-4">
-         <a href = "/">
-         <article class="article">
-                  <div class="article-header">
-                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Cross-enrolment </a></h2>
-                    </div>
-                  </div>
-                  <!--
-                  <div class="article-details">
-                      <div class = "row">
-                      <div class = "col-md-8">
-                  <p>Details... </p>
-                </div>
-             
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                 
-                  </div>
-                  </div>
-                -->
-                </article>
-        </a>
-        </div>
-        <!---->
-        <div class="col-md-4">
-        <a href = "/">
-        <article class="article">
-                  <div class="article-header">
-                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Shifting </a></h2>
-                    </div>
-                  </div>
-                  <!--
-                  <div class="article-details">
-                      <div class = "row">
-                      <div class = "col-md-8">
-                  <p>Details... </p>
-                </div>
-             
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                 
-                  </div>
-                  </div>
-                -->
-                </article>
-        </a>
-        </div>
-        <!---->
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-        <a href = "/">
-        <article class="article">
-                  <div class="article-header">
-                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Manual Enrolment</a></h2>
-                    </div>
-                  </div>
-                  <!--
-                  <div class="article-details">
-                      <div class = "row">
-                      <div class = "col-md-8">
-                  <p>Details... </p>
-                </div>
-             
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                 
-                  </div>
-                  </div>
-                -->
-                </article>
-            </a>
-        </div>
-         <!---->
-         <div class="col-md-4">
-         <a href = "/">
-         <article class="article">
-                  <div class="article-header">
-                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Subject Petition</a></h2>
-                    </div>
-                  </div>
-                  <!--
-                  <div class="article-details">
-                      <div class = "row">
-                      <div class = "col-md-8">
-                  <p>Details... </p>
-                </div>
-             
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                 
-                  </div>
-                  </div>
-                -->
-                </article>
-        </a>
-        </div>
-        <!---->
-        <div class="col-md-4">
-        <a href = "/">
-        <article class="article">
-                  <div class="article-header">
-                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Subject Tutorial Request </a></h2>
-                    </div>
-                  </div>
-                  <!--
-                  <div class="article-details">
-                      <div class = "row">
-                      <div class = "col-md-8">
-                  <p>Details... </p>
-                </div>
-             
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                 
-                  </div>
-                  </div>
-                -->
-                </article>
-        </a>
-        </div>
-        <!---->
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-        <a href = "/">
-        <article class="article">
-                  <div class="article-header">
-                    <div class="article-image" data-background="http://localhost:8000/template/img/example-image.jpg">
-                    </div>
-                    <div class="article-title">
-                      <h2><a href="#">Certification Request </a></h2>
-                    </div>
-                  </div>
-                  <!--
-                  <div class="article-details">
-                      <div class = "row">
-                      <div class = "col-md-8">
-                  <p>Details... </p>
-                </div>
-             
-                  <a href="/request_service" class="btn btn-primary"><i class = 'fa fa-arrow-right'></i></a>
-                 
-                  </div>
-                  </div>
-                -->
-                </article>
-            </a>
-        </div>
-         <!---->
+    @endforeach 
+      
 
     </div>
+
+    
 </div>
+<!--Hidden--> 
+<div id = "selected_service" style = "display:none;">
+   <!--Steps--> 
+   <section class="section">
+   <h3 id = 'request_title' >Request name</h3>
+    <button class = "btn btn-primary" onclick = "
+        $('#select_menu').css('display','block');
+
+      $('#selected_service').css('display','none');
+    ">Go back</button>
+</section>
+      <!--Steps:end--> 
+</div>
+<!--Hidden:end--> 
+</div>
+
 @endsection
 
 
