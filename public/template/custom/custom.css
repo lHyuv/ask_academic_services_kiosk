@@ -21,9 +21,10 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
+/*
 .article-image:hover{
     transform: scale(2);
     transition:.5s;
     opacity: 0.7;
 }
+*/

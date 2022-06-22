@@ -35,7 +35,7 @@
   
 
         <!-- General JS Scripts -->
-   
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
@@ -64,6 +64,9 @@
 
     <div id="app">
     <div class="main-wrapper main-wrapper-1">
+
+    @if (Route::current()->getName() != 'login' &&  Route::current()->getName() != 'register')
+
     <div class="navbar-bg"></div>
         <nav class="navbar navbar-expand-lg main-navbar">
                 <!--
@@ -81,13 +84,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     
                     <!-- Left Side Of Navbar -->
-                    <form class="form-inline mr-auto">
                  
+                    <form class="form-inline mr-auto">
+                    @if(Auth::check())
                     <ul class="navbar-nav mr-3">
                         <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
 
                    </ul>
+                   @endif
                     </form>
+                   
 
                   
                     <!-- Right Side Of Navbar -->
@@ -97,11 +103,19 @@
                         @guest
                         <li class="dropdown dropdown-list-toggle">
                             <a href="javascript:void(0);" 
+                            onclick = "window.location.href = '/guest'"
+                            role = "button" class="nav-link notification-toggle nav-link-lg beep">
+                            <i class="fas fa-home"></i></a>
+
+                        </li>
+                        <li class="dropdown dropdown-list-toggle">
+                            <a href="javascript:void(0);" 
                             onclick = "sessionStorage.setItem('keyboard_status', 'show');checkKBStatus();"
                             role = "button" id = "keyboard_show_btn" class="nav-link notification-toggle nav-link-lg beep">
                             <i class="far fa-keyboard"></i></a>
 
                         </li>
+                       
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -113,6 +127,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+                        
                         @else
                         @if(Auth::check())
 
@@ -153,8 +168,9 @@
                 </div>
     
         </nav>
+@endif
 
- @extends('layouts.sidebar')
+
 
   
         <main class="py-4">

@@ -814,18 +814,26 @@ if((window.location.href).includes('/login') || (window.location.href).includes(
 checkKBStatus();
 
 const generateService = (service_id, service_name) =>{
-    $('#select_menu').css('display','none');
+   
 
-    $('#selected_service').css('display','block');
 
-    $('#request_title').text(service_name);
+    $('.request_title').text(service_name);
+
+    $('.ticket-item').each((i,val)=>{
+    
+       if($(val).find('.ticket-title').text().includes(service_name)){
+     
+        $(val).attr('class','ticket-item active');
+       // console.log($(val).attr('class'))
+       }
+    })
     //
     $.ajax({
         url: apiURL + 'steps/request/'+service_id,
         async: true,
         method: 'GET',
         success: (data)=>{
-          
+            
             let content = ``;
             if(data.data.length != 0){
       
@@ -860,7 +868,7 @@ const generateService = (service_id, service_name) =>{
                         <p>${ details } </p>
                       </div>
                     </div>
-                    </div>
+                   
 
                 `
             }).join("");
@@ -879,19 +887,7 @@ const generateService = (service_id, service_name) =>{
                 <div class="card-body">
                 <div class = "row">
                 <div class="col-md-12">
-                <div class="activities">
-                <div class="activity">
-                <div class="activity-icon bg-primary text-white shadow-primary">
-                  <i class="fas fa-file"></i>
-                </div>
-                <div class="activity-detail">
-                  <div class="mb-2">
-                    <h5 class="text-job text-primary">No content to be shown</h5>
-
-                  </div>
-                  <p>...</p>
-                </div>
-              </div>
+                <i>No content to be shown..</i>
               </div>
               </div>
               </div>
@@ -901,7 +897,7 @@ const generateService = (service_id, service_name) =>{
               </div>
                 `
             }
-            $('#request_title').append(content);
+            $('#request_content').append(content);
         }
     });
 };
@@ -917,7 +913,7 @@ const generateRequirement = (service_id) =>{
             if(data.data.length != 0){
       
             content = `
-            <div class="card card-outline card-primary mt-5  col-md-4">
+            <div class="card card-outline card-primary mt-5 ml-5 col-md-4">
             <div class="card-header"><h4>Requirements</h4></div>
 
             <div class="card-body">
@@ -929,14 +925,13 @@ const generateRequirement = (service_id) =>{
             `;
             data.data.map((val)=>{
                 let details = val.details ? val.details: 'N/A';
-                let name = val.step_name ? val.step_name : 'N/A';
-                let icon = val.step_icon ? val.step_icon : 'fas fa-file';
+                let name = val.requirement_name ? val.requirement_name : 'N/A';
                 content +=
                 `
 
                     <div class="activity">
                       <div class="activity-icon bg-primary text-white shadow-primary">
-                        <i class="${icon}"></i>
+                        <i class="fas fa-file"></i>
                       </div>
                       <div class="activity-detail">
                         <div class="mb-2">
@@ -946,9 +941,9 @@ const generateRequirement = (service_id) =>{
                         <p>${ details } </p>
                       </div>
                     </div>
-                    </div>
-                    </div>
-                    </div>
+                 
+                  
+                   
                 `
             }).join("");
             content += `
@@ -959,36 +954,99 @@ const generateRequirement = (service_id) =>{
             `;
             }else{
                 content = `
-                <div class="card card-outline  mt-5  col-md-4">
+                <div class="card card-outline card-primary ml-5 mt-5 col-md-4">
                 <div class="card-header"><h4>Requirements</h4></div>
     
                 <div class="card-body">
                 <div class = "row">
                 <div class="col-md-12">
-                <div class="activities">
-                <div class="activity">
-                <div class="activity-icon bg-primary text-white shadow-primary">
-                  <i class="fas fa-file"></i>
-                </div>
-                <div class="activity-detail">
-                  <div class="mb-2">
-                    <h5 class="text-job text-primary">No content to be shown</h5>
-
-                  </div>
-                  <p>...</p>
-                </div>
-              </div>
+                <i>No content to be shown..</i>
               </div>
               </div>
               </div>
   
               </div>
               </div>
-  
               </div>
                 `
             }
-            $('#request_title').append(content);
+            $('#request_content').append(content);
         }
     });
 };
+
+const showMenu = (mode) =>{
+
+    if(mode == 'hide'){
+        $('#select_menu').css('display','none');
+
+        $('#selected_service').css('display','block');
+    }else{
+   
+        $('#select_menu').css('display','block');
+
+        $('#selected_service').css('display','none');
+    
+        $('#request_content').html('');
+
+        $('.ticket-item').each((i,val)=>{
+    
+             $(val).attr('class','ticket-item');
+
+         })
+    }
+
+};
+
+
+const confirmNotif = () =>{
+    Swal.fire({
+        title: 'Proceed?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+        denyButtonText: `Don't save`,
+        customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-3',
+            denyButton: 'order-2',
+          }
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: '<strong>Request Details</strong>',
+                icon: 'success',
+                html:
+                  `
+                   <button type = "button" class = "btn btn-info" 
+                  onclick = "notification('success','','Successfully printed');">Print</button>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                  `,
+              //  showCloseButton: true,
+              //  showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText:
+                  'Close',
+                  /*
+                cancelButtonText:
+                  '',
+                  */
+                
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  window.location.href = '/guest';
+                } 
+              })
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
+}

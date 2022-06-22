@@ -72,6 +72,9 @@
             <div class="mt-5 text-muted text-center">
               Don't have an account? <a href="{{ route('register') }}">Register here</a>
             </div>
+            <div class="mt-5 text-muted text-center">
+            <a href="/guest">Go to home</a>
+            </div>
           </div>
         </div>
       </div>
