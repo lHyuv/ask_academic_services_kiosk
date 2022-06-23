@@ -170,7 +170,7 @@
         </nav>
 @endif
 
-
+ @extends('layouts.sidebar')
 
   
         <main class="py-4">

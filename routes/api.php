@@ -83,7 +83,7 @@ Route::middleware('auth:sanctum')->post('/requests/update/{id}', [RequestControl
 
 Route::middleware('auth:sanctum')->post('/requests/delete/{id}', [RequestController::class, 'delete']);
 
-//Requeirements
+//Requirements
 use App\Http\Controllers\RequirementController;
 
 Route::get('/requirements', [RequirementController::class, 'index']);
@@ -147,30 +147,12 @@ Route::middleware('auth:sanctum')->get('/submitted_requests/show_active', [Submi
 
 Route::middleware('auth:sanctum')->get('/submitted_requests/user/{id}', [SubmittedRequestController::class, 'find_by_user']);
 
+Route::middleware('auth:sanctum')->get('/submitted_requests/request/{id}', [SubmittedRequestController::class, 'find_by_request']);
+
 Route::middleware('auth:sanctum')->get('/submitted_requests/{id}', [SubmittedRequestController::class, 'show']);
 
-Route::middleware('auth:sanctum')->post('/submitted_requests',[SubmittedRequestController::class, 'create']);
+Route::post('/submitted_requests',[SubmittedRequestController::class, 'create']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/update/{id}', [SubmittedRequestController::class, 'update']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/delete/{id}', [SubmittedRequestController::class, 'delete']);
-
-//statuses
-
-Route::middleware('auth:sanctum')->post('/submitted_requests/approve_request/{id}', [SubmittedRequestController::class, 'approve_request']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requests/approve_application/{id}', [SubmittedRequestController::class, 'approve_application']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requests/approve_release/{id}', [SubmittedRequestController::class, 'approve_release']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requests/reject_request/{id}', [SubmittedRequestController::class, 'reject_request']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requests/reject_application/{id}', [SubmittedRequestController::class, 'reject_application']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requests/reject_release/{id}', [SubmittedRequestController::class, 'reject_release']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requests/sign/{id}', [SubmittedRequestController::class, 'sign']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requests/student_sign/{id}', [SubmittedRequestController::class, 'student_sign']);
-
-Route::middleware('auth:sanctum')->post('/submitted_requests/complete/{id}', [SubmittedRequestController::class, 'complete']);

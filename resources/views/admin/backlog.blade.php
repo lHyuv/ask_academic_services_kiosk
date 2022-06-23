@@ -20,33 +20,32 @@
     <div class="row">
         <div class="col-md-8">
 
-            <div class="card card-primary mt-5">
-                <div class="card-header"><h4>Today</h4></div>
 
+
+    @foreach($submitted_requests as $key=>$req)
+    
+    <div class="card card-primary mt-5">
+            @if( date('d-M-y', strtotime($req[0]->created_at)) ==  date('d-M-y', strtotime(now())))
+                <div class="card-header"><h4>Today</h4></div>
+            @elseif( date('d-M-y', strtotime($req[0]->created_at)) ==  date('d-M-y', strtotime(now()->subDays(1))))
+                <div class="card-header"><h4>Yesterday</h4></div>
+            @else
+                <div class="card-header"><h4>{{ date('d-M-y', strtotime($req[0]->created_at)) }}</h4></div>
+            @endif
                 <div class="card-body">
                     <ul class = "list-unstyled">
-                    <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li> <hr>
-                    <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li> <hr>
-                    <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li>
+                        @foreach($req as $r)
+                        @if($r->student_number != 'N/A')
+                        <li><i class = 'fas fa-user'></i> User<a href = "#">  {{ $r->student_number }}</a> opted for {{ $r->requests()->pluck('request_type')[0] }}</li> <hr>
+                        @else
+                        <li><i class = 'fas fa-user'></i> A<a href = "#"> user</a> opted for {{ $r->requests()->pluck('request_type')[0]}}</li> <hr>
+                        @endif
+
+                        @endforeach
                     </ul>
                 </div>
             </div>
-   
-  <!--Continue on this card..-->
-    
-
-        <div class="card card-primary mt-5">
-            <div class="card-header"><h4>Yesterday</h4></div>
-
-            <div class="card-body">
-                <ul class = "list-unstyled">
-                <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li> <hr>
-                <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li> <hr>
-                <li><i class = 'fas fa-user'></i><a href = "#"> User</a> did this transaction.. </li>
-                </ul>
-            </div>
-        </div>
-    <!--Continue on this card..:end-->
+    @endforeach
         </div>
 
          <!---->

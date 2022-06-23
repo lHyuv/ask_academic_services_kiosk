@@ -975,12 +975,19 @@ const generateRequirement = (service_id) =>{
     });
 };
 
-const showMenu = (mode) =>{
+const showMenu = (mode, request_id) =>{
 
     if(mode == 'hide'){
         $('#select_menu').css('display','none');
 
         $('#selected_service').css('display','block');
+
+       if(request_id != null || typeof(request_id) != 'undefined'){
+            $("#submit_request_btn").on('click',()=>{
+                confirmNotif(request_id);
+            })
+       }
+
     }else{
    
         $('#select_menu').css('display','block');
@@ -999,7 +1006,7 @@ const showMenu = (mode) =>{
 };
 
 
-const confirmNotif = () =>{
+const confirmNotif = (request_id) =>{
     Swal.fire({
         title: 'Proceed?',
         showDenyButton: true,
@@ -1015,38 +1022,90 @@ const confirmNotif = () =>{
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            Swal.fire({
-                title: '<strong>Request Details</strong>',
-                icon: 'success',
-                html:
-                  `
-                   <button type = "button" class = "btn btn-info" 
-                  onclick = "notification('success','','Successfully printed');">Print</button>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                  `,
-              //  showCloseButton: true,
-              //  showCancelButton: true,
-                focusConfirm: false,
-                confirmButtonText:
-                  'Close',
-                  /*
-                cancelButtonText:
-                  '',
-                  */
-                
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                  window.location.href = '/guest';
-                } 
-              })
+
+            //AJAX
+            //Generate code
+
+            let code = "";
+
+            let chars = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            for (let i = 0; i < 10; i++){
+                code += chars.charAt(Math.floor(chars.length * Math.random()));
+                if(i == 3){
+                    code += String(new Date().getFullYear())
+                }else if(i == 7){
+                    code += String(new Date().getMonth() + 1 )
+                }else if(i == 9){
+                    String(new Date().getDate())
+                }
+            }
+
+            let student_no = '';
+           
+            if(!$('#student_no').val()){
+                student_no = 'N/A'
+            }else{
+                student_no = $('#student_no').val()
+            }
+            $.ajax({
+                url: apiURL + 'submitted_requests',
+                async: true,
+                method: 'POST',
+                data: {
+                    'request_id' : request_id,
+                    'student_number' : student_no,
+                    'reference_number' : code,
+                },
+                success: (data)=>{
+                    //
+                    Swal.fire({
+                        title: '<strong>Request Details</strong>',
+                        icon: 'success',
+                        html:
+                          `
+                           <button type = "button" class = "btn btn-info" 
+                          onclick = "notification('success','','Successfully printed');">Print</button>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                          `,
+                      //  showCloseButton: true,
+                      //  showCancelButton: true,
+                        focusConfirm: false,
+                        confirmButtonText:
+                          'Close',
+                          /*
+                        cancelButtonText:
+                          '',
+                          */
+                        
+                    }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                          window.location.href = '/guest';
+                        } 
+                      })
+                      //
+                },
+                error:({responseJSON})=>{
+                    console.log(responseJSON.detail)
+                    Swal.fire('Something went wrong', '', 'error')
+                }
+            })
+            //AJAX:end
+ 
         } else if (result.isDenied) {
           Swal.fire('Changes are not saved', '', 'info')
         }
       })
-}
+};
+
+
+
+
+
+

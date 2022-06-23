@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 use App\Models\User;
 use App\Models\Role;
@@ -48,7 +50,14 @@ class HomeController extends Controller
     }
 
     public function backlog(){
-        return view('admin.backlog');
+        $submitted_requests = SubmittedRequest::get()
+        ->groupBy(function ($val) {
+            return Carbon::parse($val->created_by)->format('d');
+        });
+    // dd($submitted_requests);
+        return view('admin.backlog',[
+            'submitted_requests' => $submitted_requests
+        ]);
     }
 
     public function view_profile(){

@@ -16,11 +16,7 @@ git pull origin master
 
 Create database "acad_services_app" on localhost > phpmyadmin
 
-4 Import DB
-
-Import acad_services_app.sql
-
-5 Composer install
+4 Composer install
 
 Open cmd/powershell on vs/etc
 
@@ -28,14 +24,14 @@ composer install --no-scripts
 
 composer install
 
-6 Create env
+5 Create env
 
 Open cmd/powershell on vs/etc
 
 cp .env.example .env
 php artisan key:generate
 
-7 Rename db
+6 Rename db
 
 on .env
 replace DB_DATABASE=test_this_app
@@ -43,13 +39,19 @@ with DB_DATABASE=db_name_here
 
 Database name is "acad_services_app"
 
-4 Migrate
+7 Migrate
 
 Open cmd/powershell on vs/etc
 
 php artisan migrate
 
-6 Open project
+8 Import data to database
+
+On localhost
+Select created database (acad_services_app)
+Click SQL > Paste SQL code from sql.sql > Go
+
+9 Open project
 
 Open cmd/powershell on vs/etc
 
@@ -63,14 +65,18 @@ Open cmd/powershell/etc
 type: npm install
 type: npm  run dev
 
-7 If project is existing, and DB tables needs changes
+10 If need to reset database
 
 Drop database on localhost/phpmyadmin  
 
-Import database (acad_services_app) on localhost/phpmyadmin 
+Create database "acad_services_app" on localhost > phpmyadmin
 
 Open cmd/powershell on vs/etc
 
 php artisan migrate:fresh
 
 php artisan migrate
+
+On localhost
+Select created database (acad_services_app)
+Click SQL > Paste SQL code from sql.sql > Go

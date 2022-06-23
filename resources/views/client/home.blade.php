@@ -60,7 +60,7 @@
                         </div>
                         @else
                         <div class="carousel-item">
-                        <a href = "javascript:void(0);" onclick = "showMenu('hide');generateService('{{ $request->id }}','{{ $request->request_type }}');generateRequirement('{{ $request->id }}');">
+                        <a href = "javascript:void(0);" onclick = "showMenu('hide','{{ $request->id}}');generateService('{{ $request->id }}','{{ $request->request_type }}');generateRequirement('{{ $request->id }}');">
                           <img class="d-block w-100" src="http://localhost:8000/template/img/news/img02.jpg" alt="Second slide">
                         
                         <div class="carousel-caption d-none d-md-block">
@@ -171,14 +171,14 @@
                             <div class="form-group">
                             
                               <label>Student Number</label>
-                              <input type="text" placeholder = "20XX-00XXX-XX-X" class = "form-control">
+                              <input id = 'student_no' name = 'student_no' type="text" placeholder = "20XX-00XXX-XX-X" class = "form-control">
                             </div>
 
                               <div class="form-group text-right">
                               <button class = "btn btn-secondary" onclick = "
                               showMenu('show');
                               ">Go back</button>
-                              <button class = "btn btn-primary" onclick = "confirmNotif();">
+                              <button class = "btn btn-primary" id = "submit_request_btn">
                               Submit </button>
                               </div>
                          
@@ -193,36 +193,6 @@
 <!--Hidden:end--> 
 </div>
 
-<!--modal-->
-<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Confirmation</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to do this action?
-        
-      </div>
-      <div class="modal-footer bg-light">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    
-        <button data-bs-toggle = "modal" data-bs-target = "#confirmModal" class = "btn btn-primary" onclick = "
-        successNotif();
-        showMenu('show');
-        
-        "
-        >Proceed</button>
-       
-  
-      </div>
-    </div>
-  </div>
-</div>
-<!--modal:end-->
 @endsection
 
 

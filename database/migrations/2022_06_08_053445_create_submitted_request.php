@@ -17,7 +17,7 @@ class CreateSubmittedRequest extends Migration
         Schema::create('submitted_requests', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-            $table->text('request_details')->nullable();
+            $table->string('student_number')->nullable();
             $table->string('reference_number')->unique();
             $table->foreignUuid('request_id')->nullable()->constrained('requests')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   
