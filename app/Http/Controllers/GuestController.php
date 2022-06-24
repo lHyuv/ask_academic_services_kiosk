@@ -9,9 +9,11 @@ class GuestController extends Controller
     //
     public function index()
     {
-        $requests = Requests::where('status',1)->get();
+        $requests = Requests::where('status',1)->orderBy('created_at', 'ASC')->paginate(5);
+        $full_requests = Requests::where('status',1)->get();
         return view('client.home', [
-            'requests' => $requests
+            'requests' => $requests,
+            'full_requests' => $full_requests,
         ]);
        
     }

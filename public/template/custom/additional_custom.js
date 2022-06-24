@@ -1109,3 +1109,19 @@ const confirmNotif = (request_id) =>{
 
 
 
+const showElement = (type,value,mode) =>{
+    let pointer = '';
+    if(type = 'id'){
+        pointer = '#';
+    }else if(type = 'class'){
+        pointer = '.';
+    }
+
+    if(mode == 'flex'){
+        $(pointer + value).css('display','flex'); 
+    }else if(mode == 'show'){
+        $(pointer + value).css('display','block'); 
+    }else{
+        $(pointer + value).css('display','none');
+    }
+};

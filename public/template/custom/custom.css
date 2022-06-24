@@ -28,3 +28,8 @@ input::-webkit-inner-spin-button {
     opacity: 0.7;
 }
 */
+
+.card-custom-left{
+    border-left: solid #800000;
+}
+

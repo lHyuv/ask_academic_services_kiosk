@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/guest', [App\Http\Controllers\GuestController::class, 'index']);
+Route::get('/guest', [App\Http\Controllers\GuestController::class, 'index'])->name('guest');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 

@@ -1,12 +1,11 @@
 
+  @if(Auth::check())
 <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-          @if(Auth::check())
+        
             <a href="/home">Academic Services</a>
-          @else
-          <a href="/guest">Academic Services</a>
-          @endif
+
           </div>
 
 
@@ -94,3 +93,4 @@
         </ul>
         </aside>
       </div>
+      @endif

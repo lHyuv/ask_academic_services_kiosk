@@ -5,98 +5,169 @@
 
 <div class="container">
 
-
-<section class="section shadow-sm">
-        <div class="section-header mt-5">
-     
-            <h1>Welcome</h1>
-
-        
+<section class="section shadow-none border-0 ml-5">
+        <div class="section-header mt-5  shadow-none border-0">
+  <!--Empty Space-->
         </div>
       
 </section>
 
+
     <div id = "select_menu">
-    <div class="row">
-        <div class="col-md-12">
+      <!----> 
+      <div class="row">
+      <div class="col-md-12">
+        <h1>Academic Services <br> Kiosk</h1>
+      </div>
+        <div class="col-md-3  my-auto text-center">
+        <div class="card  shadow-none card-outline">
+          <h3 class>Services</h3>
+        </div>
+        </div>
+        <div class="col-md-9">
+        <div class="card  shadow-none card-outline card-custom-left ml-5">
 
-            <div class="card card-outline card-primary ">
-                <div class="card-header">
-          <h4>Select a service</h4> 
-                </div>
 
-                <div class="card-body">
-                  
+            <!--Menu--> 
+            @foreach($requests as $key=>$request)
+        
+         
+          
+            @if(($key == 0 || $key != 1) && ($key) % 3 == 0)
+            <div class = "row">
+            @endif
+
+              <!---->
+         
+            <div class="col-md-4">
+            <div class="card shadow-md rounded ml-2">
+             <div class = "card-body">
+             <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "showMenu('hide');generateService('{{ $request->id }}','{{ $request->request_type }}');generateRequirement('{{ $request->id }}');">
+              <img class="d-block w-100" src="http://localhost:8000/template/img/news/img01.jpg">
+              <span class = "text-center mt-2"> {{ $request->request_type }}</span>
+             </a>
+             </div>
+            </div>
+            </div>
+          
+             <!---->
+            @if($key + 1 == count($requests))
+             <!---->
+         
+            <div class="col-md-4">
+            <div class="card shadow-md rounded ml-2">
+             <div class = "card-body">
+             <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
+             showElement('id','select_menu2','show');
+             showElement('id','select_menu','hide');
+             showElement('id','guest_header2','flex');
+             showElement('id','guest_header1','hide');
+             ">
+              <img class="d-block w-100" src="http://localhost:8000/template/img/news/img01.jpg">
+              <span class = "text-center mt-2"> Show more...</span>
+             </a>
+             </div>
+            </div>
+            </div>
+          
+             <!---->
+             </div>
+            @elseif(($key + 1) % 3 == 0 && $key != 0 && $key != 1 )
+           
+            </div>
+            @endif
+      
+          
+          
+   
+
+            @endforeach
+            <!--Menu:end-->
+        </div>
+        </div>
+      </div>
+      <!----> 
+
+  </div>
+
+
+<!--Next page--> 
+
+<div id = "select_menu2" style = "display:none;">
+      <!----> 
+     
+      <div class="row">
+        
+      <div class="col-md-8">
+      <button class = "btn btn-primary"  
+      onclick = "
+      showElement('id','select_menu','show');
+      showElement('id','select_menu2','hide');
+      showElement('id','guest_header1','flex');
+      showElement('id','guest_header2','hide');
+      "
+      ><i class = "fas fa-arrow-left"></i> Back</button>
+      </div>
+      <div class="col-md-4">
+      <span class = "float-right"> Home &nbsp; > &nbsp; <a href = "" >Menu</a>  </span>
+      </div>
+      </div>
+                 <!--Menu--> 
+        @foreach($full_requests as $key=>$request)
+        
+         
+          
+        @if(($key == 0 || $key != 1) && ($key) % 4 == 0)
+        <div class = "row">
+        @endif
+
+        @if(count($full_requests) % 10 == 0 && $key != 0 && $key != 1)
+          @if($key == count($full_requests) - 2)
+         <!---->
+     
+        <div class="col-md-3">
+        <div class="card shadow-none border-0 ml-2">
+         <div class = "card-body">
+         
+         </div>
+        </div>
+        </div>
+      
+         <!---->
+
+          @endif
+
+        @endif
+        
+          <!---->
+     
+        <div class="col-md-3">
+        <div class="card shadow-md rounded ml-2">
+         <div class = "card-body">
+         <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "showMenu('hide');generateService('{{ $request->id }}','{{ $request->request_type }}');generateRequirement('{{ $request->id }}');">
+          <img class="d-block w-100" src="http://localhost:8000/template/img/news/img01.jpg">
+          <span class = "text-center mt-2"> {{ $request->request_type }} </span>
+         </a>
+         </div>
+        </div>
+        </div>
+      
+         <!---->
+
+        @if(($key + 1) % 4 == 0 && $key != 0 && $key != 1)
+     
+        </div>
+      
+        @endif
   
       
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                      <ol class="carousel-indicators">
-                      @foreach($requests as $key=>$request)
-                        @if($key == 0)
-                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}" class="active"></li>
-                        @else
-                        <li data-target="#carouselExampleIndicators" data-slide-to="{{ $key }}"></li>
-                        @endif
-                     
-                       @endforeach
-                      </ol>
-                      <div class="carousel-inner">
-                      @foreach($requests as $key=>$request)
-                  
-                        @if($key == 0)
-                        <div class="carousel-item active">
-                        <a href = "javascript:void(0);" onclick = "showMenu('hide');generateService('{{ $request->id }}','{{ $request->request_type }}');generateRequirement('{{ $request->id }}');">
-                          <img class="d-block w-100" src="http://localhost:8000/template/img/news/img01.jpg" alt="First slide">
-                          <div class="carousel-caption d-none d-md-block">
-                          <h4>{{ $request->request_type }}</h4>
-                            @if(isset($request->details))
-                            <p>$request->details</p>
-                            @else
-                            <p>...</p>
-                            @endif
-                          </div>
-                      
-                        </a>
-                        </div>
-                        @else
-                        <div class="carousel-item">
-                        <a href = "javascript:void(0);" onclick = "showMenu('hide','{{ $request->id}}');generateService('{{ $request->id }}','{{ $request->request_type }}');generateRequirement('{{ $request->id }}');">
-                          <img class="d-block w-100" src="http://localhost:8000/template/img/news/img02.jpg" alt="Second slide">
-                        
-                        <div class="carousel-caption d-none d-md-block">
-                        <h4>{{ $request->request_type }}</h4>
-                            @if(isset($request->details))
-                            <p>$request->details</p>
-                            @else
-                            <p>...</p>
-                            @endif
-                          </div>
-
-                          </a>
-                        </div>
-                        @endif 
-                   
-                      @endforeach
-
-   
-                      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </div>
-                  </div>
-    </div>
+      
 
 
-    </div>
-   </div>
-
+        @endforeach
+        <!--Menu:end-->
 </div>
-</div>
+<!--Next page:end-->
 <!--Hidden--> 
 <div id = "selected_service" style = "display:none;">
    <!--Steps--> 
