@@ -12,7 +12,7 @@
 <div class="p-3 hide-sidebar-mini">
                         <div class="media">
                             <figure class="avatar mr-2 avatar">
-                                    <img src="http://localhost:8000/template/img/avatar/avatar-1.png" class="mr-3 rounded-circle"  alt="Avatar image">
+                                    <img src="{{ URL::to('/') }}/template/img/avatar/avatar-1.png" class="mr-3 rounded-circle"  alt="Avatar image">
                                     <i class="avatar-presence online"></i>
                             </figure>
                             <div class="media-body">

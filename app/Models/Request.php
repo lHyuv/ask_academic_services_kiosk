@@ -19,8 +19,8 @@ class Request extends Model
         'created_by',
         'updated_by',
         //
-        'file_name',
-        'file_path',
+        'icon_file_name',
+        'icon_file_path',
         'file',
     ]);
 

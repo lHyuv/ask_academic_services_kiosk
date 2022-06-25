@@ -20,8 +20,8 @@ class CreateRequest extends Migration
             $table->string('request_type')->unique();
             //V2
             $table->text('details')->nullable();
-            $table->string('icon_file_name')->nullable(); //tentative
-            $table->string('icon_file_path')->nullable(); //tentative
+            $table->string('icon_file_name')->nullable(); 
+            $table->string('icon_file_path')->nullable(); 
             //
             //
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   

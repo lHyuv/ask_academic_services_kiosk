@@ -58,7 +58,7 @@ class RequestController extends Controller
         }
 
         if ($file = $request->file('file')) {
-            $path = $file->store('public/files');
+            $path = 'files/';
             $name = Carbon::now()->format('Y-m-d') . $file->getClientOriginalName();
             $file->move(public_path('files'),$name); 
 
@@ -88,7 +88,7 @@ class RequestController extends Controller
         }
 
         if ($file = $request->file('file')) {
-            $path = $file->store('public/files');
+            $path = 'files/';
             $name = Carbon::now()->format('Y-m-d') . $file->getClientOriginalName();
             $file->move(public_path('files'),$name); 
             $request_data = Requests::findOrFail($id);

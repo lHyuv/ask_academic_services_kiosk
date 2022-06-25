@@ -43,7 +43,12 @@
             <div class="card shadow-md rounded ml-2">
              <div class = "card-body">
              <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "showMenu('hide');generateService('{{ $request->id }}','{{ $request->request_type }}');generateRequirement('{{ $request->id }}');">
-              <img class="d-block w-100" src="http://localhost:8000/template/img/news/img01.jpg">
+             @if(isset($request->icon_file_name) && isset($request->icon_file_path))
+              <img class="d-block w-100" src="{{ URL::to('/') }}/{{$request->icon_file_path}}/{{$request->icon_file_name}}">
+              @else
+              <img class="d-block w-100" src="{{ URL::to('/') }}/template/img/news/img01.jpg">
+              {{ $request->icon_file_name }}
+              @endif
               <span class = "text-center mt-2"> {{ $request->request_type }}</span>
              </a>
              </div>
@@ -63,7 +68,7 @@
              showElement('id','guest_header2','flex');
              showElement('id','guest_header1','hide');
              ">
-              <img class="d-block w-100" src="http://localhost:8000/template/img/news/img01.jpg">
+              <img class="d-block w-100" src="{{ URL::to('/') }}/template/img/news/img01.jpg">
               <span class = "text-center mt-2"> Show more...</span>
              </a>
              </div>
@@ -145,7 +150,12 @@
         <div class="card shadow-md rounded ml-2">
          <div class = "card-body">
          <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "showMenu('hide');generateService('{{ $request->id }}','{{ $request->request_type }}');generateRequirement('{{ $request->id }}');">
-          <img class="d-block w-100" src="http://localhost:8000/template/img/news/img01.jpg">
+              @if(isset($request->icon_file_name) && isset($request->icon_file_path))
+              <img class="d-block w-100" src="{{ URL::to('/') }}/{{$request->icon_file_path}}/{{$request->icon_file_name}}">
+              @else
+              <img class="d-block w-100" src="{{ URL::to('/') }}/template/img/news/img01.jpg">
+              {{ $request->icon_file_name }}
+              @endif
           <span class = "text-center mt-2"> {{ $request->request_type }} </span>
          </a>
          </div>
@@ -207,7 +217,7 @@
                       <div class="ticket-content">
                         <div class="ticket-header">
                           <div class="ticket-sender-picture img-shadow">
-                            <img src="http://localhost:8000/template/img/avatar/avatar-4.png" alt="image">
+                            <img src="{{ URL::to('/') }}/template/img/avatar/avatar-4.png" alt="image">
                           </div>
                           <div class="ticket-detail">
                             <div class="ticket-title">
