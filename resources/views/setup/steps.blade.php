@@ -167,7 +167,7 @@
                                    
                                     <div class="text-center dropdown">
                                     <!-- Dropdown Toggler --> 
-                                    <div class="btn btn-sm btn-default" data-bs-toggle="dropdown" role="button">
+                                    <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
                                     <i class="fas fa-ellipsis-v"></i>
                                     </div>
 
@@ -181,7 +181,7 @@
                                     <div>Edit</div>
                                     </div> 
                                     <!----> 
-                                    <div class="dropdown-item d-flex" role="button" onclick = "deleteStep(' {{$step}}');"  data-bs-toggle = "modal" data-bs-target="#confirmModal">
+                                    <div class="dropdown-item d-flex" role="button" onclick = "deleteStep(' {{$step}}');" >
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>

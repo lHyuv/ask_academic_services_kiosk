@@ -20,6 +20,8 @@ class CreateRequirement extends Migration
             $table->string('requirement_name');
             $table->foreignUuid('request_id')->constrained('requests')->onDelete('cascade')->onUpdate('cascade');
 
+            //V2
+            $table->text('source')->nullable();
             //
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   
             $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');  

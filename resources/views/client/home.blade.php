@@ -245,7 +245,7 @@
     </div>
     <div id="where-to-get-it" class="content" role="tabpanel" aria-labelledby="where-to-get-it-trigger">
   
- 
+    <section id = 'sources'></section>
     <button class="btn btn-primary" onclick="
       stepper.previous()">Previous</button>
 

@@ -13,7 +13,7 @@ class Requirement extends Model
     
     protected $guarded = ['id'];
 
-    protected $fillable = (['requirement_name','request_id','status','created_by','updated_by',]);
+    protected $fillable = (['requirement_name','request_id','status','created_by','updated_by','source']);
 
     public function requests(){
         return $this->belongsTo(Request::class, 'request_id');

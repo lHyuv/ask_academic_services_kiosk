@@ -655,6 +655,7 @@ const createRequirement = () =>{
             data: {
                 'request_id' : $('#create_type').val(),
                 'requirement_name' : $('#create_req_name').val(),
+                'source' : $('#create_req_source').val(),
                 'created_by' : sessionStorage.getItem('user_id'),
 
             },
@@ -686,7 +687,7 @@ const editRequirement = (data) =>{
     let values = JSON.parse(data);
     $('#edit_type').val(values['request_id']);
     $('#edit_req_name').val(values['requirement_name']);
-
+    $('#edit_req_source').val(values['source']);
     $('#edit_requirement').on('submit',(e)=>{
 
         e.preventDefault();
@@ -698,6 +699,7 @@ const editRequirement = (data) =>{
             data: {
                 'request_id' : $('#edit_type').val(),
                 'requirement_name' : $('#edit_req_name').val(),
+                'source' : $('#edit_req_source').val(),
                 'updated_by' : sessionStorage.getItem('user_id'),
             },
             headers: {
@@ -847,7 +849,7 @@ const generateService = (service_id, service_name) =>{
                 content +=
                 `
 
-                    <li>${name}</li>
+                    <li class = "mt-3 mb-3">${name}</li>
                    
 
                 `
@@ -874,27 +876,39 @@ const generateRequirement = (service_id) =>{
         async: true,
         method: 'GET',
         success: (data)=>{
-        
+            
             let content = ``;
             let content2 = ``;
+            let source = ``;
+            let sourceArr = new Array();
             if(data.data.length != 0){
       
             content = `
             <ul>
             `;
+            source = `
+            <ul>
+            `;
             data.data.map((val)=>{
               //  let details = val.details ? val.details: 'N/A';
                 let name = val.requirement_name ? val.requirement_name : 'N/A';
+              
+                if(!(typeof(val.source) == 'undefined' || val.source == null || val.source == '' || val.source.length == 0)){
+                    source +=  `<li class = "mt-3 mb-3">${val.source}</li>`;
+                    sourceArr.push(val.source);
+                }
                 content +=
                 `
-                        <li>${name}</li>
+                        <li class = "mt-3 mb-3">${name}</li>
 
                 `
             }).join("");
             content += `
                 </ul>
             `;
-
+            source += `
+                </ul>
+            `;
             content2 = `
             <ul class="list-unstyled">
             `;
@@ -903,7 +917,7 @@ const generateRequirement = (service_id) =>{
                 let name = val.requirement_name ? val.requirement_name : 'N/A';
                 content2 +=
                 `
-                      <li><input type = "checkbox" class = ""> &nbsp; ${name} </li>
+                      <li class = "mt-3 mb-3"><input type = "checkbox" class = ""> &nbsp; ${name} </li>
                 `
             }).join("");
             content2 += `
@@ -912,7 +926,7 @@ const generateRequirement = (service_id) =>{
 
             }else{
                 content = `
-                <ul><li>No requirements given yet</li></ul>
+                <ul><li  class = "mt-3 mb-3">No requirements given yet</li></ul>
                 `
                 content2 = content;
             }
@@ -924,6 +938,15 @@ const generateRequirement = (service_id) =>{
             $('#checklist_req').html('');
 
             $('#checklist_req').append(content2);
+
+            if(sourceArr.length == 0){
+                source += `
+                <ul><li  class = "mt-3 mb-3">No source is given yet</li></ul>
+                `
+            }
+            $('#sources').html('');
+
+            $('#sources').append(source);
         }
     });
 };
@@ -1082,7 +1105,9 @@ const showElement = (type,value,mode) =>{
 //Stepper
 let stepper = '';
 $(document).ready(function () {
- 
-    stepper = new Stepper($('.bs-stepper')[0])
+    if($('.bs-stepper')[0]){
+        stepper = new Stepper($('.bs-stepper')[0])
+    }
+
 })
 

@@ -69,7 +69,7 @@
 
     <div id="app">
     <div class="main-wrapper main-wrapper-1">
-    @if (Route::current()->getName() == 'guest' && !Auth::check())
+    @if (Route::current()->getName() == 'guest')
     <nav class="navbar navbar-expand-lg main-navbar" id = 'guest_header1'>
     <section class="section shadow-none border-0">
         <div class="section-header mt-5  shadow-none border-0">
