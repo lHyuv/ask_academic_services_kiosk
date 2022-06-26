@@ -50,8 +50,47 @@
              @if(isset($request->icon_file_name) && isset($request->icon_file_path))
               <img class="d-block w-100" src="{{ URL::to('/') }}/{{$request->icon_file_path}}/{{$request->icon_file_name}}">
               @else
-              <img class="d-block w-100" src="{{ URL::to('/') }}/template/img/news/img01.jpg">
+              <!--Image placeholders-->
+              @if(str_contains($request->request_type,'add') || str_contains($request->request_type,'Add'))
              
+              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/add.png">
+              @elseif(str_contains($request->request_type,'change') || str_contains($request->request_type,'Change'))
+             
+             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/change.png">
+             @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
+             
+             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+             @elseif(str_contains($request->request_type,'correction') || str_contains($request->request_type,'Correction'))
+             
+             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/correction.png">
+             @elseif(str_contains($request->request_type,'cross') || str_contains($request->request_type,'Cross'))
+             
+             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/cross.png">
+             @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
+
+             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+
+             @elseif(str_contains($request->request_type,'manual') || str_contains($request->request_type,'Manual'))
+
+            <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/manual.png">
+
+            @elseif(str_contains($request->request_type,'tutorial') || str_contains($request->request_type,'Tutorial'))
+
+            <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/tutorial.png">
+
+            @elseif(str_contains($request->request_type,'petition') || str_contains($request->request_type,'Petition'))
+
+          <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/petition.png">
+
+          @elseif(str_contains($request->request_type,'overload') || str_contains($request->request_type,'Overload'))
+
+        <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/overload.png">
+
+              @else
+             
+              <img class="d-block w-100" src="{{ URL::to('/') }}/template/img/news/img01.jpg">
+              @endif
+               <!--Image placeholders:end-->
               @endif
               <span class = "text-center mt-2"> {{ $request->request_type }}</span>
              </a>
@@ -72,7 +111,7 @@
              showElement('id','guest_header2','flex');
              showElement('id','guest_header1','hide');
              ">
-              <img class="d-block w-100" src="{{ URL::to('/') }}/template/img/news/img01.jpg">
+             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/more.png">
               <span class = "text-center mt-2"> Show more...</span>
              </a>
              </div>
@@ -160,7 +199,48 @@
               @if(isset($request->icon_file_name) && isset($request->icon_file_path))
               <img class="d-block w-100" src="{{ URL::to('/') }}/{{$request->icon_file_path}}/{{$request->icon_file_name}}">
               @else
-              <img class="d-block w-100" src="{{ URL::to('/') }}/template/img/news/img01.jpg">
+              
+              <!--Image placeholders-->
+              @if(str_contains($request->request_type,'add') || str_contains($request->request_type,'Add'))
+             
+              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/add.png">
+              @elseif(str_contains($request->request_type,'change') || str_contains($request->request_type,'Change'))
+              
+              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/change.png">
+              @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
+              
+              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+              @elseif(str_contains($request->request_type,'correction') || str_contains($request->request_type,'Correction'))
+              
+              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/correction.png">
+              @elseif(str_contains($request->request_type,'cross') || str_contains($request->request_type,'Cross'))
+              
+              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/cross.png">
+              @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
+
+              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+
+              @elseif(str_contains($request->request_type,'manual') || str_contains($request->request_type,'Manual'))
+
+            <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/manual.png">
+
+            @elseif(str_contains($request->request_type,'tutorial') || str_contains($request->request_type,'Tutorial'))
+
+            <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/tutorial.png">
+
+            @elseif(str_contains($request->request_type,'petition') || str_contains($request->request_type,'Petition'))
+
+          <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/petition.png">
+
+          @elseif(str_contains($request->request_type,'overload') || str_contains($request->request_type,'Overload'))
+
+        <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/overload.png">
+
+             @else
+            
+             <img class="d-block w-100" src="{{ URL::to('/') }}/template/img/news/img01.jpg">
+             @endif
+              <!--Image placeholders:end-->
           
               @endif
           <span class = "text-center mt-2"> {{ $request->request_type }} </span>
