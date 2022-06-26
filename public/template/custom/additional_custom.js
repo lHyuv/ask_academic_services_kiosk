@@ -818,14 +818,14 @@ const generateService = (service_id, service_name) =>{
 
 
     $('.request_title').text(service_name);
-
-    $('.ticket-item').each((i,val)=>{
-    
-       if($(val).find('.ticket-title').text().includes(service_name)){
-     
-        $(val).attr('class','ticket-item active');
-       // console.log($(val).attr('class'))
-       }
+    $(document).ready(()=>{
+        $('#final_step').append(
+            `
+            <button class = "btn btn-primary mt-2 mb-2" id = "submit_request_btn" 
+            onclick = "confirmNotif('${service_id}');">
+            Generate my Ticket </button>
+            `
+        );
     })
     //
     $.ajax({
@@ -838,16 +838,7 @@ const generateService = (service_id, service_name) =>{
             if(data.data.length != 0){
       
             content = `
-            <div class="card card-outline card-primary mt-5 col-md-4">
-            <div class="card-header"><h4>Steps</h4></div>
-
-            <div class="card-body">
-          
-            <div class = "row">
- 
-   
-            <div class="col-md-12">
-              <div class="activities">
+            <ul>
             `;
             data.data.map((val)=>{
                 let details = val.details ? val.details: 'N/A';
@@ -856,48 +847,23 @@ const generateService = (service_id, service_name) =>{
                 content +=
                 `
 
-                    <div class="activity">
-                      <div class="activity-icon bg-primary text-white shadow-primary">
-                        <i class="${icon}"></i>
-                      </div>
-                      <div class="activity-detail">
-                        <div class="mb-2">
-                          <h5 class="text-job text-primary"> ${name}</h5>
-  
-                        </div>
-                        <p>${ details } </p>
-                      </div>
-                    </div>
+                    <li>${name}</li>
                    
 
                 `
             }).join("");
             content += `
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
+                </ul>
             `;
             }else{
                 content = `
-                <div class="card card-outline card-primary mt-5 col-md-4">
-                <div class="card-header"><h4>Steps</h4></div>
-    
-                <div class="card-body">
-                <div class = "row">
-                <div class="col-md-12">
-                <i>No content to be shown..</i>
-              </div>
-              </div>
-              </div>
-  
-              </div>
-              </div>
-              </div>
+                <ul><li>No steps given yet</li></ul>
                 `
             }
-            $('#request_content').append(content);
+
+            $('#steps').html('');
+
+            $('#steps').append(content);
         }
     });
 };
@@ -910,67 +876,54 @@ const generateRequirement = (service_id) =>{
         success: (data)=>{
         
             let content = ``;
+            let content2 = ``;
             if(data.data.length != 0){
       
             content = `
-            <div class="card card-outline card-primary mt-5 ml-5 col-md-4">
-            <div class="card-header"><h4>Requirements</h4></div>
-
-            <div class="card-body">
-            <div class = "row">
- 
-   
-            <div class="col-md-12">
-              <div class="activities">
+            <ul>
             `;
             data.data.map((val)=>{
-                let details = val.details ? val.details: 'N/A';
+              //  let details = val.details ? val.details: 'N/A';
                 let name = val.requirement_name ? val.requirement_name : 'N/A';
                 content +=
                 `
+                        <li>${name}</li>
 
-                    <div class="activity">
-                      <div class="activity-icon bg-primary text-white shadow-primary">
-                        <i class="fas fa-file"></i>
-                      </div>
-                      <div class="activity-detail">
-                        <div class="mb-2">
-                          <h5 class="text-job text-primary"> ${name}</h5>
-  
-                        </div>
-                        <p>${ details } </p>
-                      </div>
-                    </div>
-                 
-                  
-                   
                 `
             }).join("");
             content += `
-            </div>
-            </div>
-
-            </div>
+                </ul>
             `;
+
+            content2 = `
+            <ul class="list-unstyled">
+            `;
+            data.data.map((val)=>{
+            //    let details = val.details ? val.details: 'N/A';
+                let name = val.requirement_name ? val.requirement_name : 'N/A';
+                content2 +=
+                `
+                      <li><input type = "checkbox" class = ""> &nbsp; ${name} </li>
+                `
+            }).join("");
+            content2 += `
+                </ul>
+            `;
+
             }else{
                 content = `
-                <div class="card card-outline card-primary ml-5 mt-5 col-md-4">
-                <div class="card-header"><h4>Requirements</h4></div>
-    
-                <div class="card-body">
-                <div class = "row">
-                <div class="col-md-12">
-                <i>No content to be shown..</i>
-              </div>
-              </div>
-              </div>
-  
-              </div>
-              </div>
-              </div>
+                <ul><li>No requirements given yet</li></ul>
                 `
+                content2 = content;
             }
-            $('#request_content').append(content);
+            //
+            $('#requirements').html('');
+
+            $('#requirements').append(content);
+
+            $('#checklist_req').html('');
+
+            $('#checklist_req').append(content2);
         }
     });
 };
@@ -979,6 +932,8 @@ const showMenu = (mode, request_id) =>{
 
     if(mode == 'hide'){
         $('#select_menu').css('display','none');
+
+        $('#select_menu2').css('display','none');
 
         $('#selected_service').css('display','block');
 
@@ -992,15 +947,13 @@ const showMenu = (mode, request_id) =>{
    
         $('#select_menu').css('display','block');
 
+        $('#select_menu2').css('display','none');
+
         $('#selected_service').css('display','none');
     
         $('#request_content').html('');
 
-        $('.ticket-item').each((i,val)=>{
-    
-             $(val).attr('class','ticket-item');
-
-         })
+ 
     }
 
 };
@@ -1125,3 +1078,11 @@ const showElement = (type,value,mode) =>{
         $(pointer + value).css('display','none');
     }
 };
+
+//Stepper
+let stepper = '';
+$(document).ready(function () {
+ 
+    stepper = new Stepper($('.bs-stepper')[0])
+})
+

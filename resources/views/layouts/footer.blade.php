@@ -128,7 +128,7 @@
     */
    
 </script>
-    
+
 <script src="http://parsleyjs.org/dist/parsley.js"></script>
 <script src="{{ asset('template/custom/additional_custom.js') }}"></script>
 </body>
