@@ -51,7 +51,7 @@
 
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/components.css') }}" rel="stylesheet">
-    <link href="{{ asset('template/custom/custom.css') }}" rel="stylesheet">
+   
     <link href="{{ asset('template/custom/keyboard.css') }}" rel="stylesheet">
     <link href="{{ asset('template/custom/step.css') }}" rel="stylesheet">
     <link href="{{ asset('template/vendors/datatable/css/datatables.min.css') }}" rel="stylesheet">
@@ -64,6 +64,7 @@
     <link href="https://unpkg.com/bs-stepper/dist/css/bs-stepper.min.css" rel="stylesheet">
     <script src = "https://unpkg.com/bs-stepper/dist/js/bs-stepper.min.js"></script>
     <!--BS Stepper:end--> 
+    <link href="{{ asset('template/custom/custom.css') }}" rel="stylesheet">
     <!--Qrious--> 
     <script src = "{{ asset('template/vendors/qrious/js/qrious.js') }}"></script>
 

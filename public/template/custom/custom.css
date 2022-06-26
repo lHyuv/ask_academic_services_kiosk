@@ -33,3 +33,6 @@ input::-webkit-inner-spin-button {
     border-left: solid #800000;
 }
 
+.active .bs-stepper-circle{background-color:#800000}
+
+.step-trigger:focus{color:#800000;outline:0}

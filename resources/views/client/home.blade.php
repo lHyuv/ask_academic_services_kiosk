@@ -184,10 +184,10 @@
 <!--Next page:end-->
 <!--Hidden--> 
 <div id = "selected_service" style = "display:none;">
-<div class="section-header-breadcrumb float-right">
+<div class="section-header-breadcrumb float-right mb-3 col-md-12">
 <span class = "float-right"> Home &nbsp; > &nbsp; <a href = "" >Menu</a> > <span class = 'request_title'>Request</span> </span>
             </div> 
-<h5 class = 'request_title text-center' >Request name</h5>
+<h4 class = 'request_title text-center' >Request name</h4>
 
 
    <!--Stepper--> 
@@ -260,7 +260,7 @@
       stepper.previous()">Previous</button>
 
     <button class="btn btn-primary float-right" onclick="
-    stepper.next()">Next</button>
+    stepper.next();">Next</button>
     </div>
 
     <div id="checklist" class="content" role="tabpanel" aria-labelledby="checklist-trigger">
@@ -270,7 +270,7 @@
       stepper.previous()">Previous</button>
 
     <button class="btn btn-primary float-right" onclick="
-    stepper.next()">Next</button>
+    if(checkReq()==true){ stepper.next(); }">Next</button>
     </div>
     <div id="get-my-ticket" class="content" role="tabpanel" aria-labelledby="get-my-ticket-trigger">
 

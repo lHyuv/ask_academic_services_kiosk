@@ -854,9 +854,9 @@ const generateService = (service_id, service_name) =>{
             <ul>
             `;
             data.data.map((val)=>{
-                let details = val.details ? val.details: 'N/A';
+             
                 let name = val.step_name ? val.step_name : 'N/A';
-                let icon = val.step_icon ? val.step_icon : 'fas fa-file';
+           
                 content +=
                 `
 
@@ -921,7 +921,7 @@ const generateRequirement = (service_id) =>{
                 </ul>
             `;
             content2 = `
-            <ul class="list-unstyled">
+            <ul class="list-unstyled" id = "req_list">
             `;
             data.data.map((val)=>{
             //    let details = val.details ? val.details: 'N/A';
@@ -937,7 +937,7 @@ const generateRequirement = (service_id) =>{
 
             }else{
                 content = `
-                <ul><li  class = "mt-3 mb-3">No requirements given yet</li></ul>
+                <ul><li class = "mt-3 mb-3">No requirements given yet</li></ul>
                 `
                 content2 = content;
             }
@@ -976,9 +976,10 @@ const showMenu = (mode, request_id) =>{
                 confirmNotif(request_id);
             })
        }
+       $('input[type=text]').val('');
 
     }else{
-   
+        
         $('#select_menu').css('display','block');
 
         $('#select_menu2').css('display','none');
@@ -998,8 +999,8 @@ const confirmNotif = (request_id) =>{
         title: 'Proceed?',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: 'Save',
-        denyButtonText: `Don't save`,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
         customClass: {
             actions: 'my-actions',
             cancelButton: 'order-1 right-gap',
@@ -1131,3 +1132,27 @@ $(document).ready(function () {
       */
 })
 
+const checkReq = () =>{
+    if($('#req_list')){
+        let check = true;
+        $('#req_list li').each((i,val)=>{
+         //   console.log($(val).find('input').is(":checked"));
+
+            if($(val).find('input').is(":checked") == false){
+               
+                check = false;
+
+            }
+        })
+
+        if(check == true){
+            
+            return true;
+        }else{
+            notification('error','','Check all the requirements first!');
+        }
+    }else{
+       
+        return true;
+    }
+};
