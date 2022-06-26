@@ -293,7 +293,43 @@
 </div>
 <!--Hidden:end--> 
 </div>
+<!--Finish Step-->
+<section id = "finish_step" style = 'display:none;'> 
+<div class = "row">
+<div class  ="col-md-12">
+<div class="section-header-breadcrumb float-right mb-3">
+  <span class = "float-right"> Home &nbsp; > &nbsp; <a href = "" >Menu</a> > <span class = 'request_title'>Request</span> </span>
+</div> 
+</div>
+  <div class  ="col-md-1"></div> 
+  <div class = "col-md-11">
+    
+<h5 class = 'request_title text-center' >Request name</h5>
+<p class = "text-center">Thank you for using our service. Have a nice day!</p>
+<div  class = "text-center">
+<canvas id="qr_code"></canvas> <br>
+</div> 
+<div  class = "text-justify">
+<b>Ticket No: </b><span id = "finish-ticket_no">&nbsp;</span> <br>
+<b>Student No:  </b><span id = "finish-name">&nbsp;</span> <br>
+<b>Purpose:  </b><span class = "request_title">&nbsp;</span><br>
+<b>Date:  </b><span id = "finish-created-at">&nbsp;</span><br>
 
+</div>
+<div  class = "text-center">
+<button class = "btn btn-primary text-center" onclick = "
+      showElement('id','select_menu','show');
+      showElement('id','select_menu2','hide');
+      showElement('id','guest_header1','flex');
+      showElement('id','guest_header2','hide');
+      showElement('id','finish_step', 'hide');
+      stepper.reset();
+">Finish</button>
+</div>
+</section>
+</div>
+</div>
+<!--Finish Step:end-->
 @endsection
 
 

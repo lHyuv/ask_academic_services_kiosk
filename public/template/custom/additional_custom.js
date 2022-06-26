@@ -821,13 +821,24 @@ const generateService = (service_id, service_name) =>{
 
     $('.request_title').text(service_name);
     $(document).ready(()=>{
-        $('#final_step').append(
-            `
-            <button class = "btn btn-primary mt-2 mb-2" id = "submit_request_btn" 
-            onclick = "confirmNotif('${service_id}');">
-            Generate my Ticket </button>
-            `
-        );
+        if($('#submit_request_btn').length){
+          
+
+            $('#submit_request_btn').on('click',()=>{
+                confirmNotif(`${service_id}`);
+            })
+        }else{
+         
+            $('#final_step').append(
+                `
+                <button class = "btn btn-primary mt-2 mb-2" id = "submit_request_btn" 
+                onclick = "confirmNotif('${service_id}');">
+                Generate my Ticket </button>
+                `
+            );
+        }
+       
+
     })
     //
     $.ajax({
@@ -1035,37 +1046,27 @@ const confirmNotif = (request_id) =>{
                 },
                 success: (data)=>{
                     //
-                    Swal.fire({
-                        title: '<strong>Request Details</strong>',
-                        icon: 'success',
-                        html:
-                          `
-                           <button type = "button" class = "btn btn-info" 
-                          onclick = "notification('success','','Successfully printed');">Print</button>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                          `,
-                      //  showCloseButton: true,
-                      //  showCancelButton: true,
-                        focusConfirm: false,
-                        confirmButtonText:
-                          'Close',
-                          /*
-                        cancelButtonText:
-                          '',
-                          */
-                        
-                    }).then((result) => {
-                        /* Read more about isConfirmed, isDenied below */
-                        if (result.isConfirmed) {
-                          window.location.href = '/guest';
-                        } 
-                      })
-                      //
+                    $('#finish_step').css('display','block');
+                    
+                    let qr_code = new QRious({
+                        element: document.getElementById('qr_code'),
+                        value: code,
+                        level: 'M',
+                    });
+
+                    if($('#selected_service')){
+                        $('#selected_service').css('display','none');
+                    }
+                    $('#finish-ticket_no').html(code);
+                    $('#finish-name').html(student_no);
+                    $('#finish-created-at').html(moment().format("MMM Do YYYY"));
+
+
+
+
+
+                   
+
                 },
                 error:({responseJSON})=>{
                     console.log(responseJSON.detail)
@@ -1102,12 +1103,31 @@ const showElement = (type,value,mode) =>{
     }
 };
 
+//qrious
+
+
+
 //Stepper
 let stepper = '';
 $(document).ready(function () {
     if($('.bs-stepper')[0]){
         stepper = new Stepper($('.bs-stepper')[0])
     }
+       /*
+        let qr_code = new QRious({
+            element: document.getElementById('qr_code'),
+            value: ''
+        });
 
+   
+      qr_code.set({
+        background: '',
+        foreground: '',
+        level: 'H',
+        padding: 25,
+        size: 100,
+        value: '',
+      });
+      */
 })
 

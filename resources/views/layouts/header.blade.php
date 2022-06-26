@@ -64,6 +64,11 @@
     <link href="https://unpkg.com/bs-stepper/dist/css/bs-stepper.min.css" rel="stylesheet">
     <script src = "https://unpkg.com/bs-stepper/dist/js/bs-stepper.min.js"></script>
     <!--BS Stepper:end--> 
+    <!--Qrious--> 
+    <script src = "{{ asset('template/vendors/qrious/js/qrious.js') }}"></script>
+
+    <!--Moment JS--> 
+    <script src = "{{ asset('template/vendors/momenjs/js/moment-2.29.3.min.js') }}"></script>
 </head>
 <body class = "bg-white">
 
