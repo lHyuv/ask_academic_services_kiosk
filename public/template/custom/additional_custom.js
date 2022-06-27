@@ -1,5 +1,7 @@
 
 const apiURL = "http://localhost:8000/api/";
+const baseURL = "http://localhost:8000/";
+let placeholder_src = $("#placeholder").attr("src");
 
 $("form").parsley();
 
@@ -304,31 +306,72 @@ $('input[type=\'password\']').showHidePassword();
 
 
 //
+const showImg = (url) => {
+
+	let ext = url.substring(url.lastIndexOf(".") + 1).toLowerCase();
+	if (url.files && url.files[0] && (ext == "jpeg" || ext == "jpg" || ext == "png")) {
+		let reader = new FileReader();
+
+		reader.onload = (e) =>{
+			$("#placeholder").attr("src", e.target.result);
+		};
+
+		reader.readAsDataURL(input.files[0]);
+	} else{
+        notification('error','','Not a valid image file type!');
+    }
+};
 
 const editRequest = (data) =>{
     //view
 
+
     let values = JSON.parse(data);
     $('#edit_type').val(values['request_type']);
+    if(values['icon_file_path'] && values['icon_file_name']){
+        $("#placeholder").attr(
+            "src",
+            `${baseURL}${values['icon_file_path']}/${values['icon_file_name']}`
+        );
+    }else{
+        $("#placeholder").attr(
+            "src",
+            placeholder_src
+        );
+    }
+    
 
 
     $('#edit_request').on('submit',(e)=>{
 
         e.preventDefault();
 
+        let form_data = new FormData(document.getElementById('edit_request'));
+        console.log(form_data)
+
+        // console.log(form_data);
+
         $.ajax({
             url: apiURL + 'requests/update/' + values['id'],
             async: true,
             method: 'POST',
-            data: {
+            data: form_data,
+            /*
+            {
                 'request_type' : $('#edit_type').val(),
                 'updated_by' : sessionStorage.getItem('user_id'),
             },
+            */
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
             },
+            //for file
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
             success: (data)=>{
-                
+                console.log(data)
 
                 notification('success','','Successfully updated');
                 //location.reload();
@@ -336,7 +379,7 @@ const editRequest = (data) =>{
                 drawTable();
             },
             error:({responseJSON})=>{
-                //console.log(responseJSON);
+                console.log(responseJSON);
                 notification('error','','Something went wrong');
             }
         });
@@ -346,22 +389,33 @@ const editRequest = (data) =>{
 };
 
 const createRequest = () =>{
-
+    
     $('#create_request').on('submit',(e)=>{
 
         e.preventDefault();
+  
+        let form_data = new FormData(document.getElementById('create_request'));
 
+       // console.log(form_data);
         $.ajax({
             url: apiURL + 'requests',
             async: true,
             method: 'POST',
-            data: {
+            data: form_data,
+            /*
+            {
                 'request_type' : $('#create_type').val(),
                 'created_by' : sessionStorage.getItem('user_id'),
             },
+            */
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
             },
+            //for file
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
             success: (data)=>{
                 
        

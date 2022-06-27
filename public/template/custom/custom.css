@@ -36,3 +36,13 @@ input::-webkit-inner-spin-button {
 .active .bs-stepper-circle{background-color:#800000}
 
 .step-trigger:focus{color:#800000;outline:0}
+
+#select_menu img:hover{
+    transform: scale(1.2); 
+ 
+}
+
+#select_menu2 img:hover{
+    transform: scale(1.2); 
+   
+}

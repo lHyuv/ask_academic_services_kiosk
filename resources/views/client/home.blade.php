@@ -40,7 +40,7 @@
 
               <!---->
          
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex align-items-stretch">
             <div class="card shadow-md rounded ml-2">
              <div class = "card-body">
              <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
@@ -102,7 +102,7 @@
             @if($key + 1 == count($requests))
              <!---->
          
-            <div class="col-md-4">
+            <div class="col-md-4 d-flex align-items-stretch">
             <div class="card shadow-md rounded ml-2">
              <div class = "card-body">
              <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
@@ -157,7 +157,7 @@
       ><i class = "fas fa-arrow-left"></i> Back</button>
       </div>
       <div class="col-md-4">
-      <span class = "float-right"> Home &nbsp; > &nbsp; <a href = "" >Menu</a>  </span>
+      <span class = "float-right"><a href = "#" > Home </a> &nbsp; > &nbsp; Menu  </span>
       </div>
       </div>
                  <!--Menu--> 
@@ -169,11 +169,11 @@
         <div class = "row">
         @endif
 
-        @if(count($full_requests) % 10 == 0 && $key != 0 && $key != 1)
+        @if(count($full_requests) == 10 && $key != 0 && $key != 1)
           @if($key == count($full_requests) - 2)
          <!---->
      
-        <div class="col-md-3">
+        <div class="col-md-3 d-flex align-items-stretch">
         <div class="card shadow-none border-0 ml-2">
          <div class = "card-body">
          
@@ -189,7 +189,7 @@
         
           <!---->
      
-        <div class="col-md-3">
+        <div class="col-md-3 d-flex align-items-stretch">
         <div class="card shadow-md rounded ml-2">
          <div class = "card-body">
          <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
@@ -357,7 +357,7 @@
 
                             <div class = "text-center">
         <label class = "text-center">Please insert your student number</label>
-        <input id = 'student_no' name = 'student_no' type="text" placeholder = "xxxx-xxxx-xxxx" class = "form-control">
+        <input id = 'student_no' name = 'student_no' type="text" placeholder = "xxxx-xxxx-xxxx" class = "form-control mb-3">
         <section id = 'final_step'></section>
  
       </div>

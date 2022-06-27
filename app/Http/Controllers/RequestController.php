@@ -79,7 +79,7 @@ class RequestController extends Controller
     public function update(Request $request, $id){
 
         $validator = Validator::make($request->all(), [
-            'request_type' => ['required', 'string', 'max:255','unique:requests'],
+            'request_type' => ['required', 'string', 'max:255'],
             'file'  => 'required|mimes:png,jpg,jpeg|max:2305',
         ]);
 
@@ -93,7 +93,7 @@ class RequestController extends Controller
             $file->move(public_path('files'),$name); 
             $request_data = Requests::findOrFail($id);
           //  $request_data->update($request->all());
-            $request_data =  Requests::create([
+            $request_data->update([
                 'request_type' => request('request_type'),
                 'icon_file_name' => $name,
                 'icon_file_path' => $path,

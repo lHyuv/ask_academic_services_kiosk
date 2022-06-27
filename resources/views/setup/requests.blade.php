@@ -25,19 +25,30 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "" id = 'edit_request'>
+                    <form action="" method = "" id = 'edit_request'  enctype="multipart/form-data">
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Request Type</label>
-                        <input type="text" name = "edit_type" id = "edit_type" class = "form-control" placeholder = "" required/>
+                        <input type="text" name = "request_type" id = "edit_type" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
 
                         </div>
-                    
-
+                        <div class = "col-md-12">
+                        <div class="form-group">
+                        <label>Icon / Picture</label>
+                        <input class="form-control" type="file" id="edit_file" name="file" accept="image/*" onchange="showImg(this.value)" >
+                        </div>
+                        </div>
+                        <div class = "col-md-12">
+                        <div class="form-group">
+                        <img src="{{ URL::to('/') }}/template/img/example-image.jpg"class="img-fluid mb-2" 
+                        style="object-fit: cover;" 
+                        id="placeholder" name="placeholder">
+                        </div>
+                        </div>
                  
                      
                         <div class="float-right">
@@ -59,13 +70,20 @@
                 <div class="card-body">
                     <div class = "row">
                     <div class = "col-md-12">
-                    <form action="" method = "" id = "create_request">
+                    <form action="" method = "" id = "create_request" name = "create_request" enctype="multipart/form-data">
 
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Request Type</label>
-                        <input type="text" name = "create_type" id = "create_type" class = "form-control" placeholder = "" required/>
+                        <input type="text" name = "request_type" id = "create_type" class = "form-control" placeholder = "" required/>
+                        </div>
+                        </div>
+
+                        <div class = "col-md-12">
+                        <div class="form-group">
+                        <label>Icon / Picture</label>
+                        <input class="form-control" type="file" id="create_file" name="file" accept="image/*" >
                         </div>
                         </div>
 
