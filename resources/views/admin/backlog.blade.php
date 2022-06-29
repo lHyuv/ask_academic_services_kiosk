@@ -22,30 +22,45 @@
 
 
 
-    @foreach($submitted_requests as $key=>$req)
+
     
     <div class="card card-primary mt-5">
-            @if( date('d-M-y', strtotime($req[0]->created_at)) ==  date('d-M-y', strtotime(now())))
-                <div class="card-header"><h4>Today</h4></div>
-            @elseif( date('d-M-y', strtotime($req[0]->created_at)) ==  date('d-M-y', strtotime(now()->subDays(1))))
-                <div class="card-header"><h4>Yesterday</h4></div>
-            @else
-                <div class="card-header"><h4>{{ date('d-M-y', strtotime($req[0]->created_at)) }}</h4></div>
-            @endif
-                <div class="card-body">
-                    <ul class = "list-unstyled">
-                        @foreach($req as $r)
-                        @if($r->student_number != 'N/A')
-                        <li><i class = 'fas fa-user'></i> User<a href = "#">  {{ $r->student_number }}</a> opted for {{ $r->requests()->pluck('request_type')[0] }}</li> <hr>
-                        @else
-                        <li><i class = 'fas fa-user'></i> A<a href = "#"> user</a> opted for {{ $r->requests()->pluck('request_type')[0]}}</li> <hr>
-                        @endif
 
+                <div class="card-header"><h4>List of created requests</h4></div>
+      
+                <div class="card-body">
+                    <table class = "table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Student Number</th>
+                                <th>Transaction</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($submitted_requests as $r)
+                        <tr>
+                        <td>
+                        @if($r->student_number != 'N/A' || $r->student_number != null)
+                        <a href = "#"> User</a>
+                        @else 
+                        {{ $r->student_number }}
+                        @endif
+                        </td>
+                        <td>
+                        {{ $r->requests()->pluck('request_type')[0]}}
+                        </td>
+                        <td>
+                        {{ date('d-M-y', strtotime($r->created_at))}}
+                        </td>
+                        </tr>
                         @endforeach
-                    </ul>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
-    @endforeach
+
         </div>
 
          <!---->
@@ -85,6 +100,9 @@
 
     </div>
 </div>
+<script>
+    $('table').dataTable();
+</script>
 @endsection
 
 

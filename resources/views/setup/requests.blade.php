@@ -83,7 +83,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Icon / Picture</label>
-                        <input class="form-control" type="file" id="create_file" name="file" accept="image/*" >
+                        <input required class="form-control" type="file" id="create_file" name="file" accept="image/*" >
                         </div>
                         </div>
 

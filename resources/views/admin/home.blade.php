@@ -29,7 +29,13 @@
                     <h4>Transactions</h4>
                   </div>
                   <div class="card-body">
+                   @if(isset($today_requests))
+                   {{ count((array)$today_requests) }}
+                   @else
                    0
+                   @endif
+
+                   
                   </div>
                 </div>
               </div>
@@ -41,10 +47,11 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Clients</h4>
+                  <h4>Most Frequented Service</h4>
                   </div>
                   <div class="card-body">
-                   0
+                  
+                   <h5 class = 'text-justify float-left' id = 'today_most_service'></h5>
                   </div>
                 </div>
               </div>
@@ -58,10 +65,10 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Pending Requests</h4>
+                    <h4>Least Frequented Service</h4>
                   </div>
                   <div class="card-body">
-                   0
+                  <h5 class = 'text-justify float-left'  id = 'today_least_service'></h5>
                   </div>
                 </div>
               </div>
@@ -69,7 +76,7 @@
         <!---->    
     </div>
     
-    <h5>Weekly</h5>
+    <h5>This Week</h5>
     <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
@@ -81,7 +88,11 @@
                     <h4>Transactions</h4>
                   </div>
                   <div class="card-body">
+                  @if(isset($today_requests))
+                   {{ count((array)$today_requests) }}
+                   @else
                    0
+                   @endif
                   </div>
                 </div>
               </div>
@@ -93,10 +104,10 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Clients</h4>
+                  <h4>Most Frequented Service</h4>
                   </div>
                   <div class="card-body">
-                   0
+                  <h5 class = 'text-justify float-left' id = 'week_service'></h5>
                   </div>
                 </div>
               </div>
@@ -110,17 +121,17 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Pending Requests</h4>
+                  <h4>Most Frequented Day</h4>
                   </div>
                   <div class="card-body">
-                   0
+                  <h5 class = 'text-justify float-left'  id = 'week_day'></h5>
                   </div>
                 </div>
               </div>
             </div>
         <!---->    
     </div>
-    <h5>Monthly</h5>
+    <h5>This Month</h5>
     <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-12">
               <div class="card card-statistic-2">
@@ -132,7 +143,11 @@
                     <h4>Transactions</h4>
                   </div>
                   <div class="card-body">
+                  @if(isset($today_requests))
+                   {{ count((array)$this_month_requests) }}
+                   @else
                    0
+                   @endif
                   </div>
                 </div>
               </div>
@@ -144,10 +159,10 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Clients</h4>
+                  <h4>Most Frequented Service</h4>
                   </div>
                   <div class="card-body">
-                   0
+                  <h5 class = 'text-justify float-left'  id = 'month_service'></h5>
                   </div>
                 </div>
               </div>
@@ -161,10 +176,10 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Pending Requests     {{ session('alert') }}</h4>
+                  <h4>Most Frequented Day</h4>
                   </div>
                   <div class="card-body">
-                   0
+                  <h5 class = 'text-justify float-left' id = 'month_day'></h5>
                   </div>
                 </div>
               </div>
@@ -182,8 +197,10 @@
 @if(Auth::user()->client)
   sessionStorage.setItem('client_id', '{{ Auth::user()->client->pluck("id")[0] }}');
 @endif
+
 </script>
 
 @endsection
+
 
 

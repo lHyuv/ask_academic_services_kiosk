@@ -1210,3 +1210,89 @@ const checkReq = () =>{
         return true;
     }
 };
+
+const getMost = (arr) => {
+
+        return arr.sort((a,b) =>
+        arr.filter(val => val === a).length - arr.filter(val => val === b).length).pop();
+
+ };
+
+ 
+const getLeast = (arr) => {
+
+    return arr.sort((a,b) =>
+    arr.filter(val => val === b).length - arr.filter(val => val === a).length).pop();
+
+};
+
+const numDashboard = () =>{
+    $.ajax({
+        url: apiURL + 'submitted_requests',
+        async: true,
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+        },
+        success: (data)=>{
+            
+            let today = new Array();
+            let month = new Array();
+            let week = new Array();
+            let today_services = new Array();
+            let today_services2 = new Array();
+            let week_services = new Array();
+            let month_services = new Array();
+ 
+            //
+            data.data.map((val)=>{
+                let value = moment(val.created_at).format("MMM Do YYYY");
+                let now = moment(new Date()).format("MMM Do YYYY");
+
+                if(val != null && typeof(val['created_at']) != 'undefined' &&
+                new Date(val['created_at']).getFullYear() == new Date().getFullYear()){
+               
+                    if(value == now){
+                        today.push(new Date(val.created_at).getDay());
+                        today_services.push(val['requests'].request_type);
+                        today_services2.push(val['requests'].request_type);
+                    }
+                    if(moment(val.created_at).format("MMM YYYY") == moment(new Date()).format("MMM YYYY")){
+                        month.push(new Date(val.created_at).getDay());
+                        month_services.push(val['requests'].request_type);
+                      
+                        if(new Date(val.created_at).getDate() >  new Date().getDate() - 7){
+                            week.push(new Date(val.created_at).getDay());
+                            week_services.push(val['requests'].request_type);
+                     
+                        }
+                    }
+                    
+                }
+            });
+            //
+        
+            $('#today_most_service').html(getMost(today_services));
+            $('#today_least_service').html(getLeast(today_services2));
+            $('#week_service').html(getMost(week_services));
+            $('#month_service').html(getMost(month_services));
+            let days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+            $('#month_day').html(days[getMost(month)]);
+            $('#week_day').html(days[getMost(week)]);
+        
+          
+        }
+
+    })
+
+};
+
+
+if((window.location.href).includes('/home')){
+ $(document).ready(()=>{
+       
+    numDashboard();
+})
+
+}
+
