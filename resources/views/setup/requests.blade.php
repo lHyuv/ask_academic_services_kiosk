@@ -189,7 +189,25 @@
 </div>
 <script>
 $(document).ready(()=>{
-    $('table').DataTable();
+    $("table").dataTable({
+        "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+        "dom": 'Bfrtip',
+    
+                 "buttons": [
+        
+                  {
+                      extend: 'collection',
+                      text: 'Options',
+                      buttons: [
+                          'copy',
+                          'excel',
+                          'csv',
+                          'pdf',
+                          'print'
+                      ]
+                  }
+                ],
+    });
 })
 </script>
 @endsection

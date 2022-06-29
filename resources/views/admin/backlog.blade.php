@@ -72,26 +72,31 @@
                 <div class="card-body">
                     <h5>Sort By</h5>
                     <form>
-                        <label>Date from</label>
-                        <input type = 'date' class = 'form-control' />
-                        <label>Date to</label>
-                        <input type = 'date' class = 'form-control' />
-                        <label>By User</label>
-                        <select class = 'form-control'>
-                            <option value = ''>...</option>
-                        </select>
                         <label>By Service</label>
-                        <select class = 'form-control'>
-                            <option value = ''>...</option>
+                        <select class = 'form-control' id='requests' onchange = 'selectRequest($("#requests").val());'>
+                            @foreach($requests as $req)
+                            <option value = "{{ $req->id }}"> {{ $req->request_type }}</option>
+                            @endforeach
                         </select>
+                        <label>Date from</label>
+                        <input type = 'date' class = 'form-control' id = 'date_from' onchange = '
+                        $("#date_to").css("display","block");
+                        $("#date_to_label").css("display","block");
+                        '/>
+                        <label id = "date_to_label" style = "display:none;" >Date to</label>
+                        <input type = 'date' class = 'form-control' id = 'date_to' onchange = '
+                        selectRange(); 
+                        $("#date_to").css("display","none");
+                        $("#date_to_label").css("display","none");
+                        ' style = "display:none;"/>
+
+
                         <label>By Month</label>
-                        <select class = 'form-control'>
-                            <option value = ''>...</option>
+                        <select class = 'form-control' id = 'month' onchange = 'selectMonth();'>
+                            
                         </select>
                         <label>By Day</label>
-                        <select class = 'form-control'>
-                            <option value = ''>...</option>
-                        </select>
+                        <input type="date" class  ='form-control' id = 'date' onchange = 'selectDay();'>
                     </form>
                 </div>
             </div>

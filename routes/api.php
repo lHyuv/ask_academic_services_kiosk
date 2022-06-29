@@ -149,6 +149,12 @@ Route::middleware('auth:sanctum')->get('/submitted_requests/user/{id}', [Submitt
 
 Route::middleware('auth:sanctum')->get('/submitted_requests/request/{id}', [SubmittedRequestController::class, 'find_by_request']);
 
+Route::middleware('auth:sanctum')->post('/submitted_requests/query', [SubmittedRequestController::class, 'date_query']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requests/month', [SubmittedRequestController::class, 'month']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requests/day', [SubmittedRequestController::class, 'day']);
+
 Route::middleware('auth:sanctum')->get('/submitted_requests/{id}', [SubmittedRequestController::class, 'show']);
 
 Route::post('/submitted_requests',[SubmittedRequestController::class, 'create']);

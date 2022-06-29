@@ -39,6 +39,31 @@ const drawTable = (table_id) =>{
         $("table").load(location.href + " table");
     }
 
+    //
+
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    $("table").DataTable({
+        "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+        "dom": 'Bfrtip',
+    
+                 "buttons": [
+        
+                  {
+                      extend: 'collection',
+                      text: 'Options',
+                      buttons: [
+                          'copy',
+                          'excel',
+                          'csv',
+                          'pdf',
+                          'print'
+                      ]
+                  }
+                ],
+    });
+
 };
 
 
@@ -1296,3 +1321,330 @@ if((window.location.href).includes('/home')){
 
 }
 
+
+const setSelect = () =>{
+    let month_content = ``;
+
+    for(let i = 1; i <= 12; i++){
+        month_content += `
+        <option value = '${i}'>${i}</option>
+        `;
+    }
+
+
+    $('#month').append(month_content);
+
+};
+
+setSelect();
+
+const selectRequest = (id) =>{
+    $('select').removeClass('text-primary');
+    $('#requests').addClass('text-primary');
+
+    //
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    $("table").DataTable({
+                
+    "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+    "dom": 'Bfrtip',
+
+             "buttons": [
+    
+              {
+                  extend: 'collection',
+                  text: 'Options',
+                  buttons: [
+                      'copy',
+                      'excel',
+                      'csv',
+                      'pdf',
+                      'print'
+                  ]
+              }
+            ],
+                'ajax': {
+                  
+                    url: apiURL + 'submitted_requests/request/' + id,
+                    type: "GET",
+                   // dataSrc:"",
+                    headers: { 
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                        dataType: "json",
+                        Accept: "application/json",
+                    },
+ 
+                },
+                //put data into columns
+        
+                'columns': [
+    
+                  
+                  { 
+                    'data': (data,type,row)=>{
+                        if(data['student_number'] == null || data['student_number'] == 'N/A'){
+                            return `<a>User</a>`;
+                        }else{
+                            return data['student_number'];
+                        }
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return data['requests']['request_type'];
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                ]
+            })
+
+            
+      
+  
+};
+
+const selectMonth = () =>{
+    $('select').removeClass('text-primary');
+    $('#month').addClass('text-primary');
+
+    //
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    $("table").DataTable({
+                
+    "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+    "dom": 'Bfrtip',
+
+             "buttons": [
+    
+              {
+                  extend: 'collection',
+                  text: 'Options',
+                  buttons: [
+                      'copy',
+                      'excel',
+                      'csv',
+                      'pdf',
+                      'print'
+                  ]
+              }
+            ],
+                'ajax': {
+                  
+                    url: apiURL + 'submitted_requests/month',
+                    type: "POST",
+                   // dataSrc:"",
+                    headers: { 
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                        dataType: "json",
+                        Accept: "application/json",
+                    },
+                    data: {
+                        'month' : $('#month').val(),
+                    },
+                    error: ({responseJSON})=>{
+                        console.log(responseJSON)
+                        notification('error','','Something went wrong')
+
+                    }
+ 
+                },
+                //put data into columns
+        
+                'columns': [
+    
+                  
+                  { 
+                    'data': (data,type,row)=>{
+                        if(data['student_number'] == null || data['student_number'] == 'N/A'){
+                            return `<a>User</a>`;
+                        }else{
+                            return data['student_number'];
+                        }
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return data['requests']['request_type'];
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                ]
+            })
+
+            
+      
+  
+};
+
+const selectDay= () =>{
+    $('select').removeClass('text-primary');
+    $('#day').addClass('text-primary');
+
+    //
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    $("table").DataTable({
+                
+    "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+    "dom": 'Bfrtip',
+
+             "buttons": [
+    
+              {
+                  extend: 'collection',
+                  text: 'Options',
+                  buttons: [
+                      'copy',
+                      'excel',
+                      'csv',
+                      'pdf',
+                      'print'
+                  ]
+              }
+            ],
+                'ajax': {
+                  
+                    url: apiURL + 'submitted_requests/day',
+                    type: "POST",
+                   // dataSrc:"",
+                    headers: { 
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                        dataType: "json",
+                        Accept: "application/json",
+                    },
+                    data: {
+                        'date' : $('#date').val(),
+                    },
+                    error: ({responseJSON})=>{
+                        console.log(responseJSON)
+                        notification('error','','Something went wrong')
+
+                    }
+ 
+                },
+                //put data into columns
+        
+                'columns': [
+    
+                  
+                  { 
+                    'data': (data,type,row)=>{
+                        if(data['student_number'] == null || data['student_number'] == 'N/A'){
+                            return `<a>User</a>`;
+                        }else{
+                            return data['student_number'];
+                        }
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return data['requests']['request_type'];
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                ]
+            })
+
+            
+      
+  
+};
+
+const selectRange = () =>{
+    
+    $('select').removeClass('text-primary');
+    $('#date_from').addClass('text-primary');
+    $('#date_to').addClass('text-primary');
+
+    //
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    $("table").DataTable({
+                
+    "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+    "dom": 'Bfrtip',
+
+             "buttons": [
+    
+              {
+                  extend: 'collection',
+                  text: 'Options',
+                  buttons: [
+                      'copy',
+                      'excel',
+                      'csv',
+                      'pdf',
+                      'print'
+                  ]
+              }
+            ],
+                'ajax': {
+                  
+                    url: apiURL + 'submitted_requests/query',
+                    type: "POST",
+                   // dataSrc:"",
+                    headers: { 
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                        dataType: "json",
+                        Accept: "application/json",
+                    },
+                    data: {
+                        'date_from' : $('#date_from').val(),
+                        'date_to' : $('#date_to').val(),
+                    },
+                    error: ({responseJSON})=>{
+                        console.log(responseJSON)
+                        notification('error','','Something went wrong')
+
+                    }
+ 
+                },
+                //put data into columns
+        
+                'columns': [
+    
+                  
+                  { 
+                    'data': (data,type,row)=>{
+                        if(data['student_number'] == null || data['student_number'] == 'N/A'){
+                            return `<a>User</a>`;
+                        }else{
+                            return data['student_number'];
+                        }
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return data['requests']['request_type'];
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                ]
+            })
+
+            
+      
+  
+};

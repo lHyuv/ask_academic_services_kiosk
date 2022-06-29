@@ -73,6 +73,7 @@ class HomeController extends Controller
 
     public function backlog(){
         $submitted_requests = SubmittedRequest::where('status',1)->get();
+        $requests = Requests::where('status',1)->get();
         /*
         ->groupBy(function ($val) {
             return Carbon::parse($val->created_by)->format('d');
@@ -80,7 +81,8 @@ class HomeController extends Controller
         */
     // dd($submitted_requests);
         return view('admin.backlog',[
-            'submitted_requests' => $submitted_requests
+            'submitted_requests' => $submitted_requests,
+            'requests' => $requests,
         ]);
     }
 

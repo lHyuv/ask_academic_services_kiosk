@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SubmittedRequest;
 use Validator;
+use Carbon\Carbon;
 
 class SubmittedRequestController extends Controller
 {
@@ -107,4 +108,66 @@ class SubmittedRequestController extends Controller
         ];
     }
 
+    public function date_query(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'date_from' => ['required'],
+            'date_to' => ['required'],
+
+        ]);
+
+        $data = SubmittedRequest::with([
+            'requests',
+         ])
+         //->whereDate('created_at','>=', request('date_from')->format('Y-m-d'))
+         //->whereDate('created_at','<=', request('date_to')->format('Y-m-d'))
+         ->whereDate('created_at','>=', request('date_from'))
+         ->whereDate('created_at','<=', request('date_to'))
+         ->get();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
+    }
+    
+    public function month(Request $request){
+
+
+        $validator = Validator::make($request->all(), [
+            'month' => ['required'],
+
+        ]);
+
+        $data = SubmittedRequest::with([
+            'requests',
+         ])
+         ->whereMonth('created_at','=', 
+          request('month'))
+         ->get();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
+    }
+
+    public function day(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'date' => ['required'],
+
+        ]);
+
+        $data = SubmittedRequest::with([
+            'requests',
+         ])
+         ->whereDate('created_at','=', Carbon::parse(request('date'))->format('Y-m-d'))
+         ->get();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
+    }
 }
