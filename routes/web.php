@@ -23,7 +23,7 @@ Auth::routes();
 
 Route::get('/guest', [App\Http\Controllers\GuestController::class, 'index'])->name('guest');
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [App\Http\Controllers\GuestController::class, 'index'])->name('guest2');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

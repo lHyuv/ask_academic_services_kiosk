@@ -2,6 +2,7 @@
 const apiURL = "http://localhost:8000/api/";
 const baseURL = "http://localhost:8000/";
 let placeholder_src = $("#placeholder").attr("src");
+let create_ctr = 0; //to prevent duplicated AJAX
 
 $("form").parsley();
 
@@ -413,14 +414,19 @@ const editRequest = (data) =>{
 
 };
 
+
 const createRequest = () =>{
     
     $('#create_request').on('submit',(e)=>{
 
         e.preventDefault();
-  
+        
+        if (create_ctr > 0) {
+            return;
+        }
+        create_ctr++;
         let form_data = new FormData(document.getElementById('create_request'));
-
+        
        // console.log(form_data);
         $.ajax({
             url: apiURL + 'requests',
@@ -444,7 +450,7 @@ const createRequest = () =>{
             success: (data)=>{
                 
        
-             
+                create_ctr = 0;
                 notification('success','','Successfully created');
                // location.reload();
                manageCard('create_request_crud','hide'); 
@@ -610,7 +616,10 @@ const createStep = () =>{
     $('#create_step').on('submit',(e)=>{
 
         e.preventDefault();
-        
+        if (create_ctr > 0) {
+            return;
+        }
+        create_ctr++;
         $.ajax({
             url: apiURL + 'steps',
             async: true,
@@ -628,7 +637,7 @@ const createStep = () =>{
             success: (data)=>{
                 
        
-             
+                create_ctr = 0;
                 notification('success','','Successfully created');
                // location.reload();
                manageCard('create_step_crud','hide'); 
@@ -726,7 +735,10 @@ const createRequirement = () =>{
     $('#create_requirement').on('submit',(e)=>{
 
         e.preventDefault();
-        
+        if (create_ctr > 0) {
+            return;
+        }
+        create_ctr++;
         $.ajax({
             url: apiURL + 'requirements',
             async: true,
@@ -744,7 +756,7 @@ const createRequirement = () =>{
             success: (data)=>{
                 
        
-             
+                create_ctr = 0;
                 notification('success','','Successfully created');
                // location.reload();
                manageCard('create_requirement_crud','hide'); 
@@ -935,11 +947,11 @@ const generateService = (service_id, service_name) =>{
             data.data.map((val)=>{
              
                 let name = val.step_name ? val.step_name : 'N/A';
-           
+                let no = val.step_number ? val.step_number : ' ';
                 content +=
                 `
 
-                    <li class = "mt-3 mb-3">${name}</li>
+                    <li class = "mt-3 mb-3">${no}. ${name}</li>
                    
 
                 `
@@ -956,7 +968,7 @@ const generateService = (service_id, service_name) =>{
             $('#steps').html('');
 
             $('#steps').append(content);
-        }
+        },
     });
 };
 
@@ -1296,14 +1308,39 @@ const numDashboard = () =>{
                 }
             });
             //
-        
-            $('#today_most_service').html(getMost(today_services));
-            $('#today_least_service').html(getLeast(today_services2));
-            $('#week_service').html(getMost(week_services));
-            $('#month_service').html(getMost(month_services));
+            if(today_services.length != 0){
+                $('#today_most_service').html(getMost(today_services));
+            }else{
+                $('#today_most_service').html("Not Available");
+            }
+            if(today_services2.length != 0){
+                $('#today_least_service').html(getLeast(today_services2));
+            }else{
+                $('#today_least_service').html("Not Available");
+            } 
+            if(week_services.length != 0){
+                $('#week_service').html(getMost(week_services));
+            }else{
+                $('#week_service').html("Not Available");
+            } 
+            if(month_services.length != 0){
+                $('#month_service').html(getMost(month_services));
+            }else{
+                $('#month_service').html("Not Available");
+            } 
+
             let days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-            $('#month_day').html(days[getMost(month)]);
-            $('#week_day').html(days[getMost(week)]);
+            if(month.length != 0){
+                $('#month_day').html(days[getMost(month)]);
+            }else{
+                $('#month_day').html("Not Available");
+            } 
+            if(week.length != 0){
+                $('#week_day').html(days[getMost(week)]);
+            }else{
+                $('#week_day').html("Not Available");
+            } 
+
         
           
         }

@@ -30,6 +30,7 @@
 
 
             <!--Menu--> 
+            @if(count($full_requests) > 0 && isset($full_requests))
             @foreach($requests as $key=>$request)
         
          
@@ -130,6 +131,34 @@
    
 
             @endforeach
+
+            @else
+        <div class = "row">
+
+        <div class="col-md-3 d-flex align-items-stretch">
+        <div class="card shadow-none border-0 ml-2">
+         <div class = "card-body">
+         
+         </div>
+        </div>
+        </div>
+
+        <div class="col-md-12 d-flex align-items-stretch">
+        <div class="card shadow-md rounded ml-2">
+         <div class = "card-body">
+         <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "#">
+         <div class="my-auto text-center">
+        <div class="card  shadow-none card-outline">
+          <h3 class>No available services yet</h3>
+        </div>
+        </div>
+         </a>
+         </div>
+        </div>
+        </div>
+        </div>
+      
+        @endif
             <!--Menu:end-->
         </div>
         </div>
@@ -411,5 +440,3 @@
 </div>
 <!--Finish Step:end-->
 @endsection
-
-

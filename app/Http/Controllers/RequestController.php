@@ -47,17 +47,20 @@ class RequestController extends Controller
     }
 
     public function create(Request $request){
-        
-        $validator = Validator::make($request->all(), [
-            'request_type' => ['required', 'string', 'max:255','unique:requests'],
-            'file'  => 'required|mimes:png,jpg,jpeg|max:2305',
-        ]);
 
-        if($validator->fails()){
-            return ['message' => [$validator->errors()]];       
-        }
 
         if ($file = $request->file('file')) {
+
+                    
+            $validator = Validator::make($request->all(), [
+                'request_type' => ['required', 'string', 'max:255','unique:requests'],
+                'file'  => 'required|mimes:png,jpg,jpeg|max:2305',
+            ]);
+
+            if($validator->fails()){
+                return ['message' => [$validator->errors()]];       
+            }
+
             $path = 'files/';
             $name = Carbon::now()->format('Y-m-d') . $file->getClientOriginalName();
             $file->move(public_path('files'),$name); 
@@ -73,21 +76,35 @@ class RequestController extends Controller
                 'message' => 'Successfully created',
                 'data' => $data
             ];
+        }else{
+            $validator = Validator::make($request->all(), [
+                'request_type' => ['required', 'string', 'max:255','unique:requests'],
+     
+            ]);
+
+            if($validator->fails()){
+                return ['message' => [$validator->errors()]];       
+            }
+
+            $data =  Requests::create($request->all());
         }
     }
 
     public function update(Request $request, $id){
 
-        $validator = Validator::make($request->all(), [
-            'request_type' => ['required', 'string', 'max:255'],
-            'file'  => 'required|mimes:png,jpg,jpeg|max:2305',
-        ]);
 
-        if($validator->fails()){
-            return ['message' => [$validator->errors()]];       
-        }
 
         if ($file = $request->file('file')) {
+
+            $validator = Validator::make($request->all(), [
+                'request_type' => ['required', 'string', 'max:255'],
+                'file'  => 'required|mimes:png,jpg,jpeg|max:2305',
+            ]);
+    
+            if($validator->fails()){
+                return ['message' => [$validator->errors()]];       
+            }
+
             $path = 'files/';
             $name = Carbon::now()->format('Y-m-d') . $file->getClientOriginalName();
             $file->move(public_path('files'),$name); 
@@ -104,6 +121,19 @@ class RequestController extends Controller
                 'message' => 'Successfully updated',
                 'data' => $request_data
             ];  
+        }else{
+            
+            $validator = Validator::make($request->all(), [
+                'request_type' => ['required', 'string', 'max:255'],
+              
+            ]);
+    
+            if($validator->fails()){
+                return ['message' => [$validator->errors()]];       
+            }
+
+            $request_data = Requests::findOrFail($id);
+            $request_data->update($request->all());
         }
     }
 

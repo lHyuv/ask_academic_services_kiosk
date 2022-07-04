@@ -15,7 +15,7 @@ INSERT INTO `requests` (`id`, `request_type`, `created_by`, `updated_by`, `statu
 ('db952c25-de00-40a6-8833-6fe151de6c78', 'Overload', NULL, NULL, '1', '2022-06-16 00:52:16', NULL, NULL),
 ('f4aade9a-4e04-447f-b025-883dd90d1638', 'Grade Correction and Reporting', NULL, NULL, '1', '2022-06-16 00:53:04', NULL, NULL);
 
----
+
 INSERT INTO `users` (`id`, `email`, `created_by`, `updated_by`, `status`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
 ('a62a2519-dfde-4620-acb1-6b31a322893a', 'admin@test.com', NULL, NULL, '1', '$2y$10$802s0f0JDpeVIWP4bW89nubkXKuDWphq1rniUUvUY7mibES30.VTK', NULL, '2022-06-09 02:02:03', '2022-06-09 02:02:03', NULL),
 ('f2310bcb-a49c-4dfd-9f8e-f70eb850c0a5', 'student@test.com', NULL, NULL, '1', '$2y$10$z4Fe2.7x/.bg/Dmu2B0AKeWJO.tJNBrQSgzbdE8/fH5QApBLK7tPG', NULL, '2022-06-09 02:03:24', '2022-06-09 02:03:24', NULL);
