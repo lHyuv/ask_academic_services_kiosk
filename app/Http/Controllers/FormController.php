@@ -3,39 +3,47 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Request as Requests;
+use App\Models\Form;
 use Validator;
 use Carbon\Carbon;
+use App\Models\Request as Requests;
 
-class RequestController extends Controller
+class FormController extends Controller
 {
-    //
-    public function index(){
-        $data = Requests::with([
-            'created_by_user',
-            'updated_by_user'
-         ])->get();
+    public function index()
+    {
+        //$data = Form::all();
+          $data = Form::with([
+              'requests',
+              'created_by_user',
+              'updated_by_user'
+           ])->get();
+   
 
         return [
             'message' => 'Successfully retrieved',
             'data' => $data
         ];
     }
-
-    public function show_active(){
-        $data = Requests::with([
+ 
+    public function show_active()
+    {
+        $data = Form::with([
+            'requests',
             'created_by_user',
             'updated_by_user'
          ])->where('status','1')->get();
-
+        
         return [
             'message' => 'Successfully retrieved',
             'data' => $data
         ];
     }
 
-    public function show($id){
-        $data = Requests::with([
+    public function show($id)
+    {
+        $data = Form::with([
+            'requests',
             'created_by_user',
             'updated_by_user'
          ])->find($id);
@@ -46,15 +54,15 @@ class RequestController extends Controller
         ];
     }
 
-    public function create(Request $request){
-
-
+    public function create(Request $request)
+    {
         if ($file = $request->file('file')) {
 
                     
             $validator = Validator::make($request->all(), [
-                'request_type' => ['required', 'string', 'max:255','unique:requests'],
-                'file'  => 'required|mimes:png,jpg,jpeg,txt,pdf,docx|max:2305',
+                'form_name' =>['string','max:255'],
+                'request_id' => ['required', 'string', 'max:255'],
+                'file'  => 'required|mimes:png,jpg,jpeg|max:2305',
             ]);
 
             if($validator->fails()){
@@ -66,28 +74,29 @@ class RequestController extends Controller
             $file->move(public_path('files'),$name); 
 
            // $data =  Requests::create($request->all());
-           $data =  Requests::create([
-            'request_type' => request('request_type'),
-            'icon_file_name' => $name,
-            'icon_file_path' => $path,
+           $data =  Form::create([
+            'form_name' => request('form_name'),
+            'source' => request('source'),
+            'request_id' => request('request_id'),
+            'form_file_name' => $name,
+            'form_file_path' => $path,
             'created_by' => request('created_by'),
            ]);
-
             return [
                 'message' => 'Successfully created',
                 'data' => $data
             ];
         }else{
             $validator = Validator::make($request->all(), [
-                'request_type' => ['required', 'string', 'max:255','unique:requests'],
-     
+                'form_name' =>['string','max:255'],
+                'request_id' => ['required', 'string', 'max:255'],
             ]);
 
             if($validator->fails()){
                 return ['message' => [$validator->errors()]];       
             }
 
-            $data =  Requests::create($request->all());
+            $data =  Form::create($request->all());
 
             return [
                 'message' => 'Successfully created',
@@ -96,15 +105,14 @@ class RequestController extends Controller
         }
     }
 
-    public function update(Request $request, $id){
-
-
-
+    public function update(Request $request, $id)
+    {
         if ($file = $request->file('file')) {
 
             $validator = Validator::make($request->all(), [
-                'request_type' => ['required', 'string', 'max:255'],
-                'file'  => 'required|mimes:png,jpg,jpeg,txt,pdf,docx|max:2305',
+                'form_name' =>['string','max:255'],
+                'request_id' => ['required', 'string', 'max:255'],
+                'file'  => 'required|mimes:png,jpg,jpeg|max:2305',
             ]);
     
             if($validator->fails()){
@@ -114,23 +122,26 @@ class RequestController extends Controller
             $path = 'files/';
             $name = Carbon::now()->format('Y-m-d') . $file->getClientOriginalName();
             $file->move(public_path('files'),$name); 
-            $request_data = Requests::findOrFail($id);
+            $data = Form::findOrFail($id);
           //  $request_data->update($request->all());
-            $request_data->update([
-                'request_type' => request('request_type'),
-                'icon_file_name' => $name,
-                'icon_file_path' => $path,
-                'updated_by' => request('updated_by'),
+            $data->update([
+                'form_name' => request('form_name'),
+                'source' => request('source'),
+                'request_id' => request('request_id'),
+                'form_file_name' => $name,
+                'form_file_path' => $path,
+                'created_by' => request('created_by'),
             ]);
             
             return [
                 'message' => 'Successfully updated',
-                'data' => $request_data
+                'data' => $data
             ];  
         }else{
             
             $validator = Validator::make($request->all(), [
-                'request_type' => ['required', 'string', 'max:255'],
+                'form_name' =>['string','max:255'],
+                'request_id' => ['required', 'string', 'max:255'],
               
             ]);
     
@@ -138,27 +149,38 @@ class RequestController extends Controller
                 return ['message' => [$validator->errors()]];       
             }
 
-            $request_data = Requests::findOrFail($id);
-            $request_data->update($request->all());
+            $data = Form::findOrFail($id);
+            $data->update($request->all());
 
             return [
                 'message' => 'Successfully updated',
-                'data' => $request_data
+                'data' => $data
             ];  
         }
     }
 
-    public function delete(Request $request, $id){
-        $request_data = Requests::findOrFail($id);
-
-        $request_data->update([
-            'status' => '2'
-        ]);
-        $data->delete();
-        //return $request_data;
+    public function delete(Request $request, $id)
+    {
+        $Form = Form::findOrFail($id);
+        $Form->update(['status' => '2']);
+        $Form->delete();
+        //return $Form;
         return [
             'message' => 'Successfully deleted'
         ];
+
     }
 
+    public function find_by_request($request){
+        $data = Form::with([
+            'requests',
+            'created_by_user',
+            'updated_by_user'
+         ])->where('request_id', $request)->get();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
+    }
 }
