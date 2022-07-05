@@ -75,11 +75,14 @@
      <meta HTTP-EQUIV="REFRESH" content="0; url= {{ URL::to('/') }}/noscript"> 
   </noscript>
 </head>
-<body class = "bg-white">
+
+    @if (Route::current()->getName() == 'guest' || Route::current()->getName() == 'guest2')
+
+    <body class = "bg-white">
 
     <div id="app">
     <div class="main-wrapper main-wrapper-1">
-    @if (Route::current()->getName() == 'guest' || Route::current()->getName() == 'guest2')
+        <!------->
     <nav class="navbar navbar-expand-lg main-navbar" id = 'guest_header1'>
     <section class="section shadow-none border-0">
         <div class="section-header mt-5  shadow-none border-0">
@@ -103,7 +106,11 @@
     </section>
     </nav>
     @elseif (Route::current()->getName() != 'login' &&  Route::current()->getName() != 'register')
-    
+    <body class = "bg-gray">
+
+    <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+          <!------->
     <div class="navbar-bg"></div>
         <nav class="navbar navbar-expand-lg main-navbar">
                 <!--
