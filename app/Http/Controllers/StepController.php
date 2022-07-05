@@ -15,7 +15,7 @@ class StepController extends Controller
             'requests',
             'created_by_user',
             'updated_by_user'
-         ])->get();
+         ])->orderBy('step_number')->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -28,7 +28,7 @@ class StepController extends Controller
             'requests',
             'created_by_user',
             'updated_by_user'
-         ])->where('status','1')->get();
+         ])->where('status','1')->orderBy('step_number')->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -41,7 +41,7 @@ class StepController extends Controller
             'requests',
             'created_by_user',
             'updated_by_user'
-         ])->find($id);
+         ])->orderBy('step_number')->find($id);
 
         return [
             'message' => 'Successfully retrieved',
@@ -54,7 +54,7 @@ class StepController extends Controller
             'requests',
             'created_by_user',
             'updated_by_user'
-         ])->where('request_id', $request)->get();
+         ])->orderBy('step_number')->where('request_id', $request)->get();
 
         return [
             'message' => 'Successfully retrieved',
@@ -104,18 +104,6 @@ class StepController extends Controller
         ];
     }
 
-    public function complete_step(Request $request, $id){
-        $data = Step::findOrFail($id);
 
-        $data->update([
-            'completed_status' => 'Completed'
-        ]);
-
-        //return $data;
-        return [
-            'message' => 'Successfully updated',
-            'data' => $data
-        ];
-    }
 
 }

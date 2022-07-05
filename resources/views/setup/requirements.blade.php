@@ -226,6 +226,10 @@ $(document).ready(()=>{
                 ],
     });
 })
+//catch datatable ini error
+$.fn.dataTable.ext.errMode = ( settings, help, msg ) => { 
+    console.log(msg);
+};
 </script>
 @endsection
 

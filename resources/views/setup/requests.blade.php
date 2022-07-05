@@ -83,7 +83,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Icon / Picture</label>
-                        <input required class="form-control" type="file" id="create_file" name="file" accept="image/*" >
+                        <input class="form-control" type="file" id="create_file" name="file" accept="image/*" >
                         </div>
                         </div>
 
@@ -209,6 +209,10 @@ $(document).ready(()=>{
                 ],
     });
 })
+//catch datatable ini error
+$.fn.dataTable.ext.errMode = ( settings, help, msg ) => { 
+    console.log(msg);
+};
 </script>
 @endsection
 

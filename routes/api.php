@@ -119,7 +119,6 @@ Route::middleware('auth:sanctum')->post('/steps/update/{id}', [StepController::c
 
 Route::middleware('auth:sanctum')->post('/steps/delete/{id}', [StepController::class, 'delete']);
 
-Route::middleware('auth:sanctum')->post('/steps/complete/{id}', [StepController::class, 'complete_step']);
 
 //Clients
 use App\Http\Controllers\ClientController;
@@ -162,3 +161,20 @@ Route::post('/submitted_requests',[SubmittedRequestController::class, 'create'])
 Route::middleware('auth:sanctum')->post('/submitted_requests/update/{id}', [SubmittedRequestController::class, 'update']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/delete/{id}', [SubmittedRequestController::class, 'delete']);
+
+//forms
+use App\Http\Controllers\FormController;
+
+Route::get('/forms', [FormController::class, 'index']);
+
+Route::middleware('auth:sanctum')->get('/forms/show_active', [FormController::class, 'show_active']);
+
+Route::get('/forms/request/{request}', [FormController::class, 'find_by_request']);
+
+Route::middleware('auth:sanctum')->get('/forms/{id}', [FormController::class, 'show']);
+
+Route::middleware('auth:sanctum')->post('/forms',[FormController::class, 'create']);
+
+Route::middleware('auth:sanctum')->post('/forms/update/{id}', [FormController::class, 'update']);
+
+Route::middleware('auth:sanctum')->post('/forms/delete/{id}', [FormController::class, 'delete']);

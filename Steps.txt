@@ -80,3 +80,10 @@ php artisan migrate
 On localhost
 Select created database (acad_services_app)
 Click SQL > Paste SQL code from sql.sql > Go
+
+11 To insert prepared data
+
+On localhost
+Select created database (acad_services_app)
+Make sure that table requests, steps, and requirements are empty
+Click SQL > Paste SQL code from data.sql > Go
