@@ -25,7 +25,7 @@ class Form extends Model
 
     ]);
 
-    public function request()
+    public function requests()
     {
         return $this->belongsTo(Request::class,'request_id');
     }
