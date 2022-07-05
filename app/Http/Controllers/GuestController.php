@@ -17,4 +17,9 @@ class GuestController extends Controller
         ]);
        
     }
+
+    public function no_script()
+    {
+        return view('noscript');
+    }
 }

@@ -70,6 +70,10 @@
 
     <!--Moment JS--> 
     <script src = "{{ asset('template/vendors/momenjs/js/moment-2.29.3.min.js') }}"></script>
+    <noscript>
+  
+     <meta HTTP-EQUIV="REFRESH" content="0; url= {{ URL::to('/') }}/noscript"> 
+  </noscript>
 </head>
 <body class = "bg-white">
 

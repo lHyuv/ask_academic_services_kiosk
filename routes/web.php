@@ -25,6 +25,8 @@ Route::get('/guest', [App\Http\Controllers\GuestController::class, 'index'])->na
 
 Route::get('/', [App\Http\Controllers\GuestController::class, 'index'])->name('guest2');
 
+Route::get('/noscript', [App\Http\Controllers\GuestController::class, 'no_script']);
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/test', [App\Http\Controllers\HomeController::class, 'test'])->name('test');
