@@ -1,6 +1,6 @@
 </div>
     </div> 
-    <footer class="footer fixed-bottom main-footer" style = "height:7%">
+    <footer class="footer fixed-bottom main-footer bg-white" style = "height:7%">
                 <div class="footer-left">
                     Copyright &copy; 2022 <div class="bullet"></div> <a href="#">PUPQC</a>
                 </div>

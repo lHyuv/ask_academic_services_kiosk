@@ -1685,3 +1685,341 @@ const selectRange = () =>{
       
   
 };
+
+
+//Charts
+const createChart = () =>{
+
+ 
+    
+    let services = new Array();
+    let service_values = new Array();
+
+    $.ajax({
+        url: apiURL + `submitted_requests`,
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+        dataType: "json",
+        contentType: "application/json",
+        success: (data)=>{
+         if(data.data.length == 0){
+            $('#today_report_none').css('display','block');
+            $('#chart-1').css('display','none');
+          
+         }else{
+            data.data.map((val)=>{
+
+            let value = moment(val.created_at).format("MM D YYYY");
+            let now = moment(new Date()).format("MM D YYYY");
+
+            if(value == now){
+           
+                if(services.includes(val['requests'].request_type)){
+                    service_values[services.indexOf(val['requests'].request_type)] =
+                    parseInt(service_values[services.indexOf(val['requests'].request_type)]) + 1;
+                }else{
+                    services.push(val['requests'].request_type);
+                    service_values.push(1);
+                }
+            }
+                        
+
+                    });
+
+            services.map((val,i)=>{
+                services[i] = services[i] + ' (' + String(service_values[i]) + ')';
+            })
+
+            // graph chart
+            let graphChartCanvas = $('#chart-1').get(0).getContext('2d')
+            
+            
+            let graphChartData = {
+                labels: services,
+                datasets: [
+                {
+                    label: 'Requests today',
+                    fill: false,
+                    borderWidth: 2,
+                    lineTension: 0,
+                    spanGaps: true,
+                    borderColor: 'rgba(54, 162, 235)',//'gray',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    pointRadius: 3,
+
+
+                    data: service_values,
+                }
+                ]
+            }
+            
+            let graphChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                legend: {
+                display: false
+                },
+                scales: {
+                y: {  
+                    min: 0,
+                    suggestedMax: 10,
+                    step: 1,
+
+                },
+                x: {  
+                    min: 0,
+                    
+                },
+
+                }
+            }
+            
+
+            let graphChart = new Chart(graphChartCanvas, { 
+                type: 'bar', //'line',
+                data: graphChartData,
+                options: graphChartOptions
+            })
+            //chart:end
+            }
+        }
+ 
+      
+    });
+    
+
+
+    
+
+}
+createChart();
+
+const createChart2 = () =>{
+
+ 
+    
+    let services = new Array();
+    let service_values = new Array();
+
+    $.ajax({
+        url: apiURL + `submitted_requests`,
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+        dataType: "json",
+        contentType: "application/json",
+        success: (data)=>{
+        
+         if(data.data.length == 0){
+            $('#this_week_report_none').css('display','block');
+            $('#chart-1').css('display','none');
+          
+         }else{
+ 
+            data.data.map((val)=>{
+
+
+
+            if(new Date(val.created_at).getDate() >  new Date().getDate() - 7){
+                if(services.includes(val['requests'].request_type)){
+                    service_values[services.indexOf(val['requests'].request_type)] =
+                    parseInt(service_values[services.indexOf(val['requests'].request_type)]) + 1;
+                }else{
+                    services.push(val['requests'].request_type);
+                    service_values.push(1);
+                }
+            }
+                        
+
+                    });
+
+            services.map((val,i)=>{
+                services[i] = services[i] + ' (' + String(service_values[i]) + ')';
+             })
+             
+            // graph chart
+            let graphChartCanvas = $('#chart-2').get(0).getContext('2d')
+            
+            
+            let graphChartData = {
+                labels: services,
+                datasets: [
+                {
+                    label: 'Requests this week',
+                    fill: false,
+                    borderWidth: 2,
+                    lineTension: 0,
+                    spanGaps: true,
+                    borderColor: 'rgba(54, 162, 235)',//'gray',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    pointRadius: 3,
+
+
+                    data: service_values,
+                }
+                ]
+            }
+            
+            let graphChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                legend: {
+                display: false
+                },
+                scales: {
+                y: {  
+                    min: 0,
+                    suggestedMax: 10,
+                    step: 1,
+
+                },
+                x: {  
+                    min: 0,
+                    
+                },
+
+                },
+                plugins: {
+                    legend: {
+                      position: 'top',
+                    },
+
+                  },
+                  indexAxis: 'y',
+            
+            }
+            
+
+            let graphChart = new Chart(graphChartCanvas, { 
+                type: 'bar', //'line',
+                data: graphChartData,
+                options: graphChartOptions
+            })
+            //chart:end
+            }
+        }
+ 
+      
+    });
+    
+
+
+    
+
+}
+createChart2();
+
+
+
+
+const createChart3 = () =>{
+
+ 
+    
+    let services = new Array();
+    let service_values = new Array();
+
+    $.ajax({
+        url: apiURL + `submitted_requests`,
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+        dataType: "json",
+        contentType: "application/json",
+        success: (data)=>{
+        
+         if(data.data.length == 0){
+            $('#this_month_report_none').css('display','block');
+            $('#chart-3').css('display','none');
+          
+         }else{
+
+            data.data.map((val)=>{
+
+
+
+            if(moment(val.created_at).format("MMM YYYY") == moment(new Date()).format("MMM YYYY")){
+                if(services.includes(val['requests'].request_type)){
+                    service_values[services.indexOf(val['requests'].request_type)] =
+                    parseInt(service_values[services.indexOf(val['requests'].request_type)]) + 1;
+                }else{
+                    services.push(val['requests'].request_type);
+                    service_values.push(1);
+                }
+            }
+                        
+
+                    });
+
+            services.map((val,i)=>{
+                services[i] = services[i] + ' (' + String(service_values[i]) + ')';
+            })
+
+            // graph chart
+            let graphChartCanvas = $('#chart-3').get(0).getContext('2d')
+            
+            
+            let graphChartData = {
+                labels: services,
+                datasets: [
+                {
+                    label: 'Requests this month',
+                    fill: false,
+                    borderWidth: 5,//2,
+                    lineTension: 0,
+                    spanGaps: true,
+                    borderColor: 'rgba(54, 162, 235)',//'gray',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    pointRadius: 3,
+
+
+                    data: service_values,
+                }
+                ]
+            }
+            
+            let graphChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                legend: {
+                display: false
+                },
+                scales: {
+                y: {  
+                    min: 0,
+                    suggestedMax: 10,
+                    step: 1,
+
+                },
+                x: {  
+                    min: 0,
+                    
+                },
+
+                },
+
+            }
+            
+
+            let graphChart = new Chart(graphChartCanvas, { 
+                type: 'line',
+                data: graphChartData,
+                options: graphChartOptions
+            })
+            //chart:end
+            }
+        }
+ 
+      
+    });
+    
+
+
+    
+
+}
+createChart3();

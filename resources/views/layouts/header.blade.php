@@ -69,7 +69,10 @@
     <script src = "{{ asset('template/vendors/qrious/js/qrious.js') }}"></script>
 
     <!--Moment JS--> 
-    <script src = "{{ asset('template/vendors/momenjs/js/moment-2.29.3.min.js') }}"></script>
+    <script src = "{{ asset('template/vendors/momentjs/js/moment-2.29.3.min.js') }}"></script>
+
+    <!--Chart JS--> 
+    <script src = "{{ asset('template/vendors/chartjs/js/chart.min.js') }}"></script>
     <noscript>
   
      <meta HTTP-EQUIV="REFRESH" content="0; url= {{ URL::to('/') }}/noscript"> 

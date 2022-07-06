@@ -17,10 +17,40 @@
       
 </section>
 
-<h5>Today</h5>
+<!--Component 1--> 
+<div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Today's Report</h5>
+
+             
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-7">
+                    <p class="text-center">
+                     <!-- <strong></strong> -->
+                    </p>
+
+                    <div class="chart">
+                      <!-- Sales Chart Canvas -->
+                      <h4 class="text-center" id = 'today_report_none' style = 'display:none;'><i>Nothing to show yet</i></h4>
+                      <canvas class="chart" id="chart-1" style="min-height: 250px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
+                    </div>
+                    <!-- /.chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-5">
+                    <p class="text-center">
+                      <strong>Trends</strong>
+                    </p>
+
+                   
     <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2  shadow-none border-0">
                 <div class="card-icon shadow-primary bg-primary">
                   <i class="fas fa-file"></i>
                 </div>
@@ -40,8 +70,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2 shadow-none border-0">
                 <div class="card-icon shadow-primary bg-primary">
                   <i class="fas fa-users"></i>
                 </div>
@@ -58,8 +88,8 @@
             </div>
     
         <!---->
-        <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2 shadow-none border-0">
                 <div class="card-icon shadow-primary bg-primary">
                   <i class="fas fa-clipboard"></i>
                 </div>
@@ -74,12 +104,36 @@
               </div>
             </div>
         <!---->    
-    </div>
-    
-    <h5>This Week</h5>
+                </div>
+                <!-- /.row -->
+                </div>
+                </div>
+              </div>
+              </div>
+<!--Component 1:end--> 
+
+<!--Component 2--> 
+<div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">This Week's Report</h5>
+
+             
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+
+                  <div class="col-md-5">
+                    <p class="text-center">
+                      <strong>Trends</strong>
+                    </p>
+
+                   
     <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2  shadow-none border-0">
                 <div class="card-icon shadow-primary bg-primary">
                   <i class="fas fa-file"></i>
                 </div>
@@ -88,17 +142,19 @@
                     <h4>Transactions</h4>
                   </div>
                   <div class="card-body">
-                  @if(isset($today_requests))
-                   {{ count((array)$today_requests) }}
+                   @if(isset($week_requests))
+                   {{ count((array)$week_requests) }}
                    @else
                    0
                    @endif
+
+                   
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2  shadow-none border-0">
                 <div class="card-icon shadow-primary bg-primary">
                   <i class="fas fa-users"></i>
                 </div>
@@ -114,8 +170,8 @@
             </div>
     
         <!---->
-        <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2  shadow-none border-0">
                 <div class="card-icon shadow-primary bg-primary">
                   <i class="fas fa-clipboard"></i>
                 </div>
@@ -130,11 +186,65 @@
               </div>
             </div>
         <!---->    
-    </div>
-    <h5>This Month</h5>
+        
+                </div>
+                
+                <!-- /.row -->
+                </div>
+                <!----->
+                <div class="col-md-7">
+                    <p class="text-center">
+                     <!-- <strong></strong> -->
+                    </p>
+
+                    <div class="chart">
+                      <!-- Sales Chart Canvas -->
+                      <h4 class="text-center" id = 'this_week_report_none' style = 'display:none;'><i>Nothing to show yet</i></h4>
+                      <canvas class="chart" id="chart-2" style="min-height: 250px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
+                    </div>
+                    <!-- /.chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+              </div>
+              </div>
+<!--Component 2:end--> 
+
+
+<!--Component 3--> 
+<div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">This Month's Report</h5>
+
+             
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-7">
+                    <p class="text-center">
+                     <!-- <strong></strong> -->
+                    </p>
+
+                    <div class="chart">
+                      <!-- Sales Chart Canvas -->
+                      <h4 class="text-center" id = 'this_month_report_none' style = 'display:none;'><i>Nothing to show yet</i></h4>
+                      <canvas class="chart" id="chart-3" style="min-height: 250px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
+                    </div>
+                    <!-- /.chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-5">
+                    <p class="text-center">
+                      <strong>Trends</strong>
+                    </p>
+
+                   
     <div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2  shadow-none border-0">
                 <div class="card-icon shadow-primary bg-primary">
                   <i class="fas fa-file"></i>
                 </div>
@@ -143,17 +253,19 @@
                     <h4>Transactions</h4>
                   </div>
                   <div class="card-body">
-                  @if(isset($today_requests))
-                   {{ count((array)$this_month_requests) }}
+                   @if(isset($month_requests))
+                   {{ count((array)$month_requests) }}
                    @else
                    0
                    @endif
+
+                   
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2  shadow-none border-0">
                 <div class="card-icon shadow-primary bg-primary">
                   <i class="fas fa-users"></i>
                 </div>
@@ -162,15 +274,15 @@
                   <h4>Most Frequented Service</h4>
                   </div>
                   <div class="card-body">
-                  <h5 class = 'text-justify float-left'  id = 'month_service'></h5>
+                  <h5 class = 'text-justify float-left' id = 'month_service'></h5>
                   </div>
                 </div>
               </div>
             </div>
     
         <!---->
-        <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="card card-statistic-2">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2  shadow-none border-0">
                 <div class="card-icon shadow-primary bg-primary">
                   <i class="fas fa-clipboard"></i>
                 </div>
@@ -179,13 +291,21 @@
                   <h4>Most Frequented Day</h4>
                   </div>
                   <div class="card-body">
-                  <h5 class = 'text-justify float-left' id = 'month_day'></h5>
+                  <h5 class = 'text-justify float-left'  id = 'month_day'></h5>
                   </div>
                 </div>
               </div>
             </div>
         <!---->    
-    </div>
+                </div>
+                <!-- /.row -->
+                </div>
+                </div>
+              </div>
+              </div>
+<!--Component 3:end--> 
+
+    
     
 
     </div>
