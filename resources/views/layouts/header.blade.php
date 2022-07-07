@@ -100,7 +100,7 @@
     <nav class="navbar navbar-expand-lg main-navbar" id = 'guest_header2' style='display:none;'>
     <section class="section shadow-none border-0">
         <div class="section-header mt-5  shadow-none border-0">
-        <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" alt="logo" width="70" class="shadow-light rounded-circle">
+        <img src="{{ URL::to('/') }}/template/img/kiosk/icons/logo.png" alt="logo" width="70" class="shadow-light rounded-circle">
             <h1 class = "ml-2">Academic Services</h1>
 
         
@@ -115,7 +115,7 @@
     <div class="main-wrapper main-wrapper-1">
           <!------->
     <div class="navbar-bg"></div>
-        <nav class="navbar navbar-expand-lg main-navbar">
+        <nav class="navbar navbar-expand-lg main-navbar" id = "header">
                 <!--
                 <a class="navbar-brand" href="/">
                   Academic Services

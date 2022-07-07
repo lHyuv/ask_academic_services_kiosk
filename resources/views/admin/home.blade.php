@@ -63,14 +63,7 @@
                     <h4>Transactions</h4>
                   </div>
                   <div class="card-body">
-                   @if(isset($today_requests))
-                   {{ count($today_requests) }}
-                   @foreach($today_requests as $r)
-                   {{$r}}
-                   @endforeach
-                   @else
-                   0
-                   @endif
+                  <h5 class = 'text-justify float-left'  id = 'today_count'></h5>
 
                    
                   </div>
@@ -149,11 +142,7 @@
                     <h4>Transactions</h4>
                   </div>
                   <div class="card-body">
-                   @if(isset($week_requests))
-                   {{ count($week_requests) }}
-                   @else
-                   0
-                   @endif
+                  <h5 class = 'text-justify float-left'  id = 'week_count'></h5>
 
                    
                   </div>
@@ -260,11 +249,7 @@
                     <h4>Transactions</h4>
                   </div>
                   <div class="card-body">
-                   @if(isset($month_requests))
-                   {{ count($month_requests) }}
-                   @else
-                   0
-                   @endif
+                  <h5 class = 'text-justify float-left'  id = 'month_count'></h5>
 
                    
                   </div>

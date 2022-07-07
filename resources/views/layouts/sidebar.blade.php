@@ -1,6 +1,6 @@
 
   @if(Auth::check())
-<div class="main-sidebar sidebar-style-2">
+<div class="main-sidebar sidebar-style-2" id = "sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
         

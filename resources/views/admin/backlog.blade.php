@@ -20,16 +20,39 @@
         </div>
       
 </section>
-    <div class="row">
+
+    <div class="row" id = "backlog_table">
         <div class="col-md-8">
 
 
 
 
     
-    <div class="card card-primary mt-5">
+    <div class="card card-primary mt-3">
 
-                <div class="card-header"><h4>List of created requests</h4></div>
+                <div class="card-header">
+                    <div  id = "backlog_header" style = "display:none;">
+                    <div class = "row">
+                        <div class = "col-md-2">
+                    <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" alt="logo" width="70" class="shadow-light rounded-circle">
+                    </div>
+                    <div class = "col-md-10">
+                    <h3 class = "ml-3 mt-3">Academic Services</h3> 
+
+                    </div>
+
+                 
+                    </div>
+                    <div class = "row">
+                        <div class = "col-md-12">
+                        <h4 class = "mt-4">List of created requests</h4> <br>
+                        <h5 id = 'query_text'></h5>
+                        </div>           
+                    </div>
+                    </div>
+                    <h4 id = "card_title">List of created requests</h4>
+        
+                </div>
       
                 <div class="card-body">
                     <table class = "table table-striped">
@@ -65,11 +88,11 @@
             </div>
 
         </div>
-
+       
          <!---->
          <div class="col-md-4">
 
-            <div class="card card-outline card-primary mt-5">
+            <div class="card card-outline card-primary mt-3" id = 'query'>
                 <div class="card-header"><h4>Queries</h4></div>
 
                 <div class="card-body">
@@ -125,7 +148,13 @@
                           'excel',
                           'csv',
                           'pdf',
-                          'print'
+                          'print',
+                          {
+                                text: 'Print Report',
+                                action: function ( e, dt, node, config ) {
+                                    printReport();
+                                }
+                          }
                       ]
                   }
                 ],

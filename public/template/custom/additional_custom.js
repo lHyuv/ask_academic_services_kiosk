@@ -3,6 +3,8 @@ const apiURL = "http://localhost:8000/api/";
 const baseURL = "http://localhost:8000/";
 let placeholder_src = $("#placeholder").attr("src");
 let create_ctr = 0; //to prevent duplicated AJAX
+let query_no = 0;
+
 
 $("form").parsley();
 
@@ -64,6 +66,49 @@ const drawTable = (table_id) =>{
                   }
                 ],
     });
+
+};
+
+const printReport = () =>{
+
+
+    $('#backlog_header').css('display','block');
+    $('#backlog_table').addClass('mt-5');
+    $('#sidebar').css('display','none');
+    $('#header').css('display','none');
+    $('.navbar-bg').css('display','none');
+    $('footer').css('display','none');
+    $('.section').css('display','none');
+    $('#query').css('display','none');
+    $('.col-md-8').attr('class','col-md-12')
+    $('.card').addClass('col-md-12');
+    $('table').attr('class','table');
+    $('.card').removeClass('card-primary'); 
+    $('#card_title').css('display','none');
+ 
+    switch(query_no){
+        case 1: $('#query_text').html('Query: Request - ' + $('#requests option:selected').text()); break;
+        case 2: $('#query_text').html('Query: Month - ' + moment($('#month').val(), 'M').format('MMMM')); break;
+        case 3: $('#query_text').html('Query: Date - ' + moment($('#date').val()).format("MMM Do YYYY")); break;
+        case 4: $('#query_text').html(
+            'Query: ' + moment($('#date_from').val()).format("MMM Do YYYY") + ' to ' + moment($('#date_to').val()).format("MMM Do YYYY")
+        ); break;
+        default: $('#query_text').html('');
+    }
+    $('table').DataTable().destroy()
+    $('table').dataTable({
+        searching: false, 
+        paging: false, 
+        info: false,
+
+    });
+    
+  
+    window.print();
+
+    setTimeout(function() {
+        window.location.reload()
+    }, 100);
 
 };
 
@@ -1280,6 +1325,10 @@ const numDashboard = () =>{
             let today_services2 = new Array();
             let week_services = new Array();
             let month_services = new Array();
+            let today_ctr = 0;
+            let month_ctr = 0;
+            let week_ctr = 0;
+            
  
             //
             data.data.map((val)=>{
@@ -1293,14 +1342,17 @@ const numDashboard = () =>{
                         today.push(new Date(val.created_at).getDay());
                         today_services.push(val['requests'].request_type);
                         today_services2.push(val['requests'].request_type);
+                        today_ctr += 1;
                     }
                     if(moment(val.created_at).format("MMM YYYY") == moment(new Date()).format("MMM YYYY")){
                         month.push(new Date(val.created_at).getDay());
                         month_services.push(val['requests'].request_type);
+                        month_ctr += 1;
                       
                         if(new Date(val.created_at).getDate() >  new Date().getDate() - 7){
                             week.push(new Date(val.created_at).getDay());
                             week_services.push(val['requests'].request_type);
+                            week_ctr += 1;
                      
                         }
                     }
@@ -1318,6 +1370,8 @@ const numDashboard = () =>{
             }else{
                 $('#today_least_service').html("Not Available");
             } 
+            $('#today_count').html(today_ctr);
+
             if(week_services.length != 0){
                 $('#week_service').html(getMost(week_services));
             }else{
@@ -1328,8 +1382,10 @@ const numDashboard = () =>{
             }else{
                 $('#month_service').html("Not Available");
             } 
+        
+            $('#week_count').html(week_ctr);
 
-            let days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
             if(month.length != 0){
                 $('#month_day').html(days[getMost(month)]);
             }else{
@@ -1340,7 +1396,7 @@ const numDashboard = () =>{
             }else{
                 $('#week_day').html("Not Available");
             } 
-
+            $('#month_count').html(month_ctr);
         
           
         }
@@ -1380,8 +1436,10 @@ const selectRequest = (id) =>{
 
     if($('#requests').val() == "All"){
         url = apiURL + 'submitted_requests';
+        query_no = 0;
     }else{
         url = apiURL + 'submitted_requests/request/' + id;
+        query_no = 1;
     }
 
     $('select').removeClass('text-primary');
@@ -1406,7 +1464,13 @@ const selectRequest = (id) =>{
                       'excel',
                       'csv',
                       'pdf',
-                      'print'
+                      'print',
+                      {
+                        text: 'Print Report',
+                        action: function ( e, dt, node, config ) {
+                            printReport();
+                        }
+                      }
                   ]
               }
             ],
@@ -1460,8 +1524,10 @@ const selectMonth = () =>{
 
     if($('#month').val() == "All"){
         url = apiURL + 'submitted_requests';
+        query_no = 0;
     }else{
         url = apiURL + 'submitted_requests/month';
+        query_no = 2;
     }
 
     $('select').removeClass('text-primary');
@@ -1486,7 +1552,13 @@ const selectMonth = () =>{
                       'excel',
                       'csv',
                       'pdf',
-                      'print'
+                      'print',
+                      {
+                        text: 'Print Report',
+                        action: function ( e, dt, node, config ) {
+                            printReport();
+                        }
+                     }
                   ]
               }
             ],
@@ -1543,6 +1615,9 @@ const selectMonth = () =>{
 };
 
 const selectDay= () =>{
+
+    query_no = 3;
+
     $('select').removeClass('text-primary');
     $('#day').addClass('text-primary');
 
@@ -1565,7 +1640,13 @@ const selectDay= () =>{
                       'excel',
                       'csv',
                       'pdf',
-                      'print'
+                      'print',
+                      {
+                        text: 'Print Report',
+                        action: function ( e, dt, node, config ) {
+                            printReport();
+                        }
+                      }
                   ]
               }
             ],
@@ -1622,6 +1703,8 @@ const selectDay= () =>{
 };
 
 const selectRange = () =>{
+
+    query_no = 4;
     
     $('select').removeClass('text-primary');
     $('#date_from').addClass('text-primary');
@@ -1646,7 +1729,13 @@ const selectRange = () =>{
                       'excel',
                       'csv',
                       'pdf',
-                      'print'
+                      'print',
+                      {
+                        text: 'Print Report',
+                        action: function ( e, dt, node, config ) {
+                            printReport();
+                        }
+                      } 
                   ]
               }
             ],
@@ -2058,3 +2147,7 @@ const createChart3 = () =>{
 
 }
 createChart3();
+
+
+
+
