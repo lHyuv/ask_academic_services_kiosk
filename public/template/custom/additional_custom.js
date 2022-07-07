@@ -4,7 +4,7 @@ const baseURL = "http://localhost:8000/";
 let placeholder_src = $("#placeholder").attr("src");
 let create_ctr = 0; //to prevent duplicated AJAX
 let query_no = 0;
-
+let days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
 $("form").parsley();
 

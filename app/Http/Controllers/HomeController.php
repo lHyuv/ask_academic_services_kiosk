@@ -37,29 +37,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //no of requests
-        $today = Carbon::now();
-        $all_requests = Requests::where('status',1)->get();
-        $today_requests = Requests::where('status',1)->whereDate('created_at','=', $today)->get();
-        $yesterday_requests = Requests::where('status',1)->whereDate('created_at','=', 
-            $today->subDays('1')->format('Y-m-d'))->get();
-        $week_requests = Requests::where('status',1)->whereDate('created_at','>', 
-            $today->subDays('8')->format('Y-m-d'))->get();
-        $this_month_requests = Requests::where('status',1)->whereMonth('created_at','=', 
-        $today->month())->get();   
-   
+       
 
        // dd($today_requests);
-        return view('admin.home',[
-            'all_requests' => $all_requests,
-            'today_requests' => $today_requests,
-            'yesterday_requests' => $yesterday_requests,
-            'week_requests' => $week_requests,
-            'this_month_requests' => $this_month_requests,
-            //
-          
-           
-        ]);
+        return view('admin.home');
        
     }
 

@@ -8,12 +8,6 @@
 
 <div class="container">
 
-<section class="section shadow-none border-0 ml-5">
-        <div class="section-header mt-5  shadow-none border-0">
-  <!--Empty Space-->
-        </div>
-      
-</section>
 
 
     <div id = "select_menu">

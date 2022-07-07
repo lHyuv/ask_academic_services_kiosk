@@ -81,14 +81,14 @@
 
     @if (Route::current()->getName() == 'guest' || Route::current()->getName() == 'guest2')
 
-    <body class = "bg-white">
+    <body class = "bg-white ">
 
     <div id="app">
     <div class="main-wrapper main-wrapper-1">
         <!------->
-    <nav class="navbar navbar-expand-lg main-navbar" id = 'guest_header1'>
+    <nav class="navbar-fixed main-navbar" id = 'guest_header1'>
     <section class="section shadow-none border-0">
-        <div class="section-header mt-5  shadow-none border-0">
+        <div class="section-header  shadow-none border-0">
         <img src="{{ URL::to('/') }}/template/img/kiosk/icons/logo.png" alt="logo" width="70" class="shadow-light rounded-circle">
             <h1 class = "ml-2">Polytechnic University of the Philippines <br> Quezon City</h1>
 
@@ -97,9 +97,9 @@
       
     </section>
     </nav>
-    <nav class="navbar navbar-expand-lg main-navbar" id = 'guest_header2' style='display:none;'>
+    <nav class="navbar-expand-lg main-navbar" id = 'guest_header2' style='display:none;'>
     <section class="section shadow-none border-0">
-        <div class="section-header mt-5  shadow-none border-0">
+        <div class="section-header shadow-none border-0">
         <img src="{{ URL::to('/') }}/template/img/kiosk/icons/logo.png" alt="logo" width="70" class="shadow-light rounded-circle">
             <h1 class = "ml-2">Academic Services</h1>
 
@@ -217,11 +217,16 @@
         </nav>
 @endif
 
- @extends('layouts.sidebar')
+@includeWhen(Auth::check(),'layouts.sidebar')
 
-  
         <main class="py-4">
+@if(Auth::check())
+        <div class="main-content">
+@endif
             @yield('content')
+@if(Auth::check())
+        </div>
+@endif
         </main>
 
- @extends('layouts.footer')
+@includeWhen(Auth::check(),'layouts.footer')

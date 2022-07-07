@@ -102,7 +102,7 @@ class RequirementController extends Controller
             'requests',
             'created_by_user',
             'updated_by_user'
-         ])->where('request_id', $request)->get();
+         ])->where('request_id', $request)->where('status','1')->get();
 
         return [
             'message' => 'Successfully retrieved',

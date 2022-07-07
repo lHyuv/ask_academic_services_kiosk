@@ -54,7 +54,7 @@ class StepController extends Controller
             'requests',
             'created_by_user',
             'updated_by_user'
-         ])->orderBy('step_number')->where('request_id', $request)->get();
+         ])->orderBy('step_number')->where('request_id', $request)->where('status','1')->get();
 
         return [
             'message' => 'Successfully retrieved',
