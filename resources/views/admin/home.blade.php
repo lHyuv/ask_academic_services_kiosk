@@ -1,5 +1,9 @@
 @extends('layouts.header')
 
+@section('page_title')
+    {{ "Home" }}
+@endsection
+
 
 @section('content')
 
@@ -60,7 +64,10 @@
                   </div>
                   <div class="card-body">
                    @if(isset($today_requests))
-                   {{ count((array)$today_requests) }}
+                   {{ count($today_requests) }}
+                   @foreach($today_requests as $r)
+                   {{$r}}
+                   @endforeach
                    @else
                    0
                    @endif
@@ -143,7 +150,7 @@
                   </div>
                   <div class="card-body">
                    @if(isset($week_requests))
-                   {{ count((array)$week_requests) }}
+                   {{ count($week_requests) }}
                    @else
                    0
                    @endif
@@ -254,7 +261,7 @@
                   </div>
                   <div class="card-body">
                    @if(isset($month_requests))
-                   {{ count((array)$month_requests) }}
+                   {{ count($month_requests) }}
                    @else
                    0
                    @endif

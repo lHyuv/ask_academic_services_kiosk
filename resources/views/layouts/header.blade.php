@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Academic Services') }}</title>
+    <title>@yield('page_title', 'Academic Services')</title>
 
     <!-- Scripts -->
     <!--
@@ -89,7 +89,7 @@
     <nav class="navbar navbar-expand-lg main-navbar" id = 'guest_header1'>
     <section class="section shadow-none border-0">
         <div class="section-header mt-5  shadow-none border-0">
-        <img src="https://cdn.pup.edu.ph/img/symbols/logo88x88.png" alt="logo" width="70" class="shadow-light rounded-circle">
+        <img src="{{ URL::to('/') }}/template/img/kiosk/icons/logo.png" alt="logo" width="70" class="shadow-light rounded-circle">
             <h1 class = "ml-2">Polytechnic University of the Philippines <br> Quezon City</h1>
 
         

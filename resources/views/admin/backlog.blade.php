@@ -1,5 +1,8 @@
 @extends('layouts.header')
 
+@section('page_title')
+    {{ "Backlogs and Queries" }}
+@endsection
 
 @section('content')
 
@@ -74,6 +77,7 @@
                     <form>
                         <label>By Service</label>
                         <select class = 'form-control' id='requests' onchange = 'selectRequest($("#requests").val());'>
+                            <option value = "All"> All </option>
                             @foreach($requests as $req)
                             <option value = "{{ $req->id }}"> {{ $req->request_type }}</option>
                             @endforeach
@@ -106,7 +110,32 @@
     </div>
 </div>
 <script>
-    $('table').dataTable();
+ $(document).ready(()=>{
+    $("table").DataTable({
+        "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+        "dom": 'Bfrtip',
+    
+                 "buttons": [
+        
+                  {
+                      extend: 'collection',
+                      text: 'Options',
+                      buttons: [
+                          'copy',
+                          'excel',
+                          'csv',
+                          'pdf',
+                          'print'
+                      ]
+                  }
+                ],
+    });
+})
+//catch datatable ini error
+$.fn.dataTable.ext.errMode = ( settings, help, msg ) => { 
+    console.log(msg);
+};
+
 </script>
 @endsection
 

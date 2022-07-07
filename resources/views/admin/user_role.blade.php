@@ -1,5 +1,8 @@
 @extends('layouts.header')
 
+@section('page_title')
+    {{ "User Roles" }}
+@endsection
 
 @section('content')
 

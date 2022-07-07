@@ -1,5 +1,8 @@
 @extends('layouts.header')
 
+@section('page_title')
+    {{ "Requests" }}
+@endsection
 
 @section('content')
 

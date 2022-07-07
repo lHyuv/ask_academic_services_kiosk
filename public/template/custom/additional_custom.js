@@ -1360,7 +1360,7 @@ if((window.location.href).includes('/home')){
 
 
 const setSelect = () =>{
-    let month_content = ``;
+    let month_content = `<option value = 'All'>All</option>`;
 
     for(let i = 1; i <= 12; i++){
         month_content += `
@@ -1376,6 +1376,14 @@ const setSelect = () =>{
 setSelect();
 
 const selectRequest = (id) =>{
+    let url = '';
+
+    if($('#requests').val() == "All"){
+        url = apiURL + 'submitted_requests';
+    }else{
+        url = apiURL + 'submitted_requests/request/' + id;
+    }
+
     $('select').removeClass('text-primary');
     $('#requests').addClass('text-primary');
 
@@ -1404,7 +1412,7 @@ const selectRequest = (id) =>{
             ],
                 'ajax': {
                   
-                    url: apiURL + 'submitted_requests/request/' + id,
+                    url: url,
                     type: "GET",
                    // dataSrc:"",
                     headers: { 
@@ -1447,6 +1455,15 @@ const selectRequest = (id) =>{
 };
 
 const selectMonth = () =>{
+
+    let url = '';
+
+    if($('#month').val() == "All"){
+        url = apiURL + 'submitted_requests';
+    }else{
+        url = apiURL + 'submitted_requests/month';
+    }
+
     $('select').removeClass('text-primary');
     $('#month').addClass('text-primary');
 
@@ -1475,7 +1492,7 @@ const selectMonth = () =>{
             ],
                 'ajax': {
                   
-                    url: apiURL + 'submitted_requests/month',
+                    url: url,
                     type: "POST",
                    // dataSrc:"",
                     headers: { 
@@ -1704,6 +1721,7 @@ const createChart = () =>{
         dataType: "json",
         contentType: "application/json",
         success: (data)=>{
+    
          if(data.data.length == 0){
             $('#today_report_none').css('display','block');
             $('#chart-1').css('display','none');
@@ -1732,6 +1750,11 @@ const createChart = () =>{
                 services[i] = services[i] + ' (' + String(service_values[i]) + ')';
             })
 
+            if(services.length == 0){
+                $('#today_report_none').css('display','block');
+                $('#chart-1').css('display','none');
+                return;
+            }
             // graph chart
             let graphChartCanvas = $('#chart-1').get(0).getContext('2d')
             
@@ -1840,6 +1863,12 @@ const createChart2 = () =>{
                 services[i] = services[i] + ' (' + String(service_values[i]) + ')';
              })
              
+             if(services.length == 0){
+                $('#this_week_report_none').css('display','block');
+                $('#chart-2').css('display','none');
+                return;
+            }
+
             // graph chart
             let graphChartCanvas = $('#chart-2').get(0).getContext('2d')
             
@@ -1958,6 +1987,12 @@ const createChart3 = () =>{
             services.map((val,i)=>{
                 services[i] = services[i] + ' (' + String(service_values[i]) + ')';
             })
+
+            if(services.length == 0){
+                $('#this_month_report_none').css('display','block');
+                $('#chart-3').css('display','none');
+                return;
+            }
 
             // graph chart
             let graphChartCanvas = $('#chart-3').get(0).getContext('2d')

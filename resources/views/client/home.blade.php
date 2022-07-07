@@ -1,5 +1,8 @@
 @extends('layouts.header')
 
+@section('page_title')
+    {{ "Academic Services" }}
+@endsection
 
 @section('content')
 
@@ -337,7 +340,7 @@
     <div class="step" data-target="#get-my-ticket">
       <button type="button" class="step-trigger" role="tab"  id="get-my-ticket-trigger" aria-controls="get-my-ticket">
         <span class="bs-stepper-circle"><i class = "fa fa-dot-circle"></i></span>
-        <span class="bs-stepper-label">Get my ticket</span>
+        <span class="bs-stepper-label text-primary">Get my ticket</span>
       </button>
     </div>
   </div>

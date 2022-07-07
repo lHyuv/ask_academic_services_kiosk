@@ -1,5 +1,9 @@
 @extends('layouts.header')
 
+@section('page_title')
+    {{ "Roles" }}
+@endsection
+
 
 @section('content')
 
