@@ -229,4 +229,5 @@
 @endif
         </main>
 
-@includeWhen(Auth::check(),'layouts.footer')
+@includeWhen(Route::current()->getName() != 'login' &&  Route::current()->getName() != 'register','layouts.footer')
+
