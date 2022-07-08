@@ -387,6 +387,11 @@
         <section id = 'final_step'></section>
  
       </div>
+   
+      <button role = "button" id = "keyboard_show_btn" class="btn btn-primary beep float-right"
+    onclick = "/*sessionStorage.setItem('keyboard_status', 'show');checkKBStatus();*/showKeyboard('show');"
+    ><i class="far fa-keyboard"></i></button>
+
     <button class="btn btn-primary" onclick="
     stepper.previous()">Previous</button>
 

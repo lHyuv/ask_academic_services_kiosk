@@ -1,6 +1,6 @@
 </div>
     </div> 
-    <footer class="footer fixed-bottom bg-white ml-3 pt-5" style = "height: 15%">
+    <footer class="footer fixed-bottom bg-white pt-2" style = "height: 10%">
                 <div class="footer-left">
                     Copyright &copy; 2022 <div class="bullet"></div> <a href="#">PUPQC</a> <div class="bullet"></div> <a href = '/login'>Login</a>
                 </div>
@@ -36,7 +36,7 @@
         <div class="key delete">Backspace</div>
         <div class="key tab">&nbsp;</div>
         <div class="key">Q</div>
-        <div class="key">w</div>
+        <div class="key">W</div>
         <div class="key">E</div>
         <div class="key">R</div>
         <div class="key">T</div>
@@ -80,7 +80,7 @@
         <div class="key command">&nbsp;</div>
         <div class="key">&nbsp;</div>
         <div class="key">&nbsp;</div>
-        <div class="key close" onclick = "sessionStorage.setItem('keyboard_status', 'close');checkKBStatus();"><br>Close</div>
+        <div class="key close" onclick = "/*sessionStorage.setItem('keyboard_status', 'close');checkKBStatus();*/showKeyboard('hide');"><br>Close</div>
     </div>
                 </div>
             </div>
