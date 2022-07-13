@@ -204,7 +204,19 @@ const deleteRole = (data) =>{
     let values = JSON.parse(data);
   
     
-    $('#modal_confirm_btn').on('click',()=>{
+    Swal.fire({
+        title: 'Delete?',
+        showDenyButton: true,
+      //  showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-3',
+            denyButton: 'order-2',
+          }
+      }).then((result) => {
 
 
         $.ajax({
@@ -348,7 +360,19 @@ const deleteUser = (data) =>{
     let values = JSON.parse(data);
 
     
-    $('#modal_confirm_btn').on('click',()=>{
+    Swal.fire({
+        title: 'Delete?',
+        showDenyButton: true,
+      //  showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-3',
+            denyButton: 'order-2',
+          }
+      }).then((result) => {
 
 
         $.ajax({
@@ -380,20 +404,21 @@ $('input[type=\'password\']').showHidePassword();
 
 //
 const showImg = (url) => {
-
-	let ext = url.substring(url.lastIndexOf(".") + 1).toLowerCase();
-	if (url.files && url.files[0] && (ext == "jpeg" || ext == "jpg" || ext == "png")) {
+   // console.log(url)
+	let ext = url.name.substring(url.name.lastIndexOf(".") + 1).toLowerCase();
+	if ((ext == "jpeg" || ext == "jpg" || ext == "png")) {
 		let reader = new FileReader();
 
 		reader.onload = (e) =>{
 			$("#placeholder").attr("src", e.target.result);
 		};
 
-		reader.readAsDataURL(input.files[0]);
+		reader.readAsDataURL(url);
 	} else{
         notification('error','','Not a valid image file type!');
     }
 };
+
 
 const editRequest = (data) =>{
     //view
@@ -518,7 +543,19 @@ const deleteRequest = (data) =>{
     let values = JSON.parse(data);
   
     
-    $('#modal_confirm_btn').on('click',()=>{
+    Swal.fire({
+        title: 'Delete?',
+        showDenyButton: true,
+      //  showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-3',
+            denyButton: 'order-2',
+          }
+      }).then((result) => {
 
 
         $.ajax({
@@ -749,7 +786,19 @@ const deleteStep = (data) =>{
     let values = JSON.parse(data);
   
     
-    $('#modal_confirm_btn').on('click',()=>{
+    Swal.fire({
+        title: 'Delete?',
+        showDenyButton: true,
+      //  showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-3',
+            denyButton: 'order-2',
+          }
+      }).then((result) => {
 
 
         $.ajax({
@@ -866,7 +915,19 @@ const deleteRequirement = (data) =>{
     let values = JSON.parse(data);
   
     
-    $('#modal_confirm_btn').on('click',()=>{
+    Swal.fire({
+        title: 'Delete?',
+        showDenyButton: true,
+      //  showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-3',
+            denyButton: 'order-2',
+          }
+      }).then((result) => {
 
 
         $.ajax({
@@ -2244,3 +2305,313 @@ $(".key").on('click', function(e){
 	//enter shift/backspace function here
 });
 
+
+const showForm = (id) =>{
+  
+    $.ajax({
+        url: apiURL + `forms/${id}`,
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+        dataType: "json",
+        contentType: "application/json",
+        success: (data)=>{
+           
+            let ext = ``;
+            let code = ``;
+         
+            if(data.data){
+               $('#show_form_title').html(data.data.form_name);
+                if(data.data.form_file_name != null){
+                    ext = data.data.form_file_name.substr(-4);
+                }
+            
+            if(ext.length > 0 && data.data.form_file_path != null && data.data.form_file_name != null){
+                if(ext == "jpeg"){
+                    code = `<img class = "mx-auto d-block"  src = "${baseURL}${data.data.form_file_path}${data.data.form_file_name}">`;
+                }else{
+                    if(ext.substr(-3) == "jpg" || ext.substr(-3) == "png" || ext.substr(-3) == "gif"){
+                        code = `<img class = "mx-auto d-block" src = "${baseURL}${data.data.form_file_path}${data.data.form_file_name}">`;
+                    }else if(ext.substr(-3) == "pdf" || ext.substr(-3) == "txt"){
+                        code = `<iframe class = "mx-auto d-block" height = "800" width = "100%" src = "${baseURL}${data.data.form_file_path}${data.data.form_file_name}"></iframe>`;
+                    }else{
+                        code = `<h5 class = "text-center">Can't render the file due to file format</h5>`;
+                    }
+                }
+            }else{
+                code = `<h5  class = "text-center">No file uploaded for this form</h5>`;
+            }
+            }
+
+            code += `
+            <button class="btn btn-primary" onclick=
+            "
+                $('#form_list_container').html('');
+                showElement('id','form_list','show');
+                showElement('id','show_form','hide');
+            "
+            >Previous</button>
+
+            <button class="btn btn-primary float-right"  onclick="
+            showElement('id','show_form','hide');
+            showElement('id','selected_service','show');
+            generateService('${data.data.request_id}','${data.data.requests.request_type}');
+            generateRequirement('${data.data.request_id}');
+            ">Request</button>
+            `;
+            $('#show_form_container').append(code);
+            //
+  
+        }
+    })
+};
+
+
+const listForm = (id, request_title) =>{
+
+    $('#form_request_title').html(request_title + ' Forms');
+
+    $.ajax({
+        url: apiURL + `forms/request/${id}`,
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+        dataType: "json",
+        contentType: "application/json",
+        success: (data)=>{
+
+            if(data.data.length != 0){
+            let code = ``;
+            data.data.map((val)=>{
+              
+              
+                let img_url = baseURL + 'template/img/kiosk/icons/paper.png';
+
+               
+                code +=
+                            `
+            
+            <div class="card shadow-md rounded ml-2">
+            <div class = "card-body">
+
+            <div class = "row">
+            <div class = "col-md-2">
+            <a href = "javascript:void(0);" onclick = "
+            $('#show_form_container').html('');
+            showElement('id','show_form','show');
+            showElement('id','form_list','hide');
+            showForm('${val.id}');
+            ">
+            
+            <img class="d-block w-40 img-thumbnail border-0" src="${img_url}" >
+            
+
+
+            </a>
+            </div>
+            <div class = "col-md-10">
+            <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
+            $('#show_form_container').html('');
+            showElement('id','show_form','show');
+            showElement('id','form_list','hide');
+            showForm('${val.id}');
+            ">
+            <h4 class = 'request_title mt-5 float-left' >${val.form_name}</h4>
+            </a>
+            </div>
+            </div>
+
+
+
+            </div>
+            </div>
+                `
+            }).join("");
+            $('#form_list_container').append(code);
+        }else{
+            $('#form_list_container').append("<h5 class = 'text-center'>No forms to show</h5>");
+            
+        }
+    }
+    })
+   
+};
+
+//
+
+
+const createForm = () =>{
+    
+    $('#create_form').on('submit',(e)=>{
+
+        e.preventDefault();
+        
+        if (create_ctr > 0) {
+            return;
+        }
+        create_ctr++;
+        let form_data = new FormData(document.getElementById('create_form'));
+        
+       
+        $.ajax({
+            url: apiURL + 'forms',
+            async: true,
+            method: 'POST',
+            data: form_data,
+
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            //for file
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: (data)=>{
+                
+       
+                create_ctr = 0;
+                notification('success','','Successfully created');
+               // location.reload();
+               manageCard('create_form_crud','hide'); 
+               drawTable();
+            },
+            error:({responseJSON})=>{
+               // console.log(responseJSON.message);
+               notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
+
+
+
+const deleteForm = (data) =>{
+    //view
+    let values = JSON.parse(data);
+  
+
+    Swal.fire({
+        title: 'Delete?',
+        showDenyButton: true,
+      //  showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-3',
+            denyButton: 'order-2',
+          }
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            $.ajax({
+                url: apiURL + 'forms/delete/' + values['id'],
+                async: true,
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                },
+                success: (data)=>{
+                   
+            
+                   notification('success','','Successfully deleted');
+                   //location.reload();
+                   drawTable();
+                },
+                error:({responseJSON})=>{
+                  //  console.log(responseJSON);
+                  notification('error','','Something went wrong');
+                }
+            });
+
+        }
+      })
+
+
+
+};
+
+const editForm = (data) =>{
+    //view
+
+
+    let values = JSON.parse(data);
+    console.log(values)
+    $('#edit_form_name').val(values['form_name']);
+    $('#edit_type').val(values['request_id']);
+    $('#edit_source').val(values['source']);
+    if(values['form_file_path'] && values['form_file_name']){
+        $("#placeholder").attr(
+            "src",
+            `${baseURL}${values['form_file_path']}/${values['form_file_name']}`
+        );
+    }else{
+        $("#placeholder").attr(
+            "src",
+            placeholder_src
+        );
+    }
+    
+
+
+    $('#edit_form').on('submit',(e)=>{
+
+        e.preventDefault();
+
+        let form_data = new FormData(document.getElementById('edit_form'));
+    
+
+
+        $.ajax({
+            url: apiURL + 'forms/update/' + values['id'],
+            async: true,
+            method: 'POST',
+            data: form_data,
+
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            //for file
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: (data)=>{
+             
+
+                notification('success','','Successfully updated');
+                //location.reload();
+                manageCard('edit_form_crud','hide');
+                drawTable();
+            },
+            error:({responseJSON})=>{
+                console.log(responseJSON);
+                notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
+
+const showFile = (url) => {
+    // console.log(url)
+     let ext = url.name.substring(url.name.lastIndexOf(".") + 1).toLowerCase();
+     if ((ext == "jpeg" || ext == "jpg" || ext == "png" || ext == "pdf" || ext == "txt")) {
+         let reader = new FileReader();
+ 
+         reader.onload = (e) =>{
+             $("#placeholder").attr("src", e.target.result);
+         };
+ 
+         reader.readAsDataURL(url);
+     } else{
+         notification('error','','This file type is not accepted!');
+     }
+ };

@@ -62,7 +62,7 @@ class FormController extends Controller
             $validator = Validator::make($request->all(), [
                 'form_name' =>['string','max:255'],
                 'request_id' => ['required', 'string', 'max:255'],
-                'file'  => 'required|mimes:png,jpg,jpeg|max:2305',
+                'file'  => 'required|mimes:png,jpg,jpeg,txt,pdf|max:2305',
             ]);
 
             if($validator->fails()){
@@ -112,7 +112,7 @@ class FormController extends Controller
             $validator = Validator::make($request->all(), [
                 'form_name' =>['string','max:255'],
                 'request_id' => ['required', 'string', 'max:255'],
-                'file'  => 'required|mimes:png,jpg,jpeg|max:2305',
+                'file'  => 'required|mimes:png,jpg,jpeg,txt,pdf|max:2305',
             ]);
     
             if($validator->fails()){

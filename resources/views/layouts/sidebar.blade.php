@@ -68,6 +68,9 @@
               <li class="nav-item">
                 <a href="/requirements" class="nav-link"><i class="far fa-clipboard"></i><span>Requirements</span></a>
               </li>
+              <li class="nav-item">
+                <a href="/forms" class="nav-link"><i class="fa fa-file-invoice"></i><span>Forms</span></a>
+              </li>
         <li class="menu-header">User Management</li>
               <li class="nav-item">
                 <a href="/user" class="nav-link"><i class="fas fa-user"></i><span>Users</span></a>

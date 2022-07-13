@@ -16,6 +16,7 @@ use App\Models\Requirement;
 use App\Models\SubmittedRequest;
 use App\Models\AceRequest;
 use App\Models\TaggedModel;
+use App\Models\Form;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -119,6 +120,15 @@ class HomeController extends Controller
         $requests = Requests::where('status',1)->get();
         return view('setup.requirements',[
             'requirements' => $requirements,
+            'requests' => $requests
+        ]);
+    }
+
+    public function form_crud(){
+        $forms = Form::where('status',1)->get();
+        $requests = Requests::where('status',1)->get();
+        return view('setup.forms',[
+            'forms' => $forms,
             'requests' => $requests
         ]);
     }

@@ -171,7 +171,7 @@ Route::middleware('auth:sanctum')->get('/forms/show_active', [FormController::cl
 
 Route::get('/forms/request/{request}', [FormController::class, 'find_by_request']);
 
-Route::middleware('auth:sanctum')->get('/forms/{id}', [FormController::class, 'show']);
+Route::get('/forms/{id}', [FormController::class, 'show']);
 
 Route::middleware('auth:sanctum')->post('/forms',[FormController::class, 'create']);
 

@@ -10,6 +10,7 @@
 </div>
 
 <section id = 'empty_space'></section>
+<section id = 'empty_space_2'></section>
 <div class="row keyboard-container">
         <div class="col-md-12">
 
@@ -91,31 +92,7 @@
 </div>
 
 
-<!--modal-->
-<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Confirmation</h5>
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to do this action?
-        
-      </div>
-      <div class="modal-footer bg-light">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    
-        <button type="button" id = 'modal_confirm_btn' class="btn btn-primary"  data-bs-dismiss="modal">Proceed</button>
-       
-  
-      </div>
-    </div>
-  </div>
-</div>
-<!--modal:end-->
+
 <script>
     /*
     if (typeof jQuery == "undefined") {

@@ -42,7 +42,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Icon / Picture</label>
-                        <input class="form-control" type="file" id="edit_file" name="file" accept="image/*" onchange="showImg(this.value)" >
+                        <input class="form-control" type="file" id="edit_file" name="file" accept="image/*" onchange="showImg(this.files[0])" >
                         </div>
                         </div>
                         <div class = "col-md-12">

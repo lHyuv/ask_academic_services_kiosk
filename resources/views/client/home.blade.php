@@ -51,38 +51,38 @@
               <!--Image placeholders-->
               @if(str_contains($request->request_type,'add') || str_contains($request->request_type,'Add'))
              
-              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/add.png">
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/add.png">
               @elseif(str_contains($request->request_type,'change') || str_contains($request->request_type,'Change'))
              
-             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/change.png">
+             <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/change.png">
              @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
              
-             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+             <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
              @elseif(str_contains($request->request_type,'correction') || str_contains($request->request_type,'Correction'))
              
-             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/correction.png">
+             <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/correction.png">
              @elseif(str_contains($request->request_type,'cross') || str_contains($request->request_type,'Cross'))
              
-             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/cross.png">
+             <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/cross.png">
              @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
 
-             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+             <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
 
              @elseif(str_contains($request->request_type,'manual') || str_contains($request->request_type,'Manual'))
 
-            <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/manual.png">
+            <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/manual.png">
 
             @elseif(str_contains($request->request_type,'tutorial') || str_contains($request->request_type,'Tutorial'))
 
-            <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/tutorial.png">
+            <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/tutorial.png">
 
             @elseif(str_contains($request->request_type,'petition') || str_contains($request->request_type,'Petition'))
 
-          <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/petition.png">
+          <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/petition.png">
 
           @elseif(str_contains($request->request_type,'overload') || str_contains($request->request_type,'Overload'))
 
-        <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/overload.png">
+        <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/overload.png">
 
               @else
              
@@ -104,12 +104,13 @@
             <div class="card shadow-md rounded ml-2">
              <div class = "card-body">
              <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
+              showElement('id','form_menu','hide');
              showElement('id','select_menu2','show');
              showElement('id','select_menu','hide');
              showElement('id','guest_header2','flex');
              showElement('id','guest_header1','hide');
              ">
-             <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/more.png">
+             <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/more.png">
               <span class = "text-center mt-2"> Show more...</span>
              </a>
              </div>
@@ -128,7 +129,6 @@
    
 
             @endforeach
-
             @else
         <div class = "row">
 
@@ -156,6 +156,7 @@
         </div>
       
         @endif
+
             <!--Menu:end-->
         </div>
         </div>
@@ -175,6 +176,7 @@
       <div class="col-md-8">
       <button class = "btn btn-primary"  
       onclick = "
+       showElement('id','form_menu','hide');
       showElement('id','select_menu','show');
       showElement('id','select_menu2','hide');
       showElement('id','guest_header1','flex');
@@ -195,23 +197,7 @@
         <div class = "row">
         @endif
 
-        @if(count($full_requests) == 10 && $key != 0 && $key != 1)
-          @if($key == count($full_requests) - 2)
-         <!---->
-     
-        <div class="col-md-3 d-flex align-items-stretch">
-        <div class="card shadow-none border-0 ml-2">
-         <div class = "card-body">
-         
-         </div>
-        </div>
-        </div>
-      
-         <!---->
 
-          @endif
-
-        @endif
         
           <!---->
      
@@ -229,38 +215,38 @@
               <!--Image placeholders-->
               @if(str_contains($request->request_type,'add') || str_contains($request->request_type,'Add'))
              
-              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/add.png">
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/add.png">
               @elseif(str_contains($request->request_type,'change') || str_contains($request->request_type,'Change'))
               
-              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/change.png">
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/change.png">
               @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
               
-              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
               @elseif(str_contains($request->request_type,'correction') || str_contains($request->request_type,'Correction'))
               
-              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/correction.png">
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/correction.png">
               @elseif(str_contains($request->request_type,'cross') || str_contains($request->request_type,'Cross'))
               
-              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/cross.png">
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/cross.png">
               @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
 
-              <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
 
               @elseif(str_contains($request->request_type,'manual') || str_contains($request->request_type,'Manual'))
 
-            <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/manual.png">
+            <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/manual.png">
 
             @elseif(str_contains($request->request_type,'tutorial') || str_contains($request->request_type,'Tutorial'))
 
-            <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/tutorial.png">
+            <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/tutorial.png">
 
             @elseif(str_contains($request->request_type,'petition') || str_contains($request->request_type,'Petition'))
 
-          <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/petition.png">
+          <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/petition.png">
 
           @elseif(str_contains($request->request_type,'overload') || str_contains($request->request_type,'Overload'))
 
-        <img class="d-block w-60" src="{{ URL::to('/') }}/template/img/kiosk/icons/overload.png">
+        <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/overload.png">
 
              @else
             
@@ -284,6 +270,23 @@
         @endif
   
         @endforeach
+
+        <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card shadow-md rounded ml-2">
+             <div class = "card-body">
+             <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
+             showElement('id','form_menu','show');
+             showElement('id','select_menu2','hide');
+             showElement('id','select_menu','hide');
+             showElement('id','guest_header2','flex');
+             showElement('id','guest_header1','hide');
+             ">
+             <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/paper.png">
+              <span class = "text-center mt-2"> Request Forms</span>
+             </a>
+             </div>
+            </div>
+            </div>
         <!--Menu:end-->
 </div>
 </div>
@@ -429,6 +432,7 @@
 </div>
 <div  class = "text-center">
 <button class = "btn btn-primary text-center" onclick = "
+      showElement('id','form_menu','hide');
       showElement('id','select_menu','show');
       showElement('id','select_menu2','hide');
       showElement('id','guest_header1','flex');
@@ -440,5 +444,152 @@
 </section>
 </div>
 </div>
+
 <!--Finish Step:end-->
+<!--Hidden--> 
+<div id = "form_menu" style = "display:none;">
+<h4 class = 'request_title text-center' >Request Forms</h4>
+<div class="section-header-breadcrumb mb-3 col-md-12">
+<button class = "btn btn-primary"  
+      onclick = "
+       showElement('id','form_menu','hide');
+      showElement('id','select_menu','show');
+      showElement('id','select_menu2','hide');
+      "
+      ><i class = "fas fa-arrow-left"></i> Back</button>
+      </div>
+
+
+
+
+@foreach($full_requests as $key=>$request)
+<!--Form List--> 
+
+<div class="card shadow-md rounded ml-2">
+             <div class = "card-body">
+
+             <div class = "row">
+              <div class = "col-md-2">
+              <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
+  listForm('{{ $request->id }}');
+  ">
+                @if(isset($request->icon_file_name) && isset($request->icon_file_path))
+              <img class="d-block w-40" src="{{ URL::to('/') }}/{{$request->icon_file_path}}/{{$request->icon_file_name}}">
+              @else
+              
+              <!--Image placeholders-->
+              @if(str_contains($request->request_type,'add') || str_contains($request->request_type,'Add'))
+             
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/add.png">
+              @elseif(str_contains($request->request_type,'change') || str_contains($request->request_type,'Change'))
+              
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/change.png">
+              @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
+              
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+              @elseif(str_contains($request->request_type,'correction') || str_contains($request->request_type,'Correction'))
+              
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/correction.png">
+              @elseif(str_contains($request->request_type,'cross') || str_contains($request->request_type,'Cross'))
+              
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/cross.png">
+              @elseif(str_contains($request->request_type,'certification') || str_contains($request->request_type,'Certification'))
+
+              <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/certification.png">
+
+              @elseif(str_contains($request->request_type,'manual') || str_contains($request->request_type,'Manual'))
+
+            <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/manual.png">
+
+            @elseif(str_contains($request->request_type,'tutorial') || str_contains($request->request_type,'Tutorial'))
+
+            <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/tutorial.png">
+
+            @elseif(str_contains($request->request_type,'petition') || str_contains($request->request_type,'Petition'))
+
+          <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/petition.png">
+
+          @elseif(str_contains($request->request_type,'overload') || str_contains($request->request_type,'Overload'))
+
+         <img class="d-block w-40" src="{{ URL::to('/') }}/template/img/kiosk/icons/overload.png">
+
+             @else
+            
+             <img class="d-block w-100" src="{{ URL::to('/') }}/template/img/news/img01.jpg">
+             @endif
+            
+              <!--Image placeholders:end-->
+              @endif
+              </a>
+              </div>
+              <div class = "col-md-10">
+              <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
+    listForm('{{ $request->id }}', '{{ $request->request_type }}');
+    showElement('id','form_menu','hide');
+     showElement('id','form_list','show');
+  ">
+              <h4 class = 'mt-5 float-left' >{{ $request->request_type}} Forms</h4>
+              </a>
+              </div>
+             </div>
+          
+            
+         
+             </div>
+            </div>
+          
+<!--Form List:end-->
+@endforeach
+</div>
+
+<!--Hidden:end-->
+<!--Hidden--> 
+<div id = "form_list" class = "col-md-12" style = "display:none;">
+  
+  <div class = "row">
+  <div class = "col-md-12">
+<h4 class = 'request_title mt-5 text-center' id = "form_request_title"> Forms</h4>
+</div>
+
+<div class="section-header-breadcrumb mb-3 col-md-12">
+<button class = "btn btn-primary"  
+      onclick = "
+      $('#form_list_container').html('');
+       showElement('id','select_menu','show');
+       showElement('id','form_list','hide');
+      "
+      ><i class = "fas fa-arrow-left"></i> Back</button>
+      </div>
+
+
+<div class = "col-md-12">
+<div id = "form_list_container"></div>
+</div>
+</div>
+
+
+
+</div>
+<!--Hidden:end--> 
+<!--Hidden--> 
+<div id = "show_form" class = "col-md-12" style = "display:none;">
+  
+  <div class = "row">
+  <div class = "col-md-12">
+<h4 class = 'request_title mt-5 text-center' id = 'show_form_title'> Form</h4>
+</div>
+
+
+
+<div class = "col-md-12">
+<div id = "show_form_container"></div>
+
+
+</div>
+</div>
+
+
+
+</div>
+<!--Hidden:end--> 
 @endsection

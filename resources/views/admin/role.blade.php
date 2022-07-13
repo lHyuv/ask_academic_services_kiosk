@@ -142,13 +142,24 @@
                                    
                                     <div class="text-center dropdown">
                                     <!-- Dropdown Toggler --> 
-                                    <div class="btn btn-sm btn-default" data-bs-toggle="dropdown" role="button">
+                                    <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
                                     <i class="fas fa-ellipsis-v"></i>
                                     </div>
 
                                     <!-- Dropdown Menu --> 
                                     <div class="dropdown-menu dropdown-menu-right"> 
-                                
+                                    @if($role->name == 'Admin' || $role->name == 'admin')
+                                    <!----> 
+                              
+                                     <div class="dropdown-item d-flex" role="button" onclick = "" >
+                                    <div style="width: 2rem">
+                                    <i class="fas fa-list mr-1"></i>
+                                    </div>
+                                    <div>&nbsp; No action provided</div>
+                                    </div> 
+                                    <!----> 
+
+                                    @else
                                     <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_role_crud','show');editRole(' {{$role}}');">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
@@ -156,13 +167,15 @@
                                     <div>Edit</div>
                                     </div> 
                                     <!----> 
-                                    <div class="dropdown-item d-flex" role="button" onclick = "deleteRole(' {{$role}}');"  data-bs-toggle = "modal" data-bs-target="#confirmModal">
+                              
+                                    <div class="dropdown-item d-flex" role="button" onclick = "deleteRole(' {{$role}}');" >
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
                                     </div>
                                     <div>Delete</div>
                                     </div> 
                                     <!----> 
+                                    @endif
                                     </div>
 
                                     </div>
