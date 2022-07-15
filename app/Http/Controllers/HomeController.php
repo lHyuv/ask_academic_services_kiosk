@@ -54,7 +54,7 @@ class HomeController extends Controller
     }
 
     public function backlog(){
-        $submitted_requests = SubmittedRequest::where('status',1)->get();
+        $submitted_requests = SubmittedRequest::where('status',1)->orderBy('created_at')->get();
         $requests = Requests::where('status',1)->get();
         /*
         ->groupBy(function ($val) {

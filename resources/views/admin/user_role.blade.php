@@ -124,7 +124,18 @@
 
                                     <!-- Dropdown Menu --> 
                                     <div class="dropdown-menu dropdown-menu-right"> 
-                                
+                                    @if($userrole->user_id == Auth::user()->id)
+                                    <!----> 
+                              
+                                     <div class="dropdown-item d-flex" role="button" onclick = "" >
+                                    <div style="width: 2rem">
+                                    <i class="fas fa-list mr-1"></i>
+                                    </div>
+                                    <div>&nbsp; No action provided</div>
+                                    </div> 
+                                    <!----> 
+
+                                    @else
                                     <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_userrole_crud','show');editUserRole(' {{$userrole}}');">
                                     <div style="width: 2rem">
                                     <i class="fas fa-list mr-1"></i>
@@ -139,6 +150,7 @@
                                     <div>Delete</div>
                                     </div> 
                                     <!----> 
+                                    @endif
                                     </div>
 
                                     </div>

@@ -146,6 +146,8 @@ Route::middleware('auth:sanctum')->get('/submitted_requests/show_active', [Submi
 
 Route::middleware('auth:sanctum')->get('/submitted_requests/user/{id}', [SubmittedRequestController::class, 'find_by_user']);
 
+Route::middleware('auth:sanctum')->get('/submitted_requests/no_user', [SubmittedRequestController::class, 'no_given_user']);
+
 Route::middleware('auth:sanctum')->get('/submitted_requests/request/{id}', [SubmittedRequestController::class, 'find_by_request']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/query', [SubmittedRequestController::class, 'date_query']);
@@ -153,6 +155,10 @@ Route::middleware('auth:sanctum')->post('/submitted_requests/query', [SubmittedR
 Route::middleware('auth:sanctum')->post('/submitted_requests/month', [SubmittedRequestController::class, 'month']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/day', [SubmittedRequestController::class, 'day']);
+
+Route::middleware('auth:sanctum')->get('/submitted_requests/this_week', [SubmittedRequestController::class, 'this_week']);
+
+Route::middleware('auth:sanctum')->get('/submitted_requests/this_month', [SubmittedRequestController::class, 'this_month']);
 
 Route::middleware('auth:sanctum')->get('/submitted_requests/{id}', [SubmittedRequestController::class, 'show']);
 

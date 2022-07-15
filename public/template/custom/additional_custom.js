@@ -5,7 +5,7 @@ let placeholder_src = $("#placeholder").attr("src");
 let create_ctr = 0; //to prevent duplicated AJAX
 let query_no = 0;
 let days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-
+let months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 $("form").parsley();
 
 const notification = (type, title, message) => {
@@ -87,7 +87,7 @@ const printReport = () =>{
     $('table').attr('class','table');
     $('.card').removeClass('card-primary'); 
     $('#card_title').css('display','none');
- 
+    $('hr').css('display','block');
     switch(query_no){
         case 1: $('#query_text').html('Query: Request - ' + $('#requests option:selected').text()); break;
         case 2: $('#query_text').html('Query: Month - ' + moment($('#month').val(), 'M').format('MMMM')); break;
@@ -95,6 +95,20 @@ const printReport = () =>{
         case 4: $('#query_text').html(
             'Query: ' + moment($('#date_from').val()).format("MMM Do YYYY") + ' to ' + moment($('#date_to').val()).format("MMM Do YYYY")
         ); break;
+        case 5: $('#query_text').html(
+            'Query: Student Number - ' + $('#student_no').val()
+        ); break;
+        case 6:     
+            if($('#report').val() == 'Weekly'){
+                $('#query_text').html(
+                    'Query: This Week/Weekly'
+                );
+            }else if($('#report').val() == 'Monthly'){
+                $('#query_text').html(
+                    'Query: This Month/Monthly (' + months[new Date().getMonth()] + ')'
+                );
+            }
+        break;
         default: $('#query_text').html('');
     }
     $('table').DataTable().destroy()
@@ -1482,9 +1496,9 @@ if((window.location.href).includes('/home')){
 const setSelect = () =>{
     let month_content = `<option value = 'All'>All</option>`;
 
-    for(let i = 1; i <= 12; i++){
+    for(let i = 0; i <= 11; i++){
         month_content += `
-        <option value = '${i}'>${i}</option>
+        <option value = '${i}'>${months[i]}</option>
         `;
     }
 
@@ -2615,3 +2629,215 @@ const showFile = (url) => {
          notification('error','','This file type is not accepted!');
      }
  };
+ 
+ const loadStudentNo =() =>{
+    let ids = new Array();
+    $.ajax({
+        url: apiURL + 'submitted_requests',
+        method: 'GET',
+        headers: {
+            Authorization: 'Bearer ' + sessionStorage.getItem('token'),
+        },
+        success: (data)=>{
+            let code = `<option value = 'None'>No given student number</option>`;
+
+            data.data.map((val)=>{
+                if(val.student_number != null){
+                    if(!ids.includes(val.student_number)){
+                        code += `<option value = '${val.student_number}'>${val.student_number}</option>`;
+                        ids.push(val.student_number);
+                    }
+                  
+                }
+                
+            }).join("");
+            $('#student_no').append(code);
+        }
+    })
+ };
+
+ loadStudentNo();
+
+ const selectUser = () =>{
+    let url = '';
+
+    if($('#student_no').val() == "All"){
+        url = apiURL + 'submitted_requests';
+        query_no = 0;
+    }else if($('#student_no').val() == "None" || $('#student_no').val() == "N/A"){
+        url = apiURL + 'submitted_requests/no_user';
+        query_no = 5;
+    }else{
+        url = apiURL + 'submitted_requests/user/' + $('#student_no').val();
+        query_no = 5;
+    }
+
+    $('select').removeClass('text-primary');
+    $('#student_no').addClass('text-primary');
+
+    //
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    $("table").DataTable({
+                
+    "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+    "dom": 'Bfrtip',
+
+             "buttons": [
+    
+              {
+                  extend: 'collection',
+                  text: 'Options',
+                  buttons: [
+                      'copy',
+                      'excel',
+                      'csv',
+                      'pdf',
+                      'print',
+                      {
+                        text: 'Print Report',
+                        action: function ( e, dt, node, config ) {
+                            printReport();
+                        }
+                      }
+                  ]
+              }
+            ],
+                'ajax': {
+                  
+                    url: url,
+                    type: "GET",
+                   // dataSrc:"",
+                    headers: { 
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                        dataType: "json",
+                        Accept: "application/json",
+                    },
+                    
+ 
+                },
+                //put data into columns
+        
+                'columns': [
+    
+                  
+                  { 
+                    'data': (data,type,row)=>{
+                        if(data['student_number'] == null || data['student_number'] == 'N/A'){
+                            return `<a>User</a>`;
+                        }else{
+                            return data['student_number'];
+                        }
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return data['requests']['request_type'];
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                ]
+            })
+
+            
+      
+  
+};
+
+
+const selectReport = () =>{
+    let url = '';
+
+    if($('#report').val() == "All"){
+        url = apiURL + 'submitted_requests';
+        query_no = 0;
+    }else if($('#report').val() == "Weekly" || $('#report').val() == "weekly"){
+        url = apiURL + 'submitted_requests/this_week';
+        query_no = 6;
+    }else if($('#report').val() == "Monthly" || $('#report').val() == "monthly"){
+        url = apiURL + 'submitted_requests/this_month';
+        query_no = 6;
+    }
+
+    $('select').removeClass('text-primary');
+    $('#report').addClass('text-primary');
+
+    //
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    $("table").DataTable({
+                
+    "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+    "dom": 'Bfrtip',
+
+             "buttons": [
+    
+              {
+                  extend: 'collection',
+                  text: 'Options',
+                  buttons: [
+                      'copy',
+                      'excel',
+                      'csv',
+                      'pdf',
+                      'print',
+                      {
+                        text: 'Print Report',
+                        action: function ( e, dt, node, config ) {
+                            printReport();
+                        }
+                      }
+                  ]
+              }
+            ],
+                'ajax': {
+                  
+                    url: url,
+                    type: "GET",
+                   // dataSrc:"",
+                    headers: { 
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                        dataType: "json",
+                        Accept: "application/json",
+                    },
+                    
+ 
+                },
+                //put data into columns
+        
+                'columns': [
+    
+                  
+                  { 
+                    'data': (data,type,row)=>{
+                        if(data['student_number'] == null || data['student_number'] == 'N/A'){
+                            return `<a>User</a>`;
+                        }else{
+                            return data['student_number'];
+                        }
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return data['requests']['request_type'];
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                ]
+            })
+
+            
+      
+  
+};
+

@@ -46,7 +46,7 @@
                     <div class = "row">
                         <div class = "col-md-12">
                         <h4 class = "mt-4">List of created requests</h4> <br>
-                        <h5 id = 'query_text'></h5>
+                        <span id = 'query_text'></span>
                         </div>           
                     </div>
                     </div>
@@ -55,6 +55,7 @@
                 </div>
       
                 <div class="card-body">
+                    <hr style = 'display:none;'>
                     <table class = "table table-striped">
                         <thead>
                             <tr>
@@ -67,7 +68,7 @@
                         @foreach($submitted_requests as $r)
                         <tr>
                         <td>
-                        @if($r->student_number != 'N/A' || $r->student_number != null)
+                        @if(is_null($r->student_number) || $r->student_number == 'N/A')
                         <a href = "#"> User</a>
                         @else 
                         {{ $r->student_number }}
@@ -124,6 +125,18 @@
                         </select>
                         <label>By Day</label>
                         <input type="date" class  ='form-control' id = 'date' onchange = 'selectDay();'>
+
+                        <label>By Student Number</label>
+                        <select name="student_no" id="student_no" class = "form-control" onchange = 'selectUser();'>
+                            <option selected value = "All">All</option>
+                        </select>
+
+                        <label>Reports</label>
+                        <select name="report" id="report" class = "form-control" onchange = 'selectReport();'>
+                            <option selected value = "All">All</option>
+                            <option value = "Weekly">This Week/Weekly</option>
+                            <option value = "Monthly">This Month/Monthly</option>
+                        </select>
                     </form>
                 </div>
             </div>
