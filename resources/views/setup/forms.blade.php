@@ -165,6 +165,7 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
+                                <th>&nbsp;</th>
                                 <th>Name</th>
                                 <th>Request</th>
                                 <th>Source</th>
@@ -176,6 +177,7 @@
                         <tbody>
                         @foreach($forms as $form)
                         <tr>
+                                <td><input type="checkbox" value = "{{ $form->id }}"> </td>
                                 <td>{{ $form->form_name }}</td>
                                 <td>
                                
@@ -267,7 +269,13 @@ $(document).ready(()=>{
                           'excel',
                           'csv',
                           'pdf',
-                          'print'
+                          'print',
+                          {
+                                text: 'Delete Checked',
+                                action: function ( e, dt, node, config ) {
+                                    deleteFormChecked();
+                                }
+                          }
                       ]
                   }
                 ],

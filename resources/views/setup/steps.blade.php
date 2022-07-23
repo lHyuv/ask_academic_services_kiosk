@@ -142,6 +142,7 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
+                                <th>&nbsp;</th>
                                 <th>Request</th>
                                 <th>Step No</th>
                                 <th>Name</th>
@@ -153,6 +154,7 @@
                         <tbody>
                         @foreach($steps as $step)
                         <tr>
+                                <td><input type="checkbox" value = "{{ $step->id }}"> </td>
                                 <td>{{ $step->requests()->pluck('request_type')[0] }}</td>
                                 <td>{{ $step->step_number }}</td>
                                 <td>{{ $step->step_name }}</td>
@@ -225,7 +227,13 @@ $(document).ready(()=>{
                           'excel',
                           'csv',
                           'pdf',
-                          'print'
+                          'print',
+                          {
+                                text: 'Delete Checked',
+                                action: function ( e, dt, node, config ) {
+                                    deleteStepChecked();
+                                }
+                          }
                       ]
                   }
                 ],

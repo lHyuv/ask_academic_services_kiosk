@@ -431,6 +431,8 @@
 
 </div>
 <div  class = "text-center">
+  <button class = "btn btn-primary float-right"
+  onclick = "printTicket();">Print</button>
 <button class = "btn btn-primary text-center" onclick = "
       showElement('id','form_menu','hide');
       showElement('id','select_menu','show');

@@ -142,6 +142,7 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
+                                <th>&nbsp;</th>
                                 <th>Request</th>
                                 <th>Name</th>
                                 <th>Date Created</th>
@@ -152,6 +153,7 @@
                         <tbody>
                         @foreach($requirements as $requirement)
                         <tr>
+                                <td><input type="checkbox" value = "{{ $requirement->id }}"> </td>
                                 <td>{{ $requirement->requests()->pluck('request_type')[0] }}</td>
                                 <td>{{ $requirement->requirement_name }}</td>
                                 <td>{{ $requirement->created_at->diffForHumans() }}</td>
@@ -223,7 +225,13 @@ $(document).ready(()=>{
                           'excel',
                           'csv',
                           'pdf',
-                          'print'
+                          'print',
+                          {
+                                text: 'Delete Checked',
+                                action: function ( e, dt, node, config ) {
+                                    deleteReqChecked();
+                                }
+                          }
                       ]
                   }
                 ],

@@ -35,7 +35,326 @@ const showKeyboard = (mode) =>{
    
 };
 
+
+
+
+
+const deleteFormChecked = () =>{
+    let ids = new Array();
+    $('td').each((i,val)=>{
+        if($(val).find('input').val()){
+           
+            if($(val).find('input').is(":checked") == true){
+               
+                ids.push($(val).find('input').val())
+    
+            }
+        }
+
+    });
+        Swal.fire({
+            title: 'Delete?',
+            showDenyButton: true,
+          //  showCancelButton: true,
+            confirmButtonText: 'Yes',
+            denyButtonText: `No`,
+            customClass: {
+                actions: 'my-actions',
+                cancelButton: 'order-1 right-gap',
+                confirmButton: 'order-3',
+                denyButton: 'order-2',
+              }
+          }).then((result) => {
+     
+            if (result.isConfirmed) {
+                 //delete loop
+                ids.forEach((val,i)=>{
+                $.ajax({
+                    url: apiURL + 'forms/delete/' + val,
+                    async: true,
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                    },
+                    success: (data)=>{
+                       
+                     if(i == ids.length - 1){
+                        notification('success','','Successfully deleted');
+                        //location.reload();
+                        drawTable();
+                     }
+
+                    },
+                    error:({responseJSON})=>{
+                      //  console.log(responseJSON);
+                      notification('error','','Something went wrong');
+                    }
+                });
+            })
+            }
+          })
+        //
+ 
+};
+
+const deleteStepChecked = () =>{
+    let ids = new Array();
+    $('td').each((i,val)=>{
+        if($(val).find('input').val()){
+           
+            if($(val).find('input').is(":checked") == true){
+               
+                ids.push($(val).find('input').val())
+    
+            }
+        }
+
+    });
+        Swal.fire({
+            title: 'Delete?',
+            showDenyButton: true,
+          //  showCancelButton: true,
+            confirmButtonText: 'Yes',
+            denyButtonText: `No`,
+            customClass: {
+                actions: 'my-actions',
+                cancelButton: 'order-1 right-gap',
+                confirmButton: 'order-3',
+                denyButton: 'order-2',
+              }
+          }).then((result) => {
+     
+            if (result.isConfirmed) {
+                 //delete loop
+                ids.forEach((val,i)=>{
+                $.ajax({
+                    url: apiURL + 'steps/delete/' + val,
+                    async: true,
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                    },
+                    success: (data)=>{
+                       
+                     if(i == ids.length - 1){
+                        notification('success','','Successfully deleted');
+                        //location.reload();
+                        drawTable();
+                     }
+
+                    },
+                    error:({responseJSON})=>{
+                      //  console.log(responseJSON);
+                      notification('error','','Something went wrong');
+                    }
+                });
+            })
+            }
+          })
+        //
+ 
+};
+
+
+const deleteReqChecked = () =>{
+    let ids = new Array();
+    $('td').each((i,val)=>{
+        if($(val).find('input').val()){
+           
+            if($(val).find('input').is(":checked") == true){
+               
+                ids.push($(val).find('input').val())
+    
+            }
+        }
+
+    });
+        Swal.fire({
+            title: 'Delete?',
+            showDenyButton: true,
+          //  showCancelButton: true,
+            confirmButtonText: 'Yes',
+            denyButtonText: `No`,
+            customClass: {
+                actions: 'my-actions',
+                cancelButton: 'order-1 right-gap',
+                confirmButton: 'order-3',
+                denyButton: 'order-2',
+              }
+          }).then((result) => {
+     
+            if (result.isConfirmed) {
+                 //delete loop
+                ids.forEach((val,i)=>{
+                $.ajax({
+                    url: apiURL + 'requirements/delete/' + val,
+                    async: true,
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                    },
+                    success: (data)=>{
+                       
+                     if(i == ids.length - 1){
+                        notification('success','','Successfully deleted');
+                        //location.reload();
+                        drawTable();
+                     }
+
+                    },
+                    error:({responseJSON})=>{
+                      //  console.log(responseJSON);
+                      notification('error','','Something went wrong');
+                    }
+                });
+            })
+            }
+          })
+        //
+ 
+};
+
+
+const deleteRequestChecked = () =>{
+    let ids = new Array();
+    $('td').each((i,val)=>{
+        if($(val).find('input').val()){
+           
+            if($(val).find('input').is(":checked") == true){
+               
+                ids.push($(val).find('input').val())
+    
+            }
+        }
+
+    });
+        Swal.fire({
+            title: 'Delete?',
+            showDenyButton: true,
+          //  showCancelButton: true,
+            confirmButtonText: 'Yes',
+            denyButtonText: `No`,
+            customClass: {
+                actions: 'my-actions',
+                cancelButton: 'order-1 right-gap',
+                confirmButton: 'order-3',
+                denyButton: 'order-2',
+              }
+          }).then((result) => {
+     
+            if (result.isConfirmed) {
+                 //delete loop
+                ids.forEach((val,i)=>{
+                $.ajax({
+                    url: apiURL + 'requests/delete/' + val,
+                    async: true,
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                    },
+                    success: (data)=>{
+                       
+                     if(i == ids.length - 1){
+                        notification('success','','Successfully deleted');
+                        //location.reload();
+                        drawTable();
+                     }
+
+                    },
+                    error:({responseJSON})=>{
+                      //  console.log(responseJSON);
+                      notification('error','','Something went wrong');
+                    }
+                });
+            })
+            }
+          })
+        //
+ 
+};
+
+
 const drawTable = (table_id) =>{
+    let buttons =  [
+        
+        {
+            extend: 'collection',
+            text: 'Options',
+            buttons: [
+                'copy',
+                'excel',
+                'csv',
+                'pdf',
+                'print',
+            ]
+        }
+      ];
+
+    if((window.location.href).includes('/requests')){
+        buttons =  [
+            'copy',
+            'excel',
+            'csv',
+            'pdf',
+            'print',
+            {
+                  text: 'Delete Checked',
+                  action: function ( e, dt, node, config ) {
+                      deleteRequestChecked();
+                  }
+            }
+        ]
+    }else if((window.location.href).includes('/forms')){
+        buttons = [
+            'copy',
+            'excel',
+            'csv',
+            'pdf',
+            'print',
+            {
+                  text: 'Delete Checked',
+                  action: function ( e, dt, node, config ) {
+                      deleteFormChecked();
+                  }
+            }
+        ]
+    }else if((window.location.href).includes('/steps')){
+        buttons =  [
+        
+            {
+                extend: 'collection',
+                text: 'Options',
+                buttons: [
+                    'copy',
+                    'excel',
+                    'csv',
+                    'pdf',
+                    'print',
+                    {
+                          text: 'Delete Checked',
+                          action: function ( e, dt, node, config ) {
+                              deleteStepChecked();
+                          }
+                    }
+                ]
+            }
+          ];
+    }else if((window.location.href).includes('/requirements')){
+        buttons = [
+            'copy',
+            'excel',
+            'csv',
+            'pdf',
+            'print',
+            {
+                  text: 'Delete Checked',
+                  action: function ( e, dt, node, config ) {
+                      deleteReqChecked();
+                  }
+            }
+        ]
+    }
+
     if(table_id){
         //do something
         $(`#${table_id}`).load(location.href + ` #${table_id}`);
@@ -58,13 +377,7 @@ const drawTable = (table_id) =>{
                   {
                       extend: 'collection',
                       text: 'Options',
-                      buttons: [
-                          'copy',
-                          'excel',
-                          'csv',
-                          'pdf',
-                          'print'
-                      ]
+                      buttons: buttons,
                   }
                 ],
     });
@@ -113,10 +426,12 @@ const printReport = () =>{
     }
     $('table').DataTable().destroy()
     $('table').dataTable({
+        responsive: true, 
+        lengthChange: false,	
         searching: false, 
         paging: false, 
         info: false,
-
+        
     });
     
   
@@ -1096,12 +1411,26 @@ const generateService = (service_id, service_name) =>{
 };
 
 const generateRequirement = (service_id) =>{
+
+    
+
+    Swal.fire({
+        title: 'Loading..',
+        showConfirmButton: false,
+        backdrop: `rgba(0,0,121,0.2)`,
+        didOpen: () => {
+            Swal.showLoading()
+ 
+          },
+
+      })
     $.ajax({
         url: apiURL + 'requirements/request/'+service_id,
         async: true,
         method: 'GET',
         success: (data)=>{
-            
+            Swal.close();
+            //
             let content = ``;
             let content2 = ``;
             let source = ``;
@@ -1262,13 +1591,25 @@ const confirmNotif = (request_id) =>{
                 success: (data)=>{
                     //
                     $('#finish_step').css('display','block');
-                    
+                   let message = `
+                   Welcome to PUPQC-Academic-Services-Kiosk. Your ticket number is: ${code}. `;
+            
+       
+                    if(student_no && student_no.length > 0){
+                        message += `Student Number: ${student_no}`
+                    }
+                    //
+
+                    //
                     let qr_code = new QRious({
                         element: document.getElementById('qr_code'),
-                        value: code,
-                        level: 'M',
+                        value: message,//code,
+                        level: 'L',//'M',
+                        padding: 25,
+                        size: 350,
                     });
 
+                    
                     if($('#selected_service')){
                         $('#selected_service').css('display','none');
                     }
@@ -1568,7 +1909,15 @@ const selectRequest = (id) =>{
         
                 'columns': [
     
-                  
+                    { 
+                        'data': (data,type,row)=>{
+                            if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                                return `<a>No reference given</a>`;
+                            }else{
+                                return data['reference_number'];
+                            }
+                        }
+                      },
                   { 
                     'data': (data,type,row)=>{
                         if(data['student_number'] == null || data['student_number'] == 'N/A'){
@@ -1663,7 +2012,15 @@ const selectMonth = () =>{
                 //put data into columns
         
                 'columns': [
-    
+                    { 
+                        'data': (data,type,row)=>{
+                            if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                                return `<a>No reference given</a>`;
+                            }else{
+                                return data['reference_number'];
+                            }
+                        }
+                      },
                   
                   { 
                     'data': (data,type,row)=>{
@@ -1751,7 +2108,15 @@ const selectDay= () =>{
                 //put data into columns
         
                 'columns': [
-    
+                    { 
+                        'data': (data,type,row)=>{
+                            if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                                return `<a>No reference given</a>`;
+                            }else{
+                                return data['reference_number'];
+                            }
+                        }
+                      },
                   
                   { 
                     'data': (data,type,row)=>{
@@ -1841,7 +2206,15 @@ const selectRange = () =>{
                 //put data into columns
         
                 'columns': [
-    
+                    { 
+                        'data': (data,type,row)=>{
+                            if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                                return `<a>No reference given</a>`;
+                            }else{
+                                return data['reference_number'];
+                            }
+                        }
+                      },
                   
                   { 
                     'data': (data,type,row)=>{
@@ -1984,8 +2357,12 @@ const createChart = () =>{
     
 
 }
-createChart();
 
+
+if((window.location.href).includes('/home')){
+    createChart();
+}
+   
 const createChart2 = () =>{
 
  
@@ -2106,7 +2483,9 @@ const createChart2 = () =>{
     
 
 }
-createChart2();
+if((window.location.href).includes('/home')){
+    createChart2();
+}
 
 
 
@@ -2224,7 +2603,9 @@ const createChart3 = () =>{
     
 
 }
-createChart3();
+if((window.location.href).includes('/home')){
+    createChart3();
+}
 
 let shift = false;
 let capslock = false;
@@ -2322,6 +2703,16 @@ $(".key").on('click', function(e){
 
 const showForm = (id) =>{
   
+    Swal.fire({
+        title: 'Loading..',
+        showConfirmButton: false,
+        backdrop: `rgba(0,0,121,0.2)`,
+        didOpen: () => {
+            Swal.showLoading()
+ 
+          },
+
+      })
     $.ajax({
         url: apiURL + `forms/${id}`,
         method: "GET",
@@ -2331,7 +2722,8 @@ const showForm = (id) =>{
         dataType: "json",
         contentType: "application/json",
         success: (data)=>{
-           
+           Swal.close();
+           //
             let ext = ``;
             let code = ``;
          
@@ -2385,7 +2777,16 @@ const showForm = (id) =>{
 const listForm = (id, request_title) =>{
 
     $('#form_request_title').html(request_title + ' Forms');
+    Swal.fire({
+        title: 'Loading..',
+        showConfirmButton: false,
+        backdrop: `rgba(0,0,121,0.2)`,
+        didOpen: () => {
+            Swal.showLoading()
+ 
+          },
 
+      })
     $.ajax({
         url: apiURL + `forms/request/${id}`,
         method: "GET",
@@ -2395,7 +2796,7 @@ const listForm = (id, request_title) =>{
         dataType: "json",
         contentType: "application/json",
         success: (data)=>{
-
+            Swal.close();
             if(data.data.length != 0){
             let code = ``;
             data.data.map((val)=>{
@@ -2839,5 +3240,21 @@ const selectReport = () =>{
             
       
   
+};
+
+const printTicket = () =>{
+    if($('#guest_header1')){
+        $('#guest_header1').css('display','none');
+    }else{
+        $('#guest_header2').css('display','none');
+    }
+    $('button').css('display','none');
+    $('.section-header-breadcrumb').css('display','none');
+    $('footer').css('display','none');
+    window.print();
+
+    setTimeout(function() {
+        window.location.reload()
+    }, 100);
 };
 

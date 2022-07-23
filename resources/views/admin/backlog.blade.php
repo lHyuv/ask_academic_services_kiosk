@@ -59,6 +59,7 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
+                                <th>Ticket No</th>
                                 <th>Student Number</th>
                                 <th>Transaction</th>
                                 <th>Date</th>
@@ -67,6 +68,13 @@
                         <tbody>
                         @foreach($submitted_requests as $r)
                         <tr>
+                        <td>
+                        @if(is_null($r->reference_number) || $r->reference_number == 'N/A')
+                        <a href = "#"> No code available</a>
+                        @else 
+                        {{ $r->reference_number }}
+                        @endif
+                        </td>
                         <td>
                         @if(is_null($r->student_number) || $r->student_number == 'N/A')
                         <a href = "#"> User</a>
