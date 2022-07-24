@@ -179,14 +179,14 @@
                                 
                                     <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_requirement_crud','show');editRequirement(' {{$requirement}}');">
                                     <div style="width: 2rem">
-                                    <i class="fas fa-list mr-1"></i>
+                                    <i class="fas fa-pen mr-1"></i>
                                     </div>
                                     <div>Edit</div>
                                     </div> 
                                     <!----> 
                                     <div class="dropdown-item d-flex" role="button" onclick = "deleteRequirement(' {{$requirement}}');">
                                     <div style="width: 2rem">
-                                    <i class="fas fa-list mr-1"></i>
+                                    <i class="fas fa-trash mr-1"></i>
                                     </div>
                                     <div>Delete</div>
                                     </div> 

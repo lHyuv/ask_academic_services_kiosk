@@ -93,6 +93,7 @@
                         </form>
          </div>
          @endif
+         <section id = 'empty_space_2'></section>
         </ul>
         </aside>
       </div>

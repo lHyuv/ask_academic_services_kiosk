@@ -162,14 +162,14 @@
                                 
                                     <div class="dropdown-item d-flex" role="button" onclick = "manageCard('edit_request_crud','show');editRequest(' {{$request}}');">
                                     <div style="width: 2rem">
-                                    <i class="fas fa-list mr-1"></i>
+                                    <i class="fas fa-pen mr-1"></i>
                                     </div>
                                     <div>Edit</div>
                                     </div> 
                                     <!----> 
                                     <div class="dropdown-item d-flex" role="button" onclick = "deleteRequest(' {{$request}}');" >
                                     <div style="width: 2rem">
-                                    <i class="fas fa-list mr-1"></i>
+                                    <i class="fas fa-trash mr-1"></i>
                                     </div>
                                     <div>Delete</div>
                                     </div> 

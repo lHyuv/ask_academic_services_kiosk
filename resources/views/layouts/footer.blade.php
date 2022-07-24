@@ -1,7 +1,7 @@
 </div>
     </div> 
     <footer class="footer fixed-bottom bg-white pt-2" style = "height: 10%">
-                <div class="footer-left">
+                <div class="ml-4 mt-3 footer-left">
                     Copyright &copy; 2022 <div class="bullet"></div> <a href="#">PUPQC</a> <div class="bullet"></div> <a href = '/login'>Login</a>
                 </div>
  
