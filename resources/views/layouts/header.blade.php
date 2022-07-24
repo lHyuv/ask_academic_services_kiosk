@@ -155,14 +155,7 @@
                             <i class="fas fa-home"></i></a>
 
                         </li>
-                        <li class="dropdown dropdown-list-toggle">
-                            <a href="javascript:void(0);" 
-                            onclick = "sessionStorage.setItem('keyboard_status', 'show');checkKBStatus();"
-                            role = "button" id = "keyboard_show_btn" class="nav-link notification-toggle nav-link-lg beep">
-                            <i class="far fa-keyboard"></i></a>
 
-                        </li>
-                       
                             @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -221,7 +214,7 @@
 
         <main class="py-4">
 @if(Auth::check())
-        <div class="main-content">
+        <div class="main-content pt-1">
 @endif
             @yield('content')
 @if(Auth::check())
