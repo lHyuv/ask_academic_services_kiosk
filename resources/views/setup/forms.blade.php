@@ -196,6 +196,13 @@
                                 @endif
                                 </td>
                                 <td>
+                                @if($form->created_at == NULL || $form->created_at == null || $form->created_at == 'null')
+                                 <i>Not Available</i>
+                                @else
+                                {{date('F j, Y', strtotime($form->created_at)) }}
+                                @endif    
+                                </td>
+                                <td>
                              
                                 @if($form->status == '1')
                                 <span class="badge badge-success">Active</span>
@@ -203,13 +210,7 @@
                                 <span class="badge badge-warning">Inactive</span>
                                 @endif
                                 </td>
-                                <td>
-                                @if($form->created_at == NULL || $form->created_at == null || $form->created_at == 'null')
-                                 <i>Not Available</i>
-                                @else
-                                {{ {{ date('F j, Y', strtotime($form->created_at)) }}}}
-                                @endif    
-                                </td>
+
                                 <td>
                                    
                                     <div class="text-center dropdown">
