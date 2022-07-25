@@ -76,3 +76,6 @@ INSERT INTO `steps` (`id`, `step_number`, `step_name`,  `request_id`, `created_b
 ('f0be3d9f-7dd5-4c77-8577-98ce6d70bbe5', 3, 'Submit the Original Copy of ACE Form (Adding of Subjects) to Director/ Head of Academic  Program.', 'aefb014d-a83e-42e1-b67f-b05e99e92ff2', 'a62a2519-dfde-4620-acb1-6b31a322893a', NULL, '1', CURDATE(), CURDATE(), NULL),
 ('f7fd3ee0-22f8-4c00-92d0-e98572d76f59', 2, 'Submit  the filled out Completion Form and official receipt to the  Professorfor completion  of  grades for subject.',  '74c59164-1ca1-4916-b455-9eed9ec527af', 'a62a2519-dfde-4620-acb1-6b31a322893a', NULL, '1',CURDATE(), CURDATE(), NULL);
 
+ALTER TABLE SUBMITTED_REQUESTS
+ADD TICKET_STATUS VARCHAR(255) NOT NULL DEFAULT 'Pending';
+

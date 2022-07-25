@@ -18,6 +18,7 @@ class SubmittedRequest extends Model
         'student_number',
         'request_id',
         'status',
+        'ticket_status',
     ]);
 
     public function requests(){

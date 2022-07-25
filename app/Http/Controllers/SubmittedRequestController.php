@@ -207,4 +207,17 @@ class SubmittedRequestController extends Controller
         ];
     }
 
+    
+    public function ticket_status(Request $request, $id){
+        $data = SubmittedRequest::findOrFail($id);
+
+        $data->update([
+            'ticket_status' => request('ticket_status')
+        ]);
+  
+        //return $data;
+        return [
+            'message' => 'Successfully updated'
+        ];
+    }
 }

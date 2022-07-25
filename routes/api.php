@@ -156,6 +156,8 @@ Route::middleware('auth:sanctum')->post('/submitted_requests/month', [SubmittedR
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/day', [SubmittedRequestController::class, 'day']);
 
+Route::middleware('auth:sanctum')->post('/submitted_requests/set_status/{id}', [SubmittedRequestController::class, 'ticket_status']);
+
 Route::middleware('auth:sanctum')->get('/submitted_requests/this_week', [SubmittedRequestController::class, 'this_week']);
 
 Route::middleware('auth:sanctum')->get('/submitted_requests/this_month', [SubmittedRequestController::class, 'this_month']);
