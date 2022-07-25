@@ -140,17 +140,17 @@
                         <hr>
                         <label>User Info</label>
                         <div class="form-group">
-                        <label>Email</label>
+                        <label>Email &nbsp;<code class = 'text-danger'>*</code></label>
                         <input type="text" name = "create_email" id = "create_email" class = "form-control" placeholder = ""/>
                         </div>
                       
                        
                         <div class="form-group">
-                        <label>Password</label>
+                        <label>Password &nbsp;<code class = 'text-danger'>*</code></label>
                         <input type="password" name = "create_password" id = "create_password" class = "form-control" placeholder = ""/>
                         </div>
                         <div class="form-group">
-                        <label>Confirm password</label>
+                        <label>Confirm password &nbsp;<code class = 'text-danger'>*</code></label>
                         <input type="password"  name = "create_password_confirm" id = "create_password_confirm"  class = "form-control" placeholder = ""/>
                         </div>
                         <div class="float-right">

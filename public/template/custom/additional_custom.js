@@ -355,23 +355,33 @@ const drawTable = (table_id) =>{
         ]
     }
 
+    //Temporary while ajax load is not yet fixed
+    location.reload();
+/*
     if(table_id){
         //do something
-        $(`#${table_id}`).load(location.href + ` #${table_id}`);
+        $(`#${table_id}`).load(window.location.href + ` #${table_id}`);
     }else{
         //$('table')... //do something
-        $("table").load(location.href + " table");
+        $("table").load("http://localhost:8000/forms" + " table");
     }
 
     //
-
+    
     $("table").dataTable().fnClearTable();
     $("table").dataTable().fnDraw();
     $("table").dataTable().fnDestroy();
+    $("table").DataTable().clear()
+  //  $("table").DataTable().destroy();
+  
     $("table").DataTable({
-        "responsive": true, "lengthChange": false,	//"autoWidth":  false,
-        "dom": 'Bfrtip',
-    
+        "responsive": true, "lengthChange": false,//	"autoWidth":  true,
+      //  "dom": 'Bfrtip',
+        "searching":true,
+        "sorting":true,
+        "serverSide":false,
+        "bFilter": true,
+     
                  "buttons": [
         
                   {
@@ -382,6 +392,11 @@ const drawTable = (table_id) =>{
                 ],
     });
 
+    //catch datatable ini error
+    $.fn.dataTable.ext.errMode = ( settings, help, msg ) => { 
+        console.log(msg);
+    };
+    */
 };
 
 const printReport = () =>{
@@ -459,6 +474,11 @@ const manageCard = (id, mode) =>{
 
 
 const editRole = (data) =>{
+    $('#create_role_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     //view
     let values = JSON.parse(data);
     $('#edit_user_type_name').val(values['name']);
@@ -495,7 +515,11 @@ const editRole = (data) =>{
 };
 
 const createRole = () =>{
-
+    $('#edit_user_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     $('#create_role').on('submit',(e)=>{
 
         e.preventDefault();
@@ -547,7 +571,7 @@ const deleteRole = (data) =>{
           }
       }).then((result) => {
 
-
+        if (result.isConfirmed) {
         $.ajax({
             url: apiURL + 'roles/delete/' + values['id'],
             async: true,
@@ -565,13 +589,18 @@ const deleteRole = (data) =>{
               notification('error','','Something went wrong');
             }
         });
+    }
     })
 
 
 };
 
 const createUser = () =>{
-
+    $('#edit_user_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     $('#create_user').on('submit',(e)=>{
 
         e.preventDefault();
@@ -613,6 +642,9 @@ const createUser = () =>{
 };
 
 const editUser = (data) =>{
+    $('#create_user_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
     //view
     let values = JSON.parse(data);
    // $('#edit_usertype_id').val(values['user_type_id']);
@@ -703,7 +735,7 @@ const deleteUser = (data) =>{
           }
       }).then((result) => {
 
-
+        if (result.isConfirmed) {
         $.ajax({
             url: apiURL + 'users/delete/' + values['id'],
             async: true,
@@ -719,6 +751,7 @@ const deleteUser = (data) =>{
                 notification('error','','Something went wrong');
             }
         });
+    }
     })
 
 
@@ -752,9 +785,14 @@ const showImg = (url) => {
 const editRequest = (data) =>{
     //view
 
-
+    $('#create_request_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     let values = JSON.parse(data);
     $('#edit_type').val(values['request_type']);
+   $('edit_file').removeAttr('required');
     if(values['icon_file_path'] && values['icon_file_name']){
         $("#placeholder").attr(
             "src",
@@ -818,6 +856,11 @@ const editRequest = (data) =>{
 
 const createRequest = () =>{
     
+    $('#edit_request_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     $('#create_request').on('submit',(e)=>{
 
         e.preventDefault();
@@ -886,7 +929,7 @@ const deleteRequest = (data) =>{
           }
       }).then((result) => {
 
-
+        if (result.isConfirmed) {
         $.ajax({
             url: apiURL + 'requests/delete/' + values['id'],
             async: true,
@@ -907,6 +950,7 @@ const deleteRequest = (data) =>{
               notification('error','','Something went wrong');
             }
         });
+    }
     })
 
 
@@ -1025,7 +1069,11 @@ const editProfile = (id) =>{
 
 
 const createStep = () =>{
-
+    $('#edit_step_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     $('#create_step').on('submit',(e)=>{
 
         e.preventDefault();
@@ -1067,6 +1115,11 @@ const createStep = () =>{
 };
 
 const editStep = (data) =>{
+    $('#create_step_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     //view
 
     let values = JSON.parse(data);
@@ -1129,7 +1182,7 @@ const deleteStep = (data) =>{
           }
       }).then((result) => {
 
-
+        if (result.isConfirmed) {
         $.ajax({
             url: apiURL + 'steps/delete/' + values['id'],
             async: true,
@@ -1150,13 +1203,18 @@ const deleteStep = (data) =>{
               notification('error','','Something went wrong');
             }
         });
+    }
     })
 
 
 };
 
 const createRequirement = () =>{
-
+    $('#edit_requirement_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     $('#create_requirement').on('submit',(e)=>{
 
         e.preventDefault();
@@ -1198,6 +1256,11 @@ const createRequirement = () =>{
 };
 
 const editRequirement = (data) =>{
+    $('#create_requirement_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     //view
 
     let values = JSON.parse(data);
@@ -1258,7 +1321,7 @@ const deleteRequirement = (data) =>{
           }
       }).then((result) => {
 
-
+        if (result.isConfirmed) {
         $.ajax({
             url: apiURL + 'requirements/delete/' + values['id'],
             async: true,
@@ -1279,6 +1342,7 @@ const deleteRequirement = (data) =>{
               notification('error','','Something went wrong');
             }
         });
+        }
     })
 
 
@@ -2054,7 +2118,7 @@ const selectDay= () =>{
     query_no = 3;
 
     $('select').removeClass('text-primary');
-    $('#day').addClass('text-primary');
+    $('#date').addClass('text-primary');
 
     //
     $("table").dataTable().fnClearTable();
@@ -2858,7 +2922,11 @@ const listForm = (id, request_title) =>{
 
 
 const createForm = () =>{
-    
+    $('#edit_form_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     $('#create_form').on('submit',(e)=>{
 
         e.preventDefault();
@@ -2953,6 +3021,11 @@ const deleteForm = (data) =>{
 };
 
 const editForm = (data) =>{
+    $('#create_form_crud').css('display','none');
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
     //view
 
 
@@ -2961,6 +3034,7 @@ const editForm = (data) =>{
     $('#edit_form_name').val(values['form_name']);
     $('#edit_type').val(values['request_id']);
     $('#edit_source').val(values['source']);
+    $('edit_file').removeAttr('required');
     if(values['form_file_path'] && values['form_file_name']){
         $("#placeholder").attr(
             "src",
@@ -3122,7 +3196,15 @@ const showFile = (url) => {
         
                 'columns': [
     
-                  
+                  {
+                    'data': (data,type,row)=>{
+                        if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                            return `<i>Not Available</i>`;
+                        }else{
+                            return data['reference_number'];
+                        }
+                    }
+                  },
                   { 
                     'data': (data,type,row)=>{
                         if(data['student_number'] == null || data['student_number'] == 'N/A'){
@@ -3214,7 +3296,15 @@ const selectReport = () =>{
         
                 'columns': [
     
-                  
+                    { 
+                        'data': (data,type,row)=>{
+                            if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                                return `<i>Not Available</i>`;
+                            }else{
+                                return data['reference_number'];
+                            }
+                        }
+                      },
                   { 
                     'data': (data,type,row)=>{
                         if(data['student_number'] == null || data['student_number'] == 'N/A'){

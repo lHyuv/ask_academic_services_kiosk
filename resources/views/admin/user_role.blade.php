@@ -36,7 +36,7 @@
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>User</label>
+                        <label>User &nbsp;<code class = 'text-danger'>*</code></label>
                         <select name="create_user" id="create_user" class = "form-control">
                             @foreach($users as $user)
                             <option value="{{ $user->id}}">{{ $user->email }}</option>
@@ -46,7 +46,7 @@
                         </div>
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>User Type</label>
+                        <label>User Type &nbsp;<code class = 'text-danger'>*</code></label>
                         <select name="create_role" id="create_role" class = "form-control">
                             @foreach($roles as $role)
                             <option value="{{ $role->id}}">{{ $role->name }}</option>

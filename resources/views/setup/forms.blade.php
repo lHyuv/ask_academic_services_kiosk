@@ -40,7 +40,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Request Type</label>
-                        <select name="request_id" id="edit_type" class = "form-control">
+                        <select required name="request_id" id="edit_type" class = "form-control">
                             <option value = "" selected disabled>Select request..</option>
                             @foreach($requests as $request)
                             <option value="{{ $request->id }}">{{ $request->request_type}}</option>
@@ -53,7 +53,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>File</label>
-                        <input class="form-control" type="file" id="edit_file" name="file"  onchange="showFile(this.files[0])"
+                        <input required class="form-control" type="file" id="edit_file" name="file"  onchange="showFile(this.files[0])"
                         accept=".txt, .pdf,  application/pdf, image/*"  >
                         </div>
                         </div>
@@ -99,14 +99,14 @@
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>Form Name</label>
+                        <label>Form Name &nbsp;<code class = 'text-danger'>*</code></label>
                         <input type="text" name = "form_name" id = "create_form_name" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>Request Type</label>
-                        <select name="request_id" id="create_type" class = "form-control">
+                        <label>Request Type  &nbsp;<code class = 'text-danger'>*</code></label>
+                        <select name="request_id" id="create_type" class = "form-control" required>
                             <option value = "" selected disabled>Select request..</option>
                             @foreach($requests as $request)
                             <option value="{{ $request->id }}">{{ $request->request_type}}</option>
@@ -118,8 +118,8 @@
                         
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>File</label>
-                        <input class="form-control" type="file" id="create_file" name="file"
+                        <label>File  &nbsp;<code class = 'text-danger'>*</code></label>
+                        <input class="form-control" type="file" id="create_file" name="file" required
                          accept=".txt, .pdf, application/pdf, image/*"  >
                         </div>
                         </div>
@@ -165,7 +165,7 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
-                                <th>&nbsp;</th>
+                                <th><label id = 'checkbox_label' style = 'display:none;'>Delete</label></th>
                                 <th>Name</th>
                                 <th>Request</th>
                                 <th>Source</th>
@@ -255,7 +255,8 @@
 </div>
 <script>
 $(document).ready(()=>{
-    $("table").dataTable({
+    $('input[type=checkbox]').css('display','none');
+    $("table").DataTable({
         "responsive": true, "lengthChange": false,	//"autoWidth":  false,
         "dom": 'Bfrtip',
     
@@ -270,17 +271,40 @@ $(document).ready(()=>{
                           'csv',
                           'pdf',
                           'print',
+
+                          {
+                                text: 'View Checkbox',
+                                action: function ( e, dt, node, config ) {
+                                    $('#checkbox_label').css('display','flex');
+                                    $('input[type=checkbox]').css('display','flex');
+                                }
+                          },
                           {
                                 text: 'Delete Checked',
                                 action: function ( e, dt, node, config ) {
-                                    deleteFormChecked();
+                                   
+                                    $('#checkbox_label').css('display','flex');
+                                    $('input[type=checkbox]').css('display','flex');
+                                    if($('input[type=checkbox]').is(":checked") == true){
+                                        deleteFormChecked();
+                                    }else{
+                                        Swal.fire({
+                                        title: 'No checkbox selected yet',
+                                        icon: 'info',
+                                        showConfirmButton: true,
+   
+
+                                    })
+                                    }
+                                 
                                 }
-                          }
+                          },
                       ]
                   }
                 ],
     });
 })
+
 //catch datatable ini error
 $.fn.dataTable.ext.errMode = ( settings, help, msg ) => { 
     console.log(msg);

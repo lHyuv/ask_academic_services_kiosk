@@ -84,7 +84,7 @@
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>Request Type</label>
+                        <label>Request Type &nbsp;<code class = 'text-danger'>*</code></label>
                         <select name="create_type" id="create_type" class = "form-control">
                         <option value = "" selected>Select request..</option>
                             @foreach($requests as $request)
@@ -95,7 +95,7 @@
                         </div>
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>Name</label>
+                        <label>Name &nbsp;<code class = 'text-danger'>*</code></label>
                         <input type="text" name = "create_req_name" id = "create_req_name" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
@@ -142,7 +142,7 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
-                                <th>&nbsp;</th>
+                            <th><label id = 'checkbox_label' style = 'display:none;'>Delete</label></th>
                                 <th>Request</th>
                                 <th>Name</th>
                                 <th>Date Created</th>
@@ -211,6 +211,7 @@
 </div>
 <script>
 $(document).ready(()=>{
+    $('input[type=checkbox]').css('display','none');
     $("table").DataTable({
         "responsive": true, "lengthChange": false,	//"autoWidth":  false,
         "dom": 'Bfrtip',
@@ -226,12 +227,34 @@ $(document).ready(()=>{
                           'csv',
                           'pdf',
                           'print',
+
+                          {
+                                text: 'View Checkbox',
+                                action: function ( e, dt, node, config ) {
+                                    $('#checkbox_label').css('display','flex');
+                                    $('input[type=checkbox]').css('display','flex');
+                                }
+                          },
                           {
                                 text: 'Delete Checked',
                                 action: function ( e, dt, node, config ) {
-                                    deleteReqChecked();
+                                   
+                                    $('#checkbox_label').css('display','flex');
+                                    $('input[type=checkbox]').css('display','flex');
+                                    if($('input[type=checkbox]').is(":checked") == true){
+                                        deleteReqChecked();
+                                    }else{
+                                        Swal.fire({
+                                        title: 'No checkbox selected yet',
+                                        icon: 'info',
+                                        showConfirmButton: true,
+   
+
+                                    })
+                                    }
+                                 
                                 }
-                          }
+                          },
                       ]
                   }
                 ],

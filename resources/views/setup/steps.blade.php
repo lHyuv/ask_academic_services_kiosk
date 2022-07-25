@@ -83,7 +83,7 @@
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>Request Type</label>
+                        <label>Request Type &nbsp;<code class = 'text-danger'>*</code></label>
                         <select name="create_type" id="create_type" class = "form-control">
                         <option value = "" selected required>Select request..</option>
                             @foreach($requests as $request)
@@ -94,13 +94,13 @@
                         </div>
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>Step number</label>
+                        <label>Step number &nbsp;<code class = 'text-danger'>*</code></label>
                         <input type="number" name = "create_step_no" id = "create_step_no" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>Step name</label>
+                        <label>Step name &nbsp;<code class = 'text-danger'>*</code></label>
                         <input type="text" name = "create_step_name" id = "create_step_name" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
@@ -142,7 +142,7 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
-                                <th>&nbsp;</th>
+                            <th><label id = 'checkbox_label' style = 'display:none;'>Delete</label></th>
                                 <th>Request</th>
                                 <th>Step No</th>
                                 <th>Name</th>
@@ -213,6 +213,7 @@
 </div>
 <script>
 $(document).ready(()=>{
+    $('input[type=checkbox]').css('display','none');
     $("table").DataTable({
         "responsive": true, "lengthChange": false,	//"autoWidth":  false,
         "dom": 'Bfrtip',
@@ -229,20 +230,41 @@ $(document).ready(()=>{
                           'pdf',
                           'print',
                           {
+                                text: 'View Checkbox',
+                                action: function ( e, dt, node, config ) {
+                                    $('#checkbox_label').css('display','flex');
+                                    $('input[type=checkbox]').css('display','flex');
+                                }
+                          },
+                          {
                                 text: 'Delete Checked',
                                 action: function ( e, dt, node, config ) {
-                                    deleteStepChecked();
+                                   
+                                    $('#checkbox_label').css('display','flex');
+                                    $('input[type=checkbox]').css('display','flex');
+                                    if($('input[type=checkbox]').is(":checked") == true){
+                                        deleteStepChecked();
+                                    }else{
+                                        Swal.fire({
+                                        title: 'No checkbox selected yet',
+                                        icon: 'info',
+                                        showConfirmButton: true,
+   
+
+                                    })
+                                    }
+                                 
                                 }
-                          }
+                          },
                       ]
                   }
                 ],
     });
 })
 //catch datatable ini error
-$.fn.dataTable.ext.errMode = ( settings, help, msg ) => { 
-    console.log(msg);
-};
+
+
+$('#deletechecked').css('display','none');
 </script>
 @endsection
 

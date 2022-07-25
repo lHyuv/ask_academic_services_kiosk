@@ -78,14 +78,14 @@
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>Request Type</label>
+                        <label>Request Type &nbsp;<code class = 'text-danger'>*</code></label>
                         <input type="text" name = "request_type" id = "create_type" class = "form-control" placeholder = "" required/>
                         </div>
                         </div>
 
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>Icon / Picture</label>
+                        <label>Icon / Picture &nbsp;<code class = 'text-danger'>*</code></label>
                         <input class="form-control" type="file" id="create_file" name="file" accept="image/*" >
                         </div>
                         </div>
@@ -127,7 +127,7 @@
                     <table class = "table table-striped">
                         <thead>
                             <tr>
-                                <th>&nbsp;</th>
+                            <th><label id = 'checkbox_label' style = 'display:none;'>Delete</label></th>
                                 <th>Type/Name</th>
                                 <th>Date Created</th>
                                 <th>Status</th>
@@ -194,6 +194,7 @@
 </div>
 <script>
 $(document).ready(()=>{
+    $('input[type=checkbox]').css('display','none');
     $("table").dataTable({
         "responsive": true, "lengthChange": false,	//"autoWidth":  false,
         "dom": 'Bfrtip',
@@ -209,12 +210,34 @@ $(document).ready(()=>{
                           'csv',
                           'pdf',
                           'print',
+
+                          {
+                                text: 'View Checkbox',
+                                action: function ( e, dt, node, config ) {
+                                    $('#checkbox_label').css('display','flex');
+                                    $('input[type=checkbox]').css('display','flex');
+                                }
+                          },
                           {
                                 text: 'Delete Checked',
                                 action: function ( e, dt, node, config ) {
-                                    deleteRequestChecked();
+                                   
+                                    $('#checkbox_label').css('display','flex');
+                                    $('input[type=checkbox]').css('display','flex');
+                                    if($('input[type=checkbox]').is(":checked") == true){
+                                        deleteRequestChecked();
+                                    }else{
+                                        Swal.fire({
+                                        title: 'No checkbox selected yet',
+                                        icon: 'info',
+                                        showConfirmButton: true,
+   
+
+                                    })
+                                    }
+                                 
                                 }
-                          }
+                          },
                       ]
                   }
                 ],

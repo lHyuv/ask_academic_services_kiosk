@@ -72,11 +72,11 @@
                         <div class = "row">
                         <div class = "col-md-12">
                         <div class="form-group">
-                        <label>User Type</label>
+                        <label>User Type &nbsp;<code class = 'text-danger'>*</code></label>
                         <input type="text" name = "create_user_type_name" id = "create_user_type_name" class = "form-control" placeholder = "" required/>
                         </div>
                         <div class="form-group">
-                        <label>Details</label>
+                        <label>Details &nbsp;<code class = 'text-danger'>*</code></label>
                         <textarea name="create_details" id="create_details" rows="10" class = "form-control"> </textarea>
                         </div>
                         </div>
