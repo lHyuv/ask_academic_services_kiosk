@@ -139,7 +139,7 @@
                         <tr>
                                 <td><input type="checkbox" value = "{{ $request->id }}"> </td>
                                 <td>{{ $request->request_type }}</td>
-                                <td>{{ $request->created_at->diffForHumans() }}</td>
+                                <td>{{ date('F j, Y', strtotime($request->created_at)) }}</td>
                                 <td>
                              
                                 @if($request->status == '1')

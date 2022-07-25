@@ -207,7 +207,7 @@
                                 @if($form->created_at == NULL || $form->created_at == null || $form->created_at == 'null')
                                  <i>Not Available</i>
                                 @else
-                                {{ $form->created_at->diffForHumans() }}
+                                {{ {{ date('F j, Y', strtotime($form->created_at)) }}}}
                                 @endif    
                                 </td>
                                 <td>

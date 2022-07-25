@@ -104,7 +104,7 @@
                         <tr>
                                 <td>{{ $userrole->user()->pluck('email')[0] }}</td>
                                 <td>{{ $userrole->role()->pluck('name')[0] }}</td>
-                                <td>{{ $userrole->created_at->diffForHumans() }}</td>
+                                <td>{{ date('F j, Y', strtotime($userrole->created_at)) }}</td>
                                 <td>
                              
                                 @if($userrole->status == '1')

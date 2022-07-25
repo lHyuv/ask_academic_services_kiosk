@@ -158,7 +158,7 @@
                                 <td>{{ $step->requests()->pluck('request_type')[0] }}</td>
                                 <td>{{ $step->step_number }}</td>
                                 <td>{{ $step->step_name }}</td>
-                                <td>{{ $step->created_at->diffForHumans() }}</td>
+                                <td>{{ date('F j, Y', strtotime($step->created_at)) }}</td>
                                 <td>
                              
                                 @if($step->status == '1')

@@ -194,7 +194,7 @@
                         @foreach($users as $user)
                         <tr>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->created_at->diffForHumans() }}</td>
+                                <td>{{ date('F j, Y', strtotime($user->created_at))  }}</td>
                                 <td>
                              
                                 @if($user->status == '1')

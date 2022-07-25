@@ -128,7 +128,7 @@
                         @foreach($roles as $role)
                         <tr>
                                 <td>{{ $role->name }}</td>
-                                <td>{{ $role->created_at->diffForHumans() }}</td>
+                                <td>{{ date('F j, Y', strtotime($role->created_at)) }}</td>
                                 <td>
                              
                                 @if($role->status == '1')

@@ -210,7 +210,7 @@
         </nav>
 @endif
 
-@includeWhen(Auth::check(),'layouts.sidebar')
+@includeWhen(Auth::check() && (Route::current()->getName() != 'guest2' && Route::current()->getName() != 'guest'),'layouts.sidebar')
 
         <main class="py-4">
 @if(Auth::check())
