@@ -32,10 +32,15 @@ input::-webkit-inner-spin-button {
 .card-custom-left{
     border-left: solid #800000;
 }
-
+/*
 .active .bs-stepper-circle{background-color:#800000}
 
 .step-trigger:focus{color:#800000;outline:0}
+*/
+
+.active .bs-stepper-circle{background-color:#19692c}
+
+.step-trigger:focus{color:#19692c;outline:0}
 
 #select_menu img:hover{
     transform: scale(1.2); 
@@ -57,4 +62,23 @@ input::-webkit-inner-spin-button {
         padding-top: 72px;
         padding-bottom: 72px ;
     }
+}
+
+.custom-bg{
+    background-color:#f0e9d6
+}
+
+.custom-bg .section-header{
+    background-color:#f0e9d6
+}
+
+.custom-bg .footer{
+    background-color:#f0e9d6
+}
+
+.shadow-lg:hover{
+    transform: scale(1.1);
+    border-style: solid;
+    border-color: lightgray;
+    font-weight:bolder;
 }

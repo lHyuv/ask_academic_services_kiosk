@@ -20,7 +20,132 @@
         </div>
       
 </section>
+<div class="row">
+        <div class="col-md-4">
 
+            <div class="card mt-4">
+                <div class="card-header"><h4>Total</h4></div>
+
+                <div class="card-body">
+                  <h3>  {{count($submitted_requests)}} </h3>
+                </div>
+            </div>
+        </div>
+        
+<div class="col-md-4">
+
+<div class="card mt-4">
+    <div class="card-header"><h4>Pending</h4></div>
+
+    <div class="card-body">
+      <h3>  {{$pending}} </h3>
+    </div>
+</div>
+</div>
+
+<div class="col-md-4">
+
+<div class="card mt-4">
+    <div class="card-header"><h4>Completed</h4></div>
+
+    <div class="card-body">
+      <h3>  {{$completed}} </h3>
+    </div>
+</div>
+</div>
+</div>
+<!--Component 0--> 
+<div class="row">
+  
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Statuses</h5>
+
+             
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-md-5">
+                    <p class="text-center">
+                      <strong>Trends</strong>
+                    </p>
+
+                   
+    <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2  shadow-none border-0">
+                <div class="card-icon shadow-primary bg-primary">
+                  <i class="fas fa-file"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Pending Today</h4>
+                  </div>
+                  <div class="card-body">
+                  <h5 class = 'text-justify float-left'  id = 'pending_today_count'></h5>
+
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2 shadow-none border-0">
+                <div class="card-icon shadow-primary bg-primary">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                  <h4>Completed this Month</h4>
+                  </div>
+                  <div class="card-body">
+                  
+                   <h5 class = 'text-justify float-left' id = 'completed_this_month_count'></h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+        <!---->
+        <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card card-statistic-2 shadow-none border-0">
+                <div class="card-icon shadow-primary bg-primary">
+                  <i class="fas fa-clipboard"></i>
+                </div>
+                <div class="card-wrap">
+                  <div class="card-header">
+                    <h4>Void Tickets</h4>
+                  </div>
+                  <div class="card-body">
+                  <h5 class = 'text-justify float-left'  id = 'void_count'></h5>
+                  </div>
+                </div>
+              </div>
+            </div>  </div>
+        <!---->    
+                </div>
+                <!-- /.row -->
+                  <div class="col-md-7">
+                    <p class="text-center">
+                     <!-- <strong></strong> -->
+                    </p>
+
+                    <div class="chart">
+                      <!-- Sales Chart Canvas -->
+                      <h4 class="text-center" id = 'status_report_none' style = 'display:none;'><i>Nothing to show yet</i></h4>
+                      <canvas class="chart" id="chart-0" style="min-height: 250px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
+                    </div>
+                    <!-- /.chart-responsive -->
+                  </div>
+                
+              
+                </div>
+              </div>
+              </div>
+<!--Component 0:end--> 
 <!--Component 1--> 
 <div class="row">
           <div class="col-md-12">

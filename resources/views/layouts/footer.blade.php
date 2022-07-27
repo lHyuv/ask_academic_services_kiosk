@@ -1,6 +1,10 @@
 </div>
     </div> 
-    <footer class="footer fixed-bottom bg-white pt-2" style = "height: 10%">
+    @if(Auth::check() && (Route::current()->getName() != 'guest2' && Route::current()->getName() != 'guest'))
+    <footer class="footer fixed-bottom pt-2 bg-white" style = "height: 10%">
+    @else
+    <footer class="footer fixed-bottom pt-2 custom-bg" style = "height: 10%">
+    @endif
                 <div class="ml-4 mt-3 footer-left">
                     Copyright &copy; 2022 <div class="bullet"></div> <a href="#">PUPQC</a> <div class="bullet"></div> <a href = '/login'>Login</a>
                 </div>

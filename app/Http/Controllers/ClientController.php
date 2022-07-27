@@ -54,12 +54,11 @@ class ClientController extends Controller
             //
             'last_name' => ['required','string', 'max:255'],
             'first_name' => ['required','string', 'max:255'],
-            'user_id' => ['required','string'],
-            'section' => ['string'],
+            'user_id' => ['string'],
+            'year_level' => ['string'],
             'student_number' => ['string'],
-            //
-            'semester_id' => ['string'],
-            'program_id' =>['string'],
+            'program' =>['string'],
+            'contact_number' =>['string'],
         ]);
 
         if($validator->fails()){
@@ -102,6 +101,19 @@ class ClientController extends Controller
             'created_by_user',
             'updated_by_user',
          ])->where('user_id', $id)->get();
+
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data
+        ];
+    }
+
+    public function find_by_student_number($id){
+        $data = Client::with([
+            'users',
+            'created_by_user',
+            'updated_by_user',
+         ])->where('student_number', $id)->get();
 
         return [
             'message' => 'Successfully retrieved',

@@ -55,12 +55,6 @@
                         <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
                         </div>
                         </div>
-                        <div class = "col-md-12">
-                        <div class="form-group">
-                        <label>Signature link (optional)</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
-                        </div>
-                        </div>
                         </div>
                     
 
@@ -124,12 +118,6 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                         <label>Extension</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
-                        </div>
-                        </div>
-                        <div class = "col-md-12">
-                        <div class="form-group">
-                        <label>Signature link (optional)</label>
                         <input type="text" name = "" id = "" class = "form-control" placeholder = ""/>
                         </div>
                         </div>

@@ -401,7 +401,7 @@ const drawTable = (table_id) =>{
 
 const printReport = () =>{
 
-
+    $('.custom_widget').css('display','none');
     $('#backlog_header').css('display','block');
     $('#backlog_table').addClass('mt-5');
     $('#sidebar').css('display','none');
@@ -436,7 +436,16 @@ const printReport = () =>{
                     'Query: This Month/Monthly (' + months[new Date().getMonth()] + ')'
                 );
             }
-        break;
+        case 7:
+            $('#query_text').html(
+                'Query: Status: ' + $('#statuses').val()
+            ); break;
+
+        case 8:
+                $('#query_text').html(
+                    'Query: Program: ' + $('#programs').val()
+                ); break;
+
         default: $('#query_text').html('');
     }
     $('table').DataTable().destroy()
@@ -893,12 +902,18 @@ const createRequest = () =>{
             cache: false,
             success: (data)=>{
                 
-       
+                
+                if(typeof(data.error) != 'undefined' || data.error != null || data.error == true){
+               
+                    notification('error','','Request type already exists!');
+                    create_ctr = 0;
+                }else{
                 create_ctr = 0;
                 notification('success','','Successfully created');
                // location.reload();
                manageCard('create_request_crud','hide'); 
                drawTable();
+                }
             },
             error:({responseJSON})=>{
                // console.log(responseJSON.message);
@@ -1413,6 +1428,7 @@ const generateService = (service_id, service_name) =>{
 
 
     $('.request_title').text(service_name);
+    $('select').select2();
     $(document).ready(()=>{
         if($('#submit_request_btn').length){
           
@@ -1604,15 +1620,15 @@ const showMenu = (mode, request_id) =>{
 const confirmNotif = (request_id) =>{
     Swal.fire({
         title: 'Proceed?',
-        showDenyButton: true,
+      //  showDenyButton: true,
         showCancelButton: true,
         confirmButtonText: 'Yes',
-        denyButtonText: `No`,
+      //  denyButtonText: `No`,
         customClass: {
             actions: 'my-actions',
             cancelButton: 'order-1 right-gap',
-            confirmButton: 'order-3',
-            denyButton: 'order-2',
+            confirmButton: 'order-2',
+          //  denyButton: 'order-2',
           }
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
@@ -1651,9 +1667,14 @@ const confirmNotif = (request_id) =>{
                     'request_id' : request_id,
                     'student_number' : student_no,
                     'reference_number' : code,
+                    //
+                    'program' : $('#student_program').val(),
                 },
                 success: (data)=>{
                     //
+                    $('#student_details').css('display','none');
+                    $('input').val('');
+                    $('select').val('');
                     $('#finish_step').css('display','block');
                    let message = `
                    Welcome to PUPQC-Academic-Services-Kiosk. Your ticket number is: ${code}. `;
@@ -1952,7 +1973,11 @@ const selectRequest = (id) =>{
                         text: 'Print Report',
                         action: function ( e, dt, node, config ) {
                             printReport();
-                        }
+                        },
+                        columnDefs: [{
+                            targets: -1,
+                            visible: false,
+                        }],
                       }
                   ]
               }
@@ -1972,7 +1997,6 @@ const selectRequest = (id) =>{
                 //put data into columns
         
                 'columns': [
-    
                     { 
                         'data': (data,type,row)=>{
                             if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
@@ -1982,6 +2006,7 @@ const selectRequest = (id) =>{
                             }
                         }
                       },
+                  
                   { 
                     'data': (data,type,row)=>{
                         if(data['student_number'] == null || data['student_number'] == 'N/A'){
@@ -1996,9 +2021,58 @@ const selectRequest = (id) =>{
                         return data['requests']['request_type'];
                     }
                   },
+
+                  {
+                    'data': (data,type,row)=>{
+                        
+                        if(
+                            data['ticket_status'] == null ||
+                            (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
+                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            )
+                            || data['ticket_status'] == 'N/A' || 
+                            data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
+                        )
+                        { return `<span class="badge badge-danger">Void</span>`; }
+                        else if(data['ticket_status'] == 'Cancelled' || data['ticket_status'] == 'cancelled') 
+                        { return `<span class="badge badge-secondary">Cancelled</span>`; }
+                        else if(data['ticket_status'] == 'Completed' || data['ticket_status'] == 'completed') 
+                        { return `<span class="badge badge-success">Completed</span>`; }
+                        else
+                        { return `<span class="badge badge-info">Pending</span>`; }
+                      
+                     }
+                  },
                   {
                     'data': (data,type,row)=>{
                         return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return `
+                        <div class="text-center dropdown">
+                        <!-- Dropdown Toggler --> 
+                        <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </div>
+
+                        <!-- Dropdown Menu --> 
+                        <div class="dropdown-menu dropdown-menu-right"> 
+
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('${data.id}');">
+                        <div style="width: 2rem">
+                        <i class="fas fa-edit mr-1"></i>
+                        </div>
+                        <div>Set Status</div>
+                        </div> 
+                        <!----> 
+                        </div>
+
+                        </div>
+                    </div>
+                        
+                        `
                     }
                   },
                 ]
@@ -2048,7 +2122,11 @@ const selectMonth = () =>{
                         text: 'Print Report',
                         action: function ( e, dt, node, config ) {
                             printReport();
-                        }
+                        },
+                        columnDefs: [{
+                            targets: -1,
+                            visible: false,
+                        }],
                      }
                   ]
               }
@@ -2100,9 +2178,58 @@ const selectMonth = () =>{
                         return data['requests']['request_type'];
                     }
                   },
+
+                  {
+                    'data': (data,type,row)=>{
+
+                        if(
+                            data['ticket_status'] == null ||
+                            (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
+                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            )
+                            || data['ticket_status'] == 'N/A' || 
+                            data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
+                        )
+                        { return `<span class="badge badge-danger">Void</span>`; }
+                        else if(data['ticket_status'] == 'Cancelled' || data['ticket_status'] == 'cancelled') 
+                        { return `<span class="badge badge-secondary">Cancelled</span>`; }
+                        else if(data['ticket_status'] == 'Completed' || data['ticket_status'] == 'completed') 
+                        { return `<span class="badge badge-success">Completed</span>`; }
+                        else
+                        { return `<span class="badge badge-info">Pending</span>`; }
+                      
+                     }
+                  },
                   {
                     'data': (data,type,row)=>{
                         return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return `
+                        <div class="text-center dropdown">
+                        <!-- Dropdown Toggler --> 
+                        <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </div>
+
+                        <!-- Dropdown Menu --> 
+                        <div class="dropdown-menu dropdown-menu-right"> 
+
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('${data.id}');">
+                        <div style="width: 2rem">
+                        <i class="fas fa-edit mr-1"></i>
+                        </div>
+                        <div>Set Status</div>
+                        </div> 
+                        <!----> 
+                        </div>
+
+                        </div>
+                    </div>
+                        
+                        `
                     }
                   },
                 ]
@@ -2144,7 +2271,11 @@ const selectDay= () =>{
                         text: 'Print Report',
                         action: function ( e, dt, node, config ) {
                             printReport();
-                        }
+                        },
+                        columnDefs: [{
+                            targets: -1,
+                            visible: false,
+                        }],
                       }
                   ]
               }
@@ -2170,7 +2301,6 @@ const selectDay= () =>{
  
                 },
                 //put data into columns
-        
                 'columns': [
                     { 
                         'data': (data,type,row)=>{
@@ -2196,9 +2326,58 @@ const selectDay= () =>{
                         return data['requests']['request_type'];
                     }
                   },
+
+                  {
+                    'data': (data,type,row)=>{
+
+                        if(
+                            data['ticket_status'] == null ||
+                            (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
+                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            )
+                            || data['ticket_status'] == 'N/A' || 
+                            data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
+                        )
+                        { return `<span class="badge badge-danger">Void</span>`; }
+                        else if(data['ticket_status'] == 'Cancelled' || data['ticket_status'] == 'cancelled') 
+                        { return `<span class="badge badge-secondary">Cancelled</span>`; }
+                        else if(data['ticket_status'] == 'Completed' || data['ticket_status'] == 'completed') 
+                        { return `<span class="badge badge-success">Completed</span>`; }
+                        else
+                        { return `<span class="badge badge-info">Pending</span>`; }
+                      
+                     }
+                  },
                   {
                     'data': (data,type,row)=>{
                         return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return `
+                        <div class="text-center dropdown">
+                        <!-- Dropdown Toggler --> 
+                        <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </div>
+
+                        <!-- Dropdown Menu --> 
+                        <div class="dropdown-menu dropdown-menu-right"> 
+
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('${data.id}');">
+                        <div style="width: 2rem">
+                        <i class="fas fa-edit mr-1"></i>
+                        </div>
+                        <div>Set Status</div>
+                        </div> 
+                        <!----> 
+                        </div>
+
+                        </div>
+                    </div>
+                        
+                        `
                     }
                   },
                 ]
@@ -2241,7 +2420,11 @@ const selectRange = () =>{
                         text: 'Print Report',
                         action: function ( e, dt, node, config ) {
                             printReport();
-                        }
+                        },
+                        columnDefs: [{
+                            targets: -1,
+                            visible: false,
+                        }],
                       } 
                   ]
               }
@@ -2268,7 +2451,6 @@ const selectRange = () =>{
  
                 },
                 //put data into columns
-        
                 'columns': [
                     { 
                         'data': (data,type,row)=>{
@@ -2294,9 +2476,58 @@ const selectRange = () =>{
                         return data['requests']['request_type'];
                     }
                   },
+
+                  {
+                    'data': (data,type,row)=>{
+
+                        if(
+                            data['ticket_status'] == null ||
+                            (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
+                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            )
+                            || data['ticket_status'] == 'N/A' || 
+                            data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
+                        )
+                        { return `<span class="badge badge-danger">Void</span>`; }
+                        else if(data['ticket_status'] == 'Cancelled' || data['ticket_status'] == 'cancelled') 
+                        { return `<span class="badge badge-secondary">Cancelled</span>`; }
+                        else if(data['ticket_status'] == 'Completed' || data['ticket_status'] == 'completed') 
+                        { return `<span class="badge badge-success">Completed</span>`; }
+                        else
+                        { return `<span class="badge badge-info">Pending</span>`; }
+                      
+                     }
+                  },
                   {
                     'data': (data,type,row)=>{
                         return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return `
+                        <div class="text-center dropdown">
+                        <!-- Dropdown Toggler --> 
+                        <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </div>
+
+                        <!-- Dropdown Menu --> 
+                        <div class="dropdown-menu dropdown-menu-right"> 
+
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('${data.id}');">
+                        <div style="width: 2rem">
+                        <i class="fas fa-edit mr-1"></i>
+                        </div>
+                        <div>Set Status</div>
+                        </div> 
+                        <!----> 
+                        </div>
+
+                        </div>
+                    </div>
+                        
+                        `
                     }
                   },
                 ]
@@ -3174,7 +3405,11 @@ const showFile = (url) => {
                         text: 'Print Report',
                         action: function ( e, dt, node, config ) {
                             printReport();
-                        }
+                        },
+                        columnDefs: [{
+                            targets: -1,
+                            visible: false,
+                        }],
                       }
                   ]
               }
@@ -3195,16 +3430,16 @@ const showFile = (url) => {
                 //put data into columns
         
                 'columns': [
-    
-                  {
-                    'data': (data,type,row)=>{
-                        if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
-                            return `<i>Not Available</i>`;
-                        }else{
-                            return data['reference_number'];
+                    { 
+                        'data': (data,type,row)=>{
+                            if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                                return `<a>No reference given</a>`;
+                            }else{
+                                return data['reference_number'];
+                            }
                         }
-                    }
-                  },
+                      },
+                  
                   { 
                     'data': (data,type,row)=>{
                         if(data['student_number'] == null || data['student_number'] == 'N/A'){
@@ -3219,9 +3454,58 @@ const showFile = (url) => {
                         return data['requests']['request_type'];
                     }
                   },
+
+                  {
+                    'data': (data,type,row)=>{
+
+                        if(
+                            data['ticket_status'] == null ||
+                            (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
+                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            )
+                            || data['ticket_status'] == 'N/A' || 
+                            data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
+                        )
+                        { return `<span class="badge badge-danger">Void</span>`; }
+                        else if(data['ticket_status'] == 'Cancelled' || data['ticket_status'] == 'cancelled') 
+                        { return `<span class="badge badge-secondary">Cancelled</span>`; }
+                        else if(data['ticket_status'] == 'Completed' || data['ticket_status'] == 'completed') 
+                        { return `<span class="badge badge-success">Completed</span>`; }
+                        else
+                        { return `<span class="badge badge-info">Pending</span>`; }
+                      
+                     }
+                  },
                   {
                     'data': (data,type,row)=>{
                         return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return `
+                        <div class="text-center dropdown">
+                        <!-- Dropdown Toggler --> 
+                        <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </div>
+
+                        <!-- Dropdown Menu --> 
+                        <div class="dropdown-menu dropdown-menu-right"> 
+
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('${data.id}');">
+                        <div style="width: 2rem">
+                        <i class="fas fa-edit mr-1"></i>
+                        </div>
+                        <div>Set Status</div>
+                        </div> 
+                        <!----> 
+                        </div>
+
+                        </div>
+                    </div>
+                        
+                        `
                     }
                   },
                 ]
@@ -3274,7 +3558,11 @@ const selectReport = () =>{
                         text: 'Print Report',
                         action: function ( e, dt, node, config ) {
                             printReport();
-                        }
+                        },
+                        columnDefs: [{
+                            targets: -1,
+                            visible: false,
+                        }],
                       }
                   ]
               }
@@ -3295,16 +3583,16 @@ const selectReport = () =>{
                 //put data into columns
         
                 'columns': [
-    
                     { 
                         'data': (data,type,row)=>{
                             if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
-                                return `<i>Not Available</i>`;
+                                return `<a>No reference given</a>`;
                             }else{
                                 return data['reference_number'];
                             }
                         }
                       },
+                  
                   { 
                     'data': (data,type,row)=>{
                         if(data['student_number'] == null || data['student_number'] == 'N/A'){
@@ -3319,9 +3607,58 @@ const selectReport = () =>{
                         return data['requests']['request_type'];
                     }
                   },
+
+                  {
+                    'data': (data,type,row)=>{
+
+                        if(
+                            data['ticket_status'] == null ||
+                            (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
+                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            )
+                            || data['ticket_status'] == 'N/A' || 
+                            data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
+                        )
+                        { return `<span class="badge badge-danger">Void</span>`; }
+                        else if(data['ticket_status'] == 'Cancelled' || data['ticket_status'] == 'cancelled') 
+                        { return `<span class="badge badge-secondary">Cancelled</span>`; }
+                        else if(data['ticket_status'] == 'Completed' || data['ticket_status'] == 'completed') 
+                        { return `<span class="badge badge-success">Completed</span>`; }
+                        else
+                        { return `<span class="badge badge-info">Pending</span>`; }
+                      
+                     }
+                  },
                   {
                     'data': (data,type,row)=>{
                         return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return `
+                        <div class="text-center dropdown">
+                        <!-- Dropdown Toggler --> 
+                        <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </div>
+
+                        <!-- Dropdown Menu --> 
+                        <div class="dropdown-menu dropdown-menu-right"> 
+
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('${data.id}');">
+                        <div style="width: 2rem">
+                        <i class="fas fa-edit mr-1"></i>
+                        </div>
+                        <div>Set Status</div>
+                        </div> 
+                        <!----> 
+                        </div>
+
+                        </div>
+                    </div>
+                        
+                        `
                     }
                   },
                 ]
@@ -3348,3 +3685,715 @@ const printTicket = () =>{
     }, 100);
 };
 
+
+const setStatus = (id) =>{
+    Swal.fire({
+        title: 'Set a status',
+        icon: 'info',
+        input: 'select',
+        inputOptions: {
+        'Void': 'Void',
+        'Cancelled': 'Cancelled',
+        'Completed': 'Completed',
+        
+        },
+        inputPlaceholder: 'Select a status..',
+      //  showCancelButton: true,
+        confirmButtonText: 'Submit',
+
+      }).then((result) => {
+        if(result.value.length <= 0){
+            Swal.fire({
+                title: 'Select an option first!',
+                icon: 'error',
+
+              //  showCancelButton: true,
+                confirmButtonText: 'Ok',
+        
+              })
+        }else if (result.isConfirmed) {
+            $.ajax({
+                url: apiURL + 'submitted_requests/set_status/' + id,
+                async: true,
+                method: 'POST',
+                data: {
+                    'ticket_status' : result.value
+                },
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+                },
+                success: (data)=>{
+
+                    Swal.fire({
+                        title: 'Successfully updated!',
+                        icon: 'success',
+        
+                      //  showCancelButton: true,
+                        confirmButtonText: 'Ok',
+                
+                      })
+                   //location.reload();
+                   drawTable();
+                },
+                error:({responseJSON})=>{
+                console.log(responseJSON);
+                  notification('error','','Something went wrong');
+                }
+            });
+
+        }
+      })
+
+};
+
+const showInfo = (val) =>{
+
+
+    Swal.fire({
+        title: 'Loading..',
+        showConfirmButton: false,
+        backdrop: `rgba(0,0,121,0.2)`,
+        didOpen: () => {
+            Swal.showLoading()
+ 
+          },
+
+      })
+    $.ajax({
+        url: apiURL + 'clients/student_number/' + val,
+        async: true,
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+        },
+        success: (data)=>{
+            if(val == 'N/A'){
+                Swal.close();
+                Swal.fire({
+                    title: 'Please select a student number first!',
+                    icon: 'error',
+                    showConfirmButton: true,
+                  })
+            }else{
+            $('#student_details').css('display','block');
+            if(typeof(data.data[0]) != 'undefined' || data.data[0] != null){
+                if(data.data[0].contact_number){
+                    $('#student_contact_number').val(" " + data.data[0].contact_number);
+                }else{
+                    $('#student_contact_number').val("Not available");
+                }
+                if(data.data[0].year_level){
+                    $('#student_year').val(" " + data.data[0].year_level);
+                }else{
+                    $('#student_year').val("Not available");
+                }
+                if(data.data[0].program){
+                    $('#student_program').val(" " + data.data[0].program);
+                }else{
+                    $('#student_program').val("Not available");
+                }
+                if(data.data[0].first_name && data.data[0].last_name){
+                    $('#student_name').val(" " + data.data[0].first_name + " " + data.data[0].last_name);
+                }else{
+                    $('#student_name').val("Not available");
+                }
+            }else{
+                $('#student_contact_number').html("Not available");
+                $('#student_program').val("Not available");
+                $('#student_year').val("Not available");
+                $('#student_name').val("Not available");
+            }
+            }
+            Swal.close();
+        }
+    })
+};
+
+
+const selectStatus = (val) =>{
+    let url = '';
+    let data = '';
+    let method = '';
+    if($('#statuses').val() == "All"){
+        url = apiURL + 'submitted_requests';
+        method = 'GET';
+        query_no = 0;
+    }else{
+        url = apiURL + 'submitted_requests/ticket_status/';
+        method = 'POST';
+        data = {
+            'ticket_status' : val,
+        };
+        query_no = 7;
+    }
+
+    $('select').removeClass('text-primary');
+    $('#statuses').addClass('text-primary');
+
+    //
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    $("table").DataTable({
+                
+    "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+    "dom": 'Bfrtip',
+
+             "buttons": [
+    
+              {
+                  extend: 'collection',
+                  text: 'Options',
+                  buttons: [
+                      'copy',
+                      'excel',
+                      'csv',
+                      'pdf',
+                      'print',
+                      {
+                        text: 'Print Report',
+                        action: function ( e, dt, node, config ) {
+                            printReport();
+                        },
+                        columnDefs: [{
+                            targets: -1,
+                            visible: false,
+                        }],
+                      }
+                  ]
+              }
+            ],
+                'ajax': {
+                  
+                    url: url,
+                    type: method,
+                    data: data,
+                   // dataSrc:"",
+                    headers: { 
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                        dataType: "json",
+                        Accept: "application/json",
+                    },
+ 
+                },
+                //put data into columns
+        
+                'columns': [
+                    { 
+                        'data': (data,type,row)=>{
+                            if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                                return `<a>No reference given</a>`;
+                            }else{
+                                return data['reference_number'];
+                            }
+                        }
+                      },
+                  
+                  { 
+                    'data': (data,type,row)=>{
+                        if(data['student_number'] == null || data['student_number'] == 'N/A'){
+                            return `<a>User</a>`;
+                        }else{
+                            return data['student_number'];
+                        }
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return data['requests']['request_type'];
+                    }
+                  },
+
+                  {
+                    'data': (data,type,row)=>{
+
+                        if(
+                            data['ticket_status'] == null ||
+                            (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
+                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            )
+                            || data['ticket_status'] == 'N/A' || 
+                            data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
+                        )
+                        { return `<span class="badge badge-danger">Void</span>`; }
+                        else if(data['ticket_status'] == 'Cancelled' || data['ticket_status'] == 'cancelled') 
+                        { return `<span class="badge badge-secondary">Cancelled</span>`; }
+                        else if(data['ticket_status'] == 'Completed' || data['ticket_status'] == 'completed') 
+                        { return `<span class="badge badge-success">Completed</span>`; }
+                        else
+                        { return `<span class="badge badge-info">Pending</span>`; }
+                      
+                     }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return `
+                        <div class="text-center dropdown">
+                        <!-- Dropdown Toggler --> 
+                        <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </div>
+
+                        <!-- Dropdown Menu --> 
+                        <div class="dropdown-menu dropdown-menu-right"> 
+
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('${data.id}');">
+                        <div style="width: 2rem">
+                        <i class="fas fa-edit mr-1"></i>
+                        </div>
+                        <div>Set Status</div>
+                        </div> 
+                        <!----> 
+                        </div>
+
+                        </div>
+                    </div>
+                        
+                        `
+                    }
+                  },
+                ]
+            })
+
+            
+      
+  
+};
+const loadProgram = () =>{
+$.ajax({
+    url: apiURL + 'clients',
+    method: 'GET',
+    headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`
+    },
+    success: (data)=>{
+        let code = ``;
+        let arr = new Array();
+
+        data.data.map((val)=>{
+            if(!arr.includes(val.program)){
+                code += `<option value = '${val.program}'>${val.program}</option>`;
+                arr.push(val.program);
+            }
+        
+        }).join("");
+
+        $('#programs').append(code);
+    }
+})
+};
+loadProgram();
+
+const selectProgram = (val) =>{
+    let url = '';
+    let data = '';
+    let method = '';
+    if($('#programs').val() == "All"){
+        url = apiURL + 'submitted_requests';
+        method = 'GET';
+        query_no = 0;
+    }else{
+        url = apiURL + 'submitted_requests/program/';
+        method = 'POST';
+        data = {
+            'program' : val,
+        };
+        query_no = 8;
+    }
+
+    $('select').removeClass('text-primary');
+    $('#programs').addClass('text-primary');
+
+    //
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    $("table").DataTable({
+                
+    "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+    "dom": 'Bfrtip',
+
+             "buttons": [
+    
+              {
+                  extend: 'collection',
+                  text: 'Options',
+                  buttons: [
+                      'copy',
+                      'excel',
+                      'csv',
+                      'pdf',
+                      'print',
+                      {
+                        text: 'Print Report',
+                        action: function ( e, dt, node, config ) {
+                            printReport();
+                        },
+                        columnDefs: [{
+                            targets: -1,
+                            visible: false,
+                        }],
+                      }
+                  ]
+              }
+            ],
+                'ajax': {
+                  
+                    url: url,
+                    type: method,
+                    data: data,
+                   // dataSrc:"",
+                    headers: { 
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                        dataType: "json",
+                        Accept: "application/json",
+                    },
+ 
+                },
+                //put data into columns
+        
+                'columns': [
+                    { 
+                        'data': (data,type,row)=>{
+                            if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                                return `<a>No reference given</a>`;
+                            }else{
+                                return data['reference_number'];
+                            }
+                        }
+                      },
+                  
+                  { 
+                    'data': (data,type,row)=>{
+                        if(data['student_number'] == null || data['student_number'] == 'N/A'){
+                            return `<a>User</a>`;
+                        }else{
+                            return data['student_number'];
+                        }
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return data['requests']['request_type'];
+                    }
+                  },
+
+                  {
+                    'data': (data,type,row)=>{
+
+                        if(
+                            data['ticket_status'] == null ||
+                            (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
+                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            )
+                            || data['ticket_status'] == 'N/A' || 
+                            data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
+                        )
+                        { return `<span class="badge badge-danger">Void</span>`; }
+                        else if(data['ticket_status'] == 'Cancelled' || data['ticket_status'] == 'cancelled') 
+                        { return `<span class="badge badge-secondary">Cancelled</span>`; }
+                        else if(data['ticket_status'] == 'Completed' || data['ticket_status'] == 'completed') 
+                        { return `<span class="badge badge-success">Completed</span>`; }
+                        else
+                        { return `<span class="badge badge-info">Pending</span>`; }
+                      
+                     }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return `
+                        <div class="text-center dropdown">
+                        <!-- Dropdown Toggler --> 
+                        <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </div>
+
+                        <!-- Dropdown Menu --> 
+                        <div class="dropdown-menu dropdown-menu-right"> 
+
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('${data.id}');">
+                        <div style="width: 2rem">
+                        <i class="fas fa-edit mr-1"></i>
+                        </div>
+                        <div>Set Status</div>
+                        </div> 
+                        <!----> 
+                        </div>
+
+                        </div>
+                    </div>
+                        
+                        `
+                    }
+                  },
+                ]
+            })
+
+            
+      
+  
+};
+
+
+const deleteStudent = (id) =>{
+  
+
+  
+    
+    Swal.fire({
+        title: 'Delete?',
+        showDenyButton: true,
+      //  showCancelButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: `No`,
+        customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-3',
+            denyButton: 'order-2',
+          }
+      }).then((result) => {
+
+        if (result.isConfirmed) {
+        $.ajax({
+            url: apiURL + 'clients/delete/' + id,
+            async: true,
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+               
+            
+             
+               notification('success','','Successfully deleted');
+               //location.reload();
+               drawTable();
+            },
+            error:({responseJSON})=>{
+              //  console.log(responseJSON);
+              notification('error','','Something went wrong');
+            }
+        });
+    }
+    })
+
+
+};
+
+
+const createStudent = () =>{
+   
+    $('input').val('');
+    $('select').val('');
+    $('textarea').val('');
+    //
+    $('#create_student').on('submit',(e)=>{
+
+        e.preventDefault();
+        if (create_ctr > 0) {
+            return;
+        }
+        create_ctr++;
+        $.ajax({
+            url: apiURL + 'clients',
+            async: true,
+            method: 'POST',
+            data: {
+                'created_by' : sessionStorage.getItem('user_id'),
+                //
+                'first_name' : $('#create_first_name').val(),
+                'middle_name' :  $('#create_middle-number').val() ? $('#create_middle_number').val() : '' ,
+                'last_name' : $('#create_last_name').val(),
+                'extension_name' : $('#create_extension_number').val() ? $('#create_extension_number').val() : '' ,
+                'program' : $('#create_program').val(),
+                'year_level' : $('#create_year_level').val(),
+                'student_number' : $('#create_student_number').val(),
+                'contact_number' : $('#create_contact_number').val() ? $('#create_contact_number').val() : 'Not Available' ,
+            },
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+            },
+            success: (data)=>{
+                
+       
+                create_ctr = 0;
+                notification('success','','Successfully created');
+               // location.reload();
+               manageCard('create_student_crud','hide'); 
+               drawTable();
+            },
+            error:({responseJSON})=>{
+               // console.log(responseJSON.message);
+               notification('error','','Something went wrong');
+            }
+        });
+    })
+
+
+};
+
+//Charts
+const createChart0 = () =>{
+
+    Swal.fire({
+        title: 'Loading..',
+        showConfirmButton: false,
+        backdrop: `rgba(0,0,121,0.2)`,
+        didOpen: () => {
+            Swal.showLoading()
+ 
+          },
+
+      })
+    
+
+    let status = new Array();
+    let status_values = new Array();
+    let pending_today = 0;
+    let completed_this_month = 0;
+    let total_void = 0;
+
+    $.ajax({
+        url: apiURL + `submitted_requests`,
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+        dataType: "json",
+        contentType: "application/json",
+        success: (data)=>{
+    
+         if(data.data.length == 0){
+            $('#today_report_none').css('display','block');
+            $('#chart-0').css('display','none');
+          
+         }else{
+            data.data.map((val)=>{
+            //
+            if(status.includes(val['ticket_status'])){
+                status_values[status.indexOf(val['ticket_status'])] =
+                parseInt(status_values[status.indexOf(val['ticket_status'])]) + 1;
+            }else{
+                status.push(val['ticket_status']);
+                status_values.push(1);
+            }
+            //
+
+
+            if(moment(val.created_at).format("MM D YYYY") == moment(new Date()).format("MM D YYYY")){
+                if(val['ticket_status'] == 'Pending'){
+                    pending_today += 1;
+                }
+            }
+            if(moment(val.created_at).format("MM YYYY") == moment(new Date()).format("MM YYYY")){
+                if(val['ticket_status'] == 'Completed'){
+                    completed_this_month += 1;
+                }
+            }  
+
+                if(val['ticket_status'] == 'Void' || val['ticket_status'] == null ){
+                    total_void += 1;
+                }             
+
+                    });
+
+            status.map((val,i)=>{
+                status[i] = status[i] + ' (' + String(status_values[i]) + ')';
+            })
+
+            if(status.length == 0){
+                $('#today_report_none').css('display','block');
+                $('#chart-0').css('display','none');
+                return;
+            }
+
+            $('#pending_today_count').html(pending_today);
+            $('#completed_this_month_count').html(completed_this_month);
+            $('#void_count').html(total_void);
+            // graph chart
+            let graphChartCanvas = $('#chart-0').get(0).getContext('2d')
+            
+            
+            let graphChartData = {
+                labels: status,
+                datasets: [
+                {
+                    label: 'Status',
+                    fill: false,
+                    borderWidth: 2,
+                    lineTension: 0,
+                    spanGaps: true,
+                                           backgroundColor     : ['rgba(54, 162, 235, 0.2)',
+                       
+                        'rgba(255, 205, 86, 0.2)','rgba(255, 99, 132, 0.2)',
+                        'rgba(153, 102, 255, 0.2)','rgba(60,141,188,0.2)'],
+                        borderColor         : ['rgba(54, 162, 235)',
+                      
+                        'rgba(255, 205, 86)','rgba(255, 99, 132)',
+                        'rgba(153, 102, 255)','rgba(60,141,188)'],
+                    pointRadius: 3,
+
+
+                    data: status_values,
+                }
+                ]
+            }
+            
+            let graphChartOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+                legend: {
+                display: false
+                },
+                scales: {
+                y: {  
+                    min: 0,
+                    suggestedMax: 10,
+                    step: 1,
+
+                },
+                x: {  
+                    min: 0,
+                    
+                },
+
+                }
+            }
+            
+
+            let graphChart = new Chart(graphChartCanvas, { 
+                type: 'doughnut',
+                data: graphChartData,
+                options: graphChartOptions
+            })
+            //chart:end
+            
+            }
+
+            Swal.close();
+        }
+ 
+      
+    });
+    
+
+
+    
+
+}
+
+
+if((window.location.href).includes('/home')){
+    createChart0();
+}

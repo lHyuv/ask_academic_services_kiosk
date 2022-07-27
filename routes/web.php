@@ -48,3 +48,20 @@ Route::get('/requirements', [App\Http\Controllers\HomeController::class, 'requir
 Route::get('/user_role', [App\Http\Controllers\HomeController::class, 'user_role_crud']);
 
 Route::get('/forms', [App\Http\Controllers\HomeController::class, 'form_crud']);
+
+//requests
+
+Route::get('/subject_tutorial', [App\Http\Controllers\HomeController::class, 'subject_tutorial']);
+Route::get('/cross_enrollment', [App\Http\Controllers\HomeController::class, 'cross_enrollment']);
+Route::get('/change_subject', [App\Http\Controllers\HomeController::class, 'change_subject']);
+Route::get('/subject_petition', [App\Http\Controllers\HomeController::class, 'subject_petition']);
+Route::get('/correction', [App\Http\Controllers\HomeController::class, 'correction']);
+Route::get('/certification', [App\Http\Controllers\HomeController::class, 'certification']);
+Route::get('/shifting', [App\Http\Controllers\HomeController::class, 'shifting']);
+Route::get('/manual_enrollment', [App\Http\Controllers\HomeController::class, 'manual_enrollment']);
+Route::get('/add_subject', [App\Http\Controllers\HomeController::class, 'add_subject']);
+Route::get('/subject_overload', [App\Http\Controllers\HomeController::class, 'subject_overload']);
+
+//
+
+Route::get('/students', [App\Http\Controllers\HomeController::class, 'students']);

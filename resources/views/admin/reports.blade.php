@@ -1,7 +1,7 @@
 @extends('layouts.header')
 
 @section('page_title')
-    {{ "Backlogs and Queries" }}
+    {{ "Requests" }}
 @endsection
 
 @section('content')
@@ -11,18 +11,58 @@
 
 <section class="section shadow-sm">
         <div class="section-header mt-5">
-        
-            <h1>Backlogs and Queries</h1>
+            @if(count($submitted_requests) > 0)
+            <h1>{{ $submitted_requests[0]->requests()->pluck('request_type')[0] }} Requests</h1>
+            @else 
+            <h1> Requests </h1> 
+            @endif
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item"><a href="/home">Home</a></div>
-              <div class="breadcrumb-item">Backlogs and Queries</div>
+              @if(count($submitted_requests) > 0)
+              <div class="breadcrumb-item">{{ $submitted_requests[0]->requests()->pluck('request_type')[0] }} Requests</div>
+              @else 
+              <div class="breadcrumb-item"> Requests</div>
+              @endif
             </div> 
         </div>
       
 </section>
+<div class="row custom_widget">
+        <div class="col-md-4">
 
+            <div class="card mt-4">
+                <div class="card-header"><h4>Total</h4></div>
+
+                <div class="card-body">
+                  <h3>  {{count($submitted_requests)}} </h3>
+                </div>
+            </div>
+        </div>
+        
+<div class="col-md-4">
+
+<div class="card mt-4">
+    <div class="card-header"><h4>Pending</h4></div>
+
+    <div class="card-body">
+      <h3>  {{$pending}} </h3>
+    </div>
+</div>
+</div>
+
+<div class="col-md-4">
+
+<div class="card mt-4">
+    <div class="card-header"><h4>Completed</h4></div>
+
+    <div class="card-body">
+      <h3>  {{$completed}} </h3>
+    </div>
+</div>
+</div>
+</div>
     <div class="row" id = "backlog_table">
-        <div class="col-md-9">
+        <div class="col-md-12">
 
 
 
@@ -43,7 +83,19 @@
 
                  
                     </div>
+                    @if(count($submitted_requests) > 0)
                     <div class = "row">
+                        <div class = "col-md-12">
+                        <h4 class = "mt-4">List of created {{ $submitted_requests[0]->requests()->pluck('request_type')[0] }} requests</h4> <br>
+                        <span id = 'query_text'></span>
+                        </div>           
+                    </div>
+                    </div>
+                    <h4 id = "card_title">List of created {{ $submitted_requests[0]->requests()->pluck('request_type')[0] }}  requests</h4>
+        
+                </div>
+                @else 
+                <div class = "row">
                         <div class = "col-md-12">
                         <h4 class = "mt-4">List of created requests</h4> <br>
                         <span id = 'query_text'></span>
@@ -53,6 +105,7 @@
                     <h4 id = "card_title">List of created requests</h4>
         
                 </div>
+                @endif
       
                 <div class="card-body">
                     <hr style = 'display:none;'>
@@ -140,69 +193,7 @@
         </div>
        
          <!---->
-         <div class="col-md-3">
-
-            <div class="card card-outline card-primary mt-3" id = 'query'>
-                <div class="card-header"><h4>Queries</h4></div>
-
-                <div class="card-body">
-                    <h5>Sort By</h5>
-                    <form>
-                        <label>By Service</label>
-                        <select class = 'form-control' id='requests' onchange = 'selectRequest(this.value);'>
-                            <option value = "All"> All </option>
-                            @foreach($requests as $req)
-                            <option value = "{{ $req->id }}"> {{ $req->request_type }}</option>
-                            @endforeach
-                        </select>
-                        <label>By Status</label>
-                        <select class = 'form-control' id='statuses' onchange = 'selectStatus(this.value);'>
-                            <option value = "All"> All </option>
-                            <option value = "Pending"> Pending</option>
-                            <option value = "Completed"> Completed</option>
-                            <option value = "Cancelled"> Cancelled</option>
-                            <option value = "Void"> Void</option>
-                        </select>
-                        <label>Date from</label>
-                        <input type = 'date' class = 'form-control' id = 'date_from' onchange = '
-                        $("#date_to").css("display","block");
-                        $("#date_to_label").css("display","block");
-                        '/>
-                        <label id = "date_to_label" style = "display:none;" >Date to</label>
-                        <input type = 'date' class = 'form-control' id = 'date_to' onchange = '
-                        selectRange(); 
-                        $("#date_to").css("display","none");
-                        $("#date_to_label").css("display","none");
-                        ' style = "display:none;"/>
-
-
-                        <label>By Month</label>
-                        <select class = 'form-control' id = 'month' onchange = 'selectMonth();'>
-                            
-                        </select>
-                        <label>By Day</label>
-                        <input type="date" class  ='form-control' id = 'date' onchange = 'selectDay();'>
-
-                        <label>By Student Number</label>
-                        <select name="student_no" id="student_no" class = "form-control" onchange = 'selectUser();'>
-                            <option selected value = "All">All</option>
-                        </select>
-
-                        <label>Reports</label>
-                        <select name="report" id="report" class = "form-control" onchange = 'selectReport();'>
-                            <option selected value = "All">All</option>
-                            <option value = "Weekly">This Week/Weekly</option>
-                            <option value = "Monthly">This Month/Monthly</option>
-                        </select>
-                        <label>By Program</label>
-                        <select class = 'form-control' id='programs' onchange = 'selectProgram(this.value);'>
-                            <option value = "All"> All </option>
-
-                        </select>
-                    </form>
-                </div>
-            </div>
-        </div>
+        
          <!---->
 
     </div>

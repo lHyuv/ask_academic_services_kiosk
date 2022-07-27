@@ -58,6 +58,7 @@
     <link href="{{ asset('template/vendors/parsley/css/custom-parsley.css') }}" rel="stylesheet">
     <link href="{{ asset('template/vendors/toastr/css/iziToast.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/vendors/toastr/css/toastr.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/vendors/select2/css/select2.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!--BS Stepper--> 
@@ -73,6 +74,9 @@
 
     <!--Chart JS--> 
     <script src = "{{ asset('template/vendors/chartjs/js/chart.min.js') }}"></script>
+
+    <!--Select2--> 
+    <script src = "{{ asset('template/vendors/select2/js/select2.min.js') }}"></script>
     <noscript>
   
      <meta HTTP-EQUIV="REFRESH" content="0; url= {{ URL::to('/') }}/noscript"> 
@@ -81,7 +85,7 @@
 
     @if (Route::current()->getName() == 'guest' || Route::current()->getName() == 'guest2')
 
-    <body class = "bg-white ">
+    <body class = "custom-bg">
 
     <div id="app">
     <div class="main-wrapper main-wrapper-1">

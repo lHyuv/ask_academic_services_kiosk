@@ -19,6 +19,8 @@ class SubmittedRequest extends Model
         'request_id',
         'status',
         'ticket_status',
+        //
+        'program',
     ]);
 
     public function requests(){

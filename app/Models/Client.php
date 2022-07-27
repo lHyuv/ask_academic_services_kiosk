@@ -20,13 +20,11 @@ class Client extends Model
         'extension_name',
         'student_number',
         'user_id',
-        'year',
-        'section',
+        'year_level',
+        'program',
         'status',
-        //
-        'semester_id',
-        'program_id',
-        //
+        'contact_number',
+
         'created_by',
         'updated_by',
     ]);

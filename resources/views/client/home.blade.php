@@ -18,12 +18,12 @@
         <h1>Academic Services <br> Kiosk</h1>
       </div>
         <div class="col-md-3  my-auto text-center">
-        <div class="card  shadow-none card-outline">
+        <div class="card  shadow-none card-outline custom-bg">
           <h3 class>Services</h3>
         </div>
         </div>
         <div class="col-md-9">
-        <div class="card  shadow-none card-outline card-custom-left ml-5">
+        <div class="card  shadow-none card-outline card-custom-left ml-5 custom-bg">
 
 
             <!--Menu--> 
@@ -39,7 +39,7 @@
               <!---->
          
             <div class="col-md-4 d-flex align-items-stretch">
-            <div class="card shadow-md rounded ml-2">
+            <div class="card shadow-lg rounded ml-2">
              <div class = "card-body">
              <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
              showMenu('hide');
@@ -101,7 +101,7 @@
              <!---->
          
             <div class="col-md-4 d-flex align-items-stretch">
-            <div class="card shadow-md rounded ml-2">
+            <div class="card shadow-lg rounded ml-2">
              <div class = "card-body">
              <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
               showElement('id','form_menu','hide');
@@ -194,7 +194,7 @@
          
           
         @if(($key == 0 || $key != 1) && ($key) % 4 == 0)
-        <div class = "row">
+        <div class = "row mt-2">
         @endif
 
 
@@ -202,7 +202,7 @@
           <!---->
      
         <div class="col-md-3 d-flex align-items-stretch">
-        <div class="card shadow-md rounded ml-2">
+        <div class="card shadow-lg rounded ml-2">
          <div class = "card-body">
          <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
          showMenu('hide');
@@ -272,7 +272,7 @@
         @endforeach
 
         <div class="col-md-4 d-flex align-items-stretch">
-            <div class="card shadow-md rounded ml-2">
+            <div class="card shadow-lg rounded ml-2">
              <div class = "card-body">
              <a class = "nav-link text-center" href = "javascript:void(0);" onclick = "
              showElement('id','form_menu','show');
@@ -307,14 +307,14 @@
     <div class="step" data-target="#what-i-need">
       <button type="button" class="step-trigger" role="tab" id="what-i-need-trigger"  aria-controls="what-i-need">
         <span class="bs-stepper-circle"><i class = "fa fa-dot-circle"></i></span>
-        <span class="bs-stepper-label text-primary">What I Need</span>
+        <span class="bs-stepper-label">What I Need</span>
       </button>
     </div>
     <div class="line"></div>
     <div class="step" data-target="#where-to-get-it">
       <button type="button" class="step-trigger" role="tab"  id="where-to-get-it-trigger" aria-controls="where-to-get-it">
         <span class="bs-stepper-circle"><i class = "fa fa-dot-circle"></i></span>
-        <span class="bs-stepper-label text-primary">Where to get it</span>
+        <span class="bs-stepper-label">Where to get it</span>
       </button>
     </div>
  
@@ -322,7 +322,7 @@
     <div class="step" data-target="#what-to-do">
       <button type="button" class="step-trigger" role="tab" id="what-to-do-trigger" aria-controls="what-to-do">
         <span class="bs-stepper-circle"><i class = "fa fa-dot-circle"></i></span>
-        <span class="bs-stepper-label text-primary">What to do</span>
+        <span class="bs-stepper-label">What to do</span>
       </button>
     </div>
 
@@ -330,14 +330,14 @@
     <div class="step" data-target="#checklist">
       <button type="button" class="step-trigger" role="tab" id="checklist-trigger" aria-controls="checklist"> 
         <span class="bs-stepper-circle"><i class = "fa fa-dot-circle"></i></span>
-        <span class="bs-stepper-label text-primary">Checklist</span>
+        <span class="bs-stepper-label">Checklist</span>
       </button>
     </div>
     <div class="line"></div>
     <div class="step" data-target="#get-my-ticket">
       <button type="button" class="step-trigger" role="tab"  id="get-my-ticket-trigger" aria-controls="get-my-ticket">
         <span class="bs-stepper-circle"><i class = "fa fa-dot-circle"></i></span>
-        <span class="bs-stepper-label text-primary">Get my ticket</span>
+        <span class="bs-stepper-label">Get my ticket</span>
       </button>
     </div>
   </div>
@@ -385,8 +385,36 @@
 
 
                             <div class = "text-center">
-        <label class = "text-center">Please insert your student number</label>
-        <input id = 'student_no' name = 'student_no' type="text" placeholder = "xxxx-xxxx-xxxx" class = "form-control mb-3">
+        <label class = "text-center">Please select your student number</label>
+        </div>
+        
+       <select id = 'student_no' name = 'student_no' type="text" class = "form-control mb-3" onchange = "showInfo(this.value);">
+       <option value = 'N/A' selected disabled>Select a student number..</option>
+       @foreach($clients as $c)
+        <option value = '{{$c->student_number}}'>{{$c->student_number}}</option>
+        @endforeach 
+       </select>
+       <div id = 'student_details' style = 'display:none;' class = "mt-4 mb-2">
+       <div class = "row">
+        <div class = "col-md-6">
+
+       <b>Name </b> <input type = 'text' disabled class = "form-control"  id = 'student_name'> 
+      </div>
+      <div class = "col-md-6">
+       <b>Year</b><input type = 'text' disabled class = "form-control"  id = 'student_year'> 
+       </div>
+       </div>
+       <div class = "row">
+       <div class = "col-md-6">
+       <b>Program</b> <input type = 'text' disabled class = "form-control"  id = 'student_program'> 
+</div> 
+<div class = "col-md-6">
+       <b>Contact Number</b> <input type = 'text' disabled class = "form-control"  id = 'student_contact_number'> 
+       </div>   
+       </div>
+     
+       </div>
+       <div class = "text-center">
         <section id = 'final_step'></section>
  
       </div>
@@ -450,7 +478,7 @@
 <!--Finish Step:end-->
 <!--Hidden--> 
 <div id = "form_menu" style = "display:none;">
-<h4 class = 'request_title text-center' >Request Forms</h4>
+<h4 class = 'text-center' >Request Forms</h4>
 <div class="section-header-breadcrumb mb-3 col-md-12">
 <button class = "btn btn-primary"  
       onclick = "
@@ -467,7 +495,7 @@
 @foreach($full_requests as $key=>$request)
 <!--Form List--> 
 
-<div class="card shadow-md rounded ml-2">
+<div class="card shadow-lg rounded ml-2">
              <div class = "card-body">
 
              <div class = "row">

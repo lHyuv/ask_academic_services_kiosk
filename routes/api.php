@@ -129,6 +129,8 @@ Route::middleware('auth:sanctum')->get('/clients/show_active', [ClientController
 
 Route::middleware('auth:sanctum')->get('/clients/user/{id}', [ClientController::class, 'find_by_user']);
 
+Route::get('/clients/student_number/{id}', [ClientController::class, 'find_by_student_number']);
+
 Route::middleware('auth:sanctum')->get('/clients/{id}', [ClientController::class, 'show']);
 
 Route::middleware('auth:sanctum')->post('/clients',[ClientController::class, 'create']);
@@ -155,6 +157,10 @@ Route::middleware('auth:sanctum')->post('/submitted_requests/query', [SubmittedR
 Route::middleware('auth:sanctum')->post('/submitted_requests/month', [SubmittedRequestController::class, 'month']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/day', [SubmittedRequestController::class, 'day']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requests/ticket_status', [SubmittedRequestController::class, 'get_ticket_status']);
+
+Route::middleware('auth:sanctum')->post('/submitted_requests/program', [SubmittedRequestController::class, 'get_program']);
 
 Route::middleware('auth:sanctum')->post('/submitted_requests/set_status/{id}', [SubmittedRequestController::class, 'ticket_status']);
 

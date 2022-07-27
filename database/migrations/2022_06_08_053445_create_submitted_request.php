@@ -23,6 +23,7 @@ class CreateSubmittedRequest extends Migration
             $table->foreignUuid('created_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');   
             $table->foreignUuid('updated_by')->nullable()->constrained('users')->onDelete('cascade')->onUpdate('cascade');  
             $table->string('ticket_status')->default('Pending');
+            $table->text('program')->nullable();
             $table->string('status')->default(true);
             $table->timestamps();
             $table->softDeletes();

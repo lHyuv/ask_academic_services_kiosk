@@ -58,7 +58,10 @@ class RequestController extends Controller
             ]);
 
             if($validator->fails()){
-                return ['message' => [$validator->errors()]];       
+                return [
+                    'error' => true,
+                    'message' => [$validator->errors()]
+                ];       
             }
 
             $path = 'files/';

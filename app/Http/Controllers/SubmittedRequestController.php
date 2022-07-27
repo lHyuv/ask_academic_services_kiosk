@@ -212,12 +212,38 @@ class SubmittedRequestController extends Controller
         $data = SubmittedRequest::findOrFail($id);
 
         $data->update([
-            'ticket_status' => request('ticket_status')
+            'ticket_status' => request('ticket_status'),
+
         ]);
   
         //return $data;
         return [
-            'message' => 'Successfully updated'
+            'message' => 'Successfully updated',
+            'data' => $data,
+        ];
+    }
+
+    public function get_ticket_status(Request $request){
+        $data = SubmittedRequest::with([
+            'requests',
+        ])->where('ticket_status',request('ticket_status'))->where('status','1')->orderBy('created_at')->get();
+
+        
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data,
+        ];
+    }
+
+    public function get_program(Request $request){
+        $data = SubmittedRequest::with([
+            'requests',
+        ])->where('program',request('program'))->where('status','1')->orderBy('created_at')->get();
+
+        
+        return [
+            'message' => 'Successfully retrieved',
+            'data' => $data,
         ];
     }
 }
