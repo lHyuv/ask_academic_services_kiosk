@@ -1839,8 +1839,8 @@ const numDashboard = () =>{
                 let value = moment(val.created_at).format("MMM Do YYYY");
                 let now = moment(new Date()).format("MMM Do YYYY");
 
-                if(val != null && typeof(val['created_at']) != 'undefined' &&
-                new Date(val['created_at']).getFullYear() == new Date().getFullYear()){
+                if((val != null && typeof(val['created_at']) != 'undefined' &&
+                new Date(val['created_at']).getFullYear() == new Date().getFullYear()) && val['ticket_status'] == 'Completed'){
                
                     if(value == now){
                         today.push(new Date(val.created_at).getDay());
@@ -2028,7 +2028,7 @@ const selectRequest = (id) =>{
                         if(
                             data['ticket_status'] == null ||
                             (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
-                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            && (data['ticket_status'] != 'Completed' && data['ticket_status'] != 'Cancelled')
                             )
                             || data['ticket_status'] == 'N/A' || 
                             data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
@@ -2185,7 +2185,7 @@ const selectMonth = () =>{
                         if(
                             data['ticket_status'] == null ||
                             (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
-                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            && (data['ticket_status'] != 'Completed' && data['ticket_status'] != 'Cancelled')
                             )
                             || data['ticket_status'] == 'N/A' || 
                             data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
@@ -2333,7 +2333,7 @@ const selectDay= () =>{
                         if(
                             data['ticket_status'] == null ||
                             (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
-                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            && (data['ticket_status'] != 'Completed' && data['ticket_status'] != 'Cancelled')
                             )
                             || data['ticket_status'] == 'N/A' || 
                             data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
@@ -2483,7 +2483,7 @@ const selectRange = () =>{
                         if(
                             data['ticket_status'] == null ||
                             (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
-                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            && (data['ticket_status'] != 'Completed' && data['ticket_status'] != 'Cancelled')
                             )
                             || data['ticket_status'] == 'N/A' || 
                             data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
@@ -2567,7 +2567,7 @@ const createChart = () =>{
             let value = moment(val.created_at).format("MM D YYYY");
             let now = moment(new Date()).format("MM D YYYY");
 
-            if(value == now){
+            if(value == now && val['ticket_status'] == 'Completed'){
            
                 if(services.includes(val['requests'].request_type)){
                     service_values[services.indexOf(val['requests'].request_type)] =
@@ -2685,7 +2685,7 @@ const createChart2 = () =>{
 
 
 
-            if(new Date(val.created_at).getDate() >  new Date().getDate() - 7){
+            if(new Date(val.created_at).getDate() >  new Date().getDate() - 7 && val['ticket_status'] == 'Completed'){
                 if(services.includes(val['requests'].request_type)){
                     service_values[services.indexOf(val['requests'].request_type)] =
                     parseInt(service_values[services.indexOf(val['requests'].request_type)]) + 1;
@@ -2812,7 +2812,7 @@ const createChart3 = () =>{
 
 
 
-            if(moment(val.created_at).format("MMM YYYY") == moment(new Date()).format("MMM YYYY")){
+            if(moment(val.created_at).format("MMM YYYY") == moment(new Date()).format("MMM YYYY") && val['ticket_status'] == 'Completed'){
                 if(services.includes(val['requests'].request_type)){
                     service_values[services.indexOf(val['requests'].request_type)] =
                     parseInt(service_values[services.indexOf(val['requests'].request_type)]) + 1;
@@ -3461,7 +3461,7 @@ const showFile = (url) => {
                         if(
                             data['ticket_status'] == null ||
                             (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
-                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            && (data['ticket_status'] != 'Completed' && data['ticket_status'] != 'Cancelled')
                             )
                             || data['ticket_status'] == 'N/A' || 
                             data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
@@ -3614,7 +3614,7 @@ const selectReport = () =>{
                         if(
                             data['ticket_status'] == null ||
                             (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
-                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            && (data['ticket_status'] != 'Completed' && data['ticket_status'] != 'Cancelled')
                             )
                             || data['ticket_status'] == 'N/A' || 
                             data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
@@ -3723,7 +3723,7 @@ const setStatus = (id) =>{
                     'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
                 },
                 success: (data)=>{
-
+                 
                     Swal.fire({
                         title: 'Successfully updated!',
                         icon: 'success',
@@ -3733,7 +3733,7 @@ const setStatus = (id) =>{
                 
                       })
                    //location.reload();
-                   drawTable();
+                  drawTable();
                 },
                 error:({responseJSON})=>{
                 console.log(responseJSON);
@@ -3910,7 +3910,7 @@ const selectStatus = (val) =>{
                         if(
                             data['ticket_status'] == null ||
                             (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
-                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            && (data['ticket_status'] != 'Completed' && data['ticket_status'] != 'Cancelled')
                             )
                             || data['ticket_status'] == 'N/A' || 
                             data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
@@ -4089,7 +4089,7 @@ const selectProgram = (val) =>{
                         if(
                             data['ticket_status'] == null ||
                             (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
-                            && (data['ticket_status'] != 'Completed' || data['ticket_status'] != 'Cancelled')
+                            && (data['ticket_status'] != 'Completed' && data['ticket_status'] != 'Cancelled')
                             )
                             || data['ticket_status'] == 'N/A' || 
                             data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'

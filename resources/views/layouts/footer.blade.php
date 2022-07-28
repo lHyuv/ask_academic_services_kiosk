@@ -2,6 +2,9 @@
     </div> 
     @if(Auth::check() && (Route::current()->getName() != 'guest2' && Route::current()->getName() != 'guest'))
     <footer class="footer fixed-bottom pt-2 bg-white" style = "height: 10%">
+        <div class="ml-4 mt-3 footer-left">
+                    Copyright &copy; 2022 <div class="bullet"></div> <a href="#">PUPQC</a> 
+                </div>
     @else
     <footer class="footer fixed-bottom pt-2 custom-bg" style = "height: 10%">
     @endif

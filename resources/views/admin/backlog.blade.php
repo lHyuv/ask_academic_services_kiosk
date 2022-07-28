@@ -87,9 +87,10 @@
                         <td>
                         {{ $r->requests()->pluck('request_type')[0]}}
                         </td>
-                        <td>   
+                        <td>  
+                          
                         @if(is_null($r->ticket_status ) || (date('F j, Y', strtotime($r->created_at)) != date('F j, Y', strtotime(now()))
-                         && ($r->ticket_status != 'Completed' || $r->ticket_status != 'Cancelled' ))
+                         && ($r->ticket_status != 'Completed' && $r->ticket_status != 'Cancelled' ))
                          || $r->ticket_status == 'N/A' || $r->ticket_status == 'Void' || $r->ticket_status == 'void')
                         <span class="badge badge-danger">Void</span>
                         @elseif($r->ticket_status == 'Cancelled' || $r->ticket_status == 'cancelled') 
