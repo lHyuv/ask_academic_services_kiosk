@@ -22,20 +22,6 @@ const notification = (type, title, message) => {
 	return toastr[type](message, title);
 };
 
-const showKeyboard = (mode) =>{
-    if(mode == "show"){
-        $('footer').css('display','none');
-        $('.keyboard-container').css('display','block');
-        $('#empty_space').css('display', 'block');
-    }else if(mode == "hide"){
-        $('.keyboard-container').css('display','none');
-        $('#empty_space').css('display', 'none');
-         $('footer').css('display','block');
-    }
-   
-};
-
-
 
 
 
@@ -1404,25 +1390,7 @@ const createUserRole = () =>{
 
 
 };
-/*
-const checkKBStatus = () =>{
 
-
-if(typeof(sessionStorage.getItem('keyboard_status')) != 'undefined' || sessionStorage.getItem('keyboard_status') != null){
-if(sessionStorage.getItem('keyboard_status') == 'show'){
-    showKeyboard('show');
-}else{
-    
-    showKeyboard('hide');
-}
-
-if((window.location.href).includes('/login') || (window.location.href).includes('/register') ){
-    sessionStorage.setItem('keyboard_status','hide');
-}
-}
-};
-checkKBStatus();
-*/
 const generateService = (service_id, service_name) =>{
    
 
@@ -1551,7 +1519,7 @@ const generateRequirement = (service_id) =>{
                 let name = val.requirement_name ? val.requirement_name : 'N/A';
                 content2 +=
                 `
-                      <li class = "mt-3 mb-3"><input type = "checkbox" class = ""> &nbsp; ${name} </li>
+                      <li class = "mt-3 mb-3"><input type = "checkbox" class="circle-checkbox"> &nbsp; ${name} </li>
                 `
             }).join("");
             content2 += `
@@ -2902,98 +2870,6 @@ if((window.location.href).includes('/home')){
     createChart3();
 }
 
-let shift = false;
-let capslock = false;
-let mode = 'none';
-$(".key").on('click', function(e){
-
-    e.preventDefault();
-
-    let input = $(this).text().trim();
-    
-    switch(input){
-        case 'Backspace' : 
-        $('input[type=text]').val($('input[type=text]').val().slice(0,-1));
-        break;
-        case 'CapsLock' : 
-        mode = 'capslock';
-
-        if(capslock == true){
-            capslock = false;
-            $(this).css('background-color','rgb(243, 243, 243)');
-        }else{
-            shift = false;
-            capslock = true;
-            //
-            $('.leftshift').css('background-color','rgb(243, 243, 243)');
-            $(this).css('background-color','lightgray');
-        }
-        break;
-        case 'Shift' : 
-
-        mode = 'shift';
-        if(shift == true){
-            shift = false;
-            $(this).css('background-color','rgb(243, 243, 243)');
-        }else{
-            capslock = false;
-            shift = true;
-            //
-            $('.capslock').css('background-color','rgb(243, 243, 243)');
-            $(this).css('background-color','lightgray');
-        }
-        break;
-        case 'Space': $('input[type=text]').val($('input[type=text]').val() + ' ');
-        break;
-        case 'Enter': showKeyboard('hide');
-        break;
-        default:
-           // notification('info','',input);
-           let modified_input = input;
-           if(mode == 'shift'){
-                if(shift == true){
-                   if(input.length > 1){
-                    modified_input =  input.charAt(2).toUpperCase();
-                   }else{
-                    modified_input =  input.charAt(0).toUpperCase();
-                   }
-                   
-                }else{
-
-                     modified_input =  input.charAt(0).toLowerCase();
-
-                }
-            }
-            else if(mode == 'capslock'){
-                if(capslock == true){
-                    if(input.length > 1){
-                        modified_input =  input.charAt(0).toUpperCase();
-                    }else{
-                        modified_input =  input.charAt(0).toUpperCase();
-                    }
-                }else{
-                    modified_input =  input.charAt(0).toLowerCase();
-                }
-            }
-    
-            else if(mode == 'none'){
-
-
-                modified_input =  input.charAt(0).toLowerCase();
-
-            }
-            
-
-            $('input[type=text]').val($('input[type=text]').val() + modified_input);
-        
-        
-        
-    }
-    
-   
-   
-	//enter shift/backspace function here
-});
 
 
 const showForm = (id) =>{

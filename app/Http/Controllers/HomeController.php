@@ -79,7 +79,10 @@ class HomeController extends Controller
     }
 
     public function view_profile(){
-        return view('profile');
+        $userroles = UserRole::where('user_id', Auth::user()->id)->where('status',1)->get();
+        return view('profile', [
+            'userroles' => $userroles,
+        ]);
     }
  
     public function user_crud(){

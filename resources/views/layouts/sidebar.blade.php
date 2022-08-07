@@ -129,7 +129,7 @@
                         </form>
          </div>
          @endif
-         <section id = 'empty_space_2'></section>
+         <section id = 'empty_space'></section>
         </ul>
         </aside>
       </div>

@@ -37,65 +37,7 @@
                         <div class = "col-md-12">
                         <div class="form-group">
                 
-                        @if(isset($my_data))
-                        <label>First Name</label>
-                        <input type="text" name = "first_name" id = "first_name" class = "form-control" placeholder = "" required
-                        value = "{{ $my_data->first_name }}"/>
-                        </div>
-                        </div>
-                        <div class = "col-md-12">
-                        <div class="form-group">
-                        <label>Middle Name</label>
-                        <input type="text" name = "middle_name" id = "middle_name" class = "form-control" placeholder = ""
-                        value = "{{ $my_data->middle_name }}"/>
-                        </div>
-                        </div>
-                        <div class = "col-md-12">
-                        <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" name = "last_name" id = "last_name" class = "form-control" placeholder = "" required
-                        value = "{{ $my_data->last_name }}"/>
-                        </div>
-                        </div>
-                        <div class = "col-md-12">
-                        <div class="form-group">
-                        <label>Extension</label>
-                        <input type="text" name = "extension_name" id = "extension_name" class = "form-control" placeholder = ""
-                        value = "{{ $my_data->extension_name }}"/>
-                        </div>
-                        </div>
-                        </div>
-                    
-                        @else
-                         <label>First Name</label>
-                        <input type="text" name = "first_name" id = "first_name" class = "form-control" placeholder = "" required/>
-                        </div>
-                        </div>
-                        <div class = "col-md-12">
-                        <div class="form-group">
-                        <label>Middle Name</label>
-                        <input type="text" name = "middle_name" id = "middle_name" class = "form-control" placeholder = ""/>
-                        </div>
-                        </div>
-                        <div class = "col-md-12">
-                        <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" name = "last_name" id = "last_name" class = "form-control" placeholder = "" required/>
-                        </div>
-                        </div>
-                        <div class = "col-md-12">
-                        <div class="form-group">
-                        <label>Extension</label>
-                        <input type="text" name = "extension_name" id = "extension_name" class = "form-control" placeholder = ""/>
-                        </div>
-                        </div>
-                        </div>
-                    
-                        @endif
-
-
-                 
-                        <hr>
+            
                         <label>User Info</label>
                         <div class="form-group">
                         <label>Email</label>
@@ -103,7 +45,11 @@
                         </div>
                         <div class="form-group">
                         <label>User Type/Role</label>
-                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" value = "{{ Auth::user()->roles->pluck('name')[0] }}" disabled/>
+                       
+                 
+                        @foreach($userroles as $role)
+                        <input type="text" name = "" id = "" class = "form-control" placeholder = "" value = "{{ $role->role()->pluck('name')[0] }}" disabled/>
+                        @endforeach
                         </div>
                         <label>Change Password</label>
                         <div class="form-group">

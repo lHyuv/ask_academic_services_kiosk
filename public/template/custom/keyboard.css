@@ -66,11 +66,8 @@
 .keyboard-container{
     display: none;
 }
+
 #empty_space{
-    margin: 200px;
-    display:none;
-}
-#empty_space_2{
     margin: 100px;
 
 }

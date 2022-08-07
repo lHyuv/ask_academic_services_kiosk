@@ -23,7 +23,7 @@
         </div>
         </div>
         <div class="col-md-9">
-        <div class="card  shadow-none card-outline card-custom-left ml-5 custom-bg">
+        <div class="card  shadow-none card-outline card-custom-left ml-5 custom-bg pl-5">
 
 
             <!--Menu--> 
@@ -391,7 +391,7 @@
        <select id = 'student_no' name = 'student_no' type="text" class = "form-control mb-3" onchange = "showInfo(this.value);">
        <option value = 'N/A' selected disabled>Select a student number..</option>
        @foreach($clients as $c)
-        <option value = '{{$c->student_number}}'>{{$c->student_number}}</option>
+        <option class = "{{$c->student_number}}" value = '{{$c->student_number}}'>{{$c->student_number}}</option>
         @endforeach 
        </select>
        <div id = 'student_details' style = 'display:none;' class = "mt-4 mb-2">
@@ -419,9 +419,7 @@
  
       </div>
    
-      <button role = "button" id = "keyboard_show_btn" class="btn btn-primary beep float-right"
-    onclick = "/*sessionStorage.setItem('keyboard_status', 'show');checkKBStatus();*/showKeyboard('show');"
-    ><i class="far fa-keyboard"></i></button>
+
 
     <button class="btn btn-primary" onclick="
     stepper.previous()">Previous</button>
