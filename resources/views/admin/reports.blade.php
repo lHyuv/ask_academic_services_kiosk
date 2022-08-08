@@ -11,18 +11,13 @@
 
 <section class="section shadow-sm">
         <div class="section-header mt-5">
-            @if(count($submitted_requests) > 0)
-            <h1>{{ $submitted_requests[0]->requests()->pluck('request_type')[0] }} Requests</h1>
-            @else 
-            <h1> Requests </h1> 
-            @endif
+
+            <h1> Reports </h1> 
+         
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item"><a href="/home">Home</a></div>
-              @if(count($submitted_requests) > 0)
-              <div class="breadcrumb-item">{{ $submitted_requests[0]->requests()->pluck('request_type')[0] }} Requests</div>
-              @else 
-              <div class="breadcrumb-item"> Requests</div>
-              @endif
+              <div class="breadcrumb-item"> Reports</div>
+         
             </div> 
         </div>
       
@@ -34,7 +29,7 @@
                 <div class="card-header"><h4>Total</h4></div>
 
                 <div class="card-body">
-                  <h3>  {{count($submitted_requests)}} </h3>
+                  <h3 id = 'all_widget'>  {{count($submitted_requests)}} </h3>
                 </div>
             </div>
         </div>
@@ -45,7 +40,7 @@
     <div class="card-header"><h4>Pending</h4></div>
 
     <div class="card-body">
-      <h3>  {{$pending}} </h3>
+      <h3 id = 'pending_widget'>  {{$pending}} </h3>
     </div>
 </div>
 </div>
@@ -56,7 +51,7 @@
     <div class="card-header"><h4>Completed</h4></div>
 
     <div class="card-body">
-      <h3>  {{$completed}} </h3>
+      <h3 id = 'completed_widget'>  {{$completed}} </h3>
     </div>
 </div>
 </div>
@@ -86,12 +81,12 @@
                     @if(count($submitted_requests) > 0)
                     <div class = "row">
                         <div class = "col-md-12">
-                        <h4 class = "mt-4">List of created {{ $submitted_requests[0]->requests()->pluck('request_type')[0] }} requests</h4> <br>
+                        <h4 class = "mt-4">List of created requests</h4> <br>
                         <span id = 'query_text'></span>
                         </div>           
                     </div>
                     </div>
-                    <h4 id = "card_title">List of created {{ $submitted_requests[0]->requests()->pluck('request_type')[0] }}  requests</h4>
+                    <h4 id = "card_title">List of created  requests</h4>
         
                 </div>
                 @else 
@@ -108,7 +103,33 @@
                 @endif
       
                 <div class="card-body">
-                    <hr style = 'display:none;'>
+                    <div class="row">
+                      <div class="col-12 col-sm-12 col-md-4">
+                        <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                                 <li class="nav-item">
+                                    <a class="nav-link active" id="" data-toggle="tab"
+                                     href="javascript:void(0);" role="tab" 
+                                     onclick = "loadReportTable('All');"
+                                     aria-selected="true">All</a>
+                                </li>
+                            @foreach($requests as $key=>$r)
+                        
+                                <li class="nav-item">
+                                    <a class="nav-link" id="" data-toggle="tab"
+                                     href="javascript:void(0);" role="tab" 
+                                     onclick = "loadReportTable('{{$r->id}}');"
+                                     aria-selected="true">{{$r->request_type}}</a>
+                                </li>
+                         
+
+                            @endforeach
+
+                        </ul>
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-8">
+                        <div class="tab-content no-padding" id="myTab2Content">
+                          <div class="tab-pane fade show active" id="home4" role="tabpanel">
+                          <hr style = 'display:none;'>
                     <table class = "table table-striped">
                         <thead>
                             <tr>
@@ -144,13 +165,13 @@
                         @if(is_null($r->ticket_status ) || (date('F j, Y', strtotime($r->created_at)) != date('F j, Y', strtotime(now()))
                          && ($r->ticket_status != 'Completed' && $r->ticket_status != 'Cancelled' ))
                          || $r->ticket_status == 'N/A' || $r->ticket_status == 'Void' || $r->ticket_status == 'void')
-                        <span class="badge badge-danger">Void</span>
+                        Void
                         @elseif($r->ticket_status == 'Cancelled' || $r->ticket_status == 'cancelled') 
-                        <span class="badge badge-secondary">Cancelled</span>
+                       Cancelled
                         @elseif($r->ticket_status == 'Completed' || $r->ticket_status == 'completed') 
-                        <span class="badge badge-success">Completed</span>
+                        Completed
                         @else
-                        <span class="badge badge-info">Pending</span>
+                       Pending
                         @endif
                     
                        
@@ -187,10 +208,12 @@
                         </tbody>
                     </table>
 
-                </div>
-            </div>
+                          </div>
 
-        </div>
+                
+               
+
+       
        
          <!---->
         
@@ -198,21 +221,23 @@
 
     </div>
 </div>
+
 <script>
+     let groupColumn2 = 3;
  $(document).ready(()=>{
     $("table").DataTable({
         "responsive": true, "lengthChange": false,	//"autoWidth":  false,
         "dom": 'Bfrtip',
         "columnDefs": [
-              { "visible": false, "targets": groupColumn,  }
+              { "visible": false, "targets": groupColumn2,  }
              ],
-             
+
             "drawCallback": function ( settings ) {
               var api = this.api();
               var rows = api.rows( {page:'current'} ).nodes();
               var last=null;
    
-              api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+              api.column(groupColumn2, {page:'current'} ).data().each( function ( group, i ) {
                   if ( last !== group ) {
                       $(rows).eq( i ).before(
                           '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
@@ -222,7 +247,7 @@
                   }
               } );
           },
-          
+          "order": [[groupColumn2, 'asc']],
                  "buttons": [
         
                   {
@@ -234,16 +259,7 @@
                           'csv',
                           'pdf',
                           'print',
-                          {
-                                text: 'Print Report',
-                                action: function ( e, dt, node, config ) {
-                                    printReport();
-                                },
-                                columnDefs: [{
-                                targets: -1,
-                                visible: false,
-                                }],
-                          }
+
                       ]
                   }
                 ],

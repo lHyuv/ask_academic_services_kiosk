@@ -129,13 +129,16 @@
                 </div>
                 <!-- /.row -->
                   <div class="col-md-7">
-                    <p class="text-center">
-                     <!-- <strong></strong> -->
-                    </p>
+                  <div id = 'status_report_none' style = 'display:none;'>
+                      <div class="empty-state" data-height="600">
+                      <img class="img-fluid" src="{{ URL::to('/') }}/template/img/drawkit/drawkit-nature-man-colour.svg" alt="image">
+                      <h2 class="mt-0">Nothing to show yet</h2>
+
+                      </div>
+                    </div>
 
                     <div class="chart">
-                      <!-- Sales Chart Canvas -->
-                      <h4 class="text-center" id = 'status_report_none' style = 'display:none;'><i>Nothing to show yet</i></h4>
+                      
                       <canvas class="chart" id="chart-0" style="min-height: 250px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
@@ -159,13 +162,17 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-7">
-                    <p class="text-center">
-                     <!-- <strong></strong> -->
-                    </p>
 
+                    <div id = 'today_report_none' style = 'display:none;'>
+                      <div class="empty-state" data-height="600">
+                      <img class="img-fluid" src="{{ URL::to('/') }}/template/img/drawkit/drawkit-nature-man-colour.svg" alt="image">
+                      <h2 class="mt-0">Nothing to show yet</h2>
+
+                      </div>
+                    </div>
                     <div class="chart">
-                      <!-- Sales Chart Canvas -->
-                      <h4 class="text-center" id = 'today_report_none' style = 'display:none;'><i>Nothing to show yet</i></h4>
+              
+
                       <canvas class="chart" id="chart-1" style="min-height: 250px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
@@ -314,13 +321,16 @@
                 </div>
                 <!----->
                 <div class="col-md-7">
-                    <p class="text-center">
-                     <!-- <strong></strong> -->
-                    </p>
+                <div id = 'this_week_report_none' style = 'display:none;'>
+                      <div class="empty-state" data-height="600">
+                      <img class="img-fluid" src="{{ URL::to('/') }}/template/img/drawkit/drawkit-nature-man-colour.svg" alt="image">
+                      <h2 class="mt-0">Nothing to show yet</h2>
+
+                      </div>
+                    </div>
 
                     <div class="chart">
-                      <!-- Sales Chart Canvas -->
-                      <h4 class="text-center" id = 'this_week_report_none' style = 'display:none;'><i>Nothing to show yet</i></h4>
+                      
                       <canvas class="chart" id="chart-2" style="min-height: 250px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
@@ -345,13 +355,16 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-7">
-                    <p class="text-center">
-                     <!-- <strong></strong> -->
-                    </p>
+                  <div id = 'this_month_report_none' style = 'display:none;'>
+                      <div class="empty-state" data-height="600">
+                      <img class="img-fluid" src="{{ URL::to('/') }}/template/img/drawkit/drawkit-nature-man-colour.svg" alt="image">
+                      <h2 class="mt-0">Nothing to show yet</h2>
+
+                      </div>
+                    </div>
 
                     <div class="chart">
-                      <!-- Sales Chart Canvas -->
-                      <h4 class="text-center" id = 'this_month_report_none' style = 'display:none;'><i>Nothing to show yet</i></h4>
+                      
                       <canvas class="chart" id="chart-3" style="min-height: 250px; height: 350px; max-height: 350px; max-width: 100%;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->

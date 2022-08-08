@@ -46,40 +46,11 @@
               <li class="nav-item">
                 <a href="/backlogs" class="nav-link"><i class="fas fa-list"></i><span>Backlogs and Queries</span></a>
               </li>
-      <!---Each Report-->
-
-
-      <li class="nav-item">
-                <a href="/subject_tutorial" class="nav-link"><i class="fas fa-book"></i><span>Subject Tutorial</span></a>
-      </li>
-      <li class="nav-item">
-                <a href="/cross_enrollment" class="nav-link"><i class="fas fa-book"></i><span>Cross-enrollment</span></a>
-      </li>
-      <li class="nav-item">
-                <a href="/change_subject" class="nav-link"><i class="fas fa-book"></i><span>Change Subject</span></a>
-      </li>
-      <li class="nav-item">
-                <a href="/subject_petition" class="nav-link"><i class="fas fa-book"></i><span>Subject Petition</span></a>
-      </li>
-      <li class="nav-item">
-                <a href="/correction" class="nav-link"><i class="fas fa-book"></i><span>Correction</span></a>
-      </li>
-      <li class="nav-item">
-                <a href="/certification" class="nav-link"><i class="fas fa-book"></i><span>Certification</span></a>
-      </li>
-      <li class="nav-item">
-                <a href="/shifting" class="nav-link"><i class="fas fa-book"></i><span>Shifting</span></a>
-      </li>
-      <li class="nav-item">
-                <a href="/manual_enrollment" class="nav-link"><i class="fas fa-book"></i><span>Manual Enrolment</span></a>
-      </li>
-      <li class="nav-item">
-                <a href="/add_subject" class="nav-link"><i class="fas fa-book"></i><span>Add Subject</span></a>
-      </li>
-      <li class="nav-item">
-                <a href="/subject_overload" class="nav-link"><i class="fas fa-book"></i><span>Subject Overload</span></a>
-      </li>
-      <!--Each Report:end--> 
+ 
+              <li class="nav-item">
+                        <a href="/reports" class="nav-link"><i class="fas fa-book"></i><span>Reports</span></a>
+              </li>
+    
         @else
         <ul class="sidebar-menu">
 

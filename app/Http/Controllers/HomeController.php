@@ -146,200 +146,7 @@ class HomeController extends Controller
         ]);
     }
    
-   
-    /*
-    Request IDs for Reference:
 
-    1081d3a5-2e0a-434b-a745-b3e15b6beed7 Subject Tutorial
-    22a6d202-bf42-45dc-802a-efb490b69ca6 Cross-enrollment
-    347b20bb-27d5-423b-8903-0c97957ff01b Change Subject
-    68a2b350-7d68-460b-bf83-7f3de12c387b Subject Petition
-    74c59164-1ca1-4916-b455-9eed9ec527af Correction
-    7ed558b5-0a86-43d5-b83d-db4e468ded5f Certification
-    a362ccad-5867-47b6-9895-1db6b201ec02 Shifting
-    a4db111e-dbb9-45d1-b0fc-9a3eca2fc812 Manual Enrollment
-    aefb014d-a83e-42e1-b67f-b05e99e92ff2 Add Subject
-    bf3aeb08-1764-4f40-8b16-932e93db5359 Subject Overload
-    */
-
-    //
-    public function subject_tutorial(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','1081d3a5-2e0a-434b-a745-b3e15b6beed7')->get();
-   
-
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','1081d3a5-2e0a-434b-a745-b3e15b6beed7')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','1081d3a5-2e0a-434b-a745-b3e15b6beed7')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-   
-        ]);
-    }
-
-
-    public function cross_enrollment(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','22a6d202-bf42-45dc-802a-efb490b69ca6')->get();
-
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','22a6d202-bf42-45dc-802a-efb490b69ca6')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','22a6d202-bf42-45dc-802a-efb490b69ca6')->count();
-        
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','1081d3a5-2e0a-434b-a745-b3e15b6beed7')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-        ]);
-    }
-
-    public function change_subject(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','347b20bb-27d5-423b-8903-0c97957ff01b')->get();
-   
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','347b20bb-27d5-423b-8903-0c97957ff01b')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','347b20bb-27d5-423b-8903-0c97957ff01b')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-        ]);
-    }
-
-    public function subject_petition(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','68a2b350-7d68-460b-bf83-7f3de12c387b')->get();
-      
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','68a2b350-7d68-460b-bf83-7f3de12c387b')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','68a2b350-7d68-460b-bf83-7f3de12c387b')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-        ]);
-    }
-
-    public function correction(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','74c59164-1ca1-4916-b455-9eed9ec527af')->get();
-         
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','74c59164-1ca1-4916-b455-9eed9ec527af')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','74c59164-1ca1-4916-b455-9eed9ec527af')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-        ]);
-    }
-
-    public function certification(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','7ed558b5-0a86-43d5-b83d-db4e468ded5f')->get();
-            
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','7ed558b5-0a86-43d5-b83d-db4e468ded5f')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','7ed558b5-0a86-43d5-b83d-db4e468ded5f')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-        ]);
-    }
-
-    public function shifting(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','a362ccad-5867-47b6-9895-1db6b201ec02')->get();
-               
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','a362ccad-5867-47b6-9895-1db6b201ec02')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','a362ccad-5867-47b6-9895-1db6b201ec02')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-        ]);
-    }
-
-    public function manual_enrollment(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','a4db111e-dbb9-45d1-b0fc-9a3eca2fc812')->get();
-                  
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','a4db111e-dbb9-45d1-b0fc-9a3eca2fc812')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','a4db111e-dbb9-45d1-b0fc-9a3eca2fc812')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-        ]);
-    }
-
-    public function add_subject(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','aefb014d-a83e-42e1-b67f-b05e99e92ff2')->get();
-                     
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','aefb014d-a83e-42e1-b67f-b05e99e92ff2')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','aefb014d-a83e-42e1-b67f-b05e99e92ff2')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-        ]);
-    }
-
-    public function subject_overload(){
-        $submitted_requests = SubmittedRequest::where('status',1)
-        ->where('request_id','bf3aeb08-1764-4f40-8b16-932e93db5359')->get();
-                        
-        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')
-        ->where('request_id','bf3aeb08-1764-4f40-8b16-932e93db5359')->count();
-
-        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')
-        ->where('request_id','bf3aeb08-1764-4f40-8b16-932e93db5359')->count();
-        
-        return view('admin.reports',[
-            'submitted_requests' => $submitted_requests,
-            'pending' => $pending,
-            'completed'=>$completed,
-        ]);
-    }
-
-    //
 
     public function students(){
         $clients = Client::where('status',1)->get();
@@ -347,6 +154,25 @@ class HomeController extends Controller
         
         return view('admin.students',[
             'clients' => $clients,
+
+        ]);
+    }
+
+
+    public function reports(){
+        $requests = Requests::where('status',1)->get();
+        $submitted_requests = SubmittedRequest::where('status',1)->get();   
+        $pending = SubmittedRequest::where('status',1)->where('ticket_status','Pending')->count();
+
+        $completed = SubmittedRequest::where('status',1)->where('ticket_status','Completed')->count();
+              
+        
+        return view('admin.reports',[
+            'requests' => $requests,
+            'submitted_requests' => $submitted_requests,
+
+            'pending' => $pending,
+            'completed'=>$completed,
 
         ]);
     }

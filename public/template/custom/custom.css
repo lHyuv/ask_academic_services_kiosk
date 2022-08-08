@@ -77,7 +77,7 @@ input::-webkit-inner-spin-button {
 }
 
 .shadow-lg:hover{
-    transform: scale(1.1);
+    
     border-style: solid;
     border-color: #FAF9EC;/*#f0e9d6*/
     font-weight:bolder;

@@ -403,6 +403,7 @@ const printReport = () =>{
     $('.card').removeClass('card-primary'); 
     $('#card_title').css('display','none');
     $('hr').css('display','block');
+    $('ul').css('display','none');
     switch(query_no){
         case 1: $('#query_text').html('Query: Request - ' + $('#requests option:selected').text()); break;
         case 2: $('#query_text').html('Query: Month - ' + moment($('#month').val(), 'M').format('MMMM')); break;
@@ -2206,7 +2207,7 @@ const selectMonth = () =>{
 
                   {
                     'data': (data,type,row)=>{
-
+                        
                         if(
                             data['ticket_status'] == null ||
                             (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
@@ -2746,7 +2747,7 @@ const createChart2 = () =>{
             data.data.map((val)=>{
 
 
-
+            if(new Date(val.created_at).getMonth() >  new Date().getMonth()){
             if(new Date(val.created_at).getDate() >  new Date().getDate() - 7 && val['ticket_status'] == 'Completed'){
                 if(services.includes(val['requests'].request_type)){
                     service_values[services.indexOf(val['requests'].request_type)] =
@@ -2755,6 +2756,7 @@ const createChart2 = () =>{
                     services.push(val['requests'].request_type);
                     service_values.push(1);
                 }
+            }
             }
                         
 
@@ -4439,3 +4441,210 @@ const createChart0 = () =>{
 if((window.location.href).includes('/home')){
     createChart0();
 }
+
+
+const loadReportTable = (id) =>{
+  
+    Swal.fire({
+        title: 'Loading..',
+        showConfirmButton: false,
+        backdrop: `rgba(0,0,121,0.2)`,
+        didOpen: () => {
+            Swal.showLoading()
+ 
+          },
+
+      });
+
+    let url = apiURL + 'submitted_requests/request/';
+    if(id != "All"){
+
+        url = apiURL + 'submitted_requests/request/' + id;
+    }else{
+        url = apiURL + 'submitted_requests/' ;
+    }
+    //
+    $("table").dataTable().fnClearTable();
+    $("table").dataTable().fnDraw();
+    $("table").dataTable().fnDestroy();
+    let this_table = $("table").DataTable({
+                
+    "responsive": true, "lengthChange": false,	//"autoWidth":  false,
+    "dom": 'Bfrtip',
+
+             "buttons": [
+    
+              {
+                  extend: 'collection',
+                  text: 'Options',
+                  buttons: [
+                      'copy',
+                      'excel',
+                      'csv',
+                      'pdf',
+                      'print',
+                      {
+                        text: 'Print Report',
+                        action: function ( e, dt, node, config ) {
+                            printReport();
+                        },
+                        columnDefs: [{
+                            targets: -1,
+                            visible: false,
+                        }],
+                      }
+                  ]
+              }
+            ],
+            "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+               ],
+               "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+     
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                        );
+     
+                        last = group;
+                    }
+                } );
+            },
+                'ajax': {
+                  
+                    url:  url,
+                    type: "GET",
+                   // dataSrc:"",
+                    headers: { 
+                        Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                        dataType: "json",
+                        Accept: "application/json",
+                    },
+ 
+                },
+                //put data into columns
+        
+                'columns': [
+                    { 
+                        'data': (data,type,row)=>{
+                            if(data['reference_number'] == null || data['reference_number'] == 'N/A'){
+                                return `<a>No reference given</a>`;
+                            }else{
+                                return data['reference_number'];
+                            }
+                        }
+                      },
+                  
+                  { 
+                    'data': (data,type,row)=>{
+                        if(data['student_number'] == null || data['student_number'] == 'N/A'){
+                            return `<a>User</a>`;
+                        }else{
+                            return data['student_number'];
+                        }
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return data['requests']['request_type'];
+                    }
+                  },
+
+                  {
+                    'data': (data,type,row)=>{
+                        
+                        if(
+                            data['ticket_status'] == null ||
+                            (moment(data['created_at']).format("MMM Do YYYY") == moment(new Date()).format("MMM Do YYYY")
+                            && (data['ticket_status'] != 'Completed' && data['ticket_status'] != 'Cancelled')
+                            )
+                            || data['ticket_status'] == 'N/A' || 
+                            data['ticket_status'] == 'Void' || data['ticket_status'] == 'void'
+                        )
+                        { return `<span class="badge badge-danger">Void</span>`; }
+                        else if(data['ticket_status'] == 'Cancelled' || data['ticket_status'] == 'cancelled') 
+                        { return `<span class="badge badge-secondary">Cancelled</span>`; }
+                        else if(data['ticket_status'] == 'Completed' || data['ticket_status'] == 'completed') 
+                        { return `<span class="badge badge-success">Completed</span>`; }
+                        else
+                        { return `<span class="badge badge-info">Pending</span>`; }
+                      
+                     }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return moment(data['created_at']).format("MMM Do YYYY");
+                    }
+                  },
+                  {
+                    'data': (data,type,row)=>{
+                        return `
+                        <div class="text-center dropdown">
+                        <!-- Dropdown Toggler --> 
+                        <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                        <i class="fas fa-ellipsis-v"></i>
+                        </div>
+
+                        <!-- Dropdown Menu --> 
+                        <div class="dropdown-menu dropdown-menu-right"> 
+
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('${data.id}');">
+                        <div style="width: 2rem">
+                        <i class="fas fa-edit mr-1"></i>
+                        </div>
+                        <div>Set Status</div>
+                        </div> 
+                        <!----> 
+                        </div>
+
+                        </div>
+                    </div>
+                        
+                        `
+                    }
+                  },
+                ]
+            })
+
+            //
+            $.ajax({
+                  
+                url:  url,
+                type: "GET",
+               // dataSrc:"",
+                headers: { 
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
+                    dataType: "json",
+                    Accept: "application/json",
+                },
+                success: (data)=>{
+                    let completed = 0;
+                    let pending = 0;
+                    let all = 0;
+
+                     data.data.map((val)=>{
+                        if(val['ticket_status'] == 'Completed'){
+                            completed++;
+                        }else if(val['ticket_status'] == 'Pending'){
+                            pending++;
+                        }else if(val['ticket_status'] == 'All'){
+                            all++;
+                        }
+                     });
+
+                     $('#completed_widget').html(completed);
+                     $('#pending_widget').html(pending);
+                     $('#all_widget').html(all);
+
+                     Swal.close();
+                }
+
+            })
+
+      
+  
+};
