@@ -171,7 +171,7 @@
 <div id = "select_menu2" style = "display:none;">
       <!----> 
      
-      <div class="row">
+      <div class="row mb-5">
         
       <div class="col-md-8">
       <button class = "btn btn-primary"  
@@ -493,7 +493,7 @@
 @foreach($full_requests as $key=>$request)
 <!--Form List--> 
 
-<div class="card shadow-lg rounded ml-2">
+<div class="card shadow-lg rounded ml-2 col-md-11 mx-auto">
              <div class = "card-body">
 
              <div class = "row">

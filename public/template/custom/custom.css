@@ -43,12 +43,12 @@ input::-webkit-inner-spin-button {
 .step-trigger:focus{color:#19692c;outline:0}
 
 #select_menu img:hover{
-    transform: scale(1.2); 
+    transform: scale(1.1); 
  
 }
 
 #select_menu2 img:hover{
-    transform: scale(1.2); 
+    transform: scale(1.1); 
    
 }
 
@@ -65,21 +65,21 @@ input::-webkit-inner-spin-button {
 }
 
 .custom-bg{
-    background-color:#f0e9d6
+    background-color:#FAF9EC;/*#f0e9d6*/
 }
 
 .custom-bg .section-header{
-    background-color:#f0e9d6
+    background-color:#FAF9EC;/*#f0e9d6*/
 }
 
 .custom-bg .footer{
-    background-color:#f0e9d6
+    background-color:#FAF9EC;/*#f0e9d6*/
 }
 
 .shadow-lg:hover{
     transform: scale(1.1);
     border-style: solid;
-    border-color: #f0e9d6;
+    border-color: #FAF9EC;/*#f0e9d6*/
     font-weight:bolder;
 }
 
@@ -97,4 +97,9 @@ input::-webkit-inner-spin-button {
 
 .circle-checkbox:checked {
     background-color: #800000;
+}
+
+#empty_space{
+    margin: 100px;
+
 }

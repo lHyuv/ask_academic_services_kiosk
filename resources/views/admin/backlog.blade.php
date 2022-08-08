@@ -106,7 +106,7 @@
                      
                         </td>
                         <td>
-                        {{ date('d-M-y', strtotime($r->created_at))}}
+                        {{ date('F j Y (l)', strtotime($r->created_at))}}
                         </td>
                         <td>
                         <div class="text-center dropdown">
@@ -210,10 +210,31 @@
 </div>
 <script>
  $(document).ready(()=>{
+    let groupColumn = 4;
     $("table").DataTable({
         "responsive": true, "lengthChange": false,	//"autoWidth":  false,
         "dom": 'Bfrtip',
-    
+   
+            "columnDefs": [
+              { "visible": false, "targets": groupColumn,  }
+             ],
+             
+            "drawCallback": function ( settings ) {
+              var api = this.api();
+              var rows = api.rows( {page:'current'} ).nodes();
+              var last=null;
+   
+              api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                  if ( last !== group ) {
+                      $(rows).eq( i ).before(
+                          '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                      );
+   
+                      last = group;
+                  }
+              } );
+          },
+          
                  "buttons": [
         
                   {
@@ -235,7 +256,7 @@
                                 visible: false,
                                 }],
                           }
-                      ]
+                      ],
                   }
                 ],
     });

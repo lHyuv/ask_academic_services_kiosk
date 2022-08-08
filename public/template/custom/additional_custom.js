@@ -6,6 +6,7 @@ let create_ctr = 0; //to prevent duplicated AJAX
 let query_no = 0;
 let days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 let months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+let groupColumn = 4;
 $("form").parsley();
 
 const notification = (type, title, message) => {
@@ -1409,7 +1410,20 @@ const generateService = (service_id, service_name) =>{
             $('#final_step').append(
                 `
                 <button class = "btn btn-primary mt-2 mb-2" id = "submit_request_btn" 
-                onclick = "confirmNotif('${service_id}');">
+                onclick = "
+                if(typeof($('select').val()) == 'undefined' || $('select').val() == null){
+                    Swal.fire({
+                        title: 'Please enter your student number first!',
+                        icon: 'error',
+                        showConfirmButton: true,
+
+
+                    })
+                }else{
+                    confirmNotif('${service_id}');
+                }
+              
+                ">
                 Generate my Ticket </button>
                 `
             );
@@ -1428,7 +1442,7 @@ const generateService = (service_id, service_name) =>{
             if(data.data.length != 0){
       
             content = `
-            <ul>
+            <ul class="list-unstyled mb-5">
             `;
             data.data.map((val)=>{
              
@@ -1486,10 +1500,10 @@ const generateRequirement = (service_id) =>{
             if(data.data.length != 0){
       
             content = `
-            <ul>
+            <ul class = "mb-5">
             `;
             source = `
-            <ul>
+            <ul class = "mb-5">
             `;
             data.data.map((val)=>{
               //  let details = val.details ? val.details: 'N/A';
@@ -1757,7 +1771,14 @@ const checkReq = () =>{
             
             return true;
         }else{
-            notification('error','','Check all the requirements first!');
+           // notification('error','','Check all the requirements first!');
+           Swal.fire({
+            title: 'Check all the requirements first!',
+            icon: 'error',
+            showConfirmButton: true,
+
+
+        })
         }
     }else{
        
@@ -1950,6 +1971,24 @@ const selectRequest = (id) =>{
                   ]
               }
             ],
+            "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+               ],
+               "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+     
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                        );
+     
+                        last = group;
+                    }
+                } );
+            },
                 'ajax': {
                   
                     url: url,
@@ -2099,6 +2138,24 @@ const selectMonth = () =>{
                   ]
               }
             ],
+            "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+               ],
+               "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+     
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                        );
+     
+                        last = group;
+                    }
+                } );
+            },
                 'ajax': {
                   
                     url: url,
@@ -2248,6 +2305,25 @@ const selectDay= () =>{
                   ]
               }
             ],
+
+              "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+               ],
+               "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+     
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                        );
+     
+                        last = group;
+                    }
+                } );
+            },
                 'ajax': {
                   
                     url: apiURL + 'submitted_requests/day',
@@ -2318,7 +2394,7 @@ const selectDay= () =>{
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM Do YYYY");
                     }
                   },
                   {
@@ -2397,6 +2473,24 @@ const selectRange = () =>{
                   ]
               }
             ],
+            "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+               ],
+               "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+     
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                        );
+     
+                        last = group;
+                    }
+                } );
+            },
                 'ajax': {
                   
                     url: apiURL + 'submitted_requests/query',
@@ -2906,14 +3000,14 @@ const showForm = (id) =>{
             
             if(ext.length > 0 && data.data.form_file_path != null && data.data.form_file_name != null){
                 if(ext == "jpeg"){
-                    code = `<img class = "mx-auto d-block"  src = "${baseURL}${data.data.form_file_path}${data.data.form_file_name}">`;
+                    code = `<img class = "mx-auto d-block mt-5 mb-5"  src = "${baseURL}${data.data.form_file_path}${data.data.form_file_name}#toolbar=0"">`;
                 }else{
                     if(ext.substr(-3) == "jpg" || ext.substr(-3) == "png" || ext.substr(-3) == "gif"){
-                        code = `<img class = "mx-auto d-block" src = "${baseURL}${data.data.form_file_path}${data.data.form_file_name}">`;
+                        code = `<img class = "mx-auto d-block mt-5 mb-5" src = "${baseURL}${data.data.form_file_path}${data.data.form_file_name}#toolbar=0"">`;
                     }else if(ext.substr(-3) == "pdf" || ext.substr(-3) == "txt"){
-                        code = `<iframe class = "mx-auto d-block" height = "800" width = "100%" src = "${baseURL}${data.data.form_file_path}${data.data.form_file_name}"></iframe>`;
+                        code = `<iframe class = "mx-auto d-block mt-5 mb-5" height = "800" width = "100%" src = "${baseURL}${data.data.form_file_path}${data.data.form_file_name}#toolbar=0""></iframe>`;
                     }else{
-                        code = `<h5 class = "text-center">Can't render the file due to file format</h5>`;
+                        code = `<h5 class = "text-center mt-5 mb-5">Can't render the file due to file format</h5>`;
                     }
                 }
             }else{
@@ -3290,6 +3384,24 @@ const showFile = (url) => {
                   ]
               }
             ],
+            "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+               ],
+               "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+     
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                        );
+     
+                        last = group;
+                    }
+                } );
+            },
                 'ajax': {
                   
                     url: url,
@@ -3443,6 +3555,24 @@ const selectReport = () =>{
                   ]
               }
             ],
+            "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+               ],
+               "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+     
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                        );
+     
+                        last = group;
+                    }
+                } );
+            },
                 'ajax': {
                   
                     url: url,
@@ -3739,6 +3869,24 @@ const selectStatus = (val) =>{
                   ]
               }
             ],
+            "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+               ],
+               "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+     
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                        );
+     
+                        last = group;
+                    }
+                } );
+            },
                 'ajax': {
                   
                     url: url,
@@ -3918,6 +4066,24 @@ const selectProgram = (val) =>{
                   ]
               }
             ],
+            "columnDefs": [
+                { "visible": false, "targets": groupColumn }
+               ],
+               "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows( {page:'current'} ).nodes();
+                var last=null;
+     
+                api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                    if ( last !== group ) {
+                        $(rows).eq( i ).before(
+                            '<tr class="group"><td colspan="6"><b class = "text-primary">'+group+'</b></td></tr>'
+                        );
+     
+                        last = group;
+                    }
+                } );
+            },
                 'ajax': {
                   
                     url: url,
