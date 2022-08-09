@@ -117,13 +117,25 @@
 
                                     <!-- Dropdown Menu --> 
                                     <div class="dropdown-menu dropdown-menu-right"> 
-
+                                    @if(is_null($r->ticket_status ) || 
+                                    (date('F j, Y', strtotime($r->created_at)) != date('F j, Y', strtotime(now())))
+                        
+                         || $r->ticket_status == 'N/A' || $r->ticket_status == 'Void' || 
+                         $r->ticket_status == 'void' ||  $r->ticket_status == 'Cancelled' ||  $r->ticket_status == 'Completed')
                                     <div class="dropdown-item d-flex" role="button" onclick = "setStatus('{{$r->id}}');">
+                                    <div style="width: 2rem">
+                          
+                                    </div>
+                                    <div>No action available </div>
+                                    </div>
+                        @else 
+                        <div class="dropdown-item d-flex" role="button" onclick = "setStatus('{{$r->id}}');">
                                     <div style="width: 2rem">
                                     <i class="fas fa-edit mr-1"></i>
                                     </div>
                                     <div>Set Status</div>
-                                    </div> 
+                                    </div>
+                        @endif 
                                     <!----> 
                                     </div>
 
@@ -218,7 +230,7 @@
             "columnDefs": [
               { "visible": false, "targets": groupColumn,  }
              ],
-             
+             "order": [[groupColumn, 'asc']],
             "drawCallback": function ( settings ) {
               var api = this.api();
               var rows = api.rows( {page:'current'} ).nodes();

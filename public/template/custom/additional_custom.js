@@ -602,11 +602,11 @@ const createUser = () =>{
 
         e.preventDefault();
         if($('#create_password').val() != $('#create_password_confirm').val()){
-            //Replace this with Toastr or other notif
-            alert('Passwords does not match!');
+
+            notification('error','','Passwords does not match!');
         }else if($('#create_password').val().length < 8){
-            //Replace this with Toastr or other notif
-            alert('Passwords must be 8 characters or more!');            
+
+            notification('error','','Passwords must be 8 characters or more!');          
         }else{
         $.ajax({
             url: apiURL + 'users',
@@ -673,13 +673,13 @@ const editUser = (data) =>{
             });
         }else{
             if($('#edit_password').val() != $('#edit_password_confirm').val()){
-                //Replace this with Toastr/Other notif
+                
 
-                alert('Passwords must match!');
+                notification('error','','Passwords does not match!');
             }else if($('#edit_password').val().length < 8){
-                //Replace this with Toastr/Other notif
+            
 
-                alert('Passwords must be 8 characters or more');                
+                notification('error','','Passwords must be 8 characters or more!');               
             }else{
                 $.ajax({
                     url: apiURL + 'users/update/' + values['id'],
@@ -738,7 +738,7 @@ const deleteUser = (data) =>{
             async: true,
             method: 'POST',
             success: (data)=>{
-            console.log(data);
+           
               
                 
                notification('success','','Successfully deleted');
@@ -809,7 +809,7 @@ const editRequest = (data) =>{
         e.preventDefault();
 
         let form_data = new FormData(document.getElementById('edit_request'));
-        console.log(form_data)
+       
 
         // console.log(form_data);
 
@@ -833,7 +833,7 @@ const editRequest = (data) =>{
             contentType: false,
             cache: false,
             success: (data)=>{
-                console.log(data)
+            
 
                 notification('success','','Successfully updated');
                 //location.reload();
@@ -841,7 +841,7 @@ const editRequest = (data) =>{
                 drawTable();
             },
             error:({responseJSON})=>{
-                console.log(responseJSON);
+              
                 notification('error','','Something went wrong');
             }
         });
@@ -1693,7 +1693,7 @@ const confirmNotif = (request_id) =>{
 
                 },
                 error:({responseJSON})=>{
-                    console.log(responseJSON.detail)
+                 //   console.log(responseJSON.detail)
                     Swal.fire('Something went wrong', '', 'error')
                 }
             })
@@ -2053,7 +2053,7 @@ const selectRequest = (id) =>{
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM DD, YYYY");
                     }
                   },
                   {
@@ -2093,14 +2093,18 @@ const selectRequest = (id) =>{
 
 const selectMonth = () =>{
 
-    let url = '';
 
+    let url = '';
+    let method = 'GET';
     if($('#month').val() == "All"){
-        url = apiURL + 'submitted_requests';
+        url = apiURL + 'submitted_requests/';
         query_no = 0;
+        method = 'GET';
     }else{
         url = apiURL + 'submitted_requests/month';
         query_no = 2;
+        method = 'POST';
+      
     }
 
     $('select').removeClass('text-primary');
@@ -2160,7 +2164,7 @@ const selectMonth = () =>{
                 'ajax': {
                   
                     url: url,
-                    type: "POST",
+                    type: method,
                    // dataSrc:"",
                     headers: { 
                         Authorization: `Bearer ${sessionStorage.getItem("token")}` ,
@@ -2168,10 +2172,10 @@ const selectMonth = () =>{
                         Accept: "application/json",
                     },
                     data: {
-                        'month' : $('#month').val(),
+                        'month' : parseInt($('#month').val()) + 1,
                     },
                     error: ({responseJSON})=>{
-                        console.log(responseJSON)
+                      //  console.log(responseJSON)
                         notification('error','','Something went wrong')
 
                     }
@@ -2228,11 +2232,43 @@ const selectMonth = () =>{
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM DD, YYYY");
                     }
                   },
                   {
                     'data': (data,type,row)=>{
+ 
+
+                        if(moment(new Date()).format("MMM Do YY") == moment(data.created_at).format("MMM Do YY")
+                        || data.ticket_status == 'N/A' || data.ticket_status == 'Void' || 
+                        data.ticket_status == 'void' ||  data.ticket_status == 'Cancelled' ||  data.ticket_status == 'Completed'
+                        ){
+                            return `
+                            <div class="text-center dropdown">
+                            <!-- Dropdown Toggler --> 
+                            <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                            <i class="fas fa-ellipsis-v"></i>
+                            </div>
+    
+                            <!-- Dropdown Menu --> 
+                            <div class="dropdown-menu dropdown-menu-right"> 
+    
+                            <div class="dropdown-item d-flex" role="button">
+                            <div style="width: 2rem">
+                          
+                            </div>
+                            <div>No action available</div>
+                            </div> 
+                            <!----> 
+                            </div>
+    
+                            </div>
+                        </div>
+                            
+                            `;    
+                        }else{
+
+                        
                         return `
                         <div class="text-center dropdown">
                         <!-- Dropdown Toggler --> 
@@ -2255,7 +2291,8 @@ const selectMonth = () =>{
                         </div>
                     </div>
                         
-                        `
+                        `;
+                        }
                     }
                   },
                 ]
@@ -2339,7 +2376,7 @@ const selectDay= () =>{
                         'date' : $('#date').val(),
                     },
                     error: ({responseJSON})=>{
-                        console.log(responseJSON)
+                     //   console.log(responseJSON)
                         notification('error','','Something went wrong')
 
                     }
@@ -2395,11 +2432,43 @@ const selectDay= () =>{
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM DD, YYYY");
                     }
                   },
                   {
                     'data': (data,type,row)=>{
+ 
+
+                        if(moment(new Date()).format("MMM Do YY") == moment(data.created_at).format("MMM Do YY")
+                        || data.ticket_status == 'N/A' || data.ticket_status == 'Void' || 
+                        data.ticket_status == 'void' ||  data.ticket_status == 'Cancelled' ||  data.ticket_status == 'Completed'
+                        ){
+                            return `
+                            <div class="text-center dropdown">
+                            <!-- Dropdown Toggler --> 
+                            <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                            <i class="fas fa-ellipsis-v"></i>
+                            </div>
+    
+                            <!-- Dropdown Menu --> 
+                            <div class="dropdown-menu dropdown-menu-right"> 
+    
+                            <div class="dropdown-item d-flex" role="button">
+                            <div style="width: 2rem">
+                          
+                            </div>
+                            <div>No action available</div>
+                            </div> 
+                            <!----> 
+                            </div>
+    
+                            </div>
+                        </div>
+                            
+                            `;    
+                        }else{
+
+                        
                         return `
                         <div class="text-center dropdown">
                         <!-- Dropdown Toggler --> 
@@ -2422,7 +2491,8 @@ const selectDay= () =>{
                         </div>
                     </div>
                         
-                        `
+                        `;
+                        }
                     }
                   },
                 ]
@@ -2507,7 +2577,7 @@ const selectRange = () =>{
                         'date_to' : $('#date_to').val(),
                     },
                     error: ({responseJSON})=>{
-                        console.log(responseJSON)
+                      //  console.log(responseJSON)
                         notification('error','','Something went wrong')
 
                     }
@@ -2563,11 +2633,43 @@ const selectRange = () =>{
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM DD, YYYY");
                     }
                   },
                   {
                     'data': (data,type,row)=>{
+ 
+
+                        if(moment(new Date()).format("MMM Do YY") == moment(data.created_at).format("MMM Do YY")
+                        || data.ticket_status == 'N/A' || data.ticket_status == 'Void' || 
+                        data.ticket_status == 'void' ||  data.ticket_status == 'Cancelled' ||  data.ticket_status == 'Completed'
+                        ){
+                            return `
+                            <div class="text-center dropdown">
+                            <!-- Dropdown Toggler --> 
+                            <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                            <i class="fas fa-ellipsis-v"></i>
+                            </div>
+    
+                            <!-- Dropdown Menu --> 
+                            <div class="dropdown-menu dropdown-menu-right"> 
+    
+                            <div class="dropdown-item d-flex" role="button">
+                            <div style="width: 2rem">
+                          
+                            </div>
+                            <div>No action available</div>
+                            </div> 
+                            <!----> 
+                            </div>
+    
+                            </div>
+                        </div>
+                            
+                            `;    
+                        }else{
+
+                        
                         return `
                         <div class="text-center dropdown">
                         <!-- Dropdown Toggler --> 
@@ -2590,9 +2692,11 @@ const selectRange = () =>{
                         </div>
                     </div>
                         
-                        `
+                        `;
+                        }
                     }
                   },
+         
                 ]
             })
 
@@ -3233,7 +3337,7 @@ const editForm = (data) =>{
 
 
     let values = JSON.parse(data);
-    console.log(values)
+  
     $('#edit_form_name').val(values['form_name']);
     $('#edit_type').val(values['request_id']);
     $('#edit_source').val(values['source']);
@@ -3283,7 +3387,7 @@ const editForm = (data) =>{
                 drawTable();
             },
             error:({responseJSON})=>{
-                console.log(responseJSON);
+             //   console.log(responseJSON);
                 notification('error','','Something went wrong');
             }
         });
@@ -3468,11 +3572,43 @@ const showFile = (url) => {
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM DD, YYYY");
                     }
                   },
                   {
                     'data': (data,type,row)=>{
+ 
+
+                        if(moment(new Date()).format("MMM Do YY") == moment(data.created_at).format("MMM Do YY")
+                        || data.ticket_status == 'N/A' || data.ticket_status == 'Void' || 
+                        data.ticket_status == 'void' ||  data.ticket_status == 'Cancelled' ||  data.ticket_status == 'Completed'
+                        ){
+                            return `
+                            <div class="text-center dropdown">
+                            <!-- Dropdown Toggler --> 
+                            <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                            <i class="fas fa-ellipsis-v"></i>
+                            </div>
+    
+                            <!-- Dropdown Menu --> 
+                            <div class="dropdown-menu dropdown-menu-right"> 
+    
+                            <div class="dropdown-item d-flex" role="button">
+                            <div style="width: 2rem">
+                          
+                            </div>
+                            <div>No action available</div>
+                            </div> 
+                            <!----> 
+                            </div>
+    
+                            </div>
+                        </div>
+                            
+                            `;    
+                        }else{
+
+                        
                         return `
                         <div class="text-center dropdown">
                         <!-- Dropdown Toggler --> 
@@ -3495,7 +3631,8 @@ const showFile = (url) => {
                         </div>
                     </div>
                         
-                        `
+                        `;
+                        }
                     }
                   },
                 ]
@@ -3639,11 +3776,43 @@ const selectReport = () =>{
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM DD, YYYY");
                     }
                   },
                   {
                     'data': (data,type,row)=>{
+ 
+
+                        if(moment(new Date()).format("MMM Do YY") == moment(data.created_at).format("MMM Do YY")
+                        || data.ticket_status == 'N/A' || data.ticket_status == 'Void' || 
+                        data.ticket_status == 'void' ||  data.ticket_status == 'Cancelled' ||  data.ticket_status == 'Completed'
+                        ){
+                            return `
+                            <div class="text-center dropdown">
+                            <!-- Dropdown Toggler --> 
+                            <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                            <i class="fas fa-ellipsis-v"></i>
+                            </div>
+    
+                            <!-- Dropdown Menu --> 
+                            <div class="dropdown-menu dropdown-menu-right"> 
+    
+                            <div class="dropdown-item d-flex" role="button">
+                            <div style="width: 2rem">
+                          
+                            </div>
+                            <div>No action available</div>
+                            </div> 
+                            <!----> 
+                            </div>
+    
+                            </div>
+                        </div>
+                            
+                            `;    
+                        }else{
+
+                        
                         return `
                         <div class="text-center dropdown">
                         <!-- Dropdown Toggler --> 
@@ -3666,7 +3835,8 @@ const selectReport = () =>{
                         </div>
                     </div>
                         
-                        `
+                        `;
+                        }
                     }
                   },
                 ]
@@ -3744,7 +3914,7 @@ const setStatus = (id) =>{
                   drawTable();
                 },
                 error:({responseJSON})=>{
-                console.log(responseJSON);
+            //    console.log(responseJSON);
                   notification('error','','Something went wrong');
                 }
             });
@@ -3953,7 +4123,7 @@ const selectStatus = (val) =>{
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM DD, YYYY");
                     }
                   },
                   {
@@ -4150,11 +4320,43 @@ const selectProgram = (val) =>{
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM DD, YYYY");
                     }
                   },
                   {
                     'data': (data,type,row)=>{
+ 
+
+                        if(moment(new Date()).format("MMM Do YY") == moment(data.created_at).format("MMM Do YY")
+                        || data.ticket_status == 'N/A' || data.ticket_status == 'Void' || 
+                        data.ticket_status == 'void' ||  data.ticket_status == 'Cancelled' ||  data.ticket_status == 'Completed'
+                        ){
+                            return `
+                            <div class="text-center dropdown">
+                            <!-- Dropdown Toggler --> 
+                            <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                            <i class="fas fa-ellipsis-v"></i>
+                            </div>
+    
+                            <!-- Dropdown Menu --> 
+                            <div class="dropdown-menu dropdown-menu-right"> 
+    
+                            <div class="dropdown-item d-flex" role="button">
+                            <div style="width: 2rem">
+                          
+                            </div>
+                            <div>No action available</div>
+                            </div> 
+                            <!----> 
+                            </div>
+    
+                            </div>
+                        </div>
+                            
+                            `;    
+                        }else{
+
+                        
                         return `
                         <div class="text-center dropdown">
                         <!-- Dropdown Toggler --> 
@@ -4177,7 +4379,8 @@ const selectProgram = (val) =>{
                         </div>
                     </div>
                         
-                        `
+                        `;
+                        }
                     }
                   },
                 ]
@@ -4456,7 +4659,7 @@ const loadReportTable = (id) =>{
 
       });
 
-    let url = apiURL + 'submitted_requests/request/';
+    let url = apiURL + 'submitted_requests/';
     if(id != "All"){
 
         url = apiURL + 'submitted_requests/request/' + id;
@@ -4577,11 +4780,43 @@ const loadReportTable = (id) =>{
                   },
                   {
                     'data': (data,type,row)=>{
-                        return moment(data['created_at']).format("MMM Do YYYY");
+                        return moment(data['created_at']).format("MMMM DD, YYYY");
                     }
                   },
                   {
                     'data': (data,type,row)=>{
+ 
+
+                        if(moment(new Date()).format("MMM Do YY") == moment(data.created_at).format("MMM Do YY")
+                        || data.ticket_status == 'N/A' || data.ticket_status == 'Void' || 
+                        data.ticket_status == 'void' ||  data.ticket_status == 'Cancelled' ||  data.ticket_status == 'Completed'
+                        ){
+                            return `
+                            <div class="text-center dropdown">
+                            <!-- Dropdown Toggler --> 
+                            <div class="btn btn-sm btn-default" data-toggle="dropdown" role="button">
+                            <i class="fas fa-ellipsis-v"></i>
+                            </div>
+    
+                            <!-- Dropdown Menu --> 
+                            <div class="dropdown-menu dropdown-menu-right"> 
+    
+                            <div class="dropdown-item d-flex" role="button">
+                            <div style="width: 2rem">
+                          
+                            </div>
+                            <div>No action available</div>
+                            </div> 
+                            <!----> 
+                            </div>
+    
+                            </div>
+                        </div>
+                            
+                            `;    
+                        }else{
+
+                        
                         return `
                         <div class="text-center dropdown">
                         <!-- Dropdown Toggler --> 
@@ -4604,7 +4839,8 @@ const loadReportTable = (id) =>{
                         </div>
                     </div>
                         
-                        `
+                        `;
+                        }
                     }
                   },
                 ]
@@ -4648,3 +4884,64 @@ const loadReportTable = (id) =>{
       
   
 };
+
+//Ripple JS
+//$('.card').attr('data-duration','5');
+//$('.btn').attr('data-duration','5');
+$(document).ready(()=>{
+
+    $.ripple(".shadow-lg", {
+        debug: false, // logging on/off
+        on: 'mouseover', // event to trigger 
+    
+        opacity: 0.3, // opacity 
+        color: "auto", //  background color, auto - text color
+        multi: false, // multiple ripples per element
+    
+        duration: 0.5,//0.7, //  duration 
+    
+        //  modify speed
+        rate: function(pxPerSecond) {
+            return pxPerSecond;
+        },
+    
+        easing: 'linear' // CSS3 easing 
+    });
+
+    $.ripple(".btn", {
+        debug: false, // logging on/off
+        on: 'mouseover', // event to trigger 
+    
+        opacity: 0.3, // opacity 
+        color: "auto", //  background color, auto - text color
+        multi: false, // multiple ripples per element
+    
+        duration: 0.5,//0.7, //  duration 
+    
+        //  modify speed
+        rate: function(pxPerSecond) {
+            return pxPerSecond;
+        },
+    
+        easing: 'linear' // CSS3 easing 
+    });
+
+    $.ripple(".select2", {
+        debug: false, // logging on/off
+        on: 'mouseover', // event to trigger 
+    
+        opacity: 0.3, // opacity 
+        color: "auto", //  background color, auto - text color
+        multi: false, // multiple ripples per element
+    
+        duration: 0.5,//0.7, //  duration 
+    
+        //  modify speed
+        rate: function(pxPerSecond) {
+            return pxPerSecond;
+        },
+    
+        easing: 'linear' // CSS3 easing 
+    });
+
+})

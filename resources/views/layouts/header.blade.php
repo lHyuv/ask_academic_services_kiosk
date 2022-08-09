@@ -76,6 +76,10 @@
 
     <!--Select2--> 
     <script src = "{{ asset('template/vendors/select2/js/select2.min.js') }}"></script>
+
+    <!--Ripple JS--> 
+    <link href="{{ asset('template/vendors/ripplejs/css/ripple.css') }}" rel="stylesheet">
+    <script src = "{{ asset('template/vendors/ripplejs/js/ripple.js') }}"></script>
     <noscript>
   
      <meta HTTP-EQUIV="REFRESH" content="0; url= {{ URL::to('/') }}/noscript"> 
