@@ -32,7 +32,7 @@
    
 </script>
 
-<script src="http://parsleyjs.org/dist/parsley.js"></script>
+<script src="{{ asset('template/vendors/parsleyjs/js/parsley.js') }}"></script>
 <script src="{{ asset('template/custom/additional_custom.js') }}"></script>
 </body>
 </html>

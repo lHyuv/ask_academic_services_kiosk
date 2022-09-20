@@ -40,15 +40,15 @@
           <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
               <li class="nav-item">
-                <a href="/home" class="nav-link"><i class="fas fa-table"></i><span>Dashboard</span></a>
+                <a href="/home" class="nav-link"><i class="fas fa-table"></i><span>&nbsp;Dashboard</span></a>
               </li>
               <li class="menu-header">Reports</li>
               <li class="nav-item">
-                <a href="/backlogs" class="nav-link"><i class="fas fa-list"></i><span>Backlogs and Queries</span></a>
+                <a href="/backlogs" class="nav-link"><i class="fas fa-list"></i><span>&nbsp;Backlogs and Queries</span></a>
               </li>
  
               <li class="nav-item">
-                        <a href="/reports" class="nav-link"><i class="fas fa-book"></i><span>Reports</span></a>
+                        <a href="/reports" class="nav-link"><i class="fas fa-book"></i><span>&nbsp;Reports</span></a>
               </li>
     
         @else
@@ -56,7 +56,7 @@
 
               <li class="menu-header">Services</li>
               <li class="nav-item">
-                <a href="/guest" class="nav-link"><i class="fas fa-file"></i><span>Services</span></a>
+                <a href="/guest" class="nav-link"><i class="fas fa-file"></i><span>&nbsp;Services</span></a>
               </li>
       
         @endif
@@ -64,29 +64,29 @@
         @if(Auth::user()->roles->pluck('name')[0] == 'Admin')
         <li class="menu-header">System Setup</li>
               <li class="nav-item">
-                <a href="/requests" class="nav-link"><i class="fas fa-file"></i><span>Requests</span></a>
+                <a href="/requests" class="nav-link"><i class="fas fa-file"></i><span>&nbsp;Requests</span></a>
               </li>
               <li class="nav-item">
-                <a href="/steps" class="nav-link"><i class="fas fa-shoe-prints"></i><span>Steps</span></a>
+                <a href="/steps" class="nav-link"><i class="fas fa-shoe-prints"></i><span>&nbsp;Steps</span></a>
               </li>
               <li class="nav-item">
-                <a href="/requirements" class="nav-link"><i class="far fa-clipboard"></i><span>Requirements</span></a>
+                <a href="/requirements" class="nav-link"><i class="far fa-clipboard"></i><span>&nbsp;Requirements</span></a>
               </li>
               <li class="nav-item">
-                <a href="/forms" class="nav-link"><i class="fa fa-file-invoice"></i><span>Forms</span></a>
+                <a href="/forms" class="nav-link"><i class="fa fa-file-invoice"></i><span>&nbsp;Forms</span></a>
               </li>
               <li class="nav-item">
-                <a href="/students" class="nav-link"><i class="fa fa-user-tie"></i><span>Students</span></a>
+                <a href="/students" class="nav-link"><i class="fa fa-user-tie"></i><span>&nbsp;Students</span></a>
               </li>
         <li class="menu-header">User Management</li>
               <li class="nav-item">
-                <a href="/user" class="nav-link"><i class="fas fa-user"></i><span>Users</span></a>
+                <a href="/user" class="nav-link"><i class="fas fa-user"></i><span>&nbsp;Users</span></a>
               </li>
               <li class="nav-item">
-                <a href="/role" class="nav-link"><i class="fas fa-user-cog"></i><span>Roles</span></a>
+                <a href="/role" class="nav-link"><i class="fas fa-user-cog"></i><span>&nbsp;Roles</span></a>
               </li>
               <li class="nav-item">
-                <a href="/user_role" class="nav-link"><i class="fas fa-users"></i><span>User Roles</span></a>
+                <a href="/user_role" class="nav-link"><i class="fas fa-users"></i><span>&nbsp;User Roles</span></a>
               </li>
         @endif
        

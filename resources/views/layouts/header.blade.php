@@ -21,8 +21,8 @@
     <!-- Styles -->
      <!--
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    -->     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    -->     <script src="{{ asset('template/vendors/jquery/js/jquery.js') }}"
+     crossorigin="anonymous"></script>
     <script src="{{ asset('template/vendors/toastr/js/toastr.min.js') }}"></script>
 
 
@@ -35,19 +35,19 @@
   
 
         <!-- General JS Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        <script src="{{ asset('template/vendors/swal/js/sweetalert.js') }}"></script>
+    <script src="{{ asset('template/vendors/popperjs/js/popper.js') }}"
+
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    <script src="{{ asset('template/vendors/bootstrap-4/js/bootstrap.js') }}"
+       
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+    <script src="{{ asset('template/vendors/jquery-nicescroll/js/jquery-nicescroll.js') }}"></script>
+    <script src="{{ asset('template/vendors/momentjs/js/moment-2.29.3.min.js') }}"></script>
     <script src="{{ asset('template/vendors/datatable/js/datatables.min.js') }}"></script>
     <script src="{{ asset('template/vendors/reveal-password/js/show-hide-password.min.js') }}"></script>
    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('template/vendors/bootstrap-4/css/bootstrap.css') }}" crossorigin="anonymous">
 
     <link href="{{ asset('template/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/components.css') }}" rel="stylesheet">
@@ -58,11 +58,14 @@
     <link href="{{ asset('template/vendors/toastr/css/iziToast.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/vendors/toastr/css/toastr.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/vendors/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('template/vendors/fontawesome/css/fontawesome.css') }}" rel="stylesheet" crossorigin="anonymous">
+    <script  src="{{ asset('template/vendors/fontawesome/js/fontawesome.js') }}" crossorigin="anonymous"></script>
+    <!--
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
+    -->
     <!--BS Stepper--> 
-    <link href="https://unpkg.com/bs-stepper/dist/css/bs-stepper.min.css" rel="stylesheet">
-    <script src = "https://unpkg.com/bs-stepper/dist/js/bs-stepper.min.js"></script>
+    <link href="{{ asset('template/vendors/bs-stepper/css/bs-stepper.css') }}" rel="stylesheet">
+    <script src = "{{ asset('template/vendors/bs-stepper/js/bs-stepper.js') }}"></script>
     <!--BS Stepper:end--> 
     <link href="{{ asset('template/custom/custom.css') }}" rel="stylesheet">
     <!--Qrious--> 

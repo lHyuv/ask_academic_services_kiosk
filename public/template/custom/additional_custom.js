@@ -4898,7 +4898,7 @@ $(document).ready(()=>{
         color: "auto", //  background color, auto - text color
         multi: false, // multiple ripples per element
     
-        duration: 0.5,//0.7, //  duration 
+        duration: 0.2,//0.7, //  duration 
     
         //  modify speed
         rate: function(pxPerSecond) {

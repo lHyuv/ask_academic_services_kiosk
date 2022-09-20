@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "datatables.net-bs4": "^1.12.1",
+        "font-awesome": "^4.7.0",
         "jquery": "^3.6.0",
         "popper.js": "^1.14.3"
     }
